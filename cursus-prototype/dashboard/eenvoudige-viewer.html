@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  EENVOUDIGE-VIEWER.HTML
+  Toont één oefening/bestand zonder messagebox.
+  Enkel bekijken en terugkeren.
+
+  URL-parameters:
+    bestand    : bestandsnaam (bv. H10_checkin.js)
+    hoofdstuk  : bv. H10
+    paragraafnr: optioneel
+============================================================ -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bekijken</title>
+  <link rel="stylesheet" href="../css/cursus.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: #f0f0f0; }
+
+    #zwevende-zone {
+      position: fixed; bottom: 1cm; left: 50%;
+      transform: translateX(-50%); z-index: 600;
+    }
+    #knop-terug {
+      background: var(--groen-donker, #4a7c59);
+      color: white; border: none; border-radius: 6px;
+      padding: 10px 28px; font-size: 11pt;
+      font-family: var(--font, Arial); font-weight: bold;
+      cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    #knop-terug:hover { background: var(--groen-midden, #6aab7e); }
+    #laad-fout { display: none; padding: 1rem; color: #c62828; font-family: Arial; }
+  </style>
+</head>
+<body>
+
+  <div class="pagina" id="oefening-container" style="margin-bottom: 4cm;"></div>
+  <div id="laad-fout"></div>
+
+  <div id="zwevende-zone">
+    <button id="knop-terug" onclick="window.close()">← Terug</button>
+  </div>
+
+<script>
+const params      = new URLSearchParams(window.location.search);
+const bestand     = params.get("bestand");
+const hoofdstuk   = params.get("hoofdstuk") || "H10";
+const paragraafnr = params.get("paragraafnr") || "";
+
+document.title = bestand || "Bekijken";
+window.ACTIEVE_CONTAINER = "#oefening-container";
+window.OEFENING_TELLER   = 1;
+
+function laadScript(src) {
+  return new Promise((ok, fout) => {
+    const s = document.createElement("script");
+    s.src = src; s.onload = ok;
+    s.onerror = () => fout(new Error("Kan " + src + " niet laden"));
+    document.head.appendChild(s);
+  });
+}
+
+(async () => {
+  if (!bestand) {
+    document.getElementById("laad-fout").style.display = "block";
+    document.getElementById("laad-fout").textContent = "Geen bestand opgegeven.";
+    return;
+  }
+
+  const x      = hoofdstuk.replace("H", "");
+  const mapPad = `../hoofdstukken/${hoofdstuk}/P${x}_0`;
+  const scriptPad = `${mapPad}/${bestand}`;;
+
+  try {
+    await laadScript("../js/helpers.js");
+    await laadScript(scriptPad);
+  } catch (e) {
+    const el = document.getElementById("laad-fout");
+    el.style.display = "block";
+    el.textContent   = `Bestand kon niet geladen worden (${bestand}).`;
+    console.error(e);
+  }
+})();
+</script>
+</body>
+</html>

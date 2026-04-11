@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Wiskunde</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-pagina">
+
+  <!-- ── Topbalk ───────────────────────────────────────────── -->
+  <header class="topbalk">
+    <span class="topbalk-naam" id="topbalk-naam"></span>
+    <div class="topbalk-rechts">
+      <button class="topbalk-knop verborgen" id="knop-terug-beheerder">← Terug naar beheerder</button>
+      <button class="topbalk-knop" id="knop-uitloggen">Uitloggen</button>
+    </div>
+  </header>
+
+  <!-- ── Beheerder: kiezer ────────────────────────────────── -->
+  <div class="beheerder-rol-kiezer verborgen" id="beheerder-balk">
+    <span class="beheerder-rol-label">Bekijk als:</span>
+    <button class="knop-secundair" id="knop-als-leerling">Leerlingenscherm</button>
+    <button class="knop-primair"   id="knop-als-beheerder">Beheerdersscherm</button>
+  </div>
+
+  <!-- ================================================================
+       LEERLINGENSCHERM
+  ================================================================ -->
+  <div id="scherm-leerling" class="verborgen">
+    <div class="dashboard-inhoud">
+
+      <!-- Titel + dropdown -->
+      <h1 class="opmaak-titel" id="hst-titel">—</h1>
+      <select class="hoofdstuk-dropdown" id="hst-dropdown">
+        <option value="">Verander hier het hoofdstuk</option>
+      </select>
+
+      <!-- Banner INHOUD -->
+      <div class="banner" style="margin-top: 0.6cm;">
+        <div class="banner-icoon">📖</div>
+        <div class="banner-tekst">INHOUD</div>
+      </div>
+
+      <!-- Knoppen cursus + theorie + PDF fallback -->
+      <div style="display:flex; gap:0.4cm; align-items:flex-start; margin:0.3cm 0 0.2cm;">
+        <a class="knop-vierkant" id="knop-cursus"  target="_blank">cursus</a>
+        <a class="knop-vierkant" id="knop-theorie" target="_blank">theorie</a>
+        <div style="display:flex; flex-direction:column; gap:0.15cm; margin-left:auto;">
+          <a class="knop-pdf" id="knop-pdf-cursus"  target="_blank">pdf cursus</a>
+          <a class="knop-pdf" id="knop-pdf-theorie" target="_blank">pdf theorie</a>
+        </div>
+      </div>
+
+      <!-- Banner CORRECTIESLEUTELS -->
+      <div class="banner">
+        <div class="banner-icoon">✏️</div>
+        <div class="banner-tekst">CORRECTIESLEUTELS</div>
+      </div>
+
+      <!-- Knoppen correctiesleutels -->
+      <div class="knop-rij" id="rij-correctie">
+        <button class="knop-vierkant" id="knop-checkin">checkin</button>
+        <button class="knop-vierkant" id="knop-opdrachten">opdrachten</button>
+        <button class="knop-vierkant" id="knop-checkout">checkout</button>
+        <button class="knop-vierkant" id="knop-schema">schema</button>
+      </div>
+
+    </div>
+  </div><!-- #scherm-leerling -->
+
+  <!-- ================================================================
+       BEHEERDERSSCHERM
+  ================================================================ -->
+  <div id="scherm-beheerder" class="verborgen">
+
+    <nav class="tabs-balk">
+      <button class="tab-knop actief" data-tab="leerlingen">Leerlingenbeheer</button>
+      <button class="tab-knop"        data-tab="hoofdstukken">Hoofdstukkenbeheer</button>
+      <button class="tab-knop"        data-tab="evolutie">Evolutie &amp; scores</button>
+    </nav>
+
+    <div class="tab-inhoud">
+      <div class="tab-paneel actief" id="tab-leerlingen">
+        <div id="beheer-leerlingen-inhoud"></div>
+      </div>
+      <div class="tab-paneel" id="tab-hoofdstukken">
+        <div id="beheer-hoofdstukken-inhoud"></div>
+      </div>
+      <div class="tab-paneel" id="tab-evolutie">
+        <div id="beheer-evolutie-inhoud"></div>
+      </div>
+    </div>
+
+  </div><!-- #scherm-beheerder -->
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

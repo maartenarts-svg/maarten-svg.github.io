@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  CORRECTIESLEUTEL-VIEWER.HTML
+  Toont één oefening in een popup-venster.
+  Slaat verbeterdata op in onze Firebase (leerlingendata).
+
+  URL-parameters:
+    bestandsnaam : bv. oe_101004
+    paragraaf    : bv. 10.1
+    nr           : volgnummer
+    paragraafnr  : laatste cijfer van de paragraaf (bv. 4 voor 10.4)
+    sleutelCode  : code van de correctiesleutel (bv. CR1)
+
+  Na indienen wordt window.close() aangeroepen.
+  Het overzicht detecteert het sluiten via window.addEventListener('focus').
+============================================================ -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oefening</title>
+  <link rel="stylesheet" href="../css/cursus.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: #f0f0f0; }
+
+    #zwevende-zone {
+      position: fixed;
+      bottom: 1cm;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: min(500px, 90vw);
+    }
+
+    #knop-verbeterd {
+      background: var(--groen-donker, #4a7c59);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 11pt;
+      font-family: var(--font, Arial);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      white-space: nowrap;
+    }
+    #knop-verbeterd:hover { background: var(--groen-midden, #6aab7e); }
+
+    #messagebox {
+      display: none;
+      background: white;
+      border: 1.5px solid var(--groen-donker, #4a7c59);
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      font-family: var(--font, Arial);
+      font-size: 10pt;
+    }
+
+    .mb-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 10pt;
+      line-height: 1.4;
+    }
+    .mb-label input { margin-top: 3px; cursor: pointer; accent-color: var(--groen-donker, #4a7c59); }
+
+    .mb-knop {
+      background: var(--groen-donker, #4a7c59);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 18px;
+      font-size: 10pt;
+      font-family: var(--font, Arial);
+      cursor: pointer;
+    }
+    .mb-knop:disabled { opacity: 0.4; cursor: not-allowed; }
+    .mb-knop:not(:disabled):hover { background: var(--groen-midden, #6aab7e); }
+
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 8px;
+      border: 1px solid var(--groen-scheiding, #a5d6a7);
+      border-radius: 4px;
+      font-family: var(--font, Arial);
+      font-size: 10pt;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    #laad-fout {
+      display: none;
+      padding: 1rem;
+      color: #c62828;
+      font-family: Arial, sans-serif;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pagina" id="oefening-container" style="margin-bottom: 4cm;"></div>
+  <div id="laad-fout"></div>
+
+  <div id="zwevende-zone">
+    <button id="knop-verbeterd">Verbeterd, keer terug.</button>
+    <div id="messagebox"></div>
+  </div>
+
+<script type="module">
+import { saveLeerlingen } from './js/firebase.js';
+
+// ── URL-parameters ────────────────────────────────────────────
+const params       = new URLSearchParams(window.location.search);
+const bestandsnaam = params.get('bestandsnaam');
+const paragraaf    = params.get('paragraaf');
+const nr           = parseInt(params.get('nr') || '1');
+const paragraafnr  = params.get('paragraafnr');
+const sleutelCode  = params.get('sleutelCode') || 'CR1';
+
+document.title = `Oefening ${nr}`;
+
+// ── Data ophalen ──────────────────────────────────────────────
+// De viewer is een apart venster. sessionStorage is NIET gedeeld
+// tussen vensters. We gebruiken localStorage als brug.
+// Het hoofdvenster schrijft leerlingendata ook naar localStorage.
+const mail = sessionStorage.getItem('wiskunde_mail')
+          || localStorage.getItem('wiskunde_mail');
+
+if (!mail || !bestandsnaam) {
+  document.getElementById('laad-fout').style.display = 'block';
+  document.getElementById('laad-fout').textContent   = 'Ongeldige parameters of niet ingelogd.';
+  document.getElementById('zwevende-zone').style.display = 'none';
+  throw new Error('stop');
+}
+
+// ── Oefening laden ────────────────────────────────────────────
+// Pad: ../hoofdstukken/H10/P10_<paragraafnr>/<bestandsnaam>.js
+const mapPad    = `../hoofdstukken/H10/P10_${paragraafnr}`;
+const scriptPad = `${mapPad}/${bestandsnaam}.js`;
+
+window.ACTIEVE_CONTAINER = '#oefening-container';
+
+function laadScript(src, id) {
+  return new Promise((ok, fout) => {
+    if (id && document.getElementById(id)) { ok(); return; }
+    const s   = document.createElement('script');
+    if (id) s.id = id;
+    s.src     = src;
+    s.onload  = ok;
+    s.onerror = () => fout(new Error(`Kan ${src} niet laden`));
+    document.head.appendChild(s);
+  });
+}
+
+try {
+  await laadScript('../js/helpers.js', 'oef-helpers');
+  OEFENING_TELLER   = nr;
+  await laadScript(scriptPad, null);
+} catch (e) {
+  const el = document.getElementById('laad-fout');
+  el.style.display = 'block';
+  el.textContent   = `Oefening kon niet geladen worden (${bestandsnaam}).`;
+  console.error(e);
+}
+
+// ── Knop ─────────────────────────────────────────────────────
+document.getElementById('knop-verbeterd').addEventListener('click', toonMessagebox);
+
+// ── Messagebox ────────────────────────────────────────────────
+function toonMessagebox() {
+  document.getElementById('knop-verbeterd').style.display = 'none';
+  const box = document.getElementById('messagebox');
+  box.style.display = 'block';
+
+  box.innerHTML = `
+    <p style="font-weight:bold; margin-bottom:10px;">
+      Vink aan wat voor deze oefening van toepassing is.
+    </p>
+    <label class="mb-label">
+      <input type="radio" name="vk" value="1">
+      <span>Ik had geen enkele fout en begrijp de opdracht.</span>
+    </label>
+    <label class="mb-label">
+      <input type="radio" name="vk" value="2">
+      <span>Ik maakte af en toe een fout, maar begrijp mijn fouten en de juiste oplossing.</span>
+    </label>
+    <label class="mb-label" style="margin-bottom:14px;">
+      <input type="radio" name="vk" value="3">
+      <span>Ik begrijp deze oefening niet en ik heb nog vragen.</span>
+    </label>
+    <div style="text-align:right;">
+      <button class="mb-knop" id="mb-verder" disabled>Ga verder</button>
+    </div>
+    <div id="mb-invoer-zone" style="display:none; margin-top:14px;">
+      <p id="mb-invoer-label" style="margin-bottom:6px; font-size:10pt;"></p>
+      <textarea id="mb-invoer"></textarea>
+      <div style="text-align:right; margin-top:8px;">
+        <button class="mb-knop" id="mb-indienen" disabled>Indienen</button>
+      </div>
+    </div>
+  `;
+
+  const radios      = box.querySelectorAll('input[type="radio"]');
+  const btnVerder   = box.querySelector('#mb-verder');
+  const invoerZone  = box.querySelector('#mb-invoer-zone');
+  const invoerLabel = box.querySelector('#mb-invoer-label');
+  const invoer      = box.querySelector('#mb-invoer');
+  const btnIndienen = box.querySelector('#mb-indienen');
+
+  radios.forEach(r => r.addEventListener('change', () => {
+    btnVerder.disabled = false;
+    invoerZone.style.display = 'none';
+    invoer.value = '';
+    btnIndienen.disabled = true;
+  }));
+
+  btnVerder.addEventListener('click', async () => {
+    const keuze = parseInt(box.querySelector('input[name="vk"]:checked')?.value || '0');
+    if (keuze === 1) {
+      await _slaOp(keuze, '');
+      window.close();
+    } else if (keuze === 2) {
+      invoerLabel.textContent = 'Noteer wat je kan helpen om de volgende keer deze oefening zonder fouten te maken.';
+      invoerZone.style.display = 'block';
+      btnIndienen.dataset.keuze = '2';
+    } else if (keuze === 3) {
+      invoerLabel.textContent = 'Noteer je vraag bij deze oefening.';
+      invoerZone.style.display = 'block';
+      btnIndienen.dataset.keuze = '3';
+    }
+  });
+
+  invoer.addEventListener('input', () => {
+    btnIndienen.disabled = invoer.value.trim() === '';
+  });
+
+  btnIndienen.addEventListener('click', async () => {
+    const keuze     = parseInt(btnIndienen.dataset.keuze);
+    const opmerking = invoer.value.trim();
+    await _slaOp(keuze, opmerking);
+    window.close();
+  });
+}
+
+// ── Opslaan in Firebase ───────────────────────────────────────
+// We lezen de MEEST RECENTE data uit localStorage (gedeeld
+// tussen vensters), zodat we nooit eerdere pogingen overschrijven.
+async function _slaOp(keuze, opmerking) {
+  // Altijd de meest recente data lezen uit localStorage
+  const dataLeerlingen = JSON.parse(
+    localStorage.getItem('wiskunde_leerlingen') || '{"leerlingen":[]}'
+  );
+
+  const idx = dataLeerlingen.leerlingen.findIndex(
+    l => l.mail.toLowerCase() === mail.toLowerCase()
+  );
+  if (idx < 0) return;
+
+  const leerling = dataLeerlingen.leerlingen[idx];
+
+  // Verbetersleutel-structuur opbouwen (behoud bestaande data)
+  if (!leerling.verbetersleutel)              leerling.verbetersleutel              = {};
+  if (!leerling.verbetersleutel[sleutelCode]) leerling.verbetersleutel[sleutelCode] = { niveaus: {}, oefeningen: {} };
+  const cr = leerling.verbetersleutel[sleutelCode];
+  if (!cr.niveaus)                            cr.niveaus                            = {};
+  if (!cr.oefeningen)                         cr.oefeningen                         = {};
+  if (!cr.oefeningen[bestandsnaam])           cr.oefeningen[bestandsnaam]           = { pogingen: [] };
+
+  // Nieuwe poging TOEVOEGEN (niet overschrijven)
+  const datum = new Date().toLocaleDateString('nl-BE');
+  cr.oefeningen[bestandsnaam].pogingen.push({ datum, keuze, opmerking, opgelost: false });
+
+  // Bijgewerkte leerling terugzetten
+  dataLeerlingen.leerlingen[idx] = leerling;
+
+  // Opslaan in localStorage (zodat hoofdvenster het oppikt) én Firebase
+  localStorage.setItem('wiskunde_leerlingen', JSON.stringify(dataLeerlingen));
+  await saveLeerlingen(dataLeerlingen);
+}
+</script>
+</body>
+</html>

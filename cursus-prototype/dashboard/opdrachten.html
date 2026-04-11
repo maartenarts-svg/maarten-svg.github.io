@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  OPDRACHTEN.HTML
+  Laadt de correctiesleutel (niveaulogica) voor een hoofdstuk.
+  Vervangt de omweg via taak.html / taak.js.
+
+  Leest uit sessionStorage:
+    actieve_taak_code     : bv. "H10"
+    actieve_datamatrix    : bv. "H10-datamatrix.js"
+    actieve_zichtbaarheid : JSON-array van zichtbaarheidsregels
+============================================================ -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opdrachten</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="../css/cursus.css">
+  <style>
+    body { background: #f0f0f0; }
+
+    /* Topbalk bovenaan */
+    .opdr-topbalk {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+      background: var(--groen-donker, #4a7c59);
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .opdr-topbalk-info {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .opdr-topbalk-naam  { font-size: 0.85rem; opacity: 0.85; }
+    .opdr-topbalk-titel { font-size: 1.1rem; font-weight: 700; }
+
+    .knop-terug {
+      padding: 0.45rem 1rem;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 6px;
+      font-size: 0.9rem; font-family: var(--font, Arial);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .knop-terug:hover { background: rgba(255,255,255,0.28); }
+
+    /* Inhoud */
+    #opdr-inhoud {
+      max-width: 22cm;
+      margin: 0.8cm auto;
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="opdr-topbalk">
+    <div class="opdr-topbalk-info">
+      <span class="opdr-topbalk-naam"  id="opdr-naam"></span>
+      <span class="opdr-topbalk-titel" id="opdr-titel">Opdrachten</span>
+    </div>
+    <button class="knop-terug" onclick="history.back()">← Terug</button>
+  </header>
+
+  <div id="opdr-inhoud">
+    <p style="color:#888; font-style:italic; padding:1rem;">Wordt geladen…</p>
+  </div>
+
+<script type="module">
+import { getHuidigHoofdstuk, getTotEnMet } from "./js/hoofdstuk.js";
+
+// ── Sessiebewaking ────────────────────────────────────────────
+const mail = sessionStorage.getItem("wiskunde_mail");
+if (!mail) { window.location.href = "index.html"; }
+
+// ── Data uit sessionStorage ───────────────────────────────────
+const hstCode      = sessionStorage.getItem("actieve_taak_code") || "H10";
+const dataInhoud   = JSON.parse(sessionStorage.getItem("wiskunde_inhoud") || '{"hoofdstukken":[]}');
+const dataLL       = JSON.parse(sessionStorage.getItem("wiskunde_leerlingen") || '{"leerlingen":[]}');
+
+const hoofdstuk    = (dataInhoud.hoofdstukken || []).find(h => h.code === hstCode) || null;
+const leerling     = dataLL.leerlingen.find(l => l.mail.toLowerCase() === mail.toLowerCase()) || {};
+
+// ── Topbalk vullen ────────────────────────────────────────────
+document.getElementById("opdr-naam").textContent  = leerling.volledigeNaam || leerling.voornaam || mail;
+document.getElementById("opdr-titel").textContent = hoofdstuk?.titel ? `${hoofdstuk.titel} — Opdrachten` : "Opdrachten";
+document.title = hoofdstuk?.titel ? `Opdrachten ${hoofdstuk.titel}` : "Opdrachten";
+
+// ── Container ─────────────────────────────────────────────────
+const container = document.getElementById("opdr-inhoud");
+
+if (!hoofdstuk) {
+  container.innerHTML = '<p style="color:#c62828; padding:1rem;">Hoofdstuk niet gevonden.</p>';
+  throw new Error("stop");
+}
+
+// ── Datamatrix laden (zet juist pad) ─────────────────────────
+// Maak de zichtbaarheidsdata beschikbaar voor de module via
+// een tijdelijk sessie-item (wordt door CR-module gelezen)
+sessionStorage.setItem("actieve_zichtbaarheid", JSON.stringify(hoofdstuk.zichtbaarheid || []));
+
+// ── CR-module dynamisch laden ─────────────────────────────────
+// Conventie: taken/CR_H10.js voor hoofdstuk H10,
+// of we laden gewoon taken/CR1.js als er maar één is.
+// Voor nu: taken/CR1.js altijd (uitbreidbaar later).
+const modPad = `./taken/CR1.js`;
+
+try {
+  const mod = await import(modPad);
+  if (mod.render) {
+    await mod.render(container, leerling, hstCode, {
+      markeerGewijzigd: () => {} // geen opslaan-knop nodig hier
+    });
+  } else {
+    container.innerHTML = '<p style="color:#c62828;">Module heeft geen render()-functie.</p>';
+  }
+} catch (e) {
+  container.innerHTML = `<p style="color:#c62828; padding:1rem;">
+    Fout bij laden van module: ${e.message}
+  </p>`;
+  console.error(e);
+}
+</script>
+</body>
+</html>

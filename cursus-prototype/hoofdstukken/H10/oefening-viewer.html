@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  OEFENING-VIEWER.HTML
+  Laadt één oefening in een aparte pagina, exact zoals de cursus.
+
+  URL-parameters:
+    bestandsnaam : bv. oe_101004
+    paragraaf    : bv. 10.1
+    nr           : volgnummer van de oefening
+    hoofdstuk    : bv. H10
+    paragraafnr  : laatste cijfer van de paragraaf (bv. 4 voor 10.4)
+    messagebox   : true | false
+
+  Na "Verbeterd, keer terug." wordt de verbeterdata opgeslagen
+  via Firebase en het venster sluit zichzelf.
+  Het overzicht detecteert het sluiten via window.addEventListener('focus').
+============================================================ -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oefening</title>
+
+  <!-- ── Cursus-stijlen ─────────────────────────────────────── -->
+  <!-- Pas het pad aan als oefening-viewer.html ergens anders staat -->
+  <link rel="stylesheet" href="../../css/cursus.css">
+
+  <style>
+    /* ── Achtergrond en centrering, zoals in de cursus ───────── */
+    html, body {
+      margin: 0; padding: 0;
+      background: #f0f0f0;
+    }
+
+    /* ── Zwevende knop onderaan ──────────────────────────────── */
+    #zwevende-zone {
+      position: fixed;
+      bottom: 1cm;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #knop-verbeterd {
+      background: var(--groen-donker, #4a7c59);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 11pt;
+      font-family: var(--font, Arial);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ── Messagebox ──────────────────────────────────────────── */
+    #messagebox {
+      display: none;
+      background: white;
+      border: 1.5px solid var(--groen-donker, #4a7c59);
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      min-width: 320px;
+      max-width: 500px;
+      font-family: var(--font, Arial);
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Pagina-blok: exact zoals .pagina in de cursus ─────── -->
+  <!-- De oefening wordt hierin geladen door helpers.js        -->
+  <div class="pagina" id="oefening-container" style="margin-bottom: 4cm;">
+  </div>
+
+  <!-- ── Zwevende zone met knop en messagebox ──────────────── -->
+  <div id="zwevende-zone">
+    <button id="knop-verbeterd">Verbeterd, keer terug.</button>
+    <div id="messagebox"></div>
+  </div>
+
+<script type="module">
+import { slaVerbeterdataOp } from '../../js/overzicht-firebase.js';
+
+// ── URL-parameters uitlezen ───────────────────────────────────
+const params       = new URLSearchParams(window.location.search);
+const bestandsnaam = params.get('bestandsnaam');
+const paragraaf    = params.get('paragraaf');
+const nr           = parseInt(params.get('nr') || '1');
+const hoofdstuk    = params.get('hoofdstuk') || 'H10';
+const paragraafnr  = params.get('paragraafnr');
+const messagebox   = params.get('messagebox') !== 'false';
+
+// ── Paginatitel instellen ─────────────────────────────────────
+document.title = `Oefening ${nr} — ${bestandsnaam}`;
+
+// ── Pad naar het oefening-script berekenen ────────────────────
+// Formaat: ../../hoofdstukken/H10/P10_4/oe_101004.js
+const mapPad    = `../../hoofdstukken/${hoofdstuk}/P${hoofdstuk.replace('H','')}_${paragraafnr}`;
+const scriptPad = `${mapPad}/${bestandsnaam}.js`;
+
+// ── ACTIEVE_CONTAINER instellen voor helpers.js ───────────────
+// helpers.js schrijft de oefening naar ACTIEVE_CONTAINER
+window.ACTIEVE_CONTAINER = '#oefening-container';
+
+// ── helpers.js laden, daarna de oefening ─────────────────────
+function laadScript(src, id, callback) {
+  if (document.getElementById(id)) { setTimeout(callback, 0); return; }
+  const s = document.createElement('script');
+  s.id  = id;
+  s.src = src;
+  s.onload = callback;
+  document.head.appendChild(s);
+}
+
+laadScript('../../js/helpers.js', 'oef-helpers', () => {
+  // helpers.js is geladen — nu de oefening laden
+  window.OEFENING_TELLER = nr;
+  const s = document.createElement('script');
+  s.src = scriptPad;
+  s.dataset.container = '#oefening-container';
+  document.head.appendChild(s);
+});
+
+// ── Knop en messagebox ────────────────────────────────────────
+const knop = document.getElementById('knop-verbeterd');
+const box  = document.getElementById('messagebox');
+
+if (!messagebox) {
+  // Geen messagebox: knop sluit gewoon het venster
+  knop.addEventListener('click', () => window.close());
+} else {
+  knop.addEventListener('click', () => toonMessagebox());
+}
+
+// ── Messagebox opbouwen ───────────────────────────────────────
+function toonMessagebox() {
+  knop.style.display = 'none';
+  box.style.display  = 'block';
+
+  box.innerHTML = `
+    <p style="font-weight:bold;margin-bottom:10px;">
+      Vink aan wat voor deze oefening van toepassing is.
+    </p>
+    <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;cursor:pointer;">
+      <input type="radio" name="verbeter-keuze" value="1" style="margin-top:3px;">
+      <span>Ik had geen enkele fout en begrijp de opdracht.</span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;cursor:pointer;">
+      <input type="radio" name="verbeter-keuze" value="2" style="margin-top:3px;">
+      <span>Ik maakte af en toe een fout, maar begrijp mijn fouten en de juiste oplossing.</span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:14px;cursor:pointer;">
+      <input type="radio" name="verbeter-keuze" value="3" style="margin-top:3px;">
+      <span>Ik begrijp deze oefening niet en ik heb nog vragen.</span>
+    </label>
+    <div style="text-align:right;">
+      <button id="mb-verder" disabled style="
+        background: var(--groen-donker,#4a7c59);
+        color: white; border:none; border-radius:4px;
+        padding:6px 18px; font-size:10pt;
+        font-family:var(--font,Arial); cursor:pointer; opacity:0.4;
+      ">Ga verder</button>
+    </div>
+    <div id="mb-invoer-zone" style="display:none;margin-top:14px;">
+      <p id="mb-invoer-label" style="margin-bottom:6px;"></p>
+      <textarea id="mb-invoer" style="
+        width:100%; min-height:80px; padding:8px;
+        border:1px solid var(--groen-rand,#a5d6a7);
+        border-radius:4px; font-family:var(--font,Arial);
+        font-size:10pt; resize:vertical; box-sizing:border-box;
+      "></textarea>
+      <div style="text-align:right;margin-top:8px;">
+        <button id="mb-indienen" disabled style="
+          background: var(--groen-donker,#4a7c59);
+          color:white; border:none; border-radius:4px;
+          padding:6px 18px; font-size:10pt;
+          font-family:var(--font,Arial); cursor:pointer; opacity:0.4;
+        ">Indienen</button>
+      </div>
+    </div>
+  `;
+
+  const radios      = box.querySelectorAll('input[type="radio"]');
+  const btnVerder   = box.querySelector('#mb-verder');
+  const invoerZone  = box.querySelector('#mb-invoer-zone');
+  const invoerLabel = box.querySelector('#mb-invoer-label');
+  const invoer      = box.querySelector('#mb-invoer');
+  const btnIndienen = box.querySelector('#mb-indienen');
+
+  // Radiobutton → knop Ga verder aanklikbaar
+  radios.forEach(r => r.addEventListener('change', () => {
+    btnVerder.disabled = false;
+    btnVerder.style.opacity = '1';
+    invoerZone.style.display = 'none';
+    invoer.value = '';
+    btnIndienen.disabled = true;
+    btnIndienen.style.opacity = '0.4';
+  }));
+
+  // Ga verder
+  btnVerder.addEventListener('click', async () => {
+    const keuze = parseInt(box.querySelector('input[name="verbeter-keuze"]:checked')?.value || '0');
+    if (keuze === 1) {
+      await slaVerbeterdataOp(bestandsnaam, { keuze, opmerking: '', opgelost: false });
+      window.close();
+    } else if (keuze === 2) {
+      invoerLabel.textContent = 'Noteer hieronder wat je kan helpen om de volgende keer deze oefening zonder fouten te maken.';
+      invoerZone.style.display = 'block';
+    } else if (keuze === 3) {
+      invoerLabel.textContent = 'Noteer hieronder wat je vraag bij deze oefening is.';
+      invoerZone.style.display = 'block';
+    }
+    btnIndienen.dataset.keuze = keuze;
+  });
+
+  // Invoerveld → Indienen aanklikbaar
+  invoer.addEventListener('input', () => {
+    const leeg = invoer.value.trim() === '';
+    btnIndienen.disabled = leeg;
+    btnIndienen.style.opacity = leeg ? '0.4' : '1';
+  });
+
+  // Indienen
+  btnIndienen.addEventListener('click', async () => {
+    const keuze     = parseInt(btnIndienen.dataset.keuze);
+    const opmerking = invoer.value.trim();
+    await slaVerbeterdataOp(bestandsnaam, { keuze, opmerking, opgelost: false });
+    window.close();
+  });
+}
+</script>
+</body>
+</html>

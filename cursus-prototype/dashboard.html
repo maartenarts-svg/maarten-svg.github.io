@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursus Wiskunde — Dashboard</title>
+  <link rel="stylesheet" href="css/cursus.css">
+  <style>
+    /* ============================================================
+       DASHBOARD — stijlen afgestemd op cursus.css
+       ============================================================ */
+
+    body {
+      background: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font);
+      font-size: var(--fontsize);
+      color: var(--tekst);
+    }
+
+    /* ── Loginscherm ─────────────────────────────────────────── */
+    #login-scherm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 0.5cm;
+    }
+
+    #login-scherm h1 {
+      font-size: 20pt;
+      font-weight: bold;
+      color: var(--groen-donker);
+      margin: 0;
+    }
+
+    #login-scherm p {
+      margin: 0;
+      color: #555;
+    }
+
+    #inlog-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.3cm;
+      background: var(--groen-donker);
+      color: var(--wit);
+      border: none;
+      border-radius: 4px;
+      padding: 0.2cm 0.5cm;
+      font-size: var(--fontsize);
+      font-family: var(--font);
+      cursor: pointer;
+      margin-top: 0.3cm;
+    }
+    #inlog-btn:hover { background: var(--groen-midden); }
+
+    /* ── Dashboard wrapper ───────────────────────────────────── */
+    #dashboard {
+      max-width: 21cm;
+      margin: 0.8cm auto;
+      background: var(--wit);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      box-sizing: border-box;
+      min-height: 90vh;
+    }
+
+    /* ── Header ──────────────────────────────────────────────── */
+    #dashboard-header {
+      background: var(--groen-donker);
+      color: var(--wit);
+      padding: 0.3cm 0.5cm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #dashboard-header h1 {
+      margin: 0;
+      font-size: 14pt;
+      font-weight: bold;
+      font-family: var(--font);
+    }
+
+    #header-rechts {
+      display: flex;
+      align-items: center;
+      gap: 0.3cm;
+      font-size: var(--fontsize);
+    }
+
+    #gebruiker-info {
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    #uitlog-btn {
+      background: transparent;
+      border: 1px solid var(--wit);
+      color: var(--wit);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: var(--fontsize);
+      font-family: var(--font);
+      cursor: pointer;
+    }
+    #uitlog-btn:hover { background: var(--groen-midden); border-color: var(--groen-midden); }
+
+    /* ── Tabbalk ─────────────────────────────────────────────── */
+    #tab-balk {
+      display: flex;
+      border-bottom: 2px solid var(--groen-scheiding);
+      padding: 0 0.4cm;
+      gap: 0.1cm;
+      background: var(--wit);
+    }
+
+    .tab-knop {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 0.2cm 0.4cm;
+      font-size: var(--fontsize);
+      font-family: var(--font);
+      color: #666;
+      cursor: pointer;
+      margin-bottom: -2px; /* overlapt de border-bottom van #tab-balk */
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-knop:hover {
+      color: var(--groen-donker);
+      border-bottom-color: var(--groen-midden);
+    }
+    .tab-knop.actief {
+      color: var(--groen-donker);
+      font-weight: bold;
+      border-bottom-color: var(--groen-donker);
+    }
+
+    /* ── Tabinhoud ───────────────────────────────────────────── */
+    #tab-inhoud {
+      padding: 0.5cm 0.6cm;
+    }
+
+    /* ── Tegelrooster ────────────────────────────────────────── */
+    .tegel-rooster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4cm;
+      margin-top: 0.3cm;
+    }
+
+    .tegel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 4.5cm;
+      min-height: 2.2cm;
+      background: var(--groen-pastel);
+      border: 1.2px solid var(--groen-scheiding);
+      border-radius: 4px;
+      font-family: var(--font);
+      font-size: var(--fontsize);
+      font-weight: bold;
+      color: var(--groen-donker);
+      text-decoration: none;
+      text-align: center;
+      padding: 0.2cm;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .tegel:hover {
+      background: var(--groen-midden);
+      color: var(--wit);
+      border-color: var(--groen-midden);
+    }
+
+    /* ── Dropdown ────────────────────────────────────────────── */
+    .select-wrapper {
+      margin-top: 0.2cm;
+    }
+
+    .select-wrapper select {
+      font-family: var(--font);
+      font-size: var(--fontsize);
+      color: var(--tekst);
+      border: 1.2px solid var(--groen-scheiding);
+      border-radius: 4px;
+      padding: 0.15cm 0.3cm;
+      background: var(--wit);
+      cursor: pointer;
+      outline: none;
+      min-width: 6cm;
+    }
+    .select-wrapper select:focus {
+      border-color: var(--groen-donker);
+    }
+
+    /* ── Hulpklassen ─────────────────────────────────────────── */
+    .verborgen { display: none !important; }
+
+    #hoofdstuk-tegels {
+      margin-top: 0.4cm;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Loginscherm ─────────────────────────────────────────── -->
+  <div id="login-scherm">
+    <h1>Cursus Wiskunde</h1>
+    <p>Log in om het dashboard te openen.</p>
+    <button id="inlog-btn">
+      <!-- Google-logo (SVG inline) -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48">
+        <path fill="#fff" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.6 20-21 0-1.4-.1-2.7-.3-4H44.5z"/>
+      </svg>
+      Inloggen met Google
+    </button>
+  </div>
+
+  <!-- ── Dashboard ───────────────────────────────────────────── -->
+  <div id="dashboard" class="verborgen">
+    <div id="dashboard-header">
+      <h1>Cursus Wiskunde — Dashboard</h1>
+      <div id="header-rechts">
+        <span id="gebruiker-info"></span>
+        <button id="uitlog-btn">Uitloggen</button>
+      </div>
+    </div>
+
+    <div id="tab-balk"></div>
+    <div id="tab-inhoud"></div>
+  </div>
+
+  <!-- ── Scripts (ES modules) ────────────────────────────────── -->
+  <script type="module" src="js/dashboard.js"></script>
+
+</body>
+</html>

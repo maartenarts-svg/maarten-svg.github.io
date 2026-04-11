@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursus Wiskunde — Oefeningoverzicht H10</title>
+<style>
+  :root {
+    --groen-donker:  #4a7c59;
+    --groen-midden:  #6aab7e;
+    --groen-pastel:  #c8e6c9;
+    --groen-licht:   #e8f5e9;
+    --groen-rand:    #a5d6a7;
+    --grijs-licht:   #f5f5f5;
+    --tekst:         #1a1a1a;
+    --tekst-zacht:   #555;
+    --blauw:         #1a4fa0;
+    --rood:          #c0392b;
+    --font:          'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radius:        6px;
+
+    /* ── Kleuren verbeteropties ──────────────────────────────
+       Voeg deze ook toe aan cursus.css als je het visuele
+       overzicht in H10_structuur.html gebruikt.
+    ─────────────────────────────────────────────────────── */
+    --oranje-rand:   #e65100;
+    --oranje-pastel: #ffe0b2;
+    --lila-rand:     #7b1fa2;
+    --lila-pastel:   #f3e5f5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); font-size: 13px; color: var(--tekst); background: #eef2ee; min-height: 100vh; }
+  header { background: var(--groen-donker); color: white; padding: 14px 24px; font-size: 15px; font-weight: 600; letter-spacing: .03em; display: flex; align-items: center; gap: 10px; }
+  header span { font-weight: 300; opacity: .8; font-size: 13px; }
+  .layout { max-width: 960px; margin: 20px auto; padding: 0 16px 40px; display: flex; flex-direction: column; gap: 16px; }
+  .kaart { background: white; border: 1px solid var(--groen-rand); border-radius: var(--radius); overflow: hidden; }
+  .kaart-titel { background: var(--groen-pastel); color: var(--groen-donker); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-bottom: 1px solid var(--groen-rand); }
+  .kaart-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  button { padding: 9px 20px; border: none; border-radius: var(--radius); font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .btn-secundair { background: white; color: var(--groen-donker); border: 1.5px solid var(--groen-donker); }
+  .btn-secundair:hover:not(:disabled) { background: var(--groen-licht); }
+  .btn-primair { background: var(--groen-donker); color: white; border: 1.5px solid var(--groen-donker); }
+  .btn-primair:hover:not(:disabled) { background: var(--groen-midden); border-color: var(--groen-midden); }
+  .btn-klein { padding: 5px 12px; font-size: 12px; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .melding { padding: 8px 12px; border-radius: 4px; font-size: 12px; display: none; }
+  .melding.fout { background: #fdecea; border: 1px solid #ef9a9a; color: var(--rood); display: block; }
+  .melding.ok   { background: #e8f5e9; border: 1px solid var(--groen-rand); color: var(--groen-donker); display: block; }
+
+  /* ── Tabel ─────────────────────────────────────────────── */
+  #resultaat-kaart { display: none; }
+  #resultaat-kaart.zichtbaar { display: block; }
+  .resultaat-acties { padding: 10px 14px; display: flex; gap: 8px; border-bottom: 1px solid var(--groen-rand); background: var(--grijs-licht); flex-wrap: wrap; align-items: center; }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--groen-pastel); }
+  th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; border-bottom: 2px solid var(--groen-rand); }
+  td { padding: 7px 12px; font-size: 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  tr:hover td { background: var(--groen-licht); }
+  tr:last-child td { border-bottom: none; }
+  td.nr { font-weight: 700; color: var(--groen-donker); width: 50px; }
+  td.bestand { font-family: 'Consolas', monospace; font-size: 11px; color: var(--blauw); }
+  td.blz { font-weight: 600; color: var(--groen-donker); width: 70px; }
+  td.container { font-size: 11px; color: var(--tekst-zacht); }
+  td.onderdeel { font-weight: 600; }
+  td.niveau { white-space: nowrap; }
+  .paragraaf-header td { background: var(--groen-donker); color: white; font-weight: 700; font-size: 12px; padding: 6px 12px; }
+  .stat-rij { display: flex; gap: 16px; flex-wrap: wrap; }
+  .stat { background: var(--groen-licht); border: 1px solid var(--groen-rand); border-radius: 4px; padding: 8px 14px; font-size: 12px; }
+  .stat strong { color: var(--groen-donker); font-size: 18px; display: block; }
+  tr.in-bewerking td { background: #fff8e1; }
+  tr.in-bewerking td.bestand { font-weight: 700; }
+
+  /* ── Niveau checkboxen ───────────────────────────────────── */
+  .niveau-checkboxen { display: flex; gap: 6px; align-items: center; }
+  .niveau-checkboxen label {
+    display: flex; align-items: center; gap: 3px;
+    font-size: 11px; font-weight: normal; color: var(--tekst);
+    text-transform: none; letter-spacing: 0;
+    cursor: pointer; user-select: none;
+  }
+  .niveau-checkboxen input[type="checkbox"] { cursor: pointer; accent-color: var(--groen-donker); }
+
+  /* ── Scherm wisselen ─────────────────────────────────────── */
+  #visueel-scherm { display: none; }
+  #visueel-scherm.zichtbaar { display: block; }
+  .verborgen { display: none !important; }
+
+  /* ── Visueel overzicht ───────────────────────────────────── */
+  .visueel-kaart { background: white; border: 1px solid var(--groen-rand); border-radius: var(--radius); overflow: hidden; }
+  .visueel-kaart-titel { background: var(--groen-pastel); color: var(--groen-donker); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-bottom: 1px solid var(--groen-rand); display: flex; justify-content: space-between; align-items: center; }
+  .visueel-kaart-body { padding: 16px; overflow-x: auto; }
+  .visueel-paragraaf-titel { font-weight: 700; font-size: 13px; color: var(--groen-donker); margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--groen-rand); }
+  .visueel-paragraaf-titel:first-child { margin-top: 0; }
+  .visueel-zonder-titel { color: var(--rood); border-color: #ef9a9a; margin-top: 24px; }
+  .visueel-opm-titel { color: var(--tekst); border-color: var(--groen-rand); margin-top: 24px; }
+  .visueel-grid { display: flex; flex-direction: column; gap: 6px; }
+  .visueel-rij { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .visueel-icoon { width: 1.6cm; flex-shrink: 0; text-align: right; font-size: 14px; }
+  .visueel-vakjes { display: flex; flex-direction: row; }
+  .visueel-vakje {
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px; font-size: 10px; font-weight: 700; flex-shrink: 0;
+    transition: opacity .15s;
+  }
+  .visueel-vakje[style*="cursor: pointer"]:hover { opacity: 0.75; }
+  .visueel-zonder-lijst { font-size: 13px; color: var(--rood); margin-top: 6px; }
+  .visueel-zonder-leeg  { font-size: 13px; color: var(--tekst-zacht); margin-top: 6px; font-style: italic; }
+
+  /* ── Dialoog niet-opgeslagen ─────────────────────────────── */
+  #dialoog-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
+  #dialoog-overlay.zichtbaar { display: flex; }
+  #dialoog-box { background: white; border-radius: var(--radius); padding: 24px; max-width: 360px; width: 90%; box-shadow: 0 4px 24px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 16px; }
+  #dialoog-box p { font-size: 13px; line-height: 1.5; }
+  .dialoog-knoppen { display: flex; gap: 10px; justify-content: flex-end; }
+
+  /* ── Laadmelding ─────────────────────────────────────────── */
+  #laad-melding { padding: 20px; text-align: center; color: var(--tekst-zacht); }
+</style>
+</head>
+<body>
+<header>📐 Cursus Wiskunde <span>— Oefeningoverzicht H10</span></header>
+
+<!-- ── Dialoog niet-opgeslagen wijzigingen ─────────────────── -->
+<div id="dialoog-overlay">
+  <div id="dialoog-box">
+    <p>Je hebt nog wijzigingen aangebracht. Wil je deze opslaan?</p>
+    <div class="dialoog-knoppen">
+      <button class="btn-secundair btn-klein" id="dialoog-niet-opslaan">Niet opslaan</button>
+      <button class="btn-primair btn-klein" id="dialoog-opslaan">Opslaan</button>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- ── ACTIES ──────────────────────────────────────────────── -->
+  <div class="kaart">
+    <div class="kaart-titel">Acties</div>
+    <div class="kaart-body">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-primair btn-klein" id="btn-opslaan" disabled>💾 Opslaan</button>
+        <button class="btn-secundair btn-klein" id="btn-visueel">📊 Maak visueel</button>
+      </div>
+      <div class="melding" id="melding-acties"></div>
+    </div>
+  </div>
+
+  <!-- ── OVERZICHT SCHERM ─────────────────────────────────────── -->
+  <div id="overzicht-scherm">
+    <div id="laad-melding">Structuurbestand laden…</div>
+    <div class="kaart" id="resultaat-kaart">
+      <div class="kaart-titel">Overzicht oefeningen</div>
+      <div class="resultaat-acties">
+        <button class="btn-secundair btn-klein" onclick="downloadCSV()">⬇ Download als CSV</button>
+      </div>
+      <div id="stats" style="padding:12px 14px;border-bottom:1px solid var(--groen-rand);background:#fafafa;"></div>
+      <div style="overflow-x:auto;">
+        <table id="overzicht-tabel">
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Bestandsnaam</th>
+              <th>Onderdeel</th>
+              <th>Paragraaf</th>
+              <th>Bladzijde</th>
+              <th>Container</th>
+              <th>Niveau</th>
+            </tr>
+          </thead>
+          <tbody id="tabel-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VISUEEL SCHERM ──────────────────────────────────────── -->
+  <div id="visueel-scherm">
+    <div class="visueel-kaart">
+      <div class="visueel-kaart-titel">
+        <span>Visueel overzicht</span>
+        <button class="btn-secundair btn-klein" id="btn-terug">← Terug naar overzicht</button>
+      </div>
+      <div class="visueel-kaart-body" id="visueel-inhoud"></div>
+    </div>
+  </div>
+
+</div><!-- einde .layout -->
+
+<script type="module">
+import { laadNiveaus, slaaNiveausOp, laadVerbeterdata, slaVerbeterdataOp } from '../../js/overzicht-firebase.js';
+import { bouwVisueel }     from '../../js/overzicht-visueel.js';
+import { laadOefening, sluitOefening } from '../../js/overzicht-oefening.js';
+import { oefeningRegister } from '../../js/oefening-register.js';
+
+// ============================================================
+// INSTELLINGEN
+// ── Beginpaginanummer ────────────────────────────────────────
+// EERSTE_PAGINA_H10: pas aan als het hoofdstuk verschuift.
+const EERSTE_PAGINA_H10 = 453;
+
+// ── Pad naar structuurbestand ────────────────────────────────
+// Staat in dezelfde map als dit bestand.
+const PAD_STRUCTUUR = 'H10_structuur.html';
+
+// ── Parameters voor het visuele overzicht ───────────────────
+// Zie overzicht-visueel.js voor uitleg van alle parameters.
+const VISUEEL_PARAMS = {
+  aanklikbaarheid: 'ja',       // 'ja' | 'gefaseerd' | 'nee'
+  messagebox:      true,        // true | false
+  inkleuren:       true,        // true | false
+  zichtbaarheid:   '1.1',       // 'x.y' — x: "geen plaats", y: "opmerkingen"
+  locatie:         'databank',  // 'databank' | 'matrix'
+};
+// ============================================================
+
+const ONDERDEEL_MAP = {
+  'oefenen': 'Oefenen!',
+  'zoeje':   'Zo doe je dat!',
+  'hoever':  'Hoe ver sta ik?',
+  'hoeveR':  'Hoe ver sta ik?',
+  'ontdek':  'Ontdekkingstocht',
+};
+
+// ── State ─────────────────────────────────────────────────────
+let _oefeningen   = [];
+let _niveaus      = {};      // sleutel = bestandsnaam
+let _verbeterdata = {};      // sleutel = bestandsnaam
+let _paragraafNamen = {};    // { "10.1": "Naam", ... }
+let _gewijzigd    = false;
+
+// ── DOM ───────────────────────────────────────────────────────
+const btnOpslaan      = document.getElementById('btn-opslaan');
+const btnVisueel      = document.getElementById('btn-visueel');
+const btnTerug        = document.getElementById('btn-terug');
+const overzichtScherm = document.getElementById('overzicht-scherm');
+const visueelScherm   = document.getElementById('visueel-scherm');
+const laadMeldingEl   = document.getElementById('laad-melding');
+const meldingActies   = document.getElementById('melding-acties');
+const dialoogOverlay  = document.getElementById('dialoog-overlay');
+
+// ── Wijziging markeren ────────────────────────────────────────
+function markeerGewijzigd() {
+  _gewijzigd = true;
+  btnOpslaan.disabled = false;
+}
+function markeerOpgeslagen() {
+  _gewijzigd = false;
+  btnOpslaan.disabled = true;
+}
+
+// ── Opslaan ───────────────────────────────────────────────────
+async function opslaan() {
+  btnOpslaan.disabled = true;
+  toonMelding('Opslaan…', '');
+  const ok = await slaaNiveausOp(_niveaus);
+  if (ok) {
+    markeerOpgeslagen();
+    toonMelding('Opgeslagen.', 'ok');
+  } else {
+    btnOpslaan.disabled = false;
+    toonMelding('Opslaan mislukt.', 'fout');
+  }
+}
+btnOpslaan.addEventListener('click', opslaan);
+
+// ── Visueel tonen ─────────────────────────────────────────────
+async function toonVisueel() {
+  console.log('toonVisueel gestart');
+  console.log('oefeningen:', _oefeningen.length);
+  console.log('niveaus:', _niveaus);  
+  if (_gewijzigd) await opslaan();
+
+  // Verbeterdata opnieuw laden (kan gewijzigd zijn)
+  _verbeterdata = await laadVerbeterdata();
+
+  overzichtScherm.classList.add('verborgen');
+  visueelScherm.classList.add('zichtbaar');
+
+  const params = {
+    ...VISUEEL_PARAMS,
+    paragraafNamen: _paragraafNamen,
+  };
+
+  bouwVisueel(
+    document.getElementById('visueel-inhoud'),
+    _oefeningen,
+    _niveaus,
+    _verbeterdata,
+    params,
+    {
+      onOefeningKlik: (oefening) => {
+        overzichtScherm.classList.add('verborgen');
+        visueelScherm.classList.add('verborgen');
+        laadOefening(oefening, {
+          messagebox: VISUEEL_PARAMS.messagebox,
+          onTerug: () => {
+            overzichtScherm.classList.add('verborgen');
+            visueelScherm.classList.remove('verborgen');
+            visueelScherm.classList.remove('zichtbaar');
+            visueelScherm.classList.add('zichtbaar');
+            console.log('onTerug uitgevoerd');
+            console.log('visueelScherm classes:', visueelScherm.classList);
+            console.log('overzichtScherm classes:', overzichtScherm.classList);
+            toonVisueel();
+          },
+          opslaanFn: async (bestandsnaam, verbeterObj) => {
+            await slaVerbeterdataOp(bestandsnaam, verbeterObj);
+            _verbeterdata[bestandsnaam] = {
+              ...(_verbeterdata[bestandsnaam] || {}),
+              ...verbeterObj,
+            };
+          },
+        });
+      }
+    }
+  );
+
+  // Luister naar "opgelost" wijzigingen in de opmerkingentabellen
+  document.getElementById('visueel-inhoud').addEventListener('opgelost-gewijzigd', async (e) => {
+    const { bestandsnaam, opgelost } = e.detail;
+    await slaVerbeterdataOp(bestandsnaam, { opgelost });
+    if (_verbeterdata[bestandsnaam]) _verbeterdata[bestandsnaam].opgelost = opgelost;
+  });
+}
+
+btnVisueel.addEventListener('click', toonVisueel);
+
+// ── Terug naar overzicht ──────────────────────────────────────
+btnTerug.addEventListener('click', () => {
+  visueelScherm.classList.remove('zichtbaar');
+  overzichtScherm.classList.remove('verborgen');
+});
+
+// ── Dialoog bij sluiten venster ───────────────────────────────
+window.addEventListener('beforeunload', e => {
+  if (_gewijzigd) { e.preventDefault(); e.returnValue = ''; }
+});
+
+function toonDialoog(cbOpslaan, cbNiet) {
+  dialoogOverlay.classList.add('zichtbaar');
+  document.getElementById('dialoog-opslaan').onclick = async () => {
+    dialoogOverlay.classList.remove('zichtbaar');
+    await cbOpslaan();
+  };
+  document.getElementById('dialoog-niet-opslaan').onclick = () => {
+    dialoogOverlay.classList.remove('zichtbaar');
+    cbNiet();
+  };
+}
+
+// ── Tabel opbouwen ────────────────────────────────────────────
+function bouwTabel() {
+  const tbody = document.getElementById('tabel-body');
+  tbody.innerHTML = '';
+
+  const perParagraaf = {};
+  _oefeningen.forEach(o => {
+    if (!perParagraaf[o.paragraaf]) perParagraaf[o.paragraaf] = [];
+    perParagraaf[o.paragraaf].push(o);
+  });
+
+  Object.keys(perParagraaf).sort().forEach(par => {
+    const naam = _paragraafNamen[par]
+      ? par + ' ' + _paragraafNamen[par]
+      : 'Paragraaf ' + par;
+
+    const trHeader = document.createElement('tr');
+    trHeader.classList.add('paragraaf-header');
+    trHeader.innerHTML = `<td colspan="7">${naam}</td>`;
+    tbody.appendChild(trHeader);
+
+    perParagraaf[par].forEach(o => {
+      const tr = document.createElement('tr');
+      if (!o.bestandsnaam.startsWith('oe_')) tr.classList.add('in-bewerking');
+
+      const huidigNiveau = _niveaus[o.bestandsnaam] || [];
+      const niveauOpties = ['cirkel', 'vierkant', 'zeshoek'];
+      const icoonMap = { cirkel: '⬤', vierkant: '⏹', zeshoek: '⬢' };
+
+      let niveauHTML = '<div class="niveau-checkboxen">';
+      niveauOpties.forEach(n => {
+        const checked = huidigNiveau.includes(n) ? 'checked' : '';
+        niveauHTML += `<label>
+          <input type="checkbox" data-bestandsnaam="${o.bestandsnaam}" data-niveau="${n}" ${checked}>
+          ${icoonMap[n]}
+        </label>`;
+      });
+      niveauHTML += '</div>';
+
+      tr.innerHTML =
+        `<td class="nr">${o.nr}</td>` +
+        `<td class="bestand">${o.bestandsnaam}</td>` +
+        `<td class="onderdeel">${o.onderdeel}</td>` +
+        `<td class="container">${o.paragraaf}</td>` +
+        `<td class="blz">${o.bladzijde}</td>` +
+        `<td class="container">${o.containerId}</td>` +
+        `<td class="niveau">${niveauHTML}</td>`;
+
+      tbody.appendChild(tr);
+    });
+  });
+
+  // Checkboxen
+  tbody.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const bestandsnaam = cb.dataset.bestandsnaam;
+      const niveau       = cb.dataset.niveau;
+      if (!_niveaus[bestandsnaam]) _niveaus[bestandsnaam] = [];
+      if (cb.checked) {
+        if (!_niveaus[bestandsnaam].includes(niveau))
+          _niveaus[bestandsnaam].push(niveau);
+      } else {
+        _niveaus[bestandsnaam] = _niveaus[bestandsnaam].filter(n => n !== niveau);
+      }
+      markeerGewijzigd();
+    });
+  });
+}
+
+// ── Statistieken ──────────────────────────────────────────────
+function bouwStats() {
+  const stats = document.getElementById('stats');
+  const perOnderdeel = {};
+  _oefeningen.forEach(o => {
+    perOnderdeel[o.onderdeel] = (perOnderdeel[o.onderdeel] || 0) + 1;
+  });
+  let html = `<div class="stat-rij"><div class="stat"><strong>${_oefeningen.length}</strong>Totaal</div>`;
+  Object.entries(perOnderdeel).forEach(([k, v]) => {
+    html += `<div class="stat"><strong>${v}</strong>${k}</div>`;
+  });
+  html += '</div>';
+  stats.innerHTML = html;
+}
+
+// ── Structuurbestand verwerken ────────────────────────────────
+function verwerkInhoud(tekst) {
+  // ── Paragraafnamen ophalen ──────────────────────────────────
+  // Zoekt naar: voegParagraafToe('10.1', 'Naam van de paragraaf')
+  _paragraafNamen = {};
+  const paragraafRegex = /voegParagraafToe\(\s*'([^']+)'\s*,\s*'([^']+)'\s*\)/g;
+  let pm;
+  while ((pm = paragraafRegex.exec(tekst)) !== null) {
+    _paragraafNamen[pm[1]] = pm[2];
+  }
+
+  // ── Paginawissels ───────────────────────────────────────────
+  const startMarker  = tekst.indexOf('/* BEGIN VANAF HIER MET TELLEN */');
+  const startPositie = startMarker !== -1 ? startMarker : 0;
+  const paginaRegex  = /nieuwePagina\s*\(\s*\)|forceerPaginawissel\s*\(\s*\)/g;
+  const paginaPosities = [];
+  let p;
+  while ((p = paginaRegex.exec(tekst)) !== null) {
+    if (p.index >= startPositie) paginaPosities.push(p.index);
+  }
+
+  // ── Oefeningen ophalen ──────────────────────────────────────
+  const regex      = /laadOefeningen\(\s*'([^']+)'\s*,\s*\[([\s\S]*?)\]\s*\)/g;
+  const oefeningen = [];
+  let teller = 0;
+  let m;
+
+  while ((m = regex.exec(tekst)) !== null) {
+    const positie       = m.index;
+    const containerId   = m[1];
+    const bestandenBlok = m[2];
+
+    const aantalPaginawissels = paginaPosities.filter(p => p < positie).length;
+    const bladzijde = EERSTE_PAGINA_H10 + aantalPaginawissels - 1;
+
+    // ── Paragraaf uit container-id ──────────────────────────
+    // container-id formaat: content-103-oefenen
+    // "103" → hoofdstuk 10, paragraaf 3 → "10.3"
+    const paragraafMatch = containerId.match(/content-(\d+)-/);
+    let paragraaf = '';
+    if (paragraafMatch) {
+      const code       = paragraafMatch[1];          // bv. "103"
+      const hoofdstuk  = code.slice(0, -1);          // bv. "10"
+      const paragraafNr = parseInt(code.slice(-1));  // bv. 3
+      paragraaf = hoofdstuk + '.' + paragraafNr;
+    }
+
+    const onderdeelMatch = containerId.match(/content-\d+-([\w]+?)(-\d+)?$/);
+    const sleutelRaw     = onderdeelMatch ? onderdeelMatch[1] : '';
+    const onderdeel      = ONDERDEEL_MAP[sleutelRaw] || sleutelRaw;
+
+    const toegestaan = ['oefenen', 'zoeje', 'hoeveR', 'hoever', 'ontdek'];
+    if (!toegestaan.includes(sleutelRaw)) continue;
+
+    const bestandRegex = /'([^']+\.js)'/g;
+    let b;
+    while ((b = bestandRegex.exec(bestandenBlok)) !== null) {
+      teller++;
+      const pad          = b[1];
+      const bestandsnaam = pad.split('/').pop().replace('.js', '');
+      oefeningen.push({ nr: teller, bestandsnaam, pad, onderdeel, sleutelRaw, paragraaf, bladzijde, containerId });
+    }
+  }
+
+  oefeningen.forEach((o, i) => o.nr = i + 1);
+  _oefeningen = oefeningen;
+  //import { oefeningRegister } from '../../js/oefening-register.js';
+  // ...
+  oefeningRegister.vul(_oefeningen);
+  window.oefeningRegister = oefeningRegister;
+
+  laadMeldingEl.style.display = 'none';
+  document.getElementById('resultaat-kaart').classList.add('zichtbaar');
+  bouwStats();
+  bouwTabel();
+}
+
+// ── Structuurbestand laden via fetch ──────────────────────────
+async function laadStructuur() {
+  try {
+    const resp = await fetch(PAD_STRUCTUUR);
+    if (!resp.ok) throw new Error('fetch mislukt');
+    verwerkInhoud(await resp.text());
+  } catch {
+    laadMeldingEl.textContent =
+      `⚠ Structuurbestand kon niet geladen worden. Controleer of ${PAD_STRUCTUUR} bestaat.`;
+    laadMeldingEl.style.color = 'var(--rood)';
+  }
+}
+
+// ── CSV download ──────────────────────────────────────────────
+window.downloadCSV = function() {
+  if (!_oefeningen.length) return;
+  const rijen = [['Nr','Bestandsnaam','Pad','Onderdeel','Paragraaf','Bladzijde','Container','Niveau']];
+  _oefeningen.forEach(o => {
+    const n = (_niveaus[o.bestandsnaam] || []).join('+');
+    rijen.push([o.nr, o.bestandsnaam, o.pad, o.onderdeel, o.paragraaf, o.bladzijde, o.containerId, n]);
+  });
+  const csv  = rijen.map(r => r.map(c => `"${c}"`).join(';')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'oefeningen_overzicht_H10.csv'; a.click();
+  URL.revokeObjectURL(url);
+};
+
+function toonMelding(tekst, type) {
+  meldingActies.textContent = tekst;
+  meldingActies.className   = 'melding' + (type ? ' ' + type : '');
+  meldingActies.style.display = tekst ? 'block' : 'none';
+}
+
+// ── Initialisatie ─────────────────────────────────────────────
+(async () => {
+  // 1 read: alles tegelijk uit Firestore
+  [_niveaus, _verbeterdata] = await Promise.all([
+    laadNiveaus(),
+    laadVerbeterdata(),
+  ]);
+  // Structuur inladen en tabel opbouwen
+  await laadStructuur();
+})();
+</script>
+</body>
+</html>

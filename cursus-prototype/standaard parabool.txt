@@ -1,0 +1,109 @@
+=========betere functie voor één parabool=========
+  //opgave .1
+  maakParabool2(inhoud, {
+    sx: 1.2,           // ← x-coördinaat startpunt links in cm
+    sy: 3.7,            // ← y-coördinaat startpunt links in cm
+    br: 2.2,            // ← afstand tussen eindpunten parabool in cm
+    h: 0.2,           // ← hoogte van de boog in cm  
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+
+========betere functie voor twee parabolen========
+  //opgave 
+  maak2Parabolen(inhoud, {
+    sx: 1.2,           // ← x-coördinaat startpunt links in cm
+    sy: 3.7,            // ← y-coördinaat startpunt links in cm
+    br1: 2.2,           // ← afstand tussen eindpunten grote parabool in cm
+    br2: 0.9,           // ← afstand tussen eindpunten kleine parabool in cm
+    pos: 1,           // ← 0: factor staat links, 1: factor staat rechts
+    h1: 0.2,          // ← hoogte van de grote boog in cm
+    h2: 0.1,          // ← hoogte van de kleine boog in cm
+    variant: 'zwart'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+
+
+
+==================================================
+
+
+
+
+
+
+
+
+
+
+//opgave a.1
+  maakParabool(inhoud, {
+    a: 0.7,   // ← steilheid
+    b: 1.35,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 0.9,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.5,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+  //opgave a.2
+  maakParabool(inhoud, {
+    a: 2,   // ← steilheid
+    b: 1.06,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 1,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.2,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+  //opgave b.1
+  maakParabool(inhoud, {
+    a: 0.7,   // ← steilheid
+    b: 1.35,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 3.9,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.5,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+  //opgave b.2
+  maakParabool(inhoud, {
+    a: 2,   // ← steilheid
+    b: 1.06,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 4,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.2,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+    //opgave c.1
+  maakParabool(inhoud, {
+    a: 0.7,   // ← steilheid
+    b: 9.35,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 0.9,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.5,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+  //opgave c.2
+  maakParabool(inhoud, {
+    a: 2,   // ← steilheid
+    b: 9.06,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 1,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.2,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+  //opgave d.1
+  maakParabool(inhoud, {
+    a: 0.7,   // ← steilheid
+    b: 9.35,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 3.9,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.5,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });
+
+  //opgave d.2
+  maakParabool(inhoud, {
+    a: 2,   // ← steilheid
+    b: 9.06,    // ← horizontale positie top in cm vanaf linkermarge
+    c: 4,    // ← verticale positie top in cm vanaf bovenkant oefening
+    d: 0.2,    // ← halve breedte in cm
+    variant: 'vast'  // ← 'zwart', 'vast' of 'toggle'
+  });

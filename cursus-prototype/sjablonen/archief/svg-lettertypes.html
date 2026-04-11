@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SVG — Lettertypes aanpassen</title>
+  <style>
+    :root {
+      --groen-donker:    #4a7c59;
+      --groen-midden:    #6aab7e;
+      --groen-pastel:    #c8e6c9;
+      --groen-scheiding: #a5d6a7;
+      --wit:             #ffffff;
+      --tekst:           #1a1a1a;
+      --font:            Arial, Helvetica, sans-serif;
+      --fontsize:        10pt;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0; padding: 0;
+      font-family: var(--font);
+      font-size: var(--fontsize);
+      color: var(--tekst);
+      background: #f0f0f0;
+    }
+
+    .pagina {
+      width: 21cm;
+      min-height: 29.7cm;
+      margin: 1cm auto;
+      padding: 2.5cm 2.5cm 2.5cm 3cm;
+      background: var(--wit);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    /* ── Sectietitel ── */
+    .sectietitel {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--groen-donker);
+      margin: 0 0 8px 0;
+    }
+
+    /* ── Info-paragraaf ── */
+    .info {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .info code {
+      background: #f0f0f0;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    /* ── Knoppen ── */
+    .knop-primair {
+      padding: 6px 16px;
+      font-size: 12px;
+      background: var(--groen-donker);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .knop-primair:hover { background: var(--groen-midden); }
+
+    .knop-secundair {
+      padding: 6px 16px;
+      font-size: 12px;
+      background: white;
+      color: var(--groen-donker);
+      border: 1.5px solid var(--groen-donker);
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .knop-secundair:hover { background: var(--groen-pastel); }
+
+    /* ── Upload zone ── */
+    .upload-zone {
+      border: 2px dashed var(--groen-scheiding);
+      border-radius: 6px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .upload-zone:hover,
+    .upload-zone.actief {
+      border-color: var(--groen-donker);
+      background: #e8f5e9;
+    }
+    .upload-zone .icoon   { font-size: 28px; margin-bottom: 8px; }
+    .upload-zone .hoofd   { font-size: 13px; }
+    .upload-zone .sub     { font-size: 11px; color: #888; margin-top: 4px; }
+    .upload-zone .bestand { font-size: 12px; color: var(--groen-donker); margin-top: 6px; font-weight: 600; }
+
+    /* ── Opties-kader ── */
+    .opties-kader {
+      border: 1.2px solid var(--groen-scheiding);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      background: #f9fffe;
+    }
+    .opties-kader .rij {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .opties-kader .rij:last-child { margin-bottom: 0; }
+
+    .optie-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--groen-donker);
+      min-width: 180px;
+    }
+
+    /* radio */
+    .radio-groep {
+      display: flex;
+      gap: 16px;
+    }
+    .radio-groep label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .radio-groep input[type="radio"] {
+      accent-color: var(--groen-donker);
+    }
+
+    /* laag-invoer */
+    #laag-invoer-rij {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #444;
+    }
+    #laag-invoer-rij input[type="number"] {
+      width: 60px;
+      padding: 4px 6px;
+      font-size: 12px;
+      border: 1.5px solid var(--groen-scheiding);
+      border-radius: 4px;
+      text-align: center;
+    }
+    #laag-invoer-rij input[type="number"]:focus {
+      outline: none;
+      border-color: var(--groen-donker);
+    }
+
+    /* ── Actie-knop rij ── */
+    .knop-rij {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    /* ── Resultaat-bericht ── */
+    .bericht {
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .bericht.ok {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid var(--groen-scheiding);
+    }
+    .bericht.fout {
+      background: #fdecea;
+      color: #c0392b;
+      border: 1px solid #ef9a9a;
+    }
+    .bericht.waarschuwing {
+      background: #fff8e1;
+      color: #e65100;
+      border: 1px solid #ffe0b2;
+    }
+
+    /* ── Code-zone ── */
+    .code-zone {
+      display: none;
+    }
+    .code-zone.zichtbaar {
+      display: block;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .code-header span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--groen-donker);
+    }
+
+    textarea#code-uitvoer {
+      width: 100%;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      border: 1.5px solid var(--groen-scheiding);
+      border-radius: 4px;
+      padding: 10px;
+      resize: vertical;
+      min-height: 300px;
+      color: #222;
+      background: #fafafa;
+    }
+    textarea#code-uitvoer:focus {
+      outline: none;
+      border-color: var(--groen-donker);
+    }
+
+    /* ── Scheidingslijn ── */
+    hr.scheiding {
+      border: none;
+      border-top: 2px solid var(--groen-scheiding);
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="pagina">
+
+  <h3 class="sectietitel">SVG — Lettertypes aanpassen</h3>
+
+  <p class="info">
+    Upload een SVG-bestand. Het gereedschap vervangt de lettertypen
+    <code>Jlm_cmss10</code> en <code>Jlm_cmssi10</code> door respectievelijk
+    <strong>Arial</strong> of <strong>Comic&nbsp;Sans&nbsp;MS</strong>, afhankelijk van de laag.<br>
+    Kies hieronder of je werkt <em>met lagen</em> (overschakeling op een bepaalde laag)
+    of <em>zonder lagen</em> (overal dezelfde vervanging).
+  </p>
+
+  <!-- ── Upload zone ──────────────────────────────────────────── -->
+  <div class="upload-zone" id="upload-zone">
+    <div class="icoon">📄</div>
+    <div class="hoofd">Klik of sleep een SVG-bestand hier</div>
+    <div class="sub">Alleen .svg bestanden</div>
+    <div class="bestand" id="bestand-naam"></div>
+    <input type="file" id="bestand-invoer" accept=".svg" style="display:none;" />
+  </div>
+
+  <hr class="scheiding" />
+
+  <!-- ── Opties ───────────────────────────────────────────────── -->
+  <div class="opties-kader">
+    <div class="rij">
+      <span class="optie-label">Werken met lagen?</span>
+      <div class="radio-groep">
+        <label>
+          <input type="radio" name="laagmodus" value="ja" id="radio-ja" checked />
+          Ja — overschakeling per laag
+        </label>
+        <label>
+          <input type="radio" name="laagmodus" value="nee" id="radio-nee" />
+          Nee — overal Comic Sans MS
+        </label>
+      </div>
+    </div>
+
+    <div class="rij" id="laag-invoer-rij">
+      <span class="optie-label">Vanaf laag&nbsp;x&nbsp;(layer<em>x</em>&nbsp;t.e.m.&nbsp;einde):</span>
+      <input type="number" id="laag-x" value="1" min="0" />
+      <span style="font-size:11px;color:#888;">
+        (0 = alle lagen Comic Sans, bijv. 1 = layer0 Arial, layer1+ Comic Sans)
+      </span>
+    </div>
+  </div>
+
+  <!-- ── Actie ─────────────────────────────────────────────────── -->
+  <div class="knop-rij">
+    <button class="knop-primair" id="btn-verwerk">⚙ Lettertypes aanpassen</button>
+  </div>
+
+  <!-- ── Bericht ───────────────────────────────────────────────── -->
+  <div id="bericht-zone"></div>
+
+  <!-- ── Code-uitvoer ──────────────────────────────────────────── -->
+  <div class="code-zone" id="code-zone">
+    <div class="code-header">
+      <span>Aangepaste SVG-code</span>
+      <button class="knop-secundair" id="btn-kopieer">⎘ Kopiëren</button>
+    </div>
+    <textarea id="code-uitvoer" readonly></textarea>
+  </div>
+
+</div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────
+let svgInhoud = null;
+
+// ── Upload zone ───────────────────────────────────────────────
+const uploadZone  = document.getElementById('upload-zone');
+const bestandInvoer = document.getElementById('bestand-invoer');
+const bestandNaam = document.getElementById('bestand-naam');
+
+uploadZone.addEventListener('click', () => bestandInvoer.click());
+
+uploadZone.addEventListener('dragover', e => {
+  e.preventDefault();
+  uploadZone.classList.add('actief');
+});
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('actief'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('actief');
+  const f = e.dataTransfer.files[0];
+  if (f) laadBestand(f);
+});
+bestandInvoer.addEventListener('change', () => {
+  if (bestandInvoer.files[0]) laadBestand(bestandInvoer.files[0]);
+});
+
+function laadBestand(bestand) {
+  if (!bestand.name.endsWith('.svg')) {
+    toonBericht('✘ Kies een .svg bestand.', 'fout');
+    return;
+  }
+  const lezer = new FileReader();
+  lezer.onload = e => {
+    svgInhoud = e.target.result;
+    bestandNaam.textContent = '✔ ' + bestand.name;
+    verbergBericht();
+    document.getElementById('code-zone').classList.remove('zichtbaar');
+    document.getElementById('code-uitvoer').value = '';
+  };
+  lezer.readAsText(bestand, 'UTF-8');
+}
+
+// ── Laagmodus toggle ──────────────────────────────────────────
+document.querySelectorAll('input[name="laagmodus"]').forEach(r => {
+  r.addEventListener('change', () => {
+    document.getElementById('laag-invoer-rij').style.display =
+      r.value === 'ja' ? 'flex' : 'none';
+  });
+});
+
+// ── Verwerken ─────────────────────────────────────────────────
+document.getElementById('btn-verwerk').addEventListener('click', verwerk);
+
+function verwerk() {
+  if (!svgInhoud) {
+    toonBericht('✘ Upload eerst een SVG-bestand.', 'fout');
+    return;
+  }
+
+  const metLagen = document.querySelector('input[name="laagmodus"]:checked').value === 'ja';
+  const laagX    = parseInt(document.getElementById('laag-x').value, 10);
+
+  let resultaat;
+  try {
+    resultaat = metLagen ? verwerkMetLagen(svgInhoud, laagX) : verwerkZonderLagen(svgInhoud);
+  } catch (e) {
+    toonBericht('✘ Fout bij verwerken: ' + e.message, 'fout');
+    return;
+  }
+
+  document.getElementById('code-uitvoer').value = resultaat.code;
+  document.getElementById('code-zone').classList.add('zichtbaar');
+
+  const info = metLagen
+    ? `✔ Klaar. Lagen 0–${laagX - 1}: Arial · Lagen ${laagX}+: Comic Sans MS · ${resultaat.vervangingen} vervanging(en).`
+    : `✔ Klaar. Overal Comic Sans MS toegepast · ${resultaat.vervangingen} vervanging(en).`;
+  toonBericht(info, 'ok');
+}
+
+// ── Vervangingslogica MET lagen ───────────────────────────────
+function verwerkMetLagen(tekst, laagX) {
+  // Splits de SVG op in laag-segmenten
+  // Patroon: <g id="layerN"> ... </g><!-- layerN -->
+  const laagRegex = /<g\s[^>]*id="layer(\d+)"[\s\S]*?<\/g>\s*<!--\s*layer\1\s*-->/g;
+
+  // We bouwen de nieuwe SVG op door de tekst stuk voor stuk te vervangen
+  let nieuw = '';
+  let laatste = 0;
+  let vervangingen = 0;
+  let match;
+
+  while ((match = laagRegex.exec(tekst)) !== null) {
+    const laagNr   = parseInt(match[1], 10);
+    const volledig  = match[0];
+    const start     = match.index;
+    const einde     = start + volledig.length;
+
+    // Tekst vóór deze laag (ongewijzigd)
+    nieuw += tekst.slice(laatste, start);
+
+    // Vervangen in dit laag-segment
+    const [segment, n] = vervangFonts(volledig, laagNr >= laagX);
+    vervangingen += n;
+    nieuw += segment;
+
+    laatste = einde;
+  }
+
+  // Resterende tekst na de laatste laag
+  nieuw += tekst.slice(laatste);
+
+  return { code: nieuw, vervangingen };
+}
+
+// ── Vervangingslogica ZONDER lagen ───────────────────────────
+function verwerkZonderLagen(tekst) {
+  const [nieuw, n] = vervangFonts(tekst, true); // altijd Comic Sans
+  return { code: nieuw, vervangingen: n };
+}
+
+// ── Kern: fonts vervangen in een stukje tekst ────────────────
+// comicSans=true → Comic Sans MS, anders Arial
+function vervangFonts(segment, comicSans) {
+  const doelFamilie = comicSans ? 'Comic Sans MS' : 'arial, sans-serif';
+  let n = 0;
+  let resultaat = segment;
+
+  // Jlm_cmss10  + font-style="normal"  → doelFamilie + font-style="normal"
+  resultaat = resultaat.replace(
+    /font-family="Jlm_cmss10"\s+font-style="normal"/g,
+    () => { n++; return `font-family="${doelFamilie}" font-style="normal"`; }
+  );
+
+  // Jlm_cmssi10 + font-style="normal"  → doelFamilie + font-style="italic"
+  resultaat = resultaat.replace(
+    /font-family="Jlm_cmssi10"\s+font-style="normal"/g,
+    () => { n++; return `font-family="${doelFamilie}" font-style="italic"`; }
+  );
+
+  return [resultaat, n];
+}
+
+// ── Kopiëren ─────────────────────────────────────────────────
+document.getElementById('btn-kopieer').addEventListener('click', () => {
+  const ta = document.getElementById('code-uitvoer');
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const btn = document.getElementById('btn-kopieer');
+    const oud = btn.textContent;
+    btn.textContent = '✔ Gekopieerd!';
+    setTimeout(() => { btn.textContent = oud; }, 1800);
+  });
+});
+
+// ── Hulpfuncties ─────────────────────────────────────────────
+function toonBericht(tekst, type) {
+  const zone = document.getElementById('bericht-zone');
+  zone.innerHTML = `<p class="bericht ${type}">${tekst}</p>`;
+}
+function verbergBericht() {
+  document.getElementById('bericht-zone').innerHTML = '';
+}
+</script>
+</body>
+</html>

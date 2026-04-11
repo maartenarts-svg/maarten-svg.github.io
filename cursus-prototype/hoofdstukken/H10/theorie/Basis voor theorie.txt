@@ -1,0 +1,101 @@
+1) Tabel maken met JavaScript
+const table = document.createElement("table");
+table.style.borderCollapse = "collapse";
+table.style.width = "100%";
+
+// --- Rij 1 ---
+const tr1 = document.createElement("tr");
+tr1.style.height = "0.9cm";
+
+// Cel 1
+const td1 = document.createElement("td");
+td1.style.border = "1px solid black";
+td1.style.paddingLeft = "10px";   // aanpasbaar
+td1.style.width = "150px";        // aanpasbaar
+td1.style.verticalAlign = "middle";
+td1.textContent = "Cel 1";
+
+// Cel 2
+const td2 = document.createElement("td");
+td2.style.paddingLeft = "10px";   // aanpasbaar
+td2.style.verticalAlign = "middle";
+td2.textContent = "Cel 2";
+
+tr1.appendChild(td1);
+tr1.appendChild(td2);
+
+// --- Rij 2 ---
+const tr2 = document.createElement("tr");
+
+const td3 = document.createElement("td");
+td3.colSpan = 2;
+td3.style.border = "1px solid black";
+td3.style.padding = "8px";
+td3.innerHTML = "Regel 1<br>Regel 2<br>Regel 3";
+
+tr2.appendChild(td3);
+
+// --- Samenstellen ---
+table.appendChild(tr1);
+table.appendChild(tr2);
+
+document.body.appendChild(table);
+
+👉 Breedte van cel 2 wordt automatisch de rest (je hoeft geen calc() te doen).
+
+2) Div layouts met JavaScript
+✔ Spans onder elkaar
+const divCol = document.createElement("div");
+divCol.style.display = "flex";
+divCol.style.flexDirection = "column";
+
+["Item 1", "Item 2"].forEach(text => {
+  const span = document.createElement("span");
+  span.style.minHeight = "30px";
+  span.textContent = text;
+  divCol.appendChild(span);
+});
+
+document.body.appendChild(divCol);
+✔ Spans naast elkaar
+const divRow = document.createElement("div");
+divRow.style.display = "flex";
+
+["Links", "Rechts"].forEach(text => {
+  const span = document.createElement("span");
+  span.textContent = text;
+  divRow.appendChild(span);
+});
+
+document.body.appendChild(divRow);
+✔ Figuur + tekst kolom
+const container = document.createElement("div");
+container.style.display = "flex";
+container.style.gap = "10px";
+
+// afbeelding
+const imgDiv = document.createElement("div");
+const img = document.createElement("img");
+img.src = "figuur.png";
+img.width = 100;
+imgDiv.appendChild(img);
+
+// tekst kolom
+const textDiv = document.createElement("div");
+textDiv.style.display = "flex";
+textDiv.style.flexDirection = "column";
+
+["Tekst 1", "Tekst 2", "Tekst 3"].forEach(t => {
+  const span = document.createElement("span");
+  span.textContent = t;
+  textDiv.appendChild(span);
+});
+
+container.appendChild(imgDiv);
+container.appendChild(textDiv);
+
+document.body.appendChild(container);
+Kort samengevat
+Gebruik document.createElement() voor alles
+Layout in divs = flexbox via JS styles
+Tabellen blijven handig voor vaste structuren

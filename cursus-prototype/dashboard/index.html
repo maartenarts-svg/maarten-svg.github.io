@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inloggen — Wiskunde</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="login-pagina">
+
+  <div class="login-kaart">
+    <div class="login-logo">
+      <span class="login-logo-letter">W</span>
+    </div>
+    <h1 class="login-titel">Wiskunde</h1>
+    <p class="login-subtitel">LAB Sint-Niklaas · Eerste jaar</p>
+
+    <form id="login-formulier" novalidate>
+
+      <div class="veld-groep">
+        <label for="login-mail" class="veld-label">Mailadres</label>
+        <input
+          type="email"
+          id="login-mail"
+          class="veld-invoer"
+          placeholder="voornaam.naam@labsintniklaas.be"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="veld-groep verborgen" id="code-wrap">
+        <label for="login-code" class="veld-label">Beheerdersscode</label>
+        <input
+          type="password"
+          id="login-code"
+          class="veld-invoer"
+          placeholder="Voer je code in"
+          autocomplete="off"
+        >
+      </div>
+
+      <p class="login-fout" id="login-fout" aria-live="polite"></p>
+
+      <button type="submit" id="login-knop" class="knop-primair knop-breed">
+        Inloggen
+      </button>
+
+    </form>
+  </div>
+
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

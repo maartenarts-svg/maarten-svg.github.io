@@ -1,0 +1,359 @@
+/* ============================================================
+   CURSUS WISKUNDE — BASISSTIJLEN
+   LAB School Vlaanderen — Eerste Middelbaar 1A
+   ============================================================ */
+
+/* --- Kleuren --- */
+:root {
+  --groen-donker:     #4a7c59;   /* tekst, lijnen, iconen */
+  --groen-midden:     #6aab7e;   /* secundair groen */
+  --groen-pastel:     #c8e6c9;   /* achtergronden, vulling */
+  --groen-licht:      #e8f5e9;   /* zeer lichte achtergrond */
+  --groen-scheiding:  #a5d6a7;   /* horizontale scheidingslijn tussen oefeningen */
+  --grijs-schrijflijn:#b0b0b0;   /* schrijflijnen */
+  --wit:              #ffffff;
+  --zwart:            #000000;
+  --tekst:            #1a1a1a;
+
+  /* --- Typografie --- */
+  --font:             Arial, Helvetica, sans-serif;
+  --fontsize:         10pt;
+  --lineheight:       1.4;
+
+  /* --- Pagina (A4) --- */
+  --marge-links:      3cm;
+  --marge-rechts:     2.5cm;
+  --marge-top:        2.5cm;
+  --marge-bottom:     2.5cm;
+  --tekstbreedte:     calc(21cm - var(--marge-links) - var(--marge-rechts));
+  /* = 21 - 3 - 2.5 = 15.5 cm */
+
+  /* --- Oefenummer (cirkel / vierkant) --- */
+  --badge-grootte:    0.75cm;    /* VASTGEZET: diameter cirkel = zijde vierkant */
+  --marge-badge-rechts: 0.3cm;
+
+  /* --- Oplossing --- */
+  --font-oplossing:   'Comic Sans MS', 'Comic Sans', cursive;
+
+  /* --- Insprong --- */
+  --insprong-stap:    0.65cm;
+
+  /* --- Schrijflijnen --- */
+  --schrijflijn-ruimte:       0.9cm;   /* boven en onder */
+  --schrijflijn-ruimte-breuk: 1.2cm;
+  --schrijflijn-dikte:        0.8px;
+  --schrijflijn-kleur:        var(--grijs-schrijflijn);
+
+  /* --- Kolommen --- */
+  --kolom-gap:        0.4cm;
+  --kolom-lijn-padding: 0.1cm;
+}
+
+/* ============================================================
+   PAGINA-LAYOUT
+   ============================================================ */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  line-height: var(--lineheight);
+  color: var(--tekst);
+  background: #f0f0f0;
+}
+
+.pagina {
+  width: 21cm;
+  min-height: 29.7cm;
+  margin: 1cm auto;
+  padding: var(--marge-top) var(--marge-rechts) var(--marge-bottom) var(--marge-links);
+  background: var(--wit);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ============================================================
+   OEFENING — BASISSTRUCTUUR
+   ============================================================ */
+.oefening {
+  position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0.4cm;
+}
+
+/* Scheidingslijn tussen oefeningen */
+.oefening + .oefening {
+  border-top: 1.5px solid var(--groen-scheiding);
+  padding-top: 0.4cm;
+  margin-top: 0.2cm;
+}
+
+/* De tekst-wrapper: verschuift naar rechts om ruimte te maken voor de marge */
+.oefening-inhoud {
+  margin-left: 0; /* tekst begint gewoon op de paginatekstbreedte */
+}
+
+/* ============================================================
+   MARGE: BADGE (nummer) + NIVEAU-ICONEN
+   ============================================================ */
+.oefening-marge {
+  position: absolute;
+  left: calc(-1 * var(--marge-links));
+  width: var(--marge-links);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 0.3cm;
+  box-sizing: border-box;
+}
+
+/* Badge = cirkel of vierkant met oefenummer */
+.badge {
+  width: var(--badge-grootte);
+  height: var(--badge-grootte);
+  background-color: var(--groen-pastel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  font-weight: bold;
+  color: var(--groen-donker);
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.badge:hover {
+  background-color: var(--groen-midden);
+  color: var(--wit);
+}
+
+.badge.actief {
+  background-color: var(--groen-donker);
+  color: var(--wit);
+}
+
+.badge.cirkel-badge {
+  border-radius: 50%;
+}
+
+.badge.vierkant-badge {
+  border-radius: 3px;
+}
+
+/* Niveau-iconen onder de badge */
+.niveau-iconen {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  margin-top: 3px;
+  font-size: 13pt;
+  color: var(--zwart);
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Tool-iconen (rekenmachine, geogebra) */
+.tool-iconen {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  margin-top: 2px;
+  font-size: 9pt;
+  justify-content: center;
+}
+
+/* ============================================================
+   OPMAAK TEKST IN OEFENING
+   ============================================================ */
+
+/* Introductietekst (paginabreed boven subopgaven) */
+.intro-tekst {
+  margin: 0 0 0.2cm 0;
+  padding: 0;
+}
+
+/* Subopgave-label: a|  b|  c| */
+.subopgave-label {
+  font-weight: bold;
+  color: var(--groen-donker);
+  font-size: var(--fontsize);
+  white-space: nowrap;
+}
+
+/* Subsubopgave-label: 1|  2|  3| */
+.subsubopgave-label {
+  font-weight: bold;
+  color: var(--groen-donker);
+  font-size: var(--fontsize);
+  white-space: nowrap;
+}
+
+/* Verticale streep in label: niet groter dan de tekst */
+.subopgave-label .streep,
+.subsubopgave-label .streep {
+  font-weight: normal;
+  font-size: var(--fontsize);
+}
+
+/* Insprong niveaus */
+.insprong-1 { padding-left: var(--insprong-stap); }
+.insprong-2 { padding-left: calc(2 * var(--insprong-stap)); }
+.insprong-3 { padding-left: calc(3 * var(--insprong-stap)); }
+
+/* Bullet */
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.2cm;
+}
+.bullet-item::before {
+  content: '•';
+  color: var(--groen-donker);
+  font-size: var(--fontsize);
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* ============================================================
+   KOLOMMEN
+   ============================================================ */
+.kolommen {
+  display: grid;
+  gap: var(--kolom-gap);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.kolommen-2 { grid-template-columns: 1fr 1fr; }
+.kolommen-3 { grid-template-columns: 1fr 1fr 1fr; }
+.kolommen-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+/* Kolom met zichtbare verticale lijn rechts */
+.kolom-lijn-rechts {
+  border-right: 1.2px solid var(--groen-donker);
+  padding-right: var(--kolom-lijn-padding);
+}
+
+.kolom {
+  box-sizing: border-box;
+  padding-left: var(--kolom-lijn-padding);
+}
+
+/* ============================================================
+   SCHRIJFLIJNEN
+   ============================================================ */
+.schrijflijn-blok {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.schrijflijn {
+  display: block;
+  border: none;
+  border-bottom: var(--schrijflijn-dikte) solid var(--schrijflijn-kleur);
+  width: 100%;
+  margin-top: var(--schrijflijn-ruimte);
+  margin-bottom: var(--schrijflijn-ruimte);
+  height: 0;
+  box-sizing: border-box;
+}
+
+.schrijflijn.breuk-ruimte {
+  margin-top: var(--schrijflijn-ruimte-breuk);
+  margin-bottom: var(--schrijflijn-ruimte-breuk);
+}
+
+/* Schrijflijn op vaste breedte */
+.schrijflijn.breedte-5cm  { width: 5cm; }
+.schrijflijn.breedte-8cm  { width: 8cm; }
+.schrijflijn.breedte-10cm { width: 10cm; }
+.schrijflijn.kolombreedte { width: 100%; }
+
+/* ============================================================
+   OPLOSSING (togglebaar, op schrijflijnen)
+   ============================================================ */
+.schrijflijn-blok {
+  position: relative;
+}
+
+.oplossing {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: #1a4fa0;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.oplossing.zichtbaar {
+  display: block;
+}
+
+/* Elke stap heeft hoogte = ruimte boven + ruimte onder de schrijflijn.
+   Tekst staat op de lijn: padding-bottom duwt baseline naar de lijn. */
+.oplossing-stap {
+  display: flex;
+  align-items: flex-end;          /* baseline onderaan = op de lijn */
+  height: calc(var(--schrijflijn-ruimte) );
+  padding-bottom: var(--schrijflijn-ruimte); /* ruimte onder = afstand tot de lijn */
+  padding-left: 2px;
+  margin: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   TABEL
+   ============================================================ */
+.cursus-tabel {
+  border-collapse: collapse;
+  font-size: var(--fontsize);
+  width: 100%;
+}
+
+.cursus-tabel td,
+.cursus-tabel th {
+  border: 1.2px solid var(--groen-donker);
+  padding: 0.1cm 0.2cm;
+}
+
+.cursus-tabel th,
+.cursus-tabel .tabel-header {
+  background: var(--groen-donker);
+  color: var(--wit);
+  font-weight: bold;
+}
+
+/* ============================================================
+   WISKUNDE (MathJax-ondersteuning)
+   ============================================================ */
+.wiskunde {
+  font-style: italic;
+}
+
+/* ============================================================
+   PRINT-STIJLEN
+   ============================================================ */
+@media print {
+  html, body {
+    background: white;
+  }
+  .pagina {
+    margin: 0;
+    box-shadow: none;
+    width: 100%;
+  }
+  .oplossing {
+    display: none !important;
+  }
+}

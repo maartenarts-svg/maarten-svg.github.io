@@ -1,0 +1,682 @@
+/* ============================================================
+   CURSUS WISKUNDE — BASISSTIJLEN
+   blauw-oplossingen: 26.79.160
+   groen-pastel: 200.230.201
+   ============================================================ */
+
+:root {
+  --groen-donker:     #4a7c59;
+  --groen-midden:     #6aab7e;
+  --groen-pastel:     #c8e6c9;
+  --groen-scheiding:  #a5d6a7;
+  --wit:              #ffffff;
+  --tekst:            #1a1a1a;
+  --blauw-oplossing:  #1a4fa0; 
+  --lila-markering:   #d500f9;
+
+  /* verbeteropties visueel overzicht */
+  --oranje-rand:      #e65100;
+  --oranje-pastel:    #ffe0b2;
+  --oranje-scheiding: #f9cb9c;
+  --lila-rand:        #7b1fa2;
+  --lila-pastel:      #f3e5f5;
+
+  --font:             Arial, Helvetica, sans-serif;
+  --font-oplossing:   'Comic Sans MS', 'Comic Sans', cursive;
+  --fontsize:         10pt;
+
+  --marge-links:      3cm;
+  --marge-rechts:     2.5cm;
+  --marge-top:        2.5cm;
+  --marge-bottom:     2.5cm;
+
+  --badge-grootte:    0.75cm;
+  --insprong-stap:    0.65cm;
+
+  --rij-hoogte:       0.9cm;
+  --rij-hoogte-breuk: 1.2cm;
+
+  --sl-kleur:         #b0b0b0;
+}
+
+/* ============================================================
+   PAGINA
+   ============================================================ */
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  color: var(--tekst);
+  background: #f0f0f0;
+}
+
+.pagina {
+  width: 21cm;
+  min-height: 29.7cm;
+  margin: 1cm auto;
+  padding: var(--marge-top) var(--marge-rechts) var(--marge-bottom) var(--marge-links);
+  background: var(--wit);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ============================================================
+   OEFENING
+   ============================================================ */
+.oefening {
+  position: relative;
+  padding-bottom: 0.4cm;
+}
+.oefening + .oefening {
+  border-top: 2px solid var(--groen-scheiding);
+  padding-top: 0.4cm;
+  margin-top: 0.2cm;
+}
+
+/* ============================================================
+   MARGE
+   ============================================================ */
+.oefening-marge {
+  position: absolute;
+  left: calc(-1 * var(--marge-links) + 1cm);
+  width: calc(var(--marge-links) - 0.5cm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 0.3cm;
+  box-sizing: border-box;
+}
+
+.badge {
+  width: var(--badge-grootte);
+  height: var(--badge-grootte);
+  background-color: var(--groen-pastel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  font-weight: bold;
+  color: var(--groen-donker);
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+.badge:hover  { background-color: var(--groen-midden); color: var(--wit); }
+.badge.actief { background-color: var(--groen-donker); color: var(--wit); }
+.badge.cirkel-badge   { border-radius: 50%; }
+.badge.vierkant-badge { border-radius: 3px; }
+
+.niveau-iconen {
+  display: flex; gap: 2px;
+  margin-top: 3px; justify-content: center; line-height: 1;
+}
+.tool-iconen {
+  display: flex; gap: 0px;
+  margin-top: 2px; font-size: 5pt; justify-content: center;
+}
+
+/* ============================================================
+   TEKST
+   ============================================================ */
+.intro-tekst { margin: 0 0 0cm 0; padding: 0; }
+
+.subopgave-label {
+  font-weight: bold;
+  color: var(--groen-donker);
+  font-size: var(--fontsize);
+  white-space: nowrap;
+}
+.subopgave-label .streep { font-weight: bold; }
+
+/* ============================================================
+   OEF-TABEL
+   ============================================================ */
+.oef-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.oef-tabel td {
+  padding: 0;
+  border: none;
+  vertical-align: middle;
+}
+.oef-tabel.met-lijn .kolom-links {
+  border-right: 1.2px solid var(--groen-donker);
+  padding-right: 0.2cm;
+}
+.oef-tabel.met-lijn .kolom-midden {
+  border-right: 1.2px solid var(--groen-donker);
+  padding-right: 0.2cm;
+  padding-left: 0.2cm;
+}
+.oef-tabel.met-lijn .kolom-rechts {
+  padding-left: 0.2cm;
+}
+
+/* ============================================================
+   RIJ — basis voor alle rijen
+   ============================================================ */
+.rij {
+  display: flex;
+  align-items: center;
+  height: var(--rij-hoogte);
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+}
+
+.rij.breuk { height: var(--rij-hoogte-breuk); }
+
+.lbl { font-weight: bold; color: var(--groen-donker); flex-shrink: 0; width: 0.65cm; display: inline-block; }
+
+/* ============================================================
+   aanpassing voor afbreken - normaal enkel eerste met waarde 0
+   ============================================================ */
+.txt {
+  flex-shrink: 1;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+/* ============================================================
+   einde afbreking
+   ============================================================ */
+
+.is  { flex-shrink: 0; padding: 0 0.15cm; }
+.tab { flex-shrink: 0; width: var(--insprong-stap); }
+
+/* ============================================================
+   SCHRIJFLIJN — aaneengesloten underscores, overflow hidden
+   ============================================================ */
+.sl {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--sl-kleur);
+  letter-spacing: -0.08em;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  line-height: 1;
+  user-select: none;
+  will-change: transform;
+  transform: translateZ(0);
+  
+}
+
+/* ============================================================
+   OPLOSSING — overlay, zelfde positie als schrijflijn
+   ============================================================ */
+.opl {
+  display: none;
+  position: absolute;
+  top: 0; bottom: 0;
+  /* left wordt ingesteld via JS per rij-type */
+  right: 0;
+  align-items: center;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  white-space: wrap;
+  overflow: hidden;
+}
+.opl.zichtbaar { display: flex; }
+
+.opl2 {
+  display: none;
+  position: relative;
+  top: 0; bottom: 0; 
+  /* left wordt ingesteld via JS per rij-type */
+  right: 0;
+  align-items: center;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  white-space: wrap;
+  overflow: hidden;
+}
+.opl2.zichtbaar { display: flex; }
+
+/* ============================================================
+   FIGUUR
+   ============================================================ */
+.figuur-cel { text-align: center; padding: 0.1cm 0; }
+
+/* ============================================================
+   BREUK — teller en noemer op 10pt
+   ============================================================ */
+.breuk-html {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1.1;
+}
+.breuk-html .teller,
+.breuk-html .noemer {
+  display: block;
+  text-align: center;
+  font-size: var(--fontsize);
+  padding: 0 2px;
+}
+.breuk-html .noemer {
+  border-top: 0.8px solid currentColor;
+  margin-top: 1px;
+}
+
+/* ============================================================
+   Exponent oplossingen
+   ============================================================ */
+.opl sup {
+  font-size: 0.65em;
+  position: relative;
+  top: -0.2em;
+  margin-left: 0.2em;
+}
+
+.txt sup {
+  font-size: 0.65em;       /* verkleint de exponent zoals bij oplossingen */
+  position: relative;      
+  top: -0.1em;             /* omhoog of omlaag verplaatsen */
+  margin-left: 0.2em;
+}
+
+.txt sub {
+  font-size: 0.65em;       
+  position: relative;
+  margin-left: 0.1em;
+}
+
+.voorgedrukt {
+  font-family: var(--font-oplossing);
+  color: var(--blauw-oplossing);
+  sup {
+    font-size: 0.65em;
+    position: relative;
+    top: -0.2em;
+    margin-left: 0.2em;
+  }
+}
+
+/* ============================================================
+   Haakjes breuken
+   ============================================================ */
+.bracket {
+  display: inline-block;
+  transform: scaleY(2.5);
+  transform-origin: center;
+  position: relative;
+  top: 0.0em;
+}
+
+/* ============================================================
+   ZICHTBARE TABEL
+   ============================================================ */
+
+.zichtbare-tabel {
+  border-collapse: collapse;
+  margin: 0.2cm 0;
+  width: 100%;
+}
+
+.zichtbare-tabel td {
+  border: 1.2px solid var(--groen-donker);
+  text-align: center;
+  vertical-align: middle;
+  font-size: var(--fontsize);
+}
+
+/* Hoofding */
+.zichtbare-tabel td.hoofding {
+  background-color: var(--groen-pastel);
+  color: var(--zwart);
+  font-weight: bold;
+}
+
+/* Toggle-oplossingen in tabel */
+.opl-toggle {
+  display: none;
+  font-family: var(--font-oplossing);
+  color: var(--blauw-oplossing);
+}
+
+.opl-toggle.zichtbaar {
+  display: inline;
+}
+
+
+/* ============================================================
+   THEORIE KADER
+   ============================================================ */
+.theorie-kader {
+  background-color: var(--groen-pastel);
+  border: 1.2px solid var(--groen-scheiding);
+  padding: 0.2cm 0.3cm;
+  margin: 0.2cm 0;
+  box-sizing: border-box;
+}
+.theorie-rij {
+  display: flex;
+  align-items: baseline;
+  margin: 0.1cm 0;
+}
+.theorie-nummer {
+  flex-shrink: 0;
+  width: 1.2cm;   /* ← HIER AANPASSEN voor tabpositie */
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  color: var(--tekst);
+}
+.theorie-tekst {
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  color: var(--tekst);
+}
+
+/* ============================================================
+   PAGINA VULLINGSINDICATOR (alleen systeem 2, niet afdrukken)
+   Staat in de rechtermarge van de pagina.
+   Groen = ok, oranje = bijna vol (>80%), rood = te vol (>100%)
+   ============================================================ */
+.vullings-balk {
+  position: absolute;
+  top: var(--marge-top);
+  right: 0.5cm;
+  width: 0.2cm;
+  bottom: var(--marge-bottom);
+  border-radius: 2px;
+  background: #e0e0e0;
+  display: none;
+}
+.vullings-balk-vulling {
+  width: 100%;
+  border-radius: 2px;
+  background: var(--groen-midden);
+  transition: height 0.3s;
+}
+body.systeem-2 .vullings-balk { display: block; }
+
+@media print {
+  .vullings-balk { display: none !important; }
+}
+
+/* ============================================================
+   Markering tekst
+   gebruik: <span class="markeer-lila">tekst</span>\u200A
+   ============================================================ */
+.markeer-lila {
+  color: #d500f9;
+}
+
+/* ============================================================
+   MARKERING
+   ============================================================ */
+.markering {
+  background-color: var(--markeer-kleur, #bbdefb);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.markering.opl-toggle-markering {
+  display: none;
+}
+.markering.opl-toggle-markering.zichtbaar {
+  display: inline;
+}
+
+/* ============================================================
+   HOE VER STA IK — TEKSTVAK
+   ============================================================ */
+.hvsi-kader {
+  background-color: var(--groen-pastel);
+  border: 1.2px solid var(--groen-scheiding);
+  padding: 0.2cm 0.3cm;
+  margin: 0.0cm 0;
+  box-sizing: border-box;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+}
+.hvsi-kader p {
+  margin: 0 0 0cm 0;
+}
+.hvsi-kader ul {
+  margin: 0;
+  padding-left: 0cm;
+  list-style: none;
+}
+.hvsi-kader ul li::before {
+  content: '•';
+  margin-right: 0.2cm;
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  html, body { background: white; }
+  .pagina-scheiding { display: none !important; }
+  .pagina-blok {
+    width: 21cm;
+    min-height: 29.7cm;
+    margin: 0 !important;
+    box-shadow: none !important;
+    page-break-after: always;
+    break-after: always;
+    padding: var(--marge-top) var(--marge-rechts) var(--marge-bottom) var(--marge-links);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .opl:not(.opl-vast) { display: none !important; }
+  .opl.zichtbaar.opl-vast { display: flex !important; }
+  .opl-toggle.opl-vast { display: inline !important; }
+  .vullings-balk { display: none !important; }
+}
+
+@media print {
+  body.toon-oplossingen .opl { display: flex !important; }
+  body.toon-oplossingen .opl-toggle { display: inline !important; }
+  body.toon-oplossingen .svg-opl-laag { display: block !important; }
+}
+
+/*===========================================================================
+STIJLEN VOOR BASISLAAG EN OPLOSSINGENLAAG TD, BETER
+===========================================================================*/
+
+/* basislaag: altijd zichtbaar, links uitgelijnd, verticaal gecentreerd */
+.basis {
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--sl-kleur);
+  letter-spacing: -0.08em;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  line-height: 1;
+  user-select: none;  
+  display: flex;
+  align-items: center;       /* verticaal centreren */
+  justify-content: flex-start; /* links uitlijnen */
+}
+
+
+/* overlaylaag: start verborgen, gecentreerd */
+.overlay {
+  display: none;             /* standaard verborgen */
+  position: absolute;        /* bovenop de basislaag */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: wrap;
+}
+
+.overlay.zichtbaar {
+  display: flex;          /* nu wordt de overlay zichtbaar */
+  align-items: center;       /* verticaal centreren */
+  justify-content: center;   /* horizontaal centreren */
+}
+
+.overlayvoorgedrukt {
+  display: flex;             
+  position: absolute;        /* bovenop de basislaag */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+  white-space: wrap;
+}
+
+.overlay sup {
+  font-size: 0.65em;
+  position: relative;
+  top: -0.2em;
+  margin-left: 0.2em;
+}
+
+.overlayvoorgedrukt sup {
+  font-size: 0.65em;
+  position: relative;
+  top: -0.2em;
+  margin-left: 0.2em
+}
+
+/*===========================================================================
+STIJLEN VOOR BASISLAAG EN OPLOSSINGENLAAG SPAN, BETER
+===========================================================================*/
+.basisspan {
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--sl-kleur);
+  letter-spacing: -0.08em;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  line-height: 1;
+  user-select: none;
+  display: inline-flex;      /* ← was flex */
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.overlayspan {
+  display: none;
+  position: absolute;        /* werkt ook op inline-flex parent */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: wrap;
+}
+
+
+.overlayspan.zichtbaar {
+  display: flex;          /* nu wordt de overlay zichtbaar */
+  align-items: center;       /* verticaal centreren */
+  justify-content: center;   /* horizontaal centreren */
+  width: 100%;
+  height: 100%;
+}
+
+.overlayvoorgedruktspan {
+  display: flex;             
+  position: absolute;        /* bovenop de basislaag */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+  white-space: wrap;
+}
+
+.overlayspan sup {
+  font-size: 0.65em;
+  position: relative;
+  top: -0.2em;
+  margin-left: 0.2em;
+}
+
+.overlayvoorgedruktspan sup {
+  font-size: 0.65em;
+  position: relative;
+  top: -0.2em;
+  margin-left: 0.2em
+}
+
+/*===========================================================================
+voor piramideoefening
+===========================================================================*/
+
+/* overlaylaag: start verborgen, gecentreerd */
+.overlaypiramide {
+  display: none;             /* standaard verborgen */
+  position: relative;        /* bovenop de basislaag */
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: wrap;
+}
+
+.overlaypiramide.zichtbaar {
+  display: flex;          /* nu wordt de overlay zichtbaar */
+  align-items: center;       /* verticaal centreren */
+  justify-content: center;   /* horizontaal centreren */
+}
+
+/*===========================================================================
+voor theoriewoorden
+===========================================================================*/
+.theorie {
+  font-weight: bold;
+  color: var(--groen-donker);
+}
+
+.theorietekst {
+  line-height: 1.2;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  color: var(--tekst);
+}
+
+.theorietekst sup {
+  font-size: 0.65em;       /* verkleint de exponent zoals bij oplossingen */
+  position: relative;      
+  top: -0.1em;             /* omhoog of omlaag verplaatsen */
+  margin-left: 0.2em;
+}

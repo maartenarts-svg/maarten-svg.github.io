@@ -1,0 +1,134 @@
+/* ============================================================
+   HELPERS VOOR GEMENGDE SCHRIJFLIJN EN TEKST
+   ============================================================ */
+
+
+/*
+  maakOpTdazExtra — td met label + tekst + tab + = + gedeeltelijke invultekst
+  tekstBreedte: 
+  breuk: grotere rijhoogte
+*/
+function maakOpTdMix(label, tekst, invulling = [], tekstBreedte='2.7cm', breuk = false) {
+  const td = document.createElement('td');
+  
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  // label
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}<span class="streep">|</span>`;
+  rij.appendChild(lbl);
+
+  // opgave (vaste breedte)
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = tekstBreedte;
+  txt.style.display = 'inline-block';
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  // =
+  const is = document.createElement('span');
+  is.classList.add('is');
+  is.textContent = '=';
+  rij.appendChild(is);
+
+  // gemengde schrijflijn
+  const mix = document.createElement('span');
+  mix.classList.add('mix-lijn');
+  mix.innerHTML = invulling;
+  rij.appendChild(mix);
+
+  // oplossing overlay (zoals bij maakOpTd)
+  if (oplossing !== null) {
+    const ov = document.createElement('div');
+    ov.classList.add('opl');
+
+    ov.style.left = `calc(${tekstBreedte} + 0.9cm)`;
+
+    if (typeof oplossing === 'string') ov.innerHTML = oplossing;
+    else ov.appendChild(oplossing);
+
+    rij.appendChild(ov);
+  }
+
+  td.appendChild(rij);
+  return td;
+}
+
+function slDeel(breedte='1cm') {
+  return `<span class="sl-deel" style="display:inline-block; width:${breedte};">${SL}</span>`;
+}
+
+function vast(txt) {
+  return `<span class="vast">${txt}</span>`;
+}
+
+// sub-blok: schrijflijn met optionele startwaarde
+function subBlok(breedte='1cm', tekst='', klas='') {
+  const span = document.createElement('span');
+  span.classList.add('sub-blok');
+  if (klas) span.classList.add(klas);
+  span.style.width = breedte;
+  span.innerHTML = tekst;
+  return span;
+}
+
+// volledige opl-blok met meerdere sub-blokjes
+function oplBlok(subBlokken=[]) {
+  const div = document.createElement('div');
+  div.classList.add('opl-blok');
+  subBlokken.forEach(sb => div.appendChild(sb));
+  return div;
+}
+
+/* ============================================================
+   STIJLEN VOOR GEMENGDE SCHRIJFLIJN EN TEKST
+   ============================================================ */
+.mix-lijn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1cm;
+  flex: 1;
+}
+
+.mix-lijn .sl-deel {
+  color: var(--sl-kleur);
+  letter-spacing: -0.08em;
+  font-family: var(--font);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mix-lijn .vast {
+  color: var(--tekst);
+}
+
+.opl-blok {
+  display: flex;        /* horizontale blokjes naast elkaar */
+  gap: 0.2em;           /* kleine ruimte tussen de sub-blokjes */
+  align-items: center;  /* verticale uitlijning */
+}
+
+.opl-blok .sub-blok {
+  display: flex;
+  justify-content: center;  /* inhoud centreren */
+  align-items: center;
+  height: 1.5em;            /* standaard hoogte van schrijflijn */
+  border-bottom: 1px solid var(--lijnkleur); /* schrijflijn */
+  font-family: var(--font-oplossing);
+  color: var(--blauw-oplossing);
+}
+
+.opl-blok .sub-blok.vooraf {
+  border-bottom: none;  /* vaste waarden hoeven geen lijn */
+  color: var(--tekst-standaard); 
+}
+
+.opl-blok .sub-blok.leeg {
+  border-bottom: 1px solid var(--lijnkleur);
+  color: transparent;  /* schrijflijn leeg */
+}

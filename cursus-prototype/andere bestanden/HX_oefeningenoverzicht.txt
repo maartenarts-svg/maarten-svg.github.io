@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursus Wiskunde — Oefeningoverzicht</title>
+<style>
+  :root {
+    --groen-donker:  #4a7c59;
+    --groen-midden:  #6aab7e;
+    --groen-pastel:  #c8e6c9;
+    --groen-licht:   #e8f5e9;
+    --groen-rand:    #a5d6a7;
+    --grijs-licht:   #f5f5f5;
+    --tekst:         #1a1a1a;
+    --tekst-zacht:   #555;
+    --blauw:         #1a4fa0;
+    --rood:          #c0392b;
+    --font:          'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radius:        6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); font-size: 13px; color: var(--tekst); background: #eef2ee; min-height: 100vh; }
+  header { background: var(--groen-donker); color: white; padding: 14px 24px; font-size: 15px; font-weight: 600; letter-spacing: .03em; display: flex; align-items: center; gap: 10px; }
+  header span { font-weight: 300; opacity: .8; font-size: 13px; }
+  .layout { max-width: 960px; margin: 20px auto; padding: 0 16px 40px; display: flex; flex-direction: column; gap: 16px; }
+  .kaart { background: white; border: 1px solid var(--groen-rand); border-radius: var(--radius); overflow: hidden; }
+  .kaart-titel { background: var(--groen-pastel); color: var(--groen-donker); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-bottom: 1px solid var(--groen-rand); }
+  .kaart-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  label { font-size: 11px; font-weight: 600; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; }
+  input[type="number"] { border: 1px solid var(--groen-rand); border-radius: 4px; padding: 6px 9px; font-size: 13px; font-family: var(--font); color: var(--tekst); background: white; outline: none; }
+  input[type="number"]:focus { border-color: var(--groen-donker); }
+  button { padding: 9px 20px; border: none; border-radius: var(--radius); font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .btn-secundair { background: white; color: var(--groen-donker); border: 1.5px solid var(--groen-donker); }
+  .btn-secundair:hover { background: var(--groen-licht); }
+  .btn-klein { padding: 5px 12px; font-size: 12px; }
+  .melding { padding: 8px 12px; border-radius: 4px; font-size: 12px; display: none; }
+  .melding.fout { background: #fdecea; border: 1px solid #ef9a9a; color: var(--rood); display: block; }
+  .melding.ok   { background: #e8f5e9; border: 1px solid var(--groen-rand); color: var(--groen-donker); display: block; }
+  .upload-zone { border: 2px dashed var(--groen-rand); border-radius: var(--radius); padding: 30px; text-align: center; cursor: pointer; transition: all .2s; color: var(--tekst-zacht); }
+  .upload-zone:hover, .upload-zone.over { border-color: var(--groen-donker); background: var(--groen-licht); }
+  .upload-zone input { display: none; }
+  .upload-zone .icoon { font-size: 32px; margin-bottom: 8px; }
+  .upload-zone .tekst { font-size: 13px; }
+  .upload-zone .subtekst { font-size: 11px; color: var(--tekst-zacht); margin-top: 4px; }
+  #resultaat-kaart { display: none; }
+  #resultaat-kaart.zichtbaar { display: block; }
+  .resultaat-acties { padding: 10px 14px; display: flex; gap: 8px; border-bottom: 1px solid var(--groen-rand); background: var(--grijs-licht); }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--groen-pastel); }
+  th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; border-bottom: 2px solid var(--groen-rand); }
+  td { padding: 7px 12px; font-size: 12px; border-bottom: 1px solid #f0f0f0; }
+  tr:hover td { background: var(--groen-licht); }
+  tr:last-child td { border-bottom: none; }
+  td.nr { font-weight: 700; color: var(--groen-donker); width: 50px; }
+  td.bestand { font-family: 'Consolas', monospace; font-size: 11px; color: var(--blauw); }
+  td.blz { font-weight: 600; color: var(--groen-donker); width: 70px; }
+  td.container { font-size: 11px; color: var(--tekst-zacht); }
+  td.onderdeel { font-weight: 600; }
+  .paragraaf-header td { background: var(--groen-donker); color: white; font-weight: 700; font-size: 12px; padding: 6px 12px; }
+  .stat-rij { display: flex; gap: 16px; flex-wrap: wrap; }
+  .stat { background: var(--groen-licht); border: 1px solid var(--groen-rand); border-radius: 4px; padding: 8px 14px; font-size: 12px; }
+  .stat strong { color: var(--groen-donker); font-size: 18px; display: block; }
+  tr.in-bewerking td { background: #fff8e1; }
+  tr.in-bewerking td.bestand { color: var(--geel-tekst); font-weight: 700; }
+</style>
+</head>
+<body>
+<header>📐 Cursus Wiskunde <span>— Oefeningoverzicht</span></header>
+<div class="layout">
+
+  <!-- INSTELLINGEN -->
+  <div class="kaart">
+    <div class="kaart-titel">Instellingen</div>
+    <div class="kaart-body">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <label for="inp-beginpagina">Beginpaginanummer</label>
+        <input type="number" id="inp-beginpagina" style="width:80px;" value="453" min="1">
+        <button class="btn-secundair btn-klein" onclick="herbereken()">↺ Herbereken</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPLOAD -->
+  <div class="kaart">
+    <div class="kaart-titel">Laad structuurbestand</div>
+    <div class="kaart-body">
+      <div class="upload-zone" id="upload-zone" onclick="document.getElementById('bestand-input').click()"
+           ondragover="event.preventDefault();this.classList.add('over')"
+           ondragleave="this.classList.remove('over')"
+           ondrop="handleDrop(event)">
+        <input type="file" id="bestand-input" accept=".html" onchange="handleBestand(this.files[0])">
+        <div class="icoon">📄</div>
+        <div class="tekst">Klik of sleep het structuurbestand hier</div>
+        <div class="subtekst">Alleen .html bestanden</div>
+      </div>
+      <div class="melding" id="melding"></div>
+    </div>
+  </div>
+
+  <!-- RESULTAAT -->
+  <div class="kaart" id="resultaat-kaart">
+    <div class="kaart-titel">Overzicht oefeningen</div>
+    <div class="resultaat-acties">
+      <button class="btn-secundair btn-klein" onclick="downloadCSV()">⬇ Download als CSV</button>
+    </div>
+    <div id="stats" style="padding:12px 14px;border-bottom:1px solid var(--groen-rand);background:#fafafa;"></div>
+    <div style="overflow-x:auto;">
+      <table id="overzicht-tabel">
+        <thead>
+          <tr>
+            <th>Nr.</th>
+            <th>Bestandsnaam</th>
+            <th>Onderdeel</th>
+            <th>Paragraaf</th>
+            <th>Bladzijde</th>
+            <th>Container</th>
+          </tr>
+        </thead>
+        <tbody id="tabel-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+<script>
+const ONDERDEEL_MAP = {
+  'oefenen':  'Oefenen!',
+  'zoeje':    'Zo doe je dat!',
+  'hoever':   'Hoe ver sta ik?',
+  'hoeveR':   'Hoe ver sta ik?',
+  'ontdek':   'Ontdekkingstocht',
+};
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('over');
+  const bestand = e.dataTransfer.files[0];
+  if (bestand) handleBestand(bestand);
+}
+
+function handleBestand(bestand) {
+  if (!bestand || !bestand.name.endsWith('.html')) {
+    toonMelding('Kies een .html bestand.', 'fout');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = e => verwerkInhoud(e.target.result);
+  reader.readAsText(bestand);
+}
+
+function verwerkInhoud(tekst) {
+  window._tekst = tekst;
+  const beginPagina = parseInt(document.getElementById('inp-beginpagina').value) || 453;
+
+  // Verzamel posities van alle paginawissels
+  const startMarker = tekst.indexOf('/* BEGIN VANAF HIER MET TELLEN */');
+  const startPositie = startMarker !== -1 ? startMarker : 0;
+
+  const paginaRegex = /nieuwePagina\s*\(\s*\)|forceerPaginawissel\s*\(\s*\)/g;
+  const paginaPosities = [];
+  let pm;
+  while ((pm = paginaRegex.exec(tekst)) !== null) {
+    if (pm.index >= startPositie) paginaPosities.push(pm.index);
+  }
+
+  // Zoek alle laadOefeningen aanroepen
+  const regex = /laadOefeningen\(\s*'([^']+)'\s*,\s*\[([\s\S]*?)\]\s*\)/g;
+  let m;
+  const oefeningen = [];
+  let teller = 0;
+
+  while ((m = regex.exec(tekst)) !== null) {
+    const positie   = m.index;
+    const containerId   = m[1];
+    const bestandenBlok = m[2];
+
+    // Tel paginawissels vóór deze positie
+    const aantalPaginawissels = paginaPosities.filter(p => p < positie).length;
+    const bladzijde = beginPagina + aantalPaginawissels - 1;
+
+    const bestandRegex = /'([^']+\.js)'/g;
+    let b;
+    while ((b = bestandRegex.exec(bestandenBlok)) !== null) {
+      teller++;
+      const pad = b[1];
+      const bestandsnaam = pad.split('/').pop().replace('.js', '');
+
+      // Paragraaf uit container-id
+      const paragraafMatch = containerId.match(/content-(\d)(\d+)-/);
+      let paragraaf = '';
+      if (paragraafMatch) {
+        paragraaf = paragraafMatch[1] + '.' + parseInt(paragraafMatch[2]);
+      }
+
+      // Onderdeel uit container-id
+      const onderdeelMatch = containerId.match(/content-\d+-([\w]+?)(-\d+)?$/);
+      let onderdeel = '';
+      const sleutelRaw = onderdeelMatch ? onderdeelMatch[1] : '';
+      if (onderdeelMatch) {
+        onderdeel = ONDERDEEL_MAP[sleutelRaw] || sleutelRaw;
+      }
+
+      // Filter op relevante onderdelen
+      const toegestaan = ['oefenen', 'zoeje', 'hoeveR', 'hoever', 'ontdek'];
+      if (!toegestaan.includes(sleutelRaw)) continue;
+
+      oefeningen.push({ nr: teller, bestandsnaam, pad, onderdeel, paragraaf, bladzijde, containerId });
+    }
+  }
+
+  if (oefeningen.length === 0) {
+    toonMelding('Geen laadOefeningen() aanroepen gevonden.', 'fout');
+    return;
+  }
+
+  oefeningen.forEach((o, i) => o.nr = i + 1);
+  toonResultaat(oefeningen);
+  toonMelding(oefeningen.length + ' oefeningen gevonden.', 'ok');
+}
+
+function toonResultaat(oefeningen) {
+  const tbody = document.getElementById('tabel-body');
+  tbody.innerHTML = '';
+
+  // Groepeer per paragraaf
+  const perParagraaf = {};
+  oefeningen.forEach(o => {
+    if (!perParagraaf[o.paragraaf]) perParagraaf[o.paragraaf] = [];
+    perParagraaf[o.paragraaf].push(o);
+  });
+
+  Object.keys(perParagraaf).sort().forEach(par => {
+    const trHeader = document.createElement('tr');
+    trHeader.classList.add('paragraaf-header');
+    trHeader.innerHTML = '<td colspan="6">Paragraaf ' + par + '</td>';
+    tbody.appendChild(trHeader);
+
+    perParagraaf[par].forEach(o => {
+      const tr = document.createElement('tr');
+      if (!o.bestandsnaam.startsWith('oe_')) tr.classList.add('in-bewerking');
+      tr.innerHTML =
+        '<td class="nr">' + o.nr + '</td>' +
+        '<td class="bestand">' + o.bestandsnaam + '</td>' +
+        '<td class="onderdeel">' + o.onderdeel + '</td>' +
+        '<td class="container">' + o.paragraaf + '</td>' +
+        '<td class="blz">' + o.bladzijde + '</td>' +
+        '<td class="container">' + o.containerId + '</td>';
+      tbody.appendChild(tr);
+    });
+  });
+
+  // Statistieken
+  const stats = document.getElementById('stats');
+  const aantalPerOnderdeel = {};
+  oefeningen.forEach(o => {
+    aantalPerOnderdeel[o.onderdeel] = (aantalPerOnderdeel[o.onderdeel] || 0) + 1;
+  });
+  let statHTML = '<div class="stat-rij"><div class="stat"><strong>' + oefeningen.length + '</strong>Totaal</div>';
+  Object.entries(aantalPerOnderdeel).forEach(function(e) {
+    statHTML += '<div class="stat"><strong>' + e[1] + '</strong>' + e[0] + '</div>';
+  });
+  statHTML += '</div>';
+  stats.innerHTML = statHTML;
+
+  window._oefeningen = oefeningen;
+  document.getElementById('resultaat-kaart').classList.add('zichtbaar');
+  document.getElementById('resultaat-kaart').scrollIntoView({ behavior: 'smooth' });
+}
+
+function herbereken() {
+  if (window._tekst) verwerkInhoud(window._tekst);
+}
+
+function downloadCSV() {
+  if (!window._oefeningen) return;
+  const rijen = [['Nr', 'Bestandsnaam', 'Pad', 'Onderdeel', 'Paragraaf', 'Bladzijde', 'Container']];
+  window._oefeningen.forEach(o => {
+    rijen.push([o.nr, o.bestandsnaam, o.pad, o.onderdeel, o.paragraaf, o.bladzijde, o.containerId]);
+  });
+  const csv = rijen.map(r => r.map(cel => '"' + cel + '"').join(';')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'oefeningen_overzicht.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function toonMelding(tekst, type) {
+  const el = document.getElementById('melding');
+  el.textContent = tekst;
+  el.className = 'melding' + (type ? ' ' + type : '');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taak — Wiskunde</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/cursus.css">
+</head>
+<body>
+
+  <!-- ── Topbalk ───────────────────────────────────────────── -->
+  <header class="taak-topbalk" id="taak-topbalk">
+    <div class="taak-topbalk-info">
+      <span class="taak-topbalk-naam"  id="taak-leerling-naam"></span>
+      <span class="taak-topbalk-code"  id="taak-code"></span>
+      <span class="taak-topbalk-titel" id="taak-titel"></span>
+    </div>
+    <div class="taak-topbalk-acties">
+      <button class="knop-opslaan" id="knop-opslaan">Opslaan</button>
+      <button class="knop-terug"   id="knop-terug">← Terug</button>
+    </div>
+  </header>
+
+  <!-- ── Taakinhoud (wordt dynamisch geladen) ─────────────── -->
+  <div class="taak-inhoud" id="taak-inhoud">
+    <p style="color:#888; font-style:italic;">Taak wordt geladen…</p>
+  </div>
+
+  <!-- ── Dialoog: niet-opgeslagen wijzigingen ─────────────── -->
+  <div class="dialoog-overlay" id="dialoog-opslaan" role="dialog" aria-modal="true">
+    <div class="dialoog-kaart">
+      <div class="dialoog-titel">Niet-opgeslagen wijzigingen</div>
+      <div class="dialoog-tekst">
+        Je hebt wijzigingen die nog niet zijn opgeslagen.
+        Wil je ze opslaan voor je het scherm verlaat?
+      </div>
+      <div class="dialoog-knoppen">
+        <button class="knop-secundair" id="dialoog-niet-opslaan">Niet opslaan</button>
+        <button class="knop-primair"   id="dialoog-opslaan-knop">Opslaan</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/taak.js"></script>
+</body>
+</html>

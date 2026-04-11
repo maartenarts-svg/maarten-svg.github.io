@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+
+<svg 
+     version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     width="7.54549761395356cm"
+     height="4.7520580717664975cm"
+     viewBox="0 0 234 147"
+     >
+<title>
+
+</title>
+<g stroke-dashoffset="0.0000" stroke-linejoin="miter" stroke-dasharray="none" stroke-width="1.0000" stroke-linecap="square" stroke-miterlimit="10.000">
+<g id="misc">
+</g><!-- misc -->
+<g id="layer0">
+</g><!-- layer0 -->
+<g id="layer1">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip16b9de41-a5b4-4898-81de-6e9b84b8f257">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip1)">
+<g fill="#c8e6c9" fill-rule="evenodd" fill-opacity="1.0000" stroke="none">
+  <path d="M 106.05 87.213 L 106.05 211.79 L 261.77 211.79 L 261.77 87.213 z"/>
+<title>Vierhoek vierhoek1</title>
+<desc>Vierhoek vierhoek1: Veelhoek A, B, C, D</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip1 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip267a97dc-a28b-4d69-aae6-b6334192b20e">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip2)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 106.05 87.213 L 106.05 211.79"/>
+<title>Lijnstuk a</title>
+<desc>Lijnstuk a: Lijnstuk [A, B]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip2 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip0bc0e977-8a82-4416-884a-ee1f3b3fee1d">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip3)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 106.05 211.79 L 261.77 211.79"/>
+<title>Lijnstuk b</title>
+<desc>Lijnstuk b: Lijnstuk [B, C]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip3 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip3ad2dc10-7148-447d-b08a-c5468a60d8f4">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip4)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 261.77 211.79 L 261.77 87.213"/>
+<title>Lijnstuk c</title>
+<desc>Lijnstuk c: Lijnstuk [C, D]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip4 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clipd08ca226-5b4b-4273-8f1a-ce8a0ca6d171">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip5)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 261.77 87.213 L 106.05 87.213"/>
+<title>Lijnstuk d</title>
+<desc>Lijnstuk d: Lijnstuk [D, A]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip5 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip658732b9-d574-45d3-870a-70c35594f028">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip6)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 137.20 118.36 L 137.20 149.50"/>
+<title>Lijnstuk e</title>
+<desc>Lijnstuk e: Lijnstuk [E, F]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip6 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clipf58fbebf-27ec-4e00-9751-1a79ec03ca74">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip7)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 137.20 149.50 L 199.48 149.50"/>
+<title>Lijnstuk f</title>
+<desc>Lijnstuk f: Lijnstuk [F, G]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip7 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip5eff28fe-5d1f-4a45-9756-1deab557074a">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip8)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 199.48 149.50 L 199.48 118.36"/>
+<title>Lijnstuk g</title>
+<desc>Lijnstuk g: Lijnstuk [G, H]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip8 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip33ac1dd1-d4cb-4519-b764-a8b620dc5c54">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip9)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 199.48 118.36 L 137.20 118.36"/>
+<title>Lijnstuk h</title>
+<desc>Lijnstuk h: Lijnstuk [H, E]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip9 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clipcea7f390-6ee8-4a3c-a700-742595499266">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip10)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 137.20 149.50 L 137.20 118.36"/>
+<title>Lijnstuk f_1</title>
+<desc>Lijnstuk f_1: Lijnstuk [F, E]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip10 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clipe9054852-03bb-42b6-88be-b8c7bcf2c21d">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip11)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 137.20 118.36 L 199.48 118.36"/>
+<title>Lijnstuk e_1</title>
+<desc>Lijnstuk e_1: Lijnstuk [E, H]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip11 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip32172a72-1e10-4d26-97eb-af7a7c68f4b3">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip12)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 199.48 118.36 L 199.48 149.50"/>
+<title>Lijnstuk h_1</title>
+<desc>Lijnstuk h_1: Lijnstuk [H, G]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip12 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip3c935715-a47f-45c8-b672-cf5803d3b9a7">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip13)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 199.48 149.50 L 137.20 149.50"/>
+<title>Lijnstuk g_1</title>
+<desc>Lijnstuk g_1: Lijnstuk [G, F]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip13 -->
+</g> <!-- transform -->
+</g><!-- layer1 -->
+<g id="layer2">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -40.648, -84.098)">
+<clipPath id="clip386e1875-d836-47ad-bdf7-232424f13f7b">
+  <path d="M 40.648 84.098 L 40.648 232.10 L 275.65 232.10 L 275.65 84.098 z"/>
+</clipPath>
+<g clip-path="url(#clip14)">
+<g fill="#ffffff" fill-rule="evenodd" fill-opacity="1.0000" stroke="none">
+  <path d="M 137.20 118.36 L 137.20 149.50 L 199.48 149.50 L 199.48 118.36 z"/>
+<title>Vierhoek vierhoek2</title>
+<desc>Vierhoek vierhoek2: Veelhoek E, F, G, H</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip14 -->
+</g> <!-- transform -->
+</g><!-- layer2 -->
+<g id="layer3">
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 111.35, 80.742)">
+<clipPath id="clip6c951210-5193-4807-89f5-d149437af16b">
+  <path d="M -742.35 -538.28 L -742.35 448.39 L 824.32 448.39 L 824.32 -538.28 z"/>
+</clipPath>
+<g clip-path="url(#clip15)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="italic" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">t</text>
+</g> <!-- clip15 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 116.77, 80.742)">
+<clipPath id="clip6be2606f-aca5-434c-9ed7-16710cef26cf">
+  <path d="M -778.45 -538.28 L -778.45 448.39 L 788.22 448.39 L 788.22 -538.28 z"/>
+</clipPath>
+<g clip-path="url(#clip16)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0"></text>
+</g> <!-- clip16 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 120.94, 80.742)">
+<clipPath id="clip859ce2c8-b2b3-4f05-866f-a3783ef8e519">
+  <path d="M -806.25 -538.28 L -806.25 448.39 L 760.42 448.39 L 760.42 -538.28 z"/>
+</clipPath>
+<g clip-path="url(#clip17)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">+</text>
+</g> <!-- clip17 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 127.60, 80.742)">
+<clipPath id="clip79a19848-0dfc-48aa-a7d4-bb52cb0f8c46">
+  <path d="M -850.65 -538.28 L -850.65 448.39 L 716.02 448.39 L 716.02 -538.28 z"/>
+</clipPath>
+<g clip-path="url(#clip18)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0"></text>
+</g> <!-- clip18 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 131.77, 80.742)">
+<clipPath id="clipaba0fc68-b9b4-4a6d-addf-896324d6eb9b">
+  <path d="M -878.45 -538.28 L -878.45 448.39 L 688.22 448.39 L 688.22 -538.28 z"/>
+</clipPath>
+<g clip-path="url(#clip19)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">3</text>
+</g> <!-- clip19 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 162.35, 55.742)">
+<clipPath id="clip35890de6-e2f9-4e75-abfb-bf361d53cb7a">
+  <path d="M -1082.3 -371.61 L -1082.3 615.06 L 484.32 615.06 L 484.32 -371.61 z"/>
+</clipPath>
+<g clip-path="url(#clip20)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">2</text>
+</g> <!-- clip20 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 225.35, 59.742)">
+<clipPath id="clip33ea0157-bf9f-4b33-848b-723c3b2b0854">
+  <path d="M -1502.3 -398.28 L -1502.3 588.39 L 64.317 588.39 L 64.317 -398.28 z"/>
+</clipPath>
+<g clip-path="url(#clip21)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">8</text>
+</g> <!-- clip21 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 117.35, 142.74)">
+<clipPath id="clipf265b861-c673-44e5-8786-09734ca534fe">
+  <path d="M -782.35 -951.61 L -782.35 35.056 L 784.32 35.056 L 784.32 -951.61 z"/>
+</clipPath>
+<g clip-path="url(#clip22)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">4</text>
+</g> <!-- clip22 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 124.85, 142.74)">
+<clipPath id="clip11e89598-d55d-4558-b396-9e3f78a22465">
+  <path d="M -832.35 -951.61 L -832.35 35.056 L 734.32 35.056 L 734.32 -951.61 z"/>
+</clipPath>
+<g clip-path="url(#clip23)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="italic" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">t</text>
+</g> <!-- clip23 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 130.27, 142.74)">
+<clipPath id="clip0010bec9-2f37-4969-9d65-83dbb5d3993a">
+  <path d="M -868.45 -951.61 L -868.45 35.056 L 698.22 35.056 L 698.22 -951.61 z"/>
+</clipPath>
+<g clip-path="url(#clip24)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0"></text>
+</g> <!-- clip24 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 134.44, 142.74)">
+<clipPath id="clipb2ea4cb4-4779-4757-8573-765b3ec5822a">
+  <path d="M -896.25 -951.61 L -896.25 35.056 L 670.42 35.056 L 670.42 -951.61 z"/>
+</clipPath>
+<g clip-path="url(#clip25)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">+</text>
+</g> <!-- clip25 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 141.10, 142.74)">
+<clipPath id="clip9f4366ea-9b3c-4783-9dc7-174257b77d46">
+  <path d="M -940.65 -951.61 L -940.65 35.056 L 626.02 35.056 L 626.02 -951.61 z"/>
+</clipPath>
+<g clip-path="url(#clip26)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0"></text>
+</g> <!-- clip26 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 145.27, 142.74)">
+<clipPath id="clipe3f5be61-9008-403a-8504-60da9584ac2d">
+  <path d="M -968.45 -951.61 L -968.45 35.056 L 598.22 35.056 L 598.22 -951.61 z"/>
+</clipPath>
+<g clip-path="url(#clip27)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">6</text>
+</g> <!-- clip27 -->
+</g> <!-- transform -->
+</g><!-- layer3 -->
+<defs>
+<font id="Jlm_cmss10" horiz-adv-x="0" >
+<font-face font-family="Jlm_cmss10" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="75.899925" descent="24.999977" />
+<missing-glyph horiz-adv-x="33.300"  d=""/>
+<glyph unicode="&#x0034;" horiz-adv-x="50.000" d="M 37.203 17.094 L 37.203 0.0000 L 29.297 0.0000 L 29.297 17.094 L 2.7969 17.094 L 2.7969 23.203 L 28.094 65.594 L 37.203 65.594 L 37.203 23.203 L 47.094 23.203 L 47.094 17.094 L 37.203 17.094 z M 10.594 23.203 L 29.906 23.203 L 29.906 61.203 Q 29.906 55.094 10.594 23.203 z"/>
+<glyph unicode="&#x0033;" horiz-adv-x="50.000" d="M 9.2031 51.406 L 5.5938 56.797 Q 8.7031 62.000 13.844 64.891 Q 19.000 67.797 24.797 67.797 Q 32.297 67.797 37.641 63.391 Q 43.000 59.000 43.000 52.594 Q 43.000 47.594 40.203 42.938 Q 37.406 38.297 31.906 35.406 Q 37.500 33.703 41.594 29.047 Q 45.703 24.406 45.703 18.000 Q 45.703 9.9062 39.641 3.8438 Q 33.594 -2.2031 24.703 -2.2031 Q 12.297 -2.2031 4.2031 8.2031 L 5.2969 14.203 Q 8.5000 9.2969 13.797 6.5938 Q 19.094 3.9062 24.500 3.9062 Q 30.094 3.9062 33.438 8.0000 Q 36.797 12.094 36.797 18.094 Q 36.797 20.297 36.250 22.500 Q 35.703 24.703 34.391 27.047 Q 33.094 29.406 30.344 30.906 Q 27.594 32.406 23.797 32.406 L 16.703 32.406 L 16.703 38.500 Q 24.203 39.094 24.594 39.203 Q 29.094 40.203 31.938 44.047 Q 34.797 47.906 34.797 52.594 Q 34.797 57.094 31.844 59.547 Q 28.906 62.000 24.703 62.000 Q 19.906 62.000 15.594 59.203 Q 11.297 56.406 9.2031 51.406 z"/>
+<glyph unicode="&#x0032;" horiz-adv-x="50.000" d="M 17.406 18.797 L 25.094 25.906 Q 28.094 29.000 29.547 30.547 Q 31.000 32.094 33.000 34.891 Q 35.000 37.703 35.844 40.391 Q 36.703 43.094 36.703 46.094 Q 36.703 52.297 32.797 56.844 Q 28.906 61.406 22.203 61.406 Q 16.094 61.406 13.141 57.297 Q 10.203 53.203 8.2969 45.906 Q 6.5938 48.406 6.0938 48.797 Q 6.0000 48.906 5.4531 49.656 Q 4.9062 50.406 4.2031 51.406 Q 8.7969 67.797 23.594 67.797 Q 33.203 67.797 39.047 61.547 Q 44.906 55.297 44.906 46.297 Q 44.906 42.406 43.156 38.656 Q 41.406 34.906 39.797 33.047 Q 38.203 31.203 35.000 28.000 Q 34.000 27.094 30.547 24.094 Q 27.094 21.094 26.094 20.203 Q 25.406 19.594 19.750 14.094 Q 14.094 8.5938 12.203 7.0000 L 23.094 7.0000 Q 23.703 7.0000 24.891 7.0469 Q 26.094 7.0938 26.703 7.0938 L 44.906 7.0938 L 44.906 0.0000 L 5.0000 0.0000 L 5.0000 6.4062 L 17.406 18.797 z"/>
+<glyph unicode="&#x0065;" horiz-adv-x="44.400" d="M 41.406 21.906 L 10.500 21.906 Q 10.703 14.594 14.953 9.7969 Q 19.203 5.0000 25.203 5.0000 Q 33.594 5.0000 40.406 10.594 L 41.000 4.0938 Q 33.797 -1.0938 25.094 -1.0938 Q 16.094 -1.0938 9.7969 5.7969 Q 3.5000 12.703 3.5000 22.594 Q 3.5000 32.297 9.3906 39.188 Q 15.297 46.094 23.594 46.094 Q 32.594 46.094 37.406 38.797 Q 41.406 32.594 41.406 21.906 z M 11.000 27.406 L 35.703 27.406 Q 34.797 33.797 31.391 36.891 Q 28.000 40.000 23.594 40.000 Q 19.297 40.000 15.750 36.500 Q 12.203 33.000 11.000 27.406 z"/>
+<glyph unicode="&#x002e;" horiz-adv-x="27.700" d="M 18.000 8.2969 L 18.000 0.0000 L 9.7031 0.0000 L 9.7031 8.2969 L 18.000 8.2969 z"/>
+<glyph unicode="&#x0038;" horiz-adv-x="50.000" d="M 32.000 35.500 Q 37.594 33.594 41.641 29.000 Q 45.703 24.406 45.703 18.000 Q 45.703 9.9062 39.703 3.8438 Q 33.703 -2.2031 24.906 -2.2031 Q 16.297 -2.2031 10.250 3.7969 Q 4.2031 9.7969 4.2031 18.000 Q 4.2031 24.203 8.1406 28.844 Q 12.094 33.500 17.906 35.500 Q 11.703 37.500 8.6406 41.641 Q 5.5938 45.797 5.5938 50.297 Q 5.5938 57.406 11.188 62.594 Q 16.797 67.797 25.000 67.797 Q 33.000 67.797 38.641 62.594 Q 44.297 57.406 44.297 50.297 Q 44.297 45.797 41.250 41.641 Q 38.203 37.500 32.000 35.500 z M 25.000 38.500 Q 30.500 38.500 33.891 41.750 Q 37.297 45.000 37.297 50.297 Q 37.297 55.406 33.938 58.703 Q 30.594 62.000 24.906 62.000 Q 19.406 62.000 16.000 58.750 Q 12.594 55.500 12.594 50.297 Q 12.594 45.000 15.938 41.750 Q 19.297 38.500 25.000 38.500 z M 25.000 3.9062 Q 30.203 3.9062 33.891 7.5469 Q 37.594 11.203 37.594 18.094 Q 37.594 25.203 33.750 28.797 Q 29.906 32.406 24.906 32.406 Q 20.094 32.406 16.188 28.844 Q 12.297 25.297 12.297 18.094 Q 12.297 11.297 15.891 7.5938 Q 19.500 3.9062 25.000 3.9062 z"/>
+<glyph unicode="&#x0036;" horiz-adv-x="50.000" d="M 41.500 65.797 L 41.500 59.906 Q 36.203 62.000 31.000 62.000 Q 23.797 62.000 18.641 55.750 Q 13.500 49.500 12.594 37.906 Q 19.406 46.203 29.500 46.203 Q 36.500 46.203 41.094 39.141 Q 45.703 32.094 45.703 22.203 Q 45.703 16.406 44.250 12.453 Q 42.797 8.5000 39.297 4.5938 Q 33.406 -2.2031 25.094 -2.2031 Q 22.297 -2.2031 19.641 -1.3906 Q 17.000 -.59375 14.094 1.7500 Q 11.203 4.0938 9.0938 7.7969 Q 7.0000 11.500 5.5938 17.797 Q 4.2031 24.094 4.2031 32.203 Q 4.2031 47.906 12.094 57.844 Q 20.000 67.797 30.906 67.797 Q 36.406 67.797 41.500 65.797 z M 12.703 21.906 Q 12.906 19.594 13.344 17.500 Q 13.797 15.406 15.000 11.844 Q 16.203 8.2969 18.797 6.0938 Q 21.406 3.9062 25.094 3.9062 Q 31.297 3.9062 35.094 10.094 Q 37.500 14.203 37.500 22.203 Q 37.500 29.797 35.203 33.906 Q 31.797 40.094 25.594 40.094 Q 19.703 40.094 16.250 35.391 Q 12.797 30.703 12.797 24.703 Q 12.703 23.500 12.703 21.906 z"/>
+</font>
+<font id="Jlm_cmssi10" horiz-adv-x="0" >
+<font-face font-family="Jlm_cmssi10" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="75.899925" descent="24.999977" />
+<missing-glyph horiz-adv-x="33.300"  d=""/>
+<glyph unicode="&#x0074;" horiz-adv-x="36.100" d="M 25.703 38.594 L 20.203 12.406 Q 19.906 10.594 19.906 10.000 Q 19.906 7.9062 20.703 6.7500 Q 21.500 5.5938 22.141 5.4375 Q 22.797 5.2969 23.703 5.2969 Q 28.594 5.2969 33.406 8.5938 L 33.797 2.7031 Q 25.703 -1.0938 18.406 -1.0938 Q 12.203 -1.0938 12.203 6.5938 Q 12.203 11.000 18.500 38.594 L 10.094 38.594 L 11.297 44.406 L 20.000 44.406 L 22.703 57.094 L 29.594 57.094 L 26.906 44.406 L 41.000 44.406 L 39.797 38.594 L 25.703 38.594 z"/>
+</font>
+
+</defs> <!-- font definitions -->
+</g> <!-- default stroke -->
+</svg> <!-- bounding box -->

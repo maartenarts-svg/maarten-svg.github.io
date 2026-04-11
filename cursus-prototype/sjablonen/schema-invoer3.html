@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursus Wiskunde — Schema invoer</title>
+<style>
+  :root {
+    --groen-donker:  #4a7c59;
+    --groen-midden:  #6aab7e;
+    --groen-pastel:  #c8e6c9;
+    --groen-licht:   #e8f5e9;
+    --groen-rand:    #a5d6a7;
+    --grijs-licht:   #f5f5f5;
+    --tekst:         #1a1a1a;
+    --tekst-zacht:   #555;
+    --blauw:         #1a4fa0;
+    --rood:          #c0392b;
+    --sl-kleur:      #b0b0b0;
+    --font:          'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radius:        6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); font-size: 13px; color: var(--tekst); background: #eef2ee; min-height: 100vh; }
+
+  header { background: var(--groen-donker); color: white; padding: 14px 24px; font-size: 15px; font-weight: 600; letter-spacing: .03em; display: flex; align-items: center; gap: 10px; }
+  header span { font-weight: 300; opacity: .8; font-size: 13px; }
+
+  .layout { display: flex; align-items: flex-start; gap: 16px; max-width: 1100px; margin: 20px auto; padding: 0 16px 40px; }
+
+  #breuk-sidebar { display: none; width: 200px; flex-shrink: 0; position: sticky; top: 16px; align-self: flex-start; }
+  #breuk-sidebar.zichtbaar { display: block; }
+
+  .container { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+
+  .kaart { background: white; border: 1px solid var(--groen-rand); border-radius: var(--radius); overflow: hidden; }
+  .kaart-titel { background: var(--groen-pastel); color: var(--groen-donker); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-bottom: 1px solid var(--groen-rand); }
+  .kaart-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+
+  .veld-rij { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+  .veld { display: flex; flex-direction: column; gap: 4px; }
+  label { font-size: 11px; font-weight: 600; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; }
+  input[type="text"], input[type="number"], select, textarea {
+    border: 1px solid var(--groen-rand); border-radius: 4px; padding: 6px 9px;
+    font-size: 13px; font-family: var(--font); color: var(--tekst); background: white;
+    outline: none; transition: border-color .15s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--groen-donker); }
+  input.smal { width: 70px; } input.middel { width: 120px; } input.breed { width: 180px; }
+  textarea { resize: vertical; width: 100%; min-height: 38px; line-height: 1.5; }
+
+  .radio-groep { display: flex; flex-wrap: wrap; gap: 6px; }
+  .radio-optie { display: flex; align-items: center; gap: 5px; cursor: pointer; padding: 5px 10px; border: 1px solid var(--groen-rand); border-radius: 20px; font-size: 12px; transition: all .15s; user-select: none; }
+  .radio-optie input { accent-color: var(--groen-donker); cursor: pointer; }
+  .radio-optie:hover { background: var(--groen-licht); border-color: var(--groen-midden); }
+  .radio-optie.geselecteerd { background: var(--groen-pastel); border-color: var(--groen-donker); font-weight: 600; }
+
+  .blok-kaart { background: white; border: 1.5px solid var(--groen-rand); border-radius: var(--radius); overflow: hidden; }
+  .blok-header { background: var(--groen-licht); padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--groen-rand); }
+  .blok-header-links { font-weight: 700; font-size: 12px; color: var(--groen-donker); }
+  .blok-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+
+  .lk-sectie { background: #f9f9f9; border: 1px dashed var(--groen-rand); border-radius: 4px; padding: 8px 10px; }
+  .lk-label { font-size: 11px; font-weight: 700; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 5px; }
+
+  .rijen-sectie { display: flex; flex-direction: column; gap: 6px; }
+  .rijen-label { font-size: 11px; font-weight: 700; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+
+  .rij-blok { border: 1px solid #ddd; border-radius: 4px; padding: 8px 10px; background: white; display: flex; flex-direction: column; gap: 6px; }
+  .rij-blok-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .rij-nr { font-size: 11px; font-weight: 700; color: var(--tekst-zacht); min-width: 20px; }
+  .rij-type-sel { font-size: 12px; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--groen-rand); background: white; color: var(--tekst); cursor: pointer; }
+  .rij-inhoud { display: flex; flex-direction: column; gap: 4px; }
+
+  .vg-wrap { display: flex; align-items: center; gap: 5px; flex-shrink: 0; cursor: pointer; }
+  .vg-wrap input[type="checkbox"] { accent-color: var(--groen-donker); width: 14px; height: 14px; cursor: pointer; }
+  .vg-wrap span { font-size: 10px; color: var(--tekst-zacht); white-space: nowrap; user-select: none; }
+  .vg-wrap.actief span { color: var(--blauw); font-weight: 600; }
+  input.vg-actief { color: var(--blauw) !important; font-style: italic; background: #f0f4ff !important; border-color: #90a8d0 !important; }
+
+  .breuk-kaart { background: white; border: 1px solid #ffe082; border-radius: var(--radius); overflow: hidden; }
+  .breuk-kaart-titel { background: #fff8e1; color: #795548; font-weight: 700; font-size: 11px; text-transform: uppercase; padding: 7px 10px; border-bottom: 1px solid #ffe082; display: flex; justify-content: space-between; align-items: center; }
+  .breuk-kaart-body { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .breuk-definitie { display: flex; align-items: center; gap: 6px; padding: 5px 8px; background: #fffde7; border: 1px solid #ffe082; border-radius: 4px; }
+  .breuk-label-tag { font-weight: 700; font-size: 12px; color: #795548; min-width: 24px; }
+  .breuk-inputs { display: flex; align-items: center; gap: 4px; flex: 1; }
+  .breuk-inputs input { width: 48px; flex: none; font-size: 12px; padding: 4px 6px; }
+  .breuk-preview { font-size: 11px; color: var(--blauw); }
+
+  .conventie-box { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 4px; padding: 8px 12px; font-size: 11.5px; color: #1565c0; line-height: 1.8; }
+  .conventie-box code { background: rgba(0,0,0,.06); padding: 1px 4px; border-radius: 3px; font-family: monospace; font-size: 11px; }
+
+  button { padding: 9px 20px; border: none; border-radius: var(--radius); font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .btn-primair { background: var(--groen-donker); color: white; }
+  .btn-primair:hover { background: #3a6348; }
+  .btn-secundair { background: white; color: var(--groen-donker); border: 1.5px solid var(--groen-donker); }
+  .btn-secundair:hover { background: var(--groen-licht); }
+  .btn-gevaar { background: white; color: var(--rood); border: 1.5px solid var(--rood); }
+  .btn-gevaar:hover { background: #fdecea; }
+  .btn-klein { padding: 5px 12px; font-size: 12px; }
+  .btn-icon { padding: 4px 8px; font-size: 13px; background: white; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; line-height: 1; }
+  .btn-icon:hover { background: #f5f5f5; }
+  .btn-plus { padding: 4px 12px; font-size: 12px; background: #fff8e1; color: #795548; border: 1px solid #ffe082; border-radius: 4px; cursor: pointer; font-weight: 700; }
+  .btn-plus:hover { background: #fff3cd; }
+  .btn-add-rij { padding: 4px 12px; font-size: 12px; background: var(--groen-licht); color: var(--groen-donker); border: 1px solid var(--groen-rand); border-radius: 4px; cursor: pointer; font-weight: 700; }
+  .btn-add-rij:hover { background: var(--groen-pastel); }
+  .btn-add-blok { padding: 8px 18px; font-size: 13px; background: var(--groen-licht); color: var(--groen-donker); border: 1.5px solid var(--groen-rand); border-radius: var(--radius); cursor: pointer; font-weight: 700; }
+  .btn-add-blok:hover { background: var(--groen-pastel); }
+
+  .melding { padding: 8px 12px; border-radius: 4px; font-size: 12px; display: none; }
+  .melding.fout { background: #fdecea; border: 1px solid #ef9a9a; color: var(--rood); display: block; }
+  .melding.ok   { background: #e8f5e9; border: 1px solid var(--groen-rand); color: var(--groen-donker); display: block; }
+
+  #output-kaart { display: none; }
+  #output-kaart.zichtbaar { display: block; }
+  #output-code { background: #1e1e1e; color: #d4d4d4; font-family: 'Consolas','Courier New',monospace; font-size: 12px; padding: 16px; border-radius: 0 0 var(--radius) var(--radius); overflow-x: auto; white-space: pre; max-height: 500px; overflow-y: auto; line-height: 1.5; }
+  .output-acties { padding: 10px 14px; display: flex; gap: 8px; border-top: 1px solid var(--groen-rand); background: var(--grijs-licht); }
+
+  @media (max-width: 700px) {
+    .layout { flex-direction: column; }
+    #breuk-sidebar { width: 100%; position: static; }
+  }
+</style>
+</head>
+<body>
+
+<header>📐 Cursus Wiskunde <span>— Schema invoer &amp; codegenerator</span></header>
+
+<div class="layout">
+
+  <div id="breuk-sidebar">
+    <div class="breuk-kaart">
+      <div class="breuk-kaart-titel">
+        <span>Breuk-definities</span>
+        <button class="btn-plus" style="padding:2px 8px;font-size:11px;" onclick="voegBreukToe()">+ breuk</button>
+      </div>
+      <div class="breuk-kaart-body" id="breuk-lijst"></div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- COÖRDINATEN -->
+    <div class="kaart">
+      <div class="kaart-titel">Coördinaten</div>
+      <div class="kaart-body">
+        <div class="veld-rij">
+          <div class="veld"><label for="inp-hoofdstuk">Hoofdstuk</label><input type="text" id="inp-hoofdstuk" class="middel" placeholder="bv. H10"></div>
+          <div class="veld"><label for="inp-paragraaf">Naam</label><input type="text" id="inp-paragraaf" class="middel" placeholder="bv. schema1"></div>
+          <div class="veld"><label for="inp-id">ID / bestandsnaam</label><input type="text" id="inp-id" class="breed" placeholder="bv. H10_schema1"></div>
+        </div>
+        <div class="veld-rij">
+          <div class="veld"><label>Soort</label>
+            <div class="radio-groep" id="rg-soort">
+              <label class="radio-optie geselecteerd"><input type="radio" name="soort" value="inoefenen" checked> Inoefenen</label>
+              <label class="radio-optie"><input type="radio" name="soort" value="ontdek"> Ontdek</label>
+              <label class="radio-optie"><input type="radio" name="soort" value="voorbeeld"> Voorbeeld</label>
+              <label class="radio-optie"><input type="radio" name="soort" value="test"> Test</label>
+            </div>
+          </div>
+        </div>
+        <div class="veld-rij">
+          <div class="veld"><label>Bevat breuken?</label>
+            <div class="radio-groep" id="rg-breuken">
+              <label class="radio-optie geselecteerd"><input type="radio" name="breuken" value="nee" checked> Nee</label>
+              <label class="radio-optie"><input type="radio" name="breuken" value="ja"> Ja</label>
+            </div>
+          </div>
+        </div>
+        <div class="veld-rij">
+          <div class="veld" style="width:100%;"><label for="inp-intro">Introductietekst (optioneel)</label>
+            <textarea id="inp-intro" style="width:100%;min-height:34px;" placeholder="bv. Vul het schema in."></textarea>
+          </div>
+        </div>
+        <div class="veld-rij">
+          <div class="veld"><label for="inp-lkbreedte">Breedte linkerkolom</label>
+            <input type="text" id="inp-lkbreedte" class="middel" value="25%" placeholder="bv. 25% of 4cm">
+            <span style="font-size:11px;color:var(--tekst-zacht);margin-top:3px;">Max. tabelbreedte: 15,5 cm (pagina − marges)</span>
+          </div>
+          <div class="veld"><label for="inp-rijhoogte">Standaard rijhoogte rechts</label>
+            <input type="text" id="inp-rijhoogte" class="middel" value="0.9cm" placeholder="bv. 0.9cm">
+          </div>
+          <div class="veld"><label for="inp-padding">Padding schrijflijnen</label>
+            <input type="text" id="inp-padding" class="middel" value="0.15cm" placeholder="bv. 0.15cm">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conventie-box">
+      <strong>Conventies:</strong><br>
+      • Cursief: <code>*a*</code> &nbsp;|&nbsp; Macht: <code>*x*^2</code> of <code>*x*^{2n+1}</code><br>
+      • Breuken: <code>B1</code>, <code>B2</code>, … (definieer links)<br>
+      • Eén Enter = nieuwe regel (<code>&lt;br&gt;</code>) &nbsp;|&nbsp; Dubbele Enter = nieuwe alinea &nbsp;|&nbsp; <code>-</code> aan regelbegin = opsommingspunt
+    </div>
+
+    <div id="blokken-container" style="display:flex;flex-direction:column;gap:12px;"></div>
+
+    <div>
+      <button class="btn-add-blok" onclick="voegBlokToe()">+ blok toevoegen</button>
+    </div>
+
+    <div class="melding" id="melding"></div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn-primair" onclick="genereer()">⚙ Genereer JS-code</button>
+      <button class="btn-gevaar" onclick="resetAlles()">↺ Reset</button>
+    </div>
+
+    <div class="kaart" id="output-kaart">
+      <div class="kaart-titel">Gegenereerde code — kopieer naar je bestand</div>
+      <div class="output-acties">
+        <button class="btn-secundair btn-klein" onclick="kopieerCode()">📋 Kopieer code</button>
+      </div>
+      <pre id="output-code"></pre>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let aantalBreuken = 0;
+let blokTeller = 0;
+let rijTellers = {};
+
+// ============================================================
+// TEKST TRANSFORMATIES
+// ============================================================
+function exponent(s) {
+  if (!s) return '';
+  s = s.replace(/\^\{([^}]*)\}/g, (_, i) => `<sup>${cursief(i)}</sup>`);
+  s = s.replace(/\^([a-zA-Z0-9\-])/g, '<sup>$1</sup>');
+  return s;
+}
+function cursief(s) { return (s||'').replace(/\*([^*]+)\*/g, '<i>$1</i>'); }
+function opmaak(s)  { return cursief(exponent(s||'')); }
+function escStr(s)  { return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+
+function tekstNaarHTML(s) {
+  if (!s) return '';
+  const alineas = s.split(/\n{2,}/);
+  const html = alineas.map(al => {
+    const regels = al.split('\n');
+    const lijstR  = regels.filter(r => r.trim().startsWith('- '));
+    const gewoneR = regels.filter(r => r.trim() !== '' && !r.trim().startsWith('- '));
+    if (lijstR.length > 0 && gewoneR.length === 0) {
+      return `<ul>${lijstR.map(r => `<li>${opmaak(r.trim().slice(2))}</li>`).join('')}</ul>`;
+    }
+    return regels.map(r => r.trim().startsWith('- ') ? `<li>${opmaak(r.trim().slice(2))}</li>` : opmaak(r)).join('<br>');
+  });
+  return html.length === 1 ? html[0] : html.map(a => `<p>${a}</p>`).join('');
+}
+
+function splitOpBreuken(str) {
+  const parts = []; const re = /B(\d+)/g; let last = 0, m;
+  while ((m = re.exec(str)) !== null) {
+    if (m.index > last) parts.push({type:'tekst', val: str.slice(last, m.index)});
+    parts.push({type:'breuk', idx: parseInt(m[1])});
+    last = m.index + m[0].length;
+  }
+  if (last < str.length) parts.push({type:'tekst', val: str.slice(last)});
+  if (parts.length === 0) parts.push({type:'tekst', val: str});
+  return parts;
+}
+
+function bouwSpanExpr(str, stijl) {
+  str = str || '';
+  const heeftB = /B\d+/.test(str);
+  const L = [];
+  L.push(`(function(){`);
+  L.push(`  const s=document.createElement('span');`);
+  if (stijl === 'grijs')     L.push(`  s.style.color='var(--sl-kleur)';`);
+  if (stijl === 'oplossing') { L.push(`  s.style.fontFamily='var(--font-oplossing)';`); L.push(`  s.style.color='var(--blauw-oplossing)';`); }
+
+  if (!heeftB) {
+    L.push(`  s.innerHTML='${escStr(tekstNaarHTML(str))}';`);
+  } else {
+    splitOpBreuken(str).forEach((p, i) => {
+      if (p.type === 'tekst') {
+        L.push(`  const p${i}=document.createElement('span'); p${i}.innerHTML='${escStr(tekstNaarHTML(p.val))}'; s.appendChild(p${i});`);
+      } else {
+        const t  = document.getElementById(`breuk-teller-${p.idx}`)?.value || '?';
+        const nm = document.getElementById(`breuk-noemer-${p.idx}`)?.value || '?';
+        L.push(`  s.appendChild(maakBreuk('${escStr(t)}','${escStr(nm)}','${stijl === 'oplossing' ? 'oplossing' : 'opgave'}'));`);
+      }
+    });
+  }
+  L.push(`  return s;})()`);
+  return L.join('\n    ');
+}
+
+// ============================================================
+// RADIO VISUEEL
+// ============================================================
+function activeerRadioGroep(g) {
+  g.addEventListener('change', e => {
+    g.querySelectorAll('.radio-optie').forEach(o => o.classList.remove('geselecteerd'));
+    e.target.closest('.radio-optie').classList.add('geselecteerd');
+  });
+}
+document.querySelectorAll('.radio-groep').forEach(activeerRadioGroep);
+document.getElementById('rg-breuken').addEventListener('change', e => {
+  const toon = e.target.value === 'ja';
+  document.getElementById('breuk-sidebar').classList.toggle('zichtbaar', toon);
+  if (toon && aantalBreuken === 0) voegBreukToe();
+});
+
+// ============================================================
+// BREUKEN
+// ============================================================
+function voegBreukToe() {
+  aantalBreuken++;
+  const n = aantalBreuken;
+  if (document.getElementById(`breuk-teller-${n}`)) return;
+  const div = document.createElement('div'); div.classList.add('breuk-definitie');
+  div.innerHTML = `<span class="breuk-label-tag">B${n}</span>
+    <div class="breuk-inputs">
+      <input type="text" id="breuk-teller-${n}" placeholder="tel.">
+      <span style="font-size:15px;color:#795548;">⁄</span>
+      <input type="text" id="breuk-noemer-${n}" placeholder="noem.">
+    </div>
+    <span class="breuk-preview" id="breuk-prev-${n}"></span>`;
+  document.getElementById('breuk-lijst').appendChild(div);
+  ['teller','noemer'].forEach(d => {
+    document.getElementById(`breuk-${d}-${n}`).addEventListener('input', () => {
+      const t = document.getElementById(`breuk-teller-${n}`).value;
+      const nm = document.getElementById(`breuk-noemer-${n}`).value;
+      document.getElementById(`breuk-prev-${n}`).textContent = t && nm ? `${t}/${nm}` : '';
+    });
+  });
+}
+
+// ============================================================
+// BLOK
+// ============================================================
+function voegBlokToe() {
+  blokTeller++;
+  const bid = blokTeller;
+  const blok = document.createElement('div');
+  blok.classList.add('blok-kaart'); blok.id = `blok-${bid}`;
+  blok.innerHTML = `
+    <div class="blok-header">
+      <span class="blok-header-links">Blok ${bid}</span>
+      <button class="btn-icon" onclick="verwijderBlok(${bid})">🗑</button>
+    </div>
+    <div class="blok-body">
+      <div class="lk-sectie">
+        <div class="lk-label">Linkerkolom</div>
+        <textarea id="lk-${bid}" style="width:100%;min-height:54px;" placeholder="Tekst linkerkolom&#10;Mag meerdere regels bevatten."></textarea>
+        <div style="margin-top:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:11px;color:var(--tekst-zacht);">Uitlijning:</span>
+          <select id="lk-align-${bid}" style="font-size:12px;padding:3px 6px;width:auto;border:1px solid var(--groen-rand);border-radius:4px;">
+            <option value="left">Links</option>
+            <option value="center" selected>Midden</option>
+            <option value="right">Rechts</option>
+          </select>
+          <select id="lk-valign-${bid}" style="font-size:12px;padding:3px 6px;width:auto;border:1px solid var(--groen-rand);border-radius:4px;">
+            <option value="top">Boven</option>
+            <option value="middle" selected>Midden</option>
+            <option value="bottom">Onder</option>
+          </select>
+        </div>
+      </div>
+      <div class="rijen-sectie">
+        <div class="rijen-label">Rechterkolom — rijen</div>
+        <div id="rijen-${bid}" style="display:flex;flex-direction:column;gap:6px;"></div>
+        <button class="btn-add-rij" onclick="voegRijToe(${bid})" style="margin-top:4px;">+ rij toevoegen</button>
+      </div>
+    </div>`;
+  document.getElementById('blokken-container').appendChild(blok);
+  voegRijToe(bid);
+}
+
+function verwijderBlok(bid) {
+  document.getElementById(`blok-${bid}`)?.remove();
+}
+
+// ============================================================
+// RIJ
+// ============================================================
+function voegRijToe(bid) {
+  if (!rijTellers[bid]) rijTellers[bid] = 0;
+  rijTellers[bid]++;
+  const rid = rijTellers[bid];
+  const container = document.getElementById(`rijen-${bid}`);
+  const rijDiv = document.createElement('div');
+  rijDiv.classList.add('rij-blok'); rijDiv.id = `rij-${bid}-${rid}`;
+  rijDiv.innerHTML = `
+    <div class="rij-blok-header">
+      <span class="rij-nr">${rid}</span>
+      <select class="rij-type-sel" id="rtype-${bid}-${rid}" onchange="updateRijInhoud(${bid},${rid})">
+        <option value="grijs">Grijze tekst</option>
+        <option value="schrijflijn">Schrijflijn + oplossing</option>
+        <option value="afbeelding">Afbeelding</option>
+      </select>
+      <div style="display:flex;align-items:center;gap:5px;">
+        <span style="font-size:11px;color:var(--tekst-zacht);">Hoogte:</span>
+        <input type="text" id="rhoogte-${bid}-${rid}" value="" placeholder="standaard" style="width:80px;font-size:12px;padding:4px 6px;border:1px solid var(--groen-rand);border-radius:4px;">
+      </div>
+      <button class="btn-icon" onclick="verwijderRij(${bid},${rid})" style="margin-left:auto;">✕</button>
+    </div>
+    <div class="rij-inhoud" id="rinhoud-${bid}-${rid}"></div>`;
+  container.appendChild(rijDiv);
+  updateRijInhoud(bid, rid);
+}
+
+function verwijderRij(bid, rid) {
+  document.getElementById(`rij-${bid}-${rid}`)?.remove();
+}
+
+function updateRijInhoud(bid, rid) {
+  const type = document.getElementById(`rtype-${bid}-${rid}`)?.value;
+  const container = document.getElementById(`rinhoud-${bid}-${rid}`);
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (type === 'grijs') {
+    const rij = document.createElement('div');
+    rij.style.cssText = 'display:flex;align-items:flex-start;gap:8px;';
+    rij.innerHTML = `<label style="font-size:11px;color:var(--tekst-zacht);white-space:nowrap;padding-top:8px;">Tekst:</label>
+      <textarea id="rtekst-${bid}-${rid}" style="flex:1;min-height:34px;" placeholder="Grijze tekst (mag opmaak bevatten)"></textarea>`;
+    container.appendChild(rij);
+
+  } else if (type === 'schrijflijn') {
+    const rij = document.createElement('div');
+    rij.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.id = `ropl-${bid}-${rid}`;
+    inp.placeholder = 'Oplossing (leeg = enkel schrijflijn)';
+    inp.style.cssText = 'flex:1;min-width:120px;';
+    const cbWrap = maakVgCheckbox(`rvg-${bid}-${rid}`);
+    rij.innerHTML = `<label style="font-size:11px;color:var(--tekst-zacht);white-space:nowrap;">Oplossing:</label>`;
+    rij.appendChild(inp);
+    rij.appendChild(cbWrap);
+    container.appendChild(rij);
+
+  } else if (type === 'afbeelding') {
+    const rij = document.createElement('div');
+    rij.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
+    rij.innerHTML = `<label style="font-size:11px;color:var(--tekst-zacht);white-space:nowrap;">Pad/URL:</label>
+      <input type="text" id="rimg-${bid}-${rid}" style="flex:1;" placeholder="bv. images/figuur1.png">
+      <label style="font-size:11px;color:var(--tekst-zacht);white-space:nowrap;">Breedte:</label>
+      <input type="text" id="rimgb-${bid}-${rid}" style="width:80px;" value="100%" placeholder="100%">`;
+    container.appendChild(rij);
+  }
+}
+
+function maakVgCheckbox(cbId) {
+  const wrap = document.createElement('label'); wrap.classList.add('vg-wrap');
+  const cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = cbId;
+  const sp = document.createElement('span'); sp.textContent = 'zichtbaar';
+  wrap.appendChild(cb); wrap.appendChild(sp);
+  cb.addEventListener('change', () => {
+    const rij = cb.closest('div');
+    const inp = rij?.querySelector('input[type="text"]');
+    if (cb.checked) { wrap.classList.add('actief'); inp?.classList.add('vg-actief'); }
+    else            { wrap.classList.remove('actief'); inp?.classList.remove('vg-actief'); }
+  });
+  return wrap;
+}
+
+// ============================================================
+// CODEGENERATIE
+// ============================================================
+const HELPERS_OPMERKING =
+`// LET OP: voorgedrukte oplossingen gebruiken 'opl-vast'.
+// Pas in helpers.js de badge-toggle aan:
+//   ovs.forEach(o => {
+//     if (!o.classList.contains('opl-vast'))
+//       o.classList.toggle('zichtbaar', !zichtbaar);
+//   });
+//
+`;
+
+function getVal(id) { return document.getElementById(id)?.value || ''; }
+function isVg(id)   { return document.getElementById(id)?.checked || false; }
+
+function genereer() {
+  toonMelding('');
+  const blokken = document.querySelectorAll('.blok-kaart');
+  if (blokken.length === 0) { toonMelding('Voeg eerst minstens één blok toe.', 'fout'); return; }
+
+  const hoofdstuk = getVal('inp-hoofdstuk') || 'H??';
+  const paragraaf = getVal('inp-paragraaf') || 'schema';
+  const fileId    = getVal('inp-id') || 'schema_???';
+  const soortEl   = document.querySelector('input[name="soort"]:checked');
+  const soort     = soortEl ? soortEl.value : 'inoefenen';
+  const intro     = escStr(tekstNaarHTML(getVal('inp-intro')));
+  const lkBreedte = getVal('inp-lkbreedte') || '25%';
+  const stdHoogte = getVal('inp-rijhoogte') || '0.9cm';
+  const padding   = getVal('inp-padding') || '0.15cm';
+
+  // Max tabelbreedte = 21cm - 3cm (links) - 2.5cm (rechts) = 15.5cm
+  const TABEL_BREEDTE = '100%';
+
+  let erIsVg = false;
+  blokken.forEach(blok => {
+    const bid = blok.id.replace('blok-','');
+    document.querySelectorAll(`[id^="rij-${bid}-"]`).forEach(rij => {
+      const rid = rij.id.replace(`rij-${bid}-`,'');
+      if (isVg(`rvg-${bid}-${rid}`)) erIsVg = true;
+    });
+  });
+
+  let c = '';
+  if (erIsVg) c += HELPERS_OPMERKING + '\n';
+
+  c += `/* ============================================================\n`;
+  c += `   ${hoofdstuk} / ${paragraaf} / ${fileId}.js\n`;
+  c += `   soort: ${soort}\n`;
+  c += `   ============================================================ */\n`;
+  c += `(function () {\n\n`;
+  c += `  const SL = '${'_'.repeat(150)}';\n\n`;
+  c += `  const inhoud = maakOefening({\n`;
+  c += `    id:'${fileId}', nummer:'S', soort:'${soort}',\n`;
+  c += `    niveaus:[], tools:[],\n`;
+  c += `    toggleModus:'oefening', container:'.pagina'\n`;
+  c += `  });\n\n`;
+  if (intro) c += `  voegTekstToe(inhoud, '${intro}', ['intro-tekst']);\n\n`;
+
+  c += `  // Schema-tabel (max. breedte = pagina − marges links/rechts)\n`;
+  c += `  const tbl = document.createElement('table');\n`;
+  c += `  tbl.classList.add('zichtbare-tabel');\n`;
+  c += `  tbl.style.width = '${TABEL_BREEDTE}';\n`;
+  c += `  tbl.style.maxWidth = '100%';\n`;
+  // Enkel buitenste rand, geen interne horizontale lijnen rechts
+  c += `  tbl.style.borderCollapse = 'collapse';\n`;
+  c += `  tbl.style.border = '1.2px solid var(--groen-donker)';\n`;
+  c += `  const tbody = document.createElement('tbody');\n\n`;
+
+  blokken.forEach((blok, bi) => {
+    const bid      = blok.id.replace('blok-','');
+    const lkTekst  = getVal(`lk-${bid}`);
+    const lkAlign  = document.getElementById(`lk-align-${bid}`)?.value || 'center';
+    const lkVAlign = document.getElementById(`lk-valign-${bid}`)?.value || 'middle';
+    const rijEls   = document.querySelectorAll(`[id^="rij-${bid}-"]`);
+    const aantalR  = rijEls.length;
+    if (aantalR === 0) return;
+
+    c += `  // --- Blok ${bi+1} ---\n`;
+
+    rijEls.forEach((rijEl, ri) => {
+      const rid    = rijEl.id.replace(`rij-${bid}-`,'');
+      const type   = document.getElementById(`rtype-${bid}-${rid}`)?.value || 'grijs';
+      const hoogte = getVal(`rhoogte-${bid}-${rid}`) || stdHoogte;
+
+      c += `  {\n`;
+      c += `    const tr = document.createElement('tr');\n`;
+
+      // --- Linkerkolom: enkel bij eerste rij ---
+      if (ri === 0) {
+        const lkExpr = bouwSpanExpr(lkTekst, 'opgave');
+        c += `    const tdL = document.createElement('td');\n`;
+        c += `    tdL.style.border = 'none';\n`;
+        c += `    tdL.rowSpan = ${aantalR};\n`;
+        c += `    tdL.style.width = '${lkBreedte}';\n`;
+        c += `    tdL.style.textAlign = '${lkAlign}';\n`;
+        c += `    tdL.style.verticalAlign = '${lkVAlign}';\n`;
+        c += `    tdL.style.padding = '0.1cm ${padding}';\n`;
+        // Buitenste rand: enkel links, boven, onder via tabel; rechts een scheidingslijn
+        c += `    tdL.style.borderRight = '1.2px solid var(--groen-donker)';\n`;
+        c += `    const lkSpan = ${lkExpr};\n`;
+        c += `    tdL.appendChild(lkSpan);\n`;
+        c += `    tr.appendChild(tdL);\n`;
+      }
+
+      // --- Rechterkolom ---
+      c += `    const tdR = document.createElement('td');\n`;
+      c += `    tdR.style.border = 'none';\n`;
+      c += `    tdR.style.borderLeft = 'none';\n`;
+      c += `    tdR.style.border = 'none';\n`;
+      c += `    tdR.style.height = '${hoogte}';\n`;
+      c += `    tdR.style.padding = '0';\n`;
+      c += `    tdR.style.verticalAlign = 'middle';\n`;
+      // Geen interne horizontale randen rechts: enkel border-bottom op alle rijen behalve de laatste van het blok
+      if (ri < aantalR - 1) {
+        // Subtiele scheidingslijn tussen rijen rechts (geen groene lijn)
+        c += `    tdR.style.borderBottom = '1px solid #e0e0e0';\n`;
+      }
+
+      if (type === 'grijs') {
+        const spanExpr = bouwSpanExpr(getVal(`rtekst-${bid}-${rid}`), 'grijs');
+        c += `    const rij = document.createElement('div'); rij.classList.add('rij');\n`;
+        c += `    rij.style.padding = '0 ${padding}';\n`;
+        c += `    const gSpan = ${spanExpr};\n`;
+        c += `    rij.appendChild(gSpan);\n`;
+        c += `    tdR.appendChild(rij);\n`;
+
+      } else if (type === 'schrijflijn') {
+        const oplTekst = getVal(`ropl-${bid}-${rid}`);
+        const vgBool   = isVg(`rvg-${bid}-${rid}`);
+        const heeftOpl = oplTekst.trim() !== '';
+        c += `    const rij = document.createElement('div'); rij.classList.add('rij');\n`;
+        c += `    rij.style.padding = '0 ${padding}';\n`;
+        c += `    rij.style.position = 'relative';\n`;
+        c += `    const sl = document.createElement('span'); sl.classList.add('sl'); sl.textContent = SL;\n`;
+        c += `    rij.appendChild(sl);\n`;
+        if (heeftOpl) {
+          const oplExpr = bouwSpanExpr(oplTekst, 'oplossing');
+          c += `    const opl = document.createElement('div'); opl.classList.add('opl');\n`;
+          c += `    opl.style.left = '${padding}';\n`;
+          c += `    const oplSpan = ${oplExpr};\n`;
+          c += `    opl.appendChild(oplSpan);\n`;
+          if (vgBool) c += `    opl.classList.add('zichtbaar', 'opl-vast');\n`;
+          c += `    rij.appendChild(opl);\n`;
+        }
+        c += `    tdR.appendChild(rij);\n`;
+
+      } else if (type === 'afbeelding') {
+        const pad    = escStr(getVal(`rimg-${bid}-${rid}`));
+        const breedte = escStr(getVal(`rimgb-${bid}-${rid}`) || '100%');
+        c += `    const img = document.createElement('img');\n`;
+        c += `    img.src = '${pad}';\n`;
+        c += `    img.style.width = '${breedte}';\n`;
+        c += `    img.style.display = 'block';\n`;
+        c += `    img.style.padding = '0.05cm ${padding}';\n`;
+        c += `    tdR.appendChild(img);\n`;
+      }
+
+      c += `    tr.appendChild(tdR);\n`;
+      c += `    tbody.appendChild(tr);\n`;
+      c += `  }\n\n`;
+    });
+  });
+
+  c += `  tbl.appendChild(tbody);\n`;
+  c += `  inhoud.appendChild(tbl);\n\n`;
+  c += `})();\n`;
+
+  document.getElementById('output-code').textContent = c;
+  document.getElementById('output-kaart').classList.add('zichtbaar');
+  document.getElementById('output-kaart').scrollIntoView({behavior:'smooth'});
+  toonMelding('Code gegenereerd!', 'ok');
+}
+
+function kopieerCode() {
+  navigator.clipboard.writeText(document.getElementById('output-code').textContent)
+    .then(() => toonMelding('Gekopieerd!', 'ok'))
+    .catch(() => toonMelding('Kopiëren mislukt — selecteer handmatig.', 'fout'));
+}
+function resetAlles() {
+  if (!confirm('Ben je zeker dat je alles wil wissen?')) return;
+  location.reload();
+}
+function toonMelding(tekst, type) {
+  const el = document.getElementById('melding');
+  el.textContent = tekst; el.className = 'melding' + (type ? ' '+type : '');
+}
+
+voegBlokToe();
+</script>
+</body>
+</html>

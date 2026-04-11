@@ -1,0 +1,995 @@
+Ik ben aan een project bezig, waarbij ik een cursus wiskunde wil digitaliseren.
+
+Ik werk met een document voor stijlen: cursus.css.
+Ik heb een document met algemene functies: helpers.js.
+Daarnaast zijn er nog sjablonen voor oefeningen: K1SLT1.js, K2SLT1.js, K3SLT1.js, K2SLT2.js en K2SLT2.js.
+
+Hier is cursus.css
+ /* ============================================================
+   CURSUS WISKUNDE — BASISSTIJLEN
+   ============================================================ */
+
+:root {
+  --groen-donker:     #4a7c59;
+  --groen-midden:     #6aab7e;
+  --groen-pastel:     #c8e6c9;
+  --groen-scheiding:  #a5d6a7;
+  --wit:              #ffffff;
+  --tekst:            #1a1a1a;
+  --blauw-oplossing:  #1a4fa0;
+
+  --font:             Arial, Helvetica, sans-serif;
+  --font-oplossing:   'Comic Sans MS', 'Comic Sans', cursive;
+  --fontsize:         10pt;
+
+  --marge-links:      3cm;
+  --marge-rechts:     2.5cm;
+  --marge-top:        2.5cm;
+  --marge-bottom:     2.5cm;
+
+  --badge-grootte:    0.75cm;
+  --insprong-stap:    0.65cm;
+
+  --rij-hoogte:       0.9cm;
+  --rij-hoogte-breuk: 1.2cm;
+
+  --sl-kleur:         #b0b0b0;
+}
+
+/* ============================================================
+   PAGINA
+   ============================================================ */
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  color: var(--tekst);
+  background: #f0f0f0;
+}
+
+.pagina {
+  width: 21cm;
+  min-height: 29.7cm;
+  margin: 1cm auto;
+  padding: var(--marge-top) var(--marge-rechts) var(--marge-bottom) var(--marge-links);
+  background: var(--wit);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ============================================================
+   OEFENING
+   ============================================================ */
+.oefening {
+  position: relative;
+  padding-bottom: 0.4cm;
+}
+.oefening + .oefening {
+  border-top: 1.5px solid var(--groen-scheiding);
+  padding-top: 0.4cm;
+  margin-top: 0.2cm;
+}
+
+/* ============================================================
+   MARGE
+   ============================================================ */
+.oefening-marge {
+  position: absolute;
+  left: calc(-1 * var(--marge-links) + 0.5cm);
+  width: calc(var(--marge-links) - 0.5cm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 0.3cm;
+  box-sizing: border-box;
+}
+
+.badge {
+  width: var(--badge-grootte);
+  height: var(--badge-grootte);
+  background-color: var(--groen-pastel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  font-weight: bold;
+  color: var(--groen-donker);
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+.badge:hover  { background-color: var(--groen-midden); color: var(--wit); }
+.badge.actief { background-color: var(--groen-donker); color: var(--wit); }
+.badge.cirkel-badge   { border-radius: 50%; }
+.badge.vierkant-badge { border-radius: 3px; }
+
+.niveau-iconen {
+  display: flex; gap: 2px;
+  margin-top: 3px; justify-content: center; line-height: 1;
+}
+.tool-iconen {
+  display: flex; gap: 2px;
+  margin-top: 2px; font-size: 9pt; justify-content: center;
+}
+
+/* ============================================================
+   TEKST
+   ============================================================ */
+.intro-tekst { margin: 0 0 0.2cm 0; padding: 0; }
+
+.subopgave-label {
+  font-weight: bold;
+  color: var(--groen-donker);
+  font-size: var(--fontsize);
+  white-space: nowrap;
+}
+.subopgave-label .streep { font-weight: normal; }
+
+/* ============================================================
+   OEF-TABEL
+   ============================================================ */
+.oef-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.oef-tabel td {
+  padding: 0;
+  border: none;
+  vertical-align: middle;
+}
+.oef-tabel.met-lijn .kolom-links {
+  border-right: 1.2px solid var(--groen-donker);
+  padding-right: 0.2cm;
+}
+.oef-tabel.met-lijn .kolom-midden {
+  border-right: 1.2px solid var(--groen-donker);
+  padding-right: 0.2cm;
+  padding-left: 0.2cm;
+}
+.oef-tabel.met-lijn .kolom-rechts {
+  padding-left: 0.2cm;
+}
+
+/* ============================================================
+   RIJ — basis voor alle rijen
+   ============================================================ */
+.rij {
+  display: flex;
+  align-items: center;
+  height: var(--rij-hoogte);
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+}
+.rij.breuk { height: var(--rij-hoogte-breuk); }
+
+.lbl { font-weight: bold; color: var(--groen-donker); flex-shrink: 0; width: 0.65cm; display: inline-block; }
+.txt { flex-shrink: 0; }
+.is  { flex-shrink: 0; padding: 0 0.15cm; }
+.tab { flex-shrink: 0; width: var(--insprong-stap); }
+
+/* ============================================================
+   SCHRIJFLIJN — aaneengesloten underscores, overflow hidden
+   ============================================================ */
+.sl {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--sl-kleur);
+  letter-spacing: -0.08em;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  line-height: 1;
+  user-select: none;
+}
+
+/* ============================================================
+   OPLOSSING — overlay, zelfde positie als schrijflijn
+   ============================================================ */
+.opl {
+  display: none;
+  position: absolute;
+  top: 0; bottom: 0;
+  /* left wordt ingesteld via JS per rij-type */
+  right: 0;
+  align-items: center;
+  font-family: var(--font-oplossing);
+  font-size: var(--fontsize);
+  color: var(--blauw-oplossing);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.opl.zichtbaar { display: flex; }
+
+/* ============================================================
+   FIGUUR
+   ============================================================ */
+.figuur-cel { text-align: center; padding: 0.1cm 0; }
+
+/* ============================================================
+   BREUK — teller en noemer op 10pt
+   ============================================================ */
+.breuk-html {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1.1;
+}
+.breuk-html .teller,
+.breuk-html .noemer {
+  display: block;
+  text-align: center;
+  font-size: var(--fontsize);
+  padding: 0 2px;
+}
+.breuk-html .noemer {
+  border-top: 0.8px solid currentColor;
+  margin-top: 1px;
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+  html, body { background: white; }
+  .pagina { margin: 0; box-shadow: none; width: 100%; }
+  .opl { display: none !important; }
+}
+
+Dit is helpers.js
+/* ============================================================
+   HELPERS.JS
+   ============================================================ */
+
+// Constante voor de schrijflijn-inhoud
+const SL = '__________________________________________________' +
+           '__________________________________________________' +
+           '__________________________________________________';
+
+function maakOefening(config) {
+  const { id, nummer, soort, niveaus=[], tools=[], toggleModus='oefening', container='.pagina' } = config;
+  const isCircel = (soort==='ontdek'||soort==='voorbeeld');
+  const badgeKlasse = isCircel ? 'cirkel-badge' : 'vierkant-badge';
+  const toolIconMap = { rekenmachine:'🖩', geogebra:'📐' };
+
+  const oefDiv = document.createElement('div');
+  oefDiv.classList.add('oefening');
+  oefDiv.id = id;
+
+  const margeDiv = document.createElement('div');
+  margeDiv.classList.add('oefening-marge');
+
+  const badge = document.createElement('div');
+  badge.classList.add('badge', badgeKlasse);
+  badge.textContent = nummer;
+  badge.title = 'Klik om oplossing te tonen/verbergen';
+
+  const ICOON = 14;
+  function maakSVG(type) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns,'svg');
+    svg.setAttribute('width',ICOON); svg.setAttribute('height',ICOON);
+    svg.setAttribute('viewBox',`0 0 ${ICOON} ${ICOON}`);
+    svg.style.cssText='display:inline-block;vertical-align:middle;';
+    if (type==='cirkel') {
+      const c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',ICOON/2);c.setAttribute('cy',ICOON/2);
+      c.setAttribute('r',ICOON/2-0.5);c.setAttribute('fill','#000');svg.appendChild(c);
+    } else if (type==='vierkant') {
+      const r=document.createElementNS(ns,'rect');
+      r.setAttribute('x',0.5);r.setAttribute('y',0.5);
+      r.setAttribute('width',ICOON-1);r.setAttribute('height',ICOON-1);
+      r.setAttribute('fill','#000');svg.appendChild(r);
+    } else if (type==='zeshoek') {
+      const cx=ICOON/2,cy=ICOON/2,r=ICOON/2-0.5;
+      const pts=Array.from({length:6},(_,i)=>{
+        const a=(Math.PI/180)*(60*i-30);
+        return `${cx+r*Math.cos(a)},${cy+r*Math.sin(a)}`;
+      });
+      const p=document.createElementNS(ns,'polygon');
+      p.setAttribute('points',pts.join(' '));p.setAttribute('fill','#000');svg.appendChild(p);
+    }
+    return svg;
+  }
+
+  const niveauDiv = document.createElement('div');
+  niveauDiv.classList.add('niveau-iconen');
+  ['cirkel','vierkant','zeshoek'].forEach(n => {
+    const w=document.createElement('span');
+    w.style.cssText=`display:inline-flex;width:${ICOON}px;height:${ICOON}px;align-items:center;justify-content:center;`;
+    if (niveaus.includes(n)){w.appendChild(maakSVG(n));w.title=n;}
+    niveauDiv.appendChild(w);
+  });
+
+  const toolDiv = document.createElement('div');
+  toolDiv.classList.add('tool-iconen');
+  tools.forEach(t=>{
+    const s=document.createElement('span');s.textContent=toolIconMap[t]||t;s.title=t;toolDiv.appendChild(s);
+  });
+
+  margeDiv.appendChild(badge);
+  margeDiv.appendChild(niveauDiv);
+  if (tools.length>0) margeDiv.appendChild(toolDiv);
+
+  const inhoudDiv = document.createElement('div');
+  inhoudDiv.classList.add('oefening-inhoud');
+  oefDiv.appendChild(margeDiv);
+  oefDiv.appendChild(inhoudDiv);
+
+  if (toggleModus==='oefening') {
+    badge.addEventListener('click',()=>{
+      const ovs=oefDiv.querySelectorAll('.opl');
+      const zichtbaar=[...ovs].some(o=>o.classList.contains('zichtbaar'));
+      ovs.forEach(o=>o.classList.toggle('zichtbaar',!zichtbaar));
+      badge.classList.toggle('actief',!zichtbaar);
+    });
+  }
+
+  document.querySelector(container).appendChild(oefDiv);
+  return inhoudDiv;
+}
+
+function voegTekstToe(container, tekst, klasses=[]) {
+  const p=document.createElement('p');
+  if (klasses.length) p.classList.add(...klasses);
+  p.innerHTML=tekst;
+  container.appendChild(p);
+  return p;
+}
+
+function maakBreuk(teller, noemer, stijl='opgave') {
+  const span=document.createElement('span');
+  span.classList.add('breuk-html');
+  if (stijl==='oplossing') {
+    span.style.fontFamily='var(--font-oplossing)';
+    span.style.color='var(--blauw-oplossing)';
+  }
+  const t=document.createElement('span'); t.classList.add('teller'); t.innerHTML=teller;
+  const n=document.createElement('span'); n.classList.add('noemer'); n.innerHTML=noemer;
+  span.appendChild(t); span.appendChild(n);
+  return span;
+}
+
+function maakOefTabel(container, aantalKolommen=2, metLijn=false) {
+  const tabel=document.createElement('table');
+  tabel.classList.add('oef-tabel');
+  if (metLijn) tabel.classList.add('met-lijn');
+  const cg=document.createElement('colgroup');
+  for (let i=0;i<aantalKolommen;i++) {
+    const col=document.createElement('col');
+    col.style.width=`${100/aantalKolommen}%`;
+    cg.appendChild(col);
+  }
+  tabel.appendChild(cg);
+  const tbody=document.createElement('tbody');
+  tabel.appendChild(tbody);
+  container.appendChild(tabel);
+  return {tabel,tbody};
+}
+
+/*
+  maakSlTd — td met tab + schrijflijn (oefening 1-stijl)
+  oplossing: HTML-string (optioneel)
+  breuk: grotere rijhoogte
+*/
+function maakSlTd(oplossing=null, breuk=false) {
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const tab = document.createElement('span');
+  tab.classList.add('tab');
+  rij.appendChild(tab);
+
+  const sl = document.createElement('span');
+  sl.classList.add('sl');
+  sl.textContent = SL;
+  rij.appendChild(sl);
+
+  if (oplossing !== null) {
+    const ov = document.createElement('div');
+    ov.classList.add('opl');
+    // Oplossing start na de tab
+    ov.style.left = 'var(--insprong-stap)';
+    if (typeof oplossing === 'string') ov.innerHTML = oplossing;
+    else ov.appendChild(oplossing);
+    rij.appendChild(ov);
+  }
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
+  maakOpTd — td met label + tekst (vaste breedte) + = + schrijflijn
+  oplossing: HTML-string of Node (optioneel)
+  tekstBreedte: CSS-waarde, standaard '2.7cm'
+  breuk: grotere rijhoogte
+*/
+function maakOpTd(label, tekst, tekstBreedte='2.7cm', breuk=false, oplossing=null) {
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}<span class="streep">|</span>`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = tekstBreedte;
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  const is = document.createElement('span');
+  is.classList.add('is');
+  is.textContent = '=';
+  rij.appendChild(is);
+
+  const sl = document.createElement('span');
+  sl.classList.add('sl');
+  sl.textContent = SL;
+  rij.appendChild(sl);
+
+  if (oplossing !== null) {
+    const ov = document.createElement('div');
+    ov.classList.add('opl');
+    // Oplossing-positie wordt na render berekend op basis van sl-positie
+    ov.style.left = `calc(${tekstBreedte} + 1.15cm)`; // label ~0.3cm + = ~0.3cm = ~0.6cm extra
+    if (typeof oplossing === 'string') ov.innerHTML = oplossing;
+    else ov.appendChild(oplossing);
+    rij.appendChild(ov);
+  }
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
+  maakOpTdaz — td met label + tekst
+  tekstBreedte: 
+  breuk: grotere rijhoogte
+*/
+function maakOpTdaz(label, tekst, breuk=false) {
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}<span class="streep">|</span>`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
+  maakOpTdazExtra — td met label + tekst + tab + tekst
+  tekstBreedte: 
+  breuk: grotere rijhoogte
+*/
+function maakOpTdazExtra(label, tekst, extraTekst,opgaveBreedte='4cm', breuk=false) {
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}<span class="streep">|</span>`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = opgaveBreedte;
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  // extra tekst (start altijd op dezelfde positie)
+  const extra = document.createElement('span');
+  extra.classList.add('txt');
+  if (typeof extraTekst === 'string') extra.innerHTML = extraTekst;
+  else extra.appendChild(extraTekst);
+  rij.appendChild(extra);
+
+  td.appendChild(rij);
+  return td;
+}
+
+
+/* SVG helpers */
+function wiskundeNaarSVGTspan(ns, tekst) {
+  const tokens=tekst.match(/[a-zA-Z]|[^a-zA-Z]+/g)||[];
+  return tokens.map(token=>{
+    const ts=document.createElementNS(ns,'tspan');
+    ts.textContent=token;
+    ts.setAttribute('font-style',/^[a-zA-Z]$/.test(token)?'italic':'normal');
+    return ts;
+  });
+}
+
+function tekenRechthoek(container, basis, hoogte, opties={}) {
+  const {breedte_px=170, hoogte_px=100}=opties;
+  const ns='http://www.w3.org/2000/svg';
+  const mx=38,my=22,rw=breedte_px-2*mx,rh=hoogte_px-2*my;
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('width',breedte_px); svg.setAttribute('height',hoogte_px);
+  svg.setAttribute('viewBox',`0 0 ${breedte_px} ${hoogte_px}`);
+  svg.style.cssText='display:block;margin:0 auto;font-family:Arial,sans-serif;font-size:9pt;';
+  const rect=document.createElementNS(ns,'rect');
+  rect.setAttribute('x',mx);rect.setAttribute('y',my);
+  rect.setAttribute('width',rw);rect.setAttribute('height',rh);
+  rect.setAttribute('fill','none');rect.setAttribute('stroke','#1a1a1a');rect.setAttribute('stroke-width','1.2');
+  svg.appendChild(rect);
+  const lb=document.createElementNS(ns,'text');
+  lb.setAttribute('x',mx+rw/2);lb.setAttribute('y',my+rh+15);
+  lb.setAttribute('text-anchor','middle');lb.setAttribute('fill','#1a1a1a');
+  wiskundeNaarSVGTspan(ns,basis).forEach(t=>lb.appendChild(t));
+  svg.appendChild(lb);
+  const lh=document.createElementNS(ns,'text');
+  lh.setAttribute('x',mx-5);lh.setAttribute('y',my+rh/2);
+  lh.setAttribute('text-anchor','end');lh.setAttribute('dominant-baseline','middle');
+  lh.setAttribute('fill','#1a1a1a');
+  wiskundeNaarSVGTspan(ns,hoogte).forEach(t=>lh.appendChild(t));
+  svg.appendChild(lh);
+  if (container) container.appendChild(svg);
+  return svg;
+}
+
+K1SLT1.js
+/* ============================================================
+   H10 / P10.4 / oe_001.js — Oppervlakte rechthoeken
+   soort: inoefenen | niveaus: cirkel, vierkant, zeshoek
+   ============================================================ */
+(function () {
+
+  const inhoud = maakOefening({
+    id:'oe_001', nummer:'7', soort:'inoefenen',
+    niveaus:['cirkel','vierkant','zeshoek'],
+    tools:[], toggleModus:'oefening', container:'.pagina'
+  });
+
+  voegTekstToe(inhoud,
+    'Bereken.',
+    ['intro-tekst']);
+
+  const {tbody} = maakOefTabel(inhoud, 1, false);
+
+  /* Rij 1: labels */
+  const trL1 = document.createElement('tr');
+  const tdA = maakOpTdaz('a', '(7<i>a</i> − 2) · 3',false);
+  tdA.classList.add('kolom-links');
+  trL1.appendChild(tdA);
+  tbody.appendChild(trL1);
+
+  /* Rijen 2-4: schrijflijnen + oplossing */
+  const oplA = [
+    '(5<i>a</i> \u200A \u2212 2) \u00B7 3',
+    '= 5<i>a</i> \u200A \u00B7 3 \u2212 2 \u00B7 3',
+    '= 15<i>a</i> \u200A \u2212 6'
+  ];
+
+  for (let i=0; i<3; i++) {
+    const tr = document.createElement('tr');
+    const tdA = maakSlTd(oplA[i], false);
+    tdA.classList.add('kolom-links');
+    tr.appendChild(tdA);
+    tbody.appendChild(tr);
+  }
+
+  /* Rij 1': labels */
+  const trL2 = document.createElement('tr');
+  const tdB = maakOpTdaz('b', '(7<i>a</i> − 2) · 3',false);
+  tdB.classList.add('kolom-links');
+  trL2.appendChild(tdB);
+  tbody.appendChild(trL2);
+
+  /* Rijen 2'-4': schrijflijnen + oplossing */
+  const oplB = [
+    '(5<i>a</i> \u200A \u2212 2) \u00B7 3',
+    '= 5<i>a</i> \u200A \u00B7 3 \u2212 2 \u00B7 3',
+    '= 15<i>a</i> \u200A \u2212 6'
+  ];
+
+  for (let i=0; i<3; i++) {
+    const tr = document.createElement('tr');
+    const tdB = maakSlTd(oplB[i], false);
+    tdB.classList.add('kolom-links');
+    tr.appendChild(tdB);
+    tbody.appendChild(tr);
+  }
+
+
+})();
+
+K2SLT1.js
+/* ============================================================
+   H10 / P10.4 / oe_001.js — Oppervlakte rechthoeken
+   soort: inoefenen | niveaus: cirkel, vierkant, zeshoek
+   ============================================================ */
+(function () {
+
+  const inhoud = maakOefening({
+    id:'oe_001', nummer:'3', soort:'inoefenen',
+    niveaus:['cirkel','vierkant','zeshoek'],
+    tools:[], toggleModus:'oefening', container:'.pagina'
+  });
+
+  voegTekstToe(inhoud,
+    'Bereken.',
+    ['intro-tekst']);
+
+  const {tbody} = maakOefTabel(inhoud, 2, true);
+
+  /* Rij 1: labels */
+  const trL1 = document.createElement('tr');
+  const tdA = maakOpTdaz('a', '(7<i>a</i> − 2) · 3',false);
+  tdA.classList.add('kolom-links');
+  trL1.appendChild(tdA);
+  const tdC = maakOpTdaz('c', '12 · (5<i>z</i> + 1)');
+  tdC.classList.add('kolom-rechts');
+  trL1.appendChild(tdC);
+  tbody.appendChild(trL1);
+
+  /* Rijen 2-4: schrijflijnen + oplossing */
+  const oplA = [
+    '(5<i>a</i> \u200A \u2212 2) \u00B7 3',
+    '= 5<i>a</i> \u200A \u00B7 3 \u2212 2 \u00B7 3',
+    '= 15<i>a</i> \u200A \u2212 6'
+  ];
+  const oplC = [
+    '12 \u00B7 (5<i>z</i> \u200A + 1)',
+    '= 12 \u00B7 5<i>z</i> \u200A + 12 \u00B7 1',
+    '= 60<i>z</i> \u200A + 12'
+  ];
+
+  for (let i=0; i<3; i++) {
+    const tr = document.createElement('tr');
+    const tdA = maakSlTd(oplA[i], false);
+    tdA.classList.add('kolom-links');
+    tr.appendChild(tdA);
+    const tdC = maakSlTd(oplC[i], false);
+    tdC.classList.add('kolom-rechts');
+    tr.appendChild(tdC);
+    tbody.appendChild(tr);
+  }
+
+  /* Rij 1': labels */
+  const trL2 = document.createElement('tr');
+  const tdB = maakOpTdaz('b', '(7<i>a</i> − 2) · 3',false);
+  tdB.classList.add('kolom-links');
+  trL2.appendChild(tdB);
+  const tdD = maakOpTdaz('d', '12 · (5<i>z</i> + 1)');
+  tdD.classList.add('kolom-rechts');
+  trL2.appendChild(tdD);
+  tbody.appendChild(trL2);
+
+  /* Rijen 2'-4': schrijflijnen + oplossing */
+  const oplB = [
+    '(5<i>a</i> \u200A \u2212 2) \u00B7 3',
+    '= 5<i>a</i> \u200A \u00B7 3 \u2212 2 \u00B7 3',
+    '= 15<i>a</i> \u200A \u2212 6'
+  ];
+  const oplD = [
+    '12 \u00B7 (5<i>z</i> \u200A + 1)',
+    '= 12 \u00B7 5<i>z</i> \u200A + 12 \u00B7 1',
+    '= 60<i>z</i> \u200A + 12'
+  ];
+
+  for (let i=0; i<3; i++) {
+    const tr = document.createElement('tr');
+    const tdB = maakSlTd(oplB[i], false);
+    tdB.classList.add('kolom-links');
+    tr.appendChild(tdB);
+    const tdD = maakSlTd(oplD[i], false);
+    tdD.classList.add('kolom-rechts');
+    tr.appendChild(tdD);
+    tbody.appendChild(tr);
+  }
+
+
+})();
+
+K3SLT1.js
+/* ============================================================
+   H10 / P10.4 / oe_001.js — Oppervlakte rechthoeken
+   soort: inoefenen | niveaus: cirkel, vierkant, zeshoek
+   ============================================================ */
+(function () {
+
+  const inhoud = maakOefening({
+    id:'oe_001', nummer:'4', soort:'inoefenen',
+    niveaus:['cirkel','vierkant','zeshoek'],
+    tools:[], toggleModus:'oefening', container:'.pagina'
+  });
+
+  voegTekstToe(inhoud,
+    'Bereken.',
+    ['intro-tekst']);
+
+  const {tbody} = maakOefTabel(inhoud, 3, true);
+
+  /* Rij 1: labels */
+  const trL1 = document.createElement('tr');
+  const tdA = maakOpTdaz('a', '(7<i>a</i> − 2) · 3',false);
+  tdA.classList.add('kolom-links');
+  trL1.appendChild(tdA);
+  const tdC = maakOpTdaz('c', '12 · (5<i>z</i> + 1)');
+  tdC.classList.add('kolom-midden');
+  trL1.appendChild(tdC);
+  const tdE = maakOpTdaz('e', '(7<i>a</i> − 2) · 3',false);
+  tdE.classList.add('kolom-rechts');
+  trL1.appendChild(tdE);
+  tbody.appendChild(trL1);
+
+  /* Rijen 2-4: schrijflijnen + oplossing */
+  const oplA = [
+    '(5<i>a</i> \u200A \u2212 2) \u00B7 3',
+    '= 5<i>a</i> \u200A \u00B7 3 \u2212 2 \u00B7 3',
+    '= 15<i>a</i> \u200A \u2212 6'
+  ];
+  const oplC = [
+    '12 \u00B7 (5<i>z</i> \u200A + 1)',
+    '= 12 \u00B7 5<i>z</i> \u200A + 12 \u00B7 1',
+    '= 60<i>z</i> \u200A + 12'
+  ];
+  const oplE = [
+    '(5<i>a</i> \u200A \u2212 2) \u00B7 3',
+    '= 5<i>a</i> \u200A \u00B7 3 \u2212 2 \u00B7 3',
+    '= 15<i>a</i> \u200A \u2212 6'
+  ];
+
+  for (let i=0; i<3; i++) {
+    const tr = document.createElement('tr');
+    const tdA = maakSlTd(oplA[i], false);
+    tdA.classList.add('kolom-links');
+    tr.appendChild(tdA);
+    const tdC = maakSlTd(oplC[i], false);
+    tdC.classList.add('kolom-midden');
+    tr.appendChild(tdC);
+    const tdE = maakSlTd(oplE[i], false);
+    tdE.classList.add('kolom-rechts');
+    tr.appendChild(tdE);
+    tbody.appendChild(tr);
+  }
+
+  /* Rij 1': labels */
+  const trL2 = document.createElement('tr');
+  const tdB = maakOpTdaz('b', '(7<i>a</i> − 2) · 3',false);
+  tdB.classList.add('kolom-links');
+  trL2.appendChild(tdB);
+  const tdD = maakOpTdaz('d', '12 · (5<i>z</i> + 1)');
+  tdD.classList.add('kolom-midden');
+  trL2.appendChild(tdD);
+  const tdF = maakOpTdaz('f', '12 · (5<i>z</i> + 1)');
+  tdF.classList.add('kolom-rechts');
+  trL2.appendChild(tdF);
+  tbody.appendChild(trL2);
+
+  /* Rijen 2'-4': schrijflijnen + oplossing */
+  const oplB = [
+    '(5<i>a</i> \u200A \u2212 2) \u00B7 3',
+    '= 5<i>a</i> \u200A \u00B7 3 \u2212 2 \u00B7 3',
+    '= 15<i>a</i> \u200A \u2212 6'
+  ];
+  const oplD = [
+    '12 \u00B7 (5<i>z</i> \u200A + 1)',
+    '= 12 \u00B7 5<i>z</i> \u200A + 12 \u00B7 1',
+    '= 60<i>z</i> \u200A + 12'
+  ];
+  const oplF = [
+    '12 \u00B7 (5<i>z</i> \u200A + 1)',
+    '= 12 \u00B7 5<i>z</i> \u200A + 12 \u00B7 1',
+    '= 60<i>z</i> \u200A + 12'
+  ];
+
+  for (let i=0; i<3; i++) {
+    const tr = document.createElement('tr');
+    const tdB = maakSlTd(oplB[i], false);
+    tdB.classList.add('kolom-links');
+    tr.appendChild(tdB);
+    const tdD = maakSlTd(oplD[i], false);
+    tdD.classList.add('kolom-midden');
+    tr.appendChild(tdD);
+    const tdF = maakSlTd(oplF[i], false);
+    tdF.classList.add('kolom-rechts');
+    tr.appendChild(tdF);
+    tbody.appendChild(tr);
+  }
+
+
+})();
+
+K2SLT2.js
+/* ============================================================
+   H10 / P10.4 / oe_002.js — Werk uit
+   soort: test | niveaus: geen
+   ============================================================ */
+(function () {
+
+  const inhoud = maakOefening({
+    id:'oe_002', nummer:'?', soort:'test',
+    niveaus:[], tools:[],
+    toggleModus:'oefening', container:'.pagina'
+  });
+
+  voegTekstToe(inhoud, 'Werk uit.', ['intro-tekst']);
+
+  const {tbody} = maakOefTabel(inhoud, 2, true);
+
+  const TW = '2.4cm';
+
+  /* Rij 1: a en c */
+  const tr1 = document.createElement('tr');
+
+  const tdA = maakOpTd(
+    'a', '5 - 8',
+    TW, true, '-3'
+  );
+  tdA.classList.add('kolom-links');
+  tr1.appendChild(tdA);
+
+  const tdC = maakOpTd(
+    'c', '3 + 4',
+    TW, true, '7'
+  );
+  tdC.classList.add('kolom-rechts');
+  tr1.appendChild(tdC);
+  tbody.appendChild(tr1);
+
+  /* Rij 2: b en d */
+  const tr2 = document.createElement('tr');
+
+  const tdB = maakOpTd(
+    'b', '(5<i>x</i> \u2212 3) \u00B7 4',
+    TW, true, '20<i>x</i> \u2212 12'
+  );
+  tdB.classList.add('kolom-links');
+  tr2.appendChild(tdB);
+
+  const tdD = maakOpTd(
+    'd', '(20<i>y</i> \u2212 3) \u00B7 (\u22125)',
+    TW, true, '\u2212100<i>y</i> + 15'
+  );
+  tdD.classList.add('kolom-rechts');
+  tr2.appendChild(tdD);
+  tbody.appendChild(tr2);
+
+})();
+
+K2SLT1EX.js
+/* ============================================================
+   H10 / P10.4 / oe_001.js — Oppervlakte rechthoeken
+   soort: inoefenen | niveaus: cirkel, vierkant, zeshoek
+   ============================================================ */
+(function () {
+
+  const inhoud = maakOefening({
+    id:'oe_001', nummer:'13', soort:'inoefenen',
+    niveaus:['cirkel','vierkant','zeshoek'],
+    tools:[], toggleModus:'oefening', container:'.pagina'
+  });
+
+  voegTekstToe(inhoud,
+    'Bereken de getalwaarde.',
+    ['intro-tekst']);
+
+  const {tbody} = maakOefTabel(inhoud, 2, true);
+
+  const BREEDTE = '3.5cm';
+
+  /* Rij 1: labels */
+  const trL1 = document.createElement('tr');
+  const tdA = maakOpTdazExtra('a', '(7<i>a</i> − 2) · 3', 'voor <i>a</i> = 5',BREEDTE, false);
+  tdA.classList.add('kolom-links');
+  trL1.appendChild(tdA);
+  const tdC = maakOpTdazExtra('c', '12 · (5<i>z</i> + 1)', 'voor <i>z</i> = -2',BREEDTE, false);
+  tdC.classList.add('kolom-rechts');
+  trL1.appendChild(tdC);
+  tbody.appendChild(trL1);
+
+  /* Rijen 2-5: schrijflijnen + oplossing */
+  const oplA = [
+    '(7 \u00B7 \u200A <span style="color: #b266ff;">5</span> \u200A \u2212 2) \u00B7 3',
+    '= (35 \u2212 2) \u00B7 3',
+    '= 33 \u00B7 3',
+    '= 99'
+  ];
+  const oplC = [
+    '12 \u00B7 (5 \u00B7 \u200A <span style="color: #b266ff;">(-2)</span> \u200A + 1)',
+    '= 12 \u00B7 (-10 \u200A + 1)',
+    '= 12 \u00B7 (-9)',
+    '= -108'
+  ];
+
+  for (let i=0; i<4; i++) {
+    const tr = document.createElement('tr');
+    const tdA = maakSlTd(oplA[i], false);
+    tdA.classList.add('kolom-links');
+    tr.appendChild(tdA);
+    const tdC = maakSlTd(oplC[i], false);
+    tdC.classList.add('kolom-rechts');
+    tr.appendChild(tdC);
+    tbody.appendChild(tr);
+  }
+
+  /* Rij 1': labels */
+  const trL2 = document.createElement('tr');
+  const tdB = maakOpTdazExtra('b', '(7<i>a</i> − 2) · 3', 'voor <i>a</i> = 5',BREEDTE, false);
+  tdB.classList.add('kolom-links');
+  trL2.appendChild(tdB);
+  const tdD = maakOpTdazExtra('d', '12 · (5<i>z</i> + 1)', 'voor <i>z</i> = -2',BREEDTE, false);
+  tdD.classList.add('kolom-rechts');
+  trL2.appendChild(tdD);
+  tbody.appendChild(trL2);
+
+  /* Rijen 2'-5': schrijflijnen + oplossing */
+  const oplB = [
+    '(7 \u00B7 \u200A <span style="color: #b266ff;">5</span> \u200A \u2212 2) \u00B7 3',
+    '= (35 \u2212 2) \u00B7 3',
+    '= 33 \u00B7 3',
+    '= 99'
+  ];
+  const oplD = [
+    '12 \u00B7 (5 \u00B7 \u200A <span style="color: #b266ff;">(-2)</span> \u200A + 1)',
+    '= 12 \u00B7 (-10 \u200A + 1)',
+    '= 12 \u00B7 (-9)',
+    '= -108'
+  ];
+
+  for (let i=0; i<4; i++) {
+    const tr = document.createElement('tr');
+    const tdB = maakSlTd(oplB[i], false);
+    tdB.classList.add('kolom-links');
+    tr.appendChild(tdB);
+    const tdD = maakSlTd(oplD[i], false);
+    tdD.classList.add('kolom-rechts');
+    tr.appendChild(tdD);
+    tbody.appendChild(tr);
+  }
+
+})();
+
+Ik wil nu graag een extra sjabloon maken.
+Dit sjabloon werkt bijna op dezelfde manier als K2SLT2.js.
+K2SLT2.js voorziet in oefeningen van de vorm:
+a| (3a - 2) · (-4) [witruimte] = ____ (schrijflijn tot einde kolom)
+Bij een klik op het vierkant bij deze oefening wordt de oplossing zichtbaar, die start waar de schrijflijn start. Hier zou dat -12a + 8 zijn.
+
+Ik wil nu oefeningen van de vorm
+a| (3a - 2) · (-4) [witruimte] = ____ (schrijflijn 1cm) 12a ____ (schrijflijn 1cm) 8 -> een deel van de oplossing is dus al voorgedrukt
+Bij een klik op het vierkant bij deze oefening wordt de oplossing zichtbaar, die nu gecentreerd op de schrijflijn moet staan. Hier is dat voor de eerste schrijflijn - en voor de tweede +.
+Ik heb het volgende in gedachten: waar bij K2SLT2.js, volgens mij, een blok voorzien is voor de schrijflijn, wil ik nu een moederblok voorzien voor de samengestelde tekst. Dat moederblok bestaat uit subblokken met een bepaalde breedte. De subblokken voor dit voorbeeld zouden: "____ (schrijflijn 1cm)", "12a (breedte van de tekst die erin komt)", " ____ (schrijflijn 1cm)" en "8 (breedte van de tekst die erin komt". De invultekst, in het voorbeeld ____ (schrijflijn 1cm) 12a ____ (schrijflijn 1cm) 8 komt in een array met elk subblok als element. Het aantal elementen van deze array kan door de code afgelezen worden en bepaalt dus het aantal subblokken. De elementen van de array zijn op zich weer array's waarin de informatie over de blokken staat.
+Ik laat even zien met dit voorbeeld: 
+____ (schrijflijn 1cm) 12a ____ (schrijflijn 1cm) 8
+subarray1: [SL,"-",1cm] -> type schrijflijn (moet opmaak schrijflijn uit project hebben), de oplossing en de lengte van de schrijflijn (dus de breedte van het blok)
+subarray2: [vast,"12a","berekenen"] -> type vast, de tekst die er komt en "berekenen" betekent dat de code de breedte van dit blok moet berekenen aan de hand van de tekst
+subarray3: [SL,"+",1cm] -> type schrijflijn (moet opmaak schrijflijn uit project hebben), de oplossing en de lengte van de schrijflijn (dus de breedte van het blok)
+subarray4: [vast,"8","berekenen"] -> type vast, de tekst die er komt en "berekenen" betekent dat de code de breedte van dit blok moet berekenen aan de hand van de tekst
+moederarray: [subarray1,subarray2,subarray3,subarray4]
+
+Ik hoop dat je dit wat begrijpt. Stel vragen als je meer wilt weten.
+Je hoeft geen bestanden opnieuw te schrijven.
+Zeg mij welke code ik waar moet toevoegen en geef een voorbeeld voor implementatie in de oefening zelf.
+
+Nog een belangrijke opmerking: er staat iets over breuken (zorgt ervoor dat regels verder uit elkaar staan), net zoals bij de andere oefeningen moet deze optie ook hier zijn.

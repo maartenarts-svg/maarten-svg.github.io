@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helper — Subopgaven</title>
+<style>
+  :root {
+    --groen-donker:  #4a7c59;
+    --groen-midden:  #6aab7e;
+    --groen-pastel:  #c8e6c9;
+    --groen-licht:   #e8f5e9;
+    --groen-rand:    #a5d6a7;
+    --grijs-licht:   #f5f5f5;
+    --tekst:         #1a1a1a;
+    --tekst-zacht:   #555;
+    --blauw:         #1a4fa0;
+    --rood:          #c0392b;
+    --geel-licht:    #fff8e1;
+    --geel-rand:     #ffe082;
+    --geel-tekst:    #795548;
+    --paars-licht:   #f3e5f5;
+    --paars-rand:    #ce93d8;
+    --paars-donker:  #7b1fa2;
+    --font:          'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radius:        6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); font-size: 13px; color: var(--tekst); background: #eef2ee; min-height: 100vh; }
+
+  header { background: var(--groen-donker); color: white; padding: 14px 24px; font-size: 15px; font-weight: 600; letter-spacing: .03em; display: flex; align-items: center; gap: 10px; }
+  header span { font-weight: 300; opacity: .8; font-size: 13px; }
+
+  .layout { max-width: 900px; margin: 20px auto; padding: 0 16px 40px; display: flex; flex-direction: column; gap: 16px; }
+
+  .kaart { background: white; border: 1px solid var(--groen-rand); border-radius: var(--radius); overflow: hidden; }
+  .kaart-titel { background: var(--groen-pastel); color: var(--groen-donker); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-bottom: 1px solid var(--groen-rand); display: flex; justify-content: space-between; align-items: center; }
+  .kaart-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+
+  .veld-rij { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+  .veld { display: flex; flex-direction: column; gap: 4px; }
+  label { font-size: 11px; font-weight: 600; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; }
+  input[type="text"], input[type="number"], select, textarea {
+    border: 1px solid var(--groen-rand); border-radius: 4px; padding: 6px 9px;
+    font-size: 13px; font-family: var(--font); color: var(--tekst); background: white;
+    outline: none; transition: border-color .15s;
+  }
+  input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus { border-color: var(--groen-donker); }
+  input.breed { width: 180px; } input.smal { width: 70px; } input.middel { width: 120px; }
+  select { width: 100%; }
+
+  .radio-groep { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .radio-optie { display: flex; align-items: center; gap: 5px; cursor: pointer; padding: 5px 10px; border: 1px solid var(--groen-rand); border-radius: 20px; font-size: 12px; transition: all .15s; user-select: none; }
+  .radio-optie input { accent-color: var(--groen-donker); cursor: pointer; }
+  .radio-optie:hover { background: var(--groen-licht); border-color: var(--groen-midden); }
+  .radio-optie.geselecteerd { background: var(--groen-pastel); border-color: var(--groen-donker); font-weight: 600; }
+
+  /* Opgave blok */
+  .opgave-blok { border: 1px solid var(--groen-rand); border-radius: var(--radius); padding: 12px; background: var(--grijs-licht); display: flex; flex-direction: column; gap: 10px; }
+  .opgave-blok + .opgave-blok { margin-top: 10px; }
+  .opgave-label { font-size: 12px; font-weight: 700; color: var(--groen-donker); display: flex; align-items: center; gap: 6px; }
+  .badge-klein { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--groen-donker); color: white; font-size: 11px; font-weight: 700; }
+
+  /* Keuzeknop voor inhoud van een opgave */
+  .opgave-keuze { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .keuze-knop { padding: 5px 12px; font-size: 12px; background: white; color: var(--groen-donker); border: 1.5px solid var(--groen-rand); border-radius: 20px; cursor: pointer; font-weight: 600; transition: all .15s; }
+  .keuze-knop:hover { background: var(--groen-licht); border-color: var(--groen-midden); }
+  .keuze-knop.actief { background: var(--groen-pastel); border-color: var(--groen-donker); }
+
+  /* Inhoud van de opgave (nadat keuze gemaakt) */
+  .opgave-inhoud { display: flex; flex-direction: column; gap: 8px; }
+
+  /* Subopgave blok */
+  .subopgave-blok { border: 1px solid var(--paars-rand); border-radius: var(--radius); padding: 10px; background: var(--paars-licht); display: flex; flex-direction: column; gap: 8px; position: relative; }
+  .subopgave-blok + .subopgave-blok { margin-top: 6px; }
+  .sub-label { font-size: 11px; font-weight: 700; color: var(--paars-donker); display: flex; align-items: center; gap: 6px; }
+  .badge-sub { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 3px; background: var(--paars-donker); color: white; font-size: 10px; font-weight: 700; }
+
+  /* Invoer-rij met span-knop */
+  .invoer-rij { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .invoer-rij label.inline { font-size: 11px; color: var(--tekst-zacht); text-transform: none; letter-spacing: 0; font-weight: normal; white-space: nowrap; padding-top: 8px; }
+
+  .opl-rij { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .opl-rij label.inline { font-size: 11px; color: var(--tekst-zacht); white-space: nowrap; width: 85px; flex-shrink: 0; }
+
+  .vg-wrap { display: flex; align-items: center; gap: 5px; flex-shrink: 0; cursor: pointer; }
+  .vg-wrap input[type="checkbox"] { accent-color: var(--groen-donker); width: 14px; height: 14px; cursor: pointer; }
+  .vg-wrap span { font-size: 10px; color: var(--tekst-zacht); white-space: nowrap; user-select: none; }
+  .vg-wrap.actief span { color: var(--blauw); font-weight: 600; }
+
+  /* Span-invoer widget */
+  .span-widget { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 100px; }
+  .span-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--groen-licht); border: 1px solid var(--groen-rand); border-radius: 4px; padding: 4px 8px; font-size: 11px; color: var(--groen-donker); font-family: monospace; cursor: pointer; transition: all .15s; white-space: nowrap; }
+  .span-tag:hover { background: var(--groen-pastel); border-color: var(--groen-donker); }
+  .span-tag.leeg { background: #fff; border-style: dashed; color: var(--tekst-zacht); font-family: var(--font); font-style: italic; }
+  .span-tag.leeg:hover { background: var(--groen-licht); border-color: var(--groen-midden); border-style: solid; }
+
+  /* Subopgave-parameter rij (aantal SL, tab) */
+  .sub-params { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; padding: 6px 0; border-bottom: 1px dashed var(--paars-rand); margin-bottom: 4px; }
+  .sub-params label { font-size: 10px; color: var(--paars-donker); text-transform: uppercase; letter-spacing: .05em; font-weight: 700; }
+
+  button { padding: 9px 20px; border: none; border-radius: var(--radius); font-family: var(--font); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .btn-primair { background: var(--groen-donker); color: white; }
+  .btn-primair:hover { background: #3a6348; }
+  .btn-secundair { background: white; color: var(--groen-donker); border: 1.5px solid var(--groen-donker); }
+  .btn-secundair:hover { background: var(--groen-licht); }
+  .btn-gevaar { background: white; color: var(--rood); border: 1.5px solid var(--rood); }
+  .btn-gevaar:hover { background: #fdecea; }
+  .btn-klein { padding: 5px 12px; font-size: 12px; }
+  .btn-plus { padding: 4px 12px; font-size: 12px; background: var(--geel-licht); color: var(--geel-tekst); border: 1px solid var(--geel-rand); border-radius: 4px; cursor: pointer; font-weight: 700; }
+  .btn-plus:hover { background: #fff3cd; }
+  .btn-plus-sl { padding: 3px 10px; font-size: 11px; background: var(--groen-licht); color: var(--groen-donker); border: 1px solid var(--groen-rand); border-radius: 4px; cursor: pointer; font-weight: 700; margin-top: 2px; }
+  .btn-plus-sl:hover { background: var(--groen-pastel); }
+  .btn-plus-sub { padding: 4px 12px; font-size: 12px; background: var(--paars-licht); color: var(--paars-donker); border: 1px solid var(--paars-rand); border-radius: 4px; cursor: pointer; font-weight: 700; margin-top: 4px; }
+  .btn-plus-sub:hover { background: #e1bee7; }
+  .btn-verwijder-sub { position: absolute; top: 8px; right: 8px; background: white; color: var(--rood); border: 1px solid var(--rood); border-radius: 4px; padding: 2px 8px; font-size: 11px; cursor: pointer; }
+  .btn-verwijder-sub:hover { background: #fdecea; }
+
+  .stap-balk { display: flex; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--groen-rand); }
+  .stap { flex: 1; text-align: center; padding: 7px 4px; font-size: 11px; font-weight: 600; color: var(--tekst-zacht); background: white; border-right: 1px solid var(--groen-rand); }
+  .stap:last-child { border-right: none; }
+  .stap.actief { background: var(--groen-donker); color: white; }
+  .stap.gedaan { background: var(--groen-pastel); color: var(--groen-donker); }
+
+  .melding { padding: 8px 12px; border-radius: 4px; font-size: 12px; display: none; }
+  .melding.fout { background: #fdecea; border: 1px solid #ef9a9a; color: var(--rood); display: block; }
+  .melding.ok   { background: #e8f5e9; border: 1px solid var(--groen-rand); color: var(--groen-donker); display: block; }
+
+  #output-kaart { display: none; }
+  #output-kaart.zichtbaar { display: block; }
+  #output-code { background: #1e1e1e; color: #d4d4d4; font-family: 'Consolas','Courier New',monospace; font-size: 12px; padding: 16px; border-radius: 0 0 var(--radius) var(--radius); overflow-x: auto; white-space: pre; max-height: 500px; overflow-y: auto; line-height: 1.5; }
+  .output-acties { padding: 10px 14px; display: flex; gap: 8px; border-top: 1px solid var(--groen-rand); background: var(--grijs-licht); }
+
+  #param-sectie  { display: none; }
+  #param-sectie.zichtbaar { display: block; }
+  #inhoud-sectie { display: none; }
+  #inhoud-sectie.zichtbaar { display: block; }
+
+  .conventie-box { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 4px; padding: 8px 12px; font-size: 11.5px; color: #1565c0; line-height: 1.8; }
+  .conventie-box code { background: rgba(0,0,0,.06); padding: 1px 4px; border-radius: 3px; font-family: monospace; font-size: 11px; }
+
+  /* ============================================================
+     MODAAL
+     ============================================================ */
+  #modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    z-index: 1000; align-items: flex-start; justify-content: center;
+    padding: 30px 16px; overflow-y: auto;
+  }
+  #modal-overlay.open { display: flex; }
+  #modal-venster { background: white; border-radius: var(--radius); width: 100%; max-width: 820px; box-shadow: 0 8px 40px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  #modal-header { background: var(--groen-donker); color: white; padding: 12px 16px; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  #modal-header .modal-varnaam { font-family: monospace; font-size: 13px; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; }
+  #modal-sluiten { background: transparent; border: none; color: white; font-size: 20px; cursor: pointer; padding: 0 4px; line-height: 1; opacity: .8; }
+  #modal-sluiten:hover { opacity: 1; }
+  #modal-body { padding: 16px; display: flex; gap: 16px; align-items: flex-start; overflow-y: auto; max-height: calc(100vh - 200px); }
+  #modal-breuk-sidebar { width: 190px; flex-shrink: 0; display: none; }
+  #modal-breuk-sidebar.zichtbaar { display: block; }
+  .modal-breuk-kaart { background: white; border: 1px solid var(--geel-rand); border-radius: var(--radius); overflow: hidden; }
+  .modal-breuk-kaart-titel { background: var(--geel-licht); color: var(--geel-tekst); font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 7px 10px; border-bottom: 1px solid var(--geel-rand); display: flex; justify-content: space-between; align-items: center; }
+  .modal-breuk-kaart-body { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .modal-breuk-definitie { display: flex; align-items: center; gap: 6px; padding: 5px 8px; background: #fffde7; border: 1px solid var(--geel-rand); border-radius: 4px; }
+  .modal-breuk-label-tag { font-weight: 700; font-size: 12px; color: var(--geel-tekst); min-width: 24px; }
+  .modal-breuk-inputs { display: flex; align-items: center; gap: 4px; flex: 1; }
+  .modal-breuk-inputs input { width: 48px; flex: none; font-size: 12px; padding: 4px 6px; border: 1px solid var(--groen-rand); border-radius: 4px; }
+  #modal-inhoud { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+  .modal-kaart { background: white; border: 1px solid var(--groen-rand); border-radius: var(--radius); overflow: hidden; }
+  .modal-kaart-titel { background: var(--groen-pastel); color: var(--groen-donker); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 7px 12px; border-bottom: 1px solid var(--groen-rand); }
+  .modal-kaart-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .term-blok { border: 1px solid var(--groen-rand); border-radius: var(--radius); padding: 10px; background: var(--grijs-licht); position: relative; display: flex; flex-direction: column; gap: 8px; }
+  .term-blok-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .term-nr { font-weight: 700; color: var(--groen-donker); font-size: 12px; min-width: 55px; }
+  .term-blok-params { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; padding-top: 6px; border-top: 1px dashed var(--groen-rand); }
+  .param-groep { display: flex; flex-direction: column; gap: 3px; }
+  .param-groep label { font-size: 10px; color: var(--groen-donker); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+  .btn-verwijder { position: absolute; top: 8px; right: 8px; background: white; color: var(--rood); border: 1px solid var(--rood); border-radius: 4px; padding: 2px 8px; font-size: 11px; cursor: pointer; }
+  .btn-verwijder:hover { background: #fdecea; }
+  .btn-verplaats { position: absolute; background: white; border: 1px solid var(--groen-rand); border-radius: 4px; padding: 2px 7px; font-size: 11px; cursor: pointer; top: 8px; }
+  .btn-verplaats:hover { background: var(--groen-licht); }
+  .modal-btn-plus { padding: 6px 14px; font-size: 12px; background: var(--groen-licht); color: var(--groen-donker); border: 1px solid var(--groen-rand); border-radius: 4px; cursor: pointer; font-weight: 700; }
+  .modal-btn-plus:hover { background: var(--groen-pastel); }
+  .checkbox-rij { display: flex; align-items: center; gap: 5px; }
+  .checkbox-rij input { accent-color: var(--groen-donker); width: 14px; height: 14px; }
+  .checkbox-rij span { font-size: 11px; color: var(--tekst-zacht); }
+  #modal-footer { padding: 12px 16px; border-top: 1px solid var(--groen-rand); background: var(--grijs-licht); display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+  #modal-melding { font-size: 12px; flex: 1; }
+  #modal-melding.fout { color: var(--rood); }
+  #modal-melding.ok   { color: var(--groen-donker); }
+  .modal-radio-groep { display: flex; flex-wrap: wrap; gap: 6px; }
+  .modal-radio-optie { display: flex; align-items: center; gap: 5px; cursor: pointer; padding: 4px 9px; border: 1px solid var(--groen-rand); border-radius: 20px; font-size: 12px; transition: all .15s; user-select: none; }
+  .modal-radio-optie input { accent-color: var(--groen-donker); cursor: pointer; }
+  .modal-radio-optie:hover { background: var(--groen-licht); }
+  .modal-radio-optie.geselecteerd { background: var(--groen-pastel); border-color: var(--groen-donker); font-weight: 600; }
+  .conventie-box-klein { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 4px; padding: 7px 10px; font-size: 11px; color: #1565c0; line-height: 1.8; }
+  .conventie-box-klein code { background: rgba(0,0,0,.06); padding: 1px 3px; border-radius: 3px; font-family: monospace; font-size: 10px; }
+</style>
+</head>
+<body>
+
+<header>📐 Cursus Wiskunde <span>— Helper: opgaven met subopgaven</span></header>
+
+<div class="layout">
+
+  <div class="stap-balk">
+    <div class="stap actief" id="stap1">① Coördinaten</div>
+    <div class="stap" id="stap2">② Parameters</div>
+    <div class="stap" id="stap3">③ Inhoud</div>
+    <div class="stap" id="stap4">④ Genereer</div>
+  </div>
+
+  <!-- COÖRDINATEN -->
+  <div class="kaart">
+    <div class="kaart-titel">① Coördinaten van de oefening</div>
+    <div class="kaart-body">
+      <div class="veld-rij">
+        <div class="veld"><label for="inp-hoofdstuk">Hoofdstuk</label><input type="text" id="inp-hoofdstuk" class="middel" placeholder="bv. H10"></div>
+        <div class="veld"><label for="inp-paragraaf">Paragraaf</label><input type="text" id="inp-paragraaf" class="middel" placeholder="bv. P10_4"></div>
+        <div class="veld"><label for="inp-id">ID / bestandsnaam</label><input type="text" id="inp-id" class="breed" placeholder="bv. oe_003"></div>
+      </div>
+      <div class="veld-rij">
+        <div class="veld"><label>Soort</label>
+          <div class="radio-groep" id="rg-soort">
+            <label class="radio-optie"><input type="radio" name="soort" value="inoefenen"> Inoefenen</label>
+            <label class="radio-optie"><input type="radio" name="soort" value="ontdek"> Ontdek</label>
+            <label class="radio-optie"><input type="radio" name="soort" value="voorbeeld"> Voorbeeld</label>
+            <label class="radio-optie"><input type="radio" name="soort" value="test"> Test</label>
+          </div>
+        </div>
+      </div>
+      <div class="veld-rij">
+        <div class="veld"><label>Niveaus</label>
+          <div class="radio-groep" id="rg-niveaus">
+            <label class="radio-optie"><input type="checkbox" name="niveau" value="geen"> Geen</label>
+            <label class="radio-optie"><input type="checkbox" name="niveau" value="cirkel"> ● Cirkel</label>
+            <label class="radio-optie"><input type="checkbox" name="niveau" value="vierkant"> ■ Vierkant</label>
+            <label class="radio-optie"><input type="checkbox" name="niveau" value="zeshoek"> ⬡ Zeshoek</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARAMETERS -->
+  <div class="kaart" id="param-sectie">
+    <div class="kaart-titel">② Parameters</div>
+    <div class="kaart-body" id="param-body">
+      <div class="veld-rij">
+        <div class="veld">
+          <label for="inp-aantal">Aantal hoofdopgaven</label>
+          <input type="number" id="inp-aantal" class="smal" min="1" max="20" value="2">
+        </div>
+        <div class="veld">
+          <label>Bevat breuken? <span style="font-size:10px;font-weight:400;color:var(--tekst-zacht);">(rijhoogte — waarden in span-pop-up)</span></label>
+          <div class="radio-groep" id="rg-breuken">
+            <label class="radio-optie geselecteerd"><input type="radio" name="breuken" value="nee" checked> Nee</label>
+            <label class="radio-optie"><input type="radio" name="breuken" value="ja"> Ja</label>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="btn-primair" onclick="bouwInhoud()">→ Ga naar inhoud</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INHOUD -->
+  <div class="kaart" id="inhoud-sectie">
+    <div class="kaart-titel">③ Inhoud van de oefening</div>
+    <div class="kaart-body">
+      <div class="conventie-box">
+        <strong>Conventies tekst (span-pop-up):</strong><br>
+        • Cursief: <code>*a*</code> &nbsp;|&nbsp; Macht: <code>*x*^2</code> of <code>*x*^{2n+1}</code><br>
+        • Breuk: <code>B1</code>, <code>B2</code>, … (definieer in de sidebar van de pop-up)<br>
+        • Oplossing: <code>$tekst$</code> of <code>$B1$</code> &nbsp;|&nbsp; Markering: <code>['tekst','#kleur']</code><br>
+        • Breedte-span: <code>£1cm,'tekst'£</code> &nbsp;|&nbsp; Spatie: <code>' '</code>
+      </div>
+      <div class="veld">
+        <label for="inp-intro">Introductietekst</label>
+        <textarea id="inp-intro" style="resize:vertical;width:100%;min-height:38px;line-height:1.5;" placeholder="bv. Bereken."></textarea>
+      </div>
+      <div id="opgave-container"></div>
+    </div>
+  </div>
+
+  <div class="melding" id="melding"></div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button class="btn-primair" onclick="genereer()">⚙ Genereer JS-code</button>
+    <button class="btn-gevaar" onclick="resetAlles()">↺ Reset</button>
+  </div>
+
+  <div class="kaart" id="output-kaart">
+    <div class="kaart-titel">④ Gegenereerde code</div>
+    <div class="output-acties">
+      <button class="btn-secundair btn-klein" onclick="kopieerCode()">📋 Kopieer code</button>
+    </div>
+    <pre id="output-code"></pre>
+  </div>
+
+</div><!-- /layout -->
+
+<!-- MODAAL -->
+<div id="modal-overlay">
+  <div id="modal-venster">
+    <div id="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span>🔷 Span-bouwer</span>
+        <span class="modal-varnaam" id="modal-varnaam-label"></span>
+      </div>
+      <button id="modal-sluiten" onclick="sluitModal()" title="Sluiten zonder opslaan">✕</button>
+    </div>
+    <div id="modal-body">
+      <div id="modal-breuk-sidebar">
+        <div class="modal-breuk-kaart">
+          <div class="modal-breuk-kaart-titel">
+            <span>Breuk-definities</span>
+            <button style="padding:2px 8px;font-size:11px;background:var(--geel-licht);color:var(--geel-tekst);border:1px solid var(--geel-rand);border-radius:4px;cursor:pointer;font-weight:700;" onclick="modalVoegBreukToe()">+ breuk</button>
+          </div>
+          <div class="modal-breuk-kaart-body" id="modal-breuk-lijst"></div>
+        </div>
+      </div>
+      <div id="modal-inhoud">
+        <div class="modal-kaart">
+          <div class="modal-kaart-titel">Conventies</div>
+          <div class="modal-kaart-body">
+            <div class="conventie-box-klein">
+              <strong>Invoer per term:</strong><br>
+              • Cursief: <code>*x*</code> &nbsp;|&nbsp; Exponent: <code>^2</code> of <code>^{2n+1}</code><br>
+              • Breuk: <code>B1</code>, <code>B2</code>, … (definieer links)<br>
+              • Oplossing tekst: <code>$1*x*$</code> &nbsp;|&nbsp; Oplossing breuk: <code>$B1$</code><br>
+              • Markering: <code>['tekst','#kleur',true]</code><br>
+              • Breedte-span: <code>£1cm,'tekst'£</code> of <code>£1cm£</code><br>
+              • Spatie: <code>' '</code>
+            </div>
+          </div>
+        </div>
+        <div class="modal-kaart">
+          <div class="modal-kaart-titel">Instellingen</div>
+          <div class="modal-kaart-body">
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <label style="font-size:10px;">Bevat breuken?</label>
+              <div class="modal-radio-groep" id="modal-rg-breuken">
+                <label class="modal-radio-optie geselecteerd"><input type="radio" name="modal-breuken" value="nee" checked> Nee</label>
+                <label class="modal-radio-optie"><input type="radio" name="modal-breuken" value="ja"> Ja</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-kaart">
+          <div class="modal-kaart-titel">Termen</div>
+          <div class="modal-kaart-body">
+            <div id="modal-termen-container"></div>
+            <button class="modal-btn-plus" onclick="modalVoegTermToe()">+ term toevoegen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modal-footer">
+      <span id="modal-melding"></span>
+      <button class="btn-secundair btn-klein" onclick="sluitModal()">Annuleren</button>
+      <button class="btn-primair btn-klein" onclick="modalBevestigen()">✓ Toevoegen</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// GLOBALE TOESTAND
+// ============================================================
+let aantalOpgaven = 2;
+let heeftBreuken  = false;
+
+// spanVars: { varNaam: { termen: [...], breuken: [...] } }
+const spanVars = {};
+
+// Modal toestand
+let modalDoelVeldId = null;
+let modalVarNaam    = null;
+let modalAantalTermen = 0;
+let modalAantalBreuken = 0;
+let spanVarTeller = 0;
+
+// Opgave-data: array van { type, ... } per hoofdopgave-label
+// type: 'schrijflijnen' | 'subopgaven'
+// Voor 'schrijflijnen': geen extra data nodig (variabel per opgave)
+// Voor 'subopgaven': subopgaven: [{ type, aantalSl, ... }]
+const opgaveData = {};
+
+// ============================================================
+// TEKST TRANSFORMATIES
+// ============================================================
+function exponent(s) {
+  if (!s) return '';
+  s = s.replace(/\^\{([^}]*)\}/g, (_, inhoud) => `<sup>${cursief(inhoud)}</sup>`);
+  s = s.replace(/\^([a-zA-Z0-9\-])/g, '<sup>$1</sup>');
+  return s;
+}
+function cursief(s) {
+  if (!s) return '';
+  return s.replace(/\*([^*]+)\*/g, '<i>$1</i>');
+}
+function opmaak(s) {
+  if (!s) return '';
+  return cursief(exponent(s));
+}
+function escStr(s) { return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+
+function tekstNaarHTML(s) {
+  if (!s) return '';
+  const alineas = s.split(/\n{2,}/);
+  const htmlAlineas = alineas.map(alinea => {
+    const regels = alinea.split('\n');
+    const lijstRegels = regels.filter(r => r.trim().startsWith('- '));
+    const gewoneRegels = regels.filter(r => r.trim() !== '' && !r.trim().startsWith('- '));
+    if (lijstRegels.length > 0 && gewoneRegels.length === 0) {
+      const items = lijstRegels.map(r => `<li>${opmaak(r.trim().slice(2))}</li>`).join('');
+      return `<ul>${items}</ul>`;
+    } else {
+      return regels.map(r => r.trim().startsWith('- ') ? `<li>${opmaak(r.trim().slice(2))}</li>` : opmaak(r)).join('<br>');
+    }
+  });
+  return htmlAlineas.length === 1 ? htmlAlineas[0] : htmlAlineas.map(a => `<p>${a}</p>`).join('');
+}
+
+// ============================================================
+// RADIO / CHECKBOX VISUEEL
+// ============================================================
+function activeerRadioGroep(groepEl) {
+  groepEl.addEventListener('change', e => {
+    if (e.target.type === 'checkbox') {
+      if (e.target.value === 'geen' && e.target.checked) {
+        groepEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          if (cb.value !== 'geen') { cb.checked = false; cb.closest('.radio-optie').classList.remove('geselecteerd'); }
+        });
+      } else if (e.target.checked) {
+        const g = groepEl.querySelector('input[value="geen"]');
+        if (g) { g.checked = false; g.closest('.radio-optie').classList.remove('geselecteerd'); }
+      }
+      e.target.closest('.radio-optie').classList.toggle('geselecteerd', e.target.checked);
+    } else {
+      groepEl.querySelectorAll('.radio-optie').forEach(o => o.classList.remove('geselecteerd'));
+      e.target.closest('.radio-optie').classList.add('geselecteerd');
+    }
+  });
+}
+document.querySelectorAll('.radio-groep').forEach(activeerRadioGroep);
+activeerRadioGroep(document.getElementById('rg-breuken'));
+
+// ============================================================
+// SPAN-WIDGET HELPERS
+// ============================================================
+function getBasisNaam() {
+  return (document.getElementById('inp-id')?.value || 'oe').trim().replace(/[^a-zA-Z0-9_]/g, '_');
+}
+function nieuweVarNaam() {
+  spanVarTeller++;
+  return `${getBasisNaam()}_${spanVarTeller}`;
+}
+function maakSpanWidget(veldId) {
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('span-widget');
+  wrapper.id = `sw-${veldId}`;
+  const tag = document.createElement('span');
+  tag.classList.add('span-tag', 'leeg');
+  tag.id = `st-${veldId}`;
+  tag.title = 'Klik om span-bouwer te openen';
+  tag.innerHTML = '🔷 span toevoegen';
+  tag.onclick = () => openModal(veldId);
+  wrapper.appendChild(tag);
+  return wrapper;
+}
+function updateSpanTag(veldId, varNaam) {
+  const tag = document.getElementById(`st-${veldId}`);
+  if (!tag) return;
+  tag.classList.remove('leeg');
+  tag.innerHTML = `🔷 <code style="font-size:11px;">${varNaam}</code> <span style="font-size:10px;opacity:.6;">(klik om te bewerken)</span>`;
+  tag.title = `Variabele: ${varNaam} — klik om te bewerken`;
+  tag.dataset.varNaam = varNaam;
+  tag.onclick = () => openModal(veldId, varNaam);
+}
+function getSpanVarNaam(veldId) {
+  const tag = document.getElementById(`st-${veldId}`);
+  return tag?.dataset?.varNaam || null;
+}
+
+// ============================================================
+// INHOUD BOUWEN
+// ============================================================
+function bouwInhoud() {
+  aantalOpgaven = parseInt(document.getElementById('inp-aantal')?.value) || 2;
+  const brEl = document.querySelector('input[name="breuken"]:checked');
+  heeftBreuken = brEl && brEl.value === 'ja';
+
+  const alfabet = 'abcdefghijklmnopqrstuvwxyz';
+  const labels  = Array.from({length: aantalOpgaven}, (_, i) => alfabet[i]);
+  const container = document.getElementById('opgave-container');
+  container.innerHTML = '';
+
+  labels.forEach(lbl => {
+    const blok = document.createElement('div');
+    blok.classList.add('opgave-blok');
+    blok.id = `blok-${lbl}`;
+
+    // Label
+    const labelDiv = document.createElement('div');
+    labelDiv.classList.add('opgave-label');
+    labelDiv.innerHTML = `<span class="badge-klein">${lbl}</span> Opgave ${lbl}`;
+    blok.appendChild(labelDiv);
+
+    // Opgave-tekst (span-widget)
+    const rijOp = document.createElement('div');
+    rijOp.classList.add('invoer-rij');
+    const lbOp = document.createElement('label');
+    lbOp.className = 'inline';
+    lbOp.textContent = 'Opgave:';
+    rijOp.appendChild(lbOp);
+    rijOp.appendChild(maakSpanWidget(`opgave-${lbl}`));
+    blok.appendChild(rijOp);
+
+    // Keuzeknop: schrijflijnen of subopgaven
+    const keuzeDiv = document.createElement('div');
+    keuzeDiv.classList.add('opgave-keuze');
+    keuzeDiv.id = `keuze-${lbl}`;
+
+    const btnSl = document.createElement('button');
+    btnSl.className = 'keuze-knop';
+    btnSl.textContent = '📝 Schrijflijnen (variabel)';
+    btnSl.onclick = () => kiesOpgaveType(lbl, 'schrijflijnen');
+
+    const btnSub = document.createElement('button');
+    btnSub.className = 'keuze-knop';
+    btnSub.textContent = '📋 Subopgaven';
+    btnSub.onclick = () => kiesOpgaveType(lbl, 'subopgaven');
+
+    keuzeDiv.appendChild(document.createTextNode('Kies type: '));
+    keuzeDiv.appendChild(btnSl);
+    keuzeDiv.appendChild(btnSub);
+    blok.appendChild(keuzeDiv);
+
+    // Container voor inhoud na keuze
+    const inhoudDiv = document.createElement('div');
+    inhoudDiv.classList.add('opgave-inhoud');
+    inhoudDiv.id = `inhoud-${lbl}`;
+    blok.appendChild(inhoudDiv);
+
+    container.appendChild(blok);
+  });
+
+  document.getElementById('inhoud-sectie').classList.add('zichtbaar');
+  updateStappen(3);
+}
+
+// ============================================================
+// OPGAVE-TYPE KIEZEN
+// ============================================================
+function kiesOpgaveType(lbl, type) {
+  // Update keuzeknop stijl
+  const keuzeDiv = document.getElementById(`keuze-${lbl}`);
+  keuzeDiv.querySelectorAll('.keuze-knop').forEach(b => b.classList.remove('actief'));
+  const actieveKnop = [...keuzeDiv.querySelectorAll('.keuze-knop')].find(b =>
+    (type === 'schrijflijnen' && b.textContent.includes('Schrijflijnen')) ||
+    (type === 'subopgaven' && b.textContent.includes('Subopgaven'))
+  );
+  if (actieveKnop) actieveKnop.classList.add('actief');
+
+  // Sla type op
+  if (!opgaveData[lbl]) opgaveData[lbl] = {};
+  opgaveData[lbl].type = type;
+
+  const inhoudDiv = document.getElementById(`inhoud-${lbl}`);
+  inhoudDiv.innerHTML = '';
+
+  if (type === 'schrijflijnen') {
+    bouwSchrijflijnInhoud(lbl, inhoudDiv);
+  } else {
+    bouwSubopgavenInhoud(lbl, inhoudDiv);
+  }
+}
+
+// ============================================================
+// SCHRIJFLIJNEN (variabel, zoals K1SLT1V)
+// ============================================================
+function bouwSchrijflijnInhoud(lbl, container) {
+  if (!opgaveData[lbl]) opgaveData[lbl] = {};
+  opgaveData[lbl].type = 'schrijflijnen';
+
+  const slContainer = document.createElement('div');
+  slContainer.id = `sl-container-${lbl}`;
+  container.appendChild(slContainer);
+  voegSchrijflijnSpanToe(lbl, 0, slContainer);
+
+  const btnPlus = document.createElement('button');
+  btnPlus.className = 'btn-plus-sl';
+  btnPlus.textContent = '+ schrijflijn toevoegen';
+  btnPlus.onclick = () => {
+    const n = slContainer.querySelectorAll('.opl-rij').length;
+    voegSchrijflijnSpanToe(lbl, n, slContainer);
+  };
+  container.appendChild(btnPlus);
+}
+
+function maakOplossingsRijSpan(veldId, labelTekst) {
+  const rij = document.createElement('div');
+  rij.classList.add('opl-rij');
+  const lbEl = document.createElement('label');
+  lbEl.className = 'inline';
+  lbEl.textContent = labelTekst;
+  const widget = maakSpanWidget(veldId);
+  const cbWrap = maakVgCheckbox(`vg-${veldId}`);
+  rij.appendChild(lbEl);
+  rij.appendChild(widget);
+  rij.appendChild(cbWrap);
+  return rij;
+}
+
+function voegSchrijflijnSpanToe(lbl, s, slContainer) {
+  slContainer.appendChild(maakOplossingsRijSpan(`opl-${lbl}-${s}`, `Oplossing ${s+1}:`));
+}
+
+function maakVgCheckbox(cbId) {
+  const wrap = document.createElement('label');
+  wrap.classList.add('vg-wrap');
+  wrap.title = 'Aanvinken = altijd zichtbaar (voorgedrukt)';
+  const cb = document.createElement('input');
+  cb.type = 'checkbox';
+  cb.id = cbId;
+  const sp = document.createElement('span');
+  sp.textContent = 'zichtbaar';
+  wrap.appendChild(cb);
+  wrap.appendChild(sp);
+  cb.addEventListener('change', () => wrap.classList.toggle('actief', cb.checked));
+  return wrap;
+}
+
+// ============================================================
+// SUBOPGAVEN
+// ============================================================
+function bouwSubopgavenInhoud(lbl, container) {
+  if (!opgaveData[lbl]) opgaveData[lbl] = {};
+  opgaveData[lbl].type = 'subopgaven';
+
+  // Parameters voor de subopgavenblok als geheel
+  const paramDiv = document.createElement('div');
+  paramDiv.classList.add('sub-params');
+  paramDiv.style.flexDirection = 'column';
+  paramDiv.style.gap = '10px';
+
+  // Type-keuze
+  const typeRij = document.createElement('div');
+  typeRij.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;align-items:center;';
+  const typeLabel = document.createElement('span');
+  typeLabel.style.cssText = 'font-size:11px;font-weight:700;color:var(--paars-donker);min-width:50px;';
+  typeLabel.textContent = 'Type:';
+  typeRij.appendChild(typeLabel);
+
+  const typen = [
+    { val: 'K1SLT1V', label: '📝 Schrijflijnen eronder (variabel)' },
+    { val: 'K2SLT1',  label: '📋 2 kolommen + schrijflijnen eronder' },
+    { val: 'K2SLT2',  label: '📋 2 kolommen + schrijflijn ernaast' },
+  ];
+
+  // Parameters-container (verschijnt na type-keuze)
+  const subParamDiv = document.createElement('div');
+  subParamDiv.id = `sub-params-extra-${lbl}`;
+  subParamDiv.style.display = 'none';
+
+  // Velden-container (verschijnt na "Bouw velden")
+  const subContainer = document.createElement('div');
+  subContainer.id = `sub-container-${lbl}`;
+
+  typen.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'keuze-knop';
+    btn.style.fontSize = '11px';
+    btn.textContent = t.label;
+    btn.dataset.val = t.val;
+    btn.onclick = () => {
+      // Markeer actief
+      typeRij.querySelectorAll('.keuze-knop').forEach(b => b.classList.remove('actief'));
+      btn.classList.add('actief');
+      // Sla type op
+      if (!opgaveData[lbl]) opgaveData[lbl] = {};
+      opgaveData[lbl].subType = t.val;
+      // Toon parameters voor dit type
+      bouwSubParams(lbl, t.val, subParamDiv, subContainer);
+      subParamDiv.style.display = 'block';
+      // Reset velden
+      subContainer.innerHTML = '';
+    };
+    typeRij.appendChild(btn);
+  });
+
+  paramDiv.appendChild(typeRij);
+  paramDiv.appendChild(subParamDiv);
+  container.appendChild(paramDiv);
+  container.appendChild(subContainer);
+}
+
+// Bouw de parameters-sectie voor het gekozen subtype
+function bouwSubParams(lbl, type, paramDiv, subContainer) {
+  paramDiv.innerHTML = '';
+
+  const rij = document.createElement('div');
+  rij.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-top:6px;';
+
+  if (type === 'K1SLT1V') {
+    // Aantal subopgaven
+    const vAantal = maakParamVeld('Aantal subopgaven', `subparam-${lbl}-aantal`, 'number', '2', '1', '20', '60px');
+    rij.appendChild(vAantal);
+
+  } else if (type === 'K2SLT1') {
+    // Aantal opgaven per kolom + aantal schrijflijnen
+    const vAantal = maakParamVeld('Aantal per kolom', `subparam-${lbl}-aantal`, 'number', '2', '1', '20', '60px');
+    const vSl     = maakParamVeld('Schrijflijnen per opgave', `subparam-${lbl}-sl`, 'number', '3', '1', '10', '60px');
+    rij.appendChild(vAantal);
+    rij.appendChild(vSl);
+
+  } else if (type === 'K2SLT2') {
+    // Aantal opgaven per kolom + tab-breedte
+    const vAantal = maakParamVeld('Aantal per kolom', `subparam-${lbl}-aantal`, 'number', '2', '1', '20', '60px');
+    const vTab    = maakParamVeld('Tab tot = (bv. 2.4cm)', `subparam-${lbl}-tab`, 'text', '2.4cm', null, null, '80px');
+    rij.appendChild(vAantal);
+    rij.appendChild(vTab);
+  }
+
+  const btnBouw = document.createElement('button');
+  btnBouw.className = 'btn-primair btn-klein';
+  btnBouw.style.marginBottom = '2px';
+  btnBouw.textContent = '→ Bouw velden';
+  btnBouw.onclick = () => bouwSubVelden(lbl, type, subContainer);
+  rij.appendChild(btnBouw);
+
+  paramDiv.appendChild(rij);
+}
+
+function maakParamVeld(labelTekst, id, type, defaultVal, min, max, breedte) {
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;flex-direction:column;gap:3px;';
+  const lbl = document.createElement('label');
+  lbl.style.cssText = 'font-size:10px;color:var(--paars-donker);text-transform:uppercase;letter-spacing:.04em;font-weight:700;';
+  lbl.textContent = labelTekst;
+  const inp = document.createElement('input');
+  inp.type = type; inp.id = id; inp.value = defaultVal;
+  inp.style.width = breedte;
+  inp.style.padding = '5px 7px';
+  inp.style.fontSize = '12px';
+  if (min) inp.min = min;
+  if (max) inp.max = max;
+  wrap.appendChild(lbl);
+  wrap.appendChild(inp);
+  return wrap;
+}
+
+// Bouw de eigenlijke inhoudsvelden voor de subopgaven
+function bouwSubVelden(lbl, type, subContainer) {
+  subContainer.innerHTML = '';
+
+  const aantal = parseInt(document.getElementById(`subparam-${lbl}-aantal`)?.value) || 2;
+  const aantalSl = parseInt(document.getElementById(`subparam-${lbl}-sl`)?.value) || 3;
+  const tabBr   = document.getElementById(`subparam-${lbl}-tab`)?.value || '2.4cm';
+
+  // Sla parameters op in opgaveData
+  if (!opgaveData[lbl]) opgaveData[lbl] = {};
+  opgaveData[lbl].subAantal = aantal;
+  opgaveData[lbl].subSl     = aantalSl;
+  opgaveData[lbl].subTab    = tabBr;
+
+  if (type === 'K1SLT1V') {
+    // Per subopgave: badge (1|, 2|...) + opgave-span + variabel schrijflijnen
+    for (let nr = 1; nr <= aantal; nr++) {
+      const subId = `${lbl}-sub${nr}`;
+      const blok = maakSubBlok(nr);
+      blok.id = `subblok-${subId}`;
+
+      // Opgave
+      const rijOp = document.createElement('div'); rijOp.classList.add('invoer-rij');
+      const lbOp = document.createElement('label'); lbOp.className = 'inline'; lbOp.textContent = 'Opgave:';
+      rijOp.appendChild(lbOp);
+      rijOp.appendChild(maakSpanWidget(`subopg-${subId}`));
+      blok.appendChild(rijOp);
+
+      // Schrijflijnen variabel
+      const slCont = document.createElement('div');
+      slCont.id = `sub-sl-${subId}`;
+      blok.appendChild(slCont);
+      // begin met 1 schrijflijn
+      slCont.appendChild(maakOplossingsRijSpan(`subopl-${subId}-0`, 'Opl. 1:'));
+
+      const btnSl = document.createElement('button');
+      btnSl.className = 'btn-plus-sl';
+      btnSl.textContent = '+ schrijflijn';
+      btnSl.onclick = () => {
+        const n = slCont.querySelectorAll('.opl-rij').length;
+        slCont.appendChild(maakOplossingsRijSpan(`subopl-${subId}-${n}`, `Opl. ${n+1}:`));
+      };
+      blok.appendChild(btnSl);
+      subContainer.appendChild(blok);
+    }
+
+  } else if (type === 'K2SLT1') {
+    const totaal = aantal * 2;
+    for (let nr = 1; nr <= totaal; nr++) {
+      const subId = `${lbl}-sub${nr}`;
+      const blok = maakSubBlok(nr);
+      blok.id = `subblok-${subId}`;
+
+      const rijOp = document.createElement('div'); rijOp.classList.add('invoer-rij');
+      const lbOp = document.createElement('label'); lbOp.className = 'inline'; lbOp.textContent = 'Opgave:';
+      rijOp.appendChild(lbOp);
+      rijOp.appendChild(maakSpanWidget(`subopg-${subId}`));
+      blok.appendChild(rijOp);
+
+      for (let s = 0; s < aantalSl; s++) {
+        blok.appendChild(maakOplossingsRijSpan(`subopl-${subId}-${s}`, `Opl. ${s+1}:`));
+      }
+      subContainer.appendChild(blok);
+    }
+
+  } else if (type === 'K2SLT2') {
+    const totaal = aantal * 2;
+    for (let nr = 1; nr <= totaal; nr++) {
+      const subId = `${lbl}-sub${nr}`;
+      const blok = maakSubBlok(nr);
+      blok.id = `subblok-${subId}`;
+
+      const rijOp = document.createElement('div'); rijOp.classList.add('invoer-rij');
+      const lbOp = document.createElement('label'); lbOp.className = 'inline'; lbOp.textContent = 'Opgave:';
+      rijOp.appendChild(lbOp);
+      rijOp.appendChild(maakSpanWidget(`subopg-${subId}`));
+      blok.appendChild(rijOp);
+
+      blok.appendChild(maakOplossingsRijSpan(`subopl-${subId}-0`, 'Oplossing:'));
+      subContainer.appendChild(blok);
+    }
+  }
+}
+
+function maakSubBlok(nr) {
+  const blok = document.createElement('div');
+  blok.classList.add('subopgave-blok');
+  const subLabelDiv = document.createElement('div');
+  subLabelDiv.classList.add('sub-label');
+  subLabelDiv.innerHTML = `<span class="badge-sub">${nr}|</span> <span>Subopgave ${nr}</span>`;
+  blok.appendChild(subLabelDiv);
+  return blok;
+}
+
+function maakKolomSectie(titel) {
+  const secDiv = document.createElement('div');
+  secDiv.style.cssText = 'border-left:2px solid var(--paars-rand);padding-left:8px;margin:4px 0;';
+  const secLabel = document.createElement('div');
+  secLabel.style.cssText = 'font-size:10px;font-weight:700;color:var(--paars-donker);margin-bottom:4px;text-transform:uppercase;';
+  secLabel.textContent = titel;
+  secDiv.appendChild(secLabel);
+  return secDiv;
+}
+
+// ============================================================
+// MODAL OPENEN / SLUITEN
+// ============================================================
+function openModal(veldId, bestaandeVarNaam) {
+  modalDoelVeldId = veldId;
+  if (bestaandeVarNaam && spanVars[bestaandeVarNaam]) {
+    modalVarNaam = bestaandeVarNaam;
+  } else {
+    modalVarNaam = nieuweVarNaam();
+  }
+  document.getElementById('modal-varnaam-label').textContent = modalVarNaam;
+
+  modalAantalTermen = 0;
+  modalAantalBreuken = 0;
+  document.getElementById('modal-termen-container').innerHTML = '';
+  document.getElementById('modal-breuk-lijst').innerHTML = '';
+  document.getElementById('modal-melding').textContent = '';
+
+  const neeRadio = document.querySelector('input[name="modal-breuken"][value="nee"]');
+  if (neeRadio) {
+    neeRadio.checked = true;
+    document.querySelectorAll('#modal-rg-breuken .modal-radio-optie').forEach(o => o.classList.remove('geselecteerd'));
+    neeRadio.closest('.modal-radio-optie').classList.add('geselecteerd');
+  }
+  document.getElementById('modal-breuk-sidebar').classList.remove('zichtbaar');
+  modalVoegBreukToe();
+  document.getElementById('modal-breuk-sidebar').classList.remove('zichtbaar');
+
+  if (bestaandeVarNaam && spanVars[bestaandeVarNaam]) {
+    const data = spanVars[bestaandeVarNaam];
+    data.breuken.forEach((b, i) => {
+      if (i >= modalAantalBreuken) modalVoegBreukToe();
+      const ti = document.getElementById(`modal-breuk-teller-${i+1}`);
+      const ni = document.getElementById(`modal-breuk-noemer-${i+1}`);
+      if (ti) ti.value = b.teller;
+      if (ni) ni.value = b.noemer;
+    });
+    if (data.breuken.length > 0) {
+      document.getElementById('modal-breuk-sidebar').classList.add('zichtbaar');
+      const jaRadio = document.querySelector('input[name="modal-breuken"][value="ja"]');
+      if (jaRadio) {
+        jaRadio.checked = true;
+        document.querySelectorAll('#modal-rg-breuken .modal-radio-optie').forEach(o => o.classList.remove('geselecteerd'));
+        jaRadio.closest('.modal-radio-optie').classList.add('geselecteerd');
+      }
+    }
+    data.termen.forEach(term => {
+      modalVoegTermToe();
+      const n = modalAantalTermen;
+      const inhoudEl = document.getElementById(`modal-inhoud-${n}`);
+      const stijlEl  = document.getElementById(`modal-stijl-${n}`);
+      const diepteEl = document.getElementById(`modal-diepte-${n}`);
+      const hoogteEl = document.getElementById(`modal-hoogte-${n}`);
+      const toggleEl = document.getElementById(`modal-toggle-${n}`);
+      if (inhoudEl) inhoudEl.value = term.inhoud;
+      if (stijlEl)  { stijlEl.value = term.stijl; modalUpdateParams(n); }
+      if (diepteEl && term.diepte) diepteEl.value = term.diepte;
+      if (hoogteEl && term.hoogte) hoogteEl.value = term.hoogte;
+      if (toggleEl) toggleEl.checked = term.toggle;
+    });
+  } else {
+    modalVoegTermToe();
+  }
+
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function sluitModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  modalDoelVeldId = null;
+}
+
+function modalBevestigen() {
+  const termBlokken = document.querySelectorAll('#modal-termen-container .term-blok');
+  if (termBlokken.length === 0) {
+    document.getElementById('modal-melding').textContent = 'Voeg minstens één term toe.';
+    document.getElementById('modal-melding').className = 'fout';
+    return;
+  }
+  const termen = [];
+  termBlokken.forEach(blok => {
+    const n = blok.id.replace('modal-term-', '');
+    termen.push({
+      inhoud: document.getElementById(`modal-inhoud-${n}`)?.value ?? '',
+      stijl:  document.getElementById(`modal-stijl-${n}`)?.value ?? 'geen',
+      diepte: document.getElementById(`modal-diepte-${n}`)?.value ?? '0.1cm',
+      hoogte: document.getElementById(`modal-hoogte-${n}`)?.value ?? '',
+      toggle: document.getElementById(`modal-toggle-${n}`)?.checked ?? true,
+    });
+  });
+  const breuken = [];
+  for (let i = 1; i <= modalAantalBreuken; i++) {
+    const t  = document.getElementById(`modal-breuk-teller-${i}`)?.value || '';
+    const nm = document.getElementById(`modal-breuk-noemer-${i}`)?.value || '';
+    if (t || nm) breuken.push({ teller: t, noemer: nm });
+  }
+  spanVars[modalVarNaam] = { termen, breuken };
+
+  if (breuken.length > 0) {
+    heeftBreuken = true;
+    const jaRadioParam = document.querySelector('input[name="breuken"][value="ja"]');
+    if (jaRadioParam) {
+      jaRadioParam.checked = true;
+      const rg = document.getElementById('rg-breuken');
+      if (rg) {
+        rg.querySelectorAll('.radio-optie').forEach(o => o.classList.remove('geselecteerd'));
+        jaRadioParam.closest('.radio-optie')?.classList.add('geselecteerd');
+      }
+    }
+  }
+
+  updateSpanTag(modalDoelVeldId, modalVarNaam);
+  document.getElementById('modal-overlay').classList.remove('open');
+  modalDoelVeldId = null;
+}
+
+// ============================================================
+// MODAL — BREUKEN
+// ============================================================
+function modalVoegBreukToe() {
+  modalAantalBreuken++;
+  const n = modalAantalBreuken;
+  if (document.getElementById(`modal-breuk-teller-${n}`)) return;
+  const div = document.createElement('div');
+  div.classList.add('modal-breuk-definitie');
+  div.innerHTML = `<span class="modal-breuk-label-tag">B${n}</span>
+    <div class="modal-breuk-inputs">
+      <input type="text" id="modal-breuk-teller-${n}" placeholder="tel.">
+      <span style="font-size:15px;color:var(--geel-tekst);">⁄</span>
+      <input type="text" id="modal-breuk-noemer-${n}" placeholder="noem.">
+    </div>`;
+  document.getElementById('modal-breuk-lijst').appendChild(div);
+}
+
+document.getElementById('modal-rg-breuken').addEventListener('change', e => {
+  if (e.target.type !== 'radio') return;
+  document.querySelectorAll('#modal-rg-breuken .modal-radio-optie').forEach(o => o.classList.remove('geselecteerd'));
+  e.target.closest('.modal-radio-optie').classList.add('geselecteerd');
+  const toon = e.target.value === 'ja';
+  document.getElementById('modal-breuk-sidebar').classList.toggle('zichtbaar', toon);
+  if (toon && modalAantalBreuken < 1) modalVoegBreukToe();
+});
+
+// ============================================================
+// MODAL — TERMEN
+// ============================================================
+function modalVoegTermToe() {
+  modalAantalTermen++;
+  const n = modalAantalTermen;
+  const cont = document.getElementById('modal-termen-container');
+  const blok = document.createElement('div');
+  blok.classList.add('term-blok');
+  blok.id = `modal-term-${n}`;
+  blok.innerHTML = `
+    <button class="btn-verwijder" onclick="modalVerwijderTerm(${n})">✕</button>
+    <button class="btn-verplaats" style="right:72px;" onclick="modalVerplaatsTerm(${n},-1)">↑</button>
+    <button class="btn-verplaats" style="right:112px;" onclick="modalVerplaatsTerm(${n},1)">↓</button>
+    <div class="term-blok-header">
+      <span class="term-nr">Term ${n}</span>
+      <div class="param-groep">
+        <label>Inhoud</label>
+        <input type="text" id="modal-inhoud-${n}" style="width:280px;" placeholder="bv. *x*^2 of $3$ of [' ']">
+      </div>
+    </div>
+    <div class="term-blok-params">
+      <div class="param-groep">
+        <label>Onderstreping</label>
+        <select id="modal-stijl-${n}" onchange="modalUpdateParams(${n})">
+          <option value="geen">geen</option>
+          <option value="enkel">enkel</option>
+          <option value="dubbel">dubbel</option>
+          <option value="golf">golf</option>
+        </select>
+      </div>
+      <div id="modal-extra-params-${n}" style="display:none;gap:8px;flex-wrap:wrap;align-items:flex-end;">
+        <div class="param-groep">
+          <label>Diepte</label>
+          <input type="text" id="modal-diepte-${n}" class="smal" value="0.1cm">
+        </div>
+        <div class="param-groep">
+          <label>Hoogte</label>
+          <input type="text" id="modal-hoogte-${n}" class="smal" placeholder="auto">
+        </div>
+        <div class="param-groep" style="padding-top:16px;">
+          <div class="checkbox-rij">
+            <input type="checkbox" id="modal-toggle-${n}" checked>
+            <span>toggle</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  cont.appendChild(blok);
+  modalUpdateParams(n);
+  modalHernoemTermen();
+}
+
+function modalUpdateParams(n) {
+  const stijl = document.getElementById(`modal-stijl-${n}`)?.value;
+  const extraEl = document.getElementById(`modal-extra-params-${n}`);
+  const diepteEl = document.getElementById(`modal-diepte-${n}`);
+  if (!extraEl) return;
+  if (stijl === 'geen') { extraEl.style.display = 'none'; }
+  else {
+    extraEl.style.display = 'flex';
+    if (diepteEl) diepteEl.value = stijl === 'enkel' ? '0.1cm' : '0.18cm';
+  }
+}
+
+function modalVerplaatsTerm(n, richting) {
+  const blok = document.getElementById(`modal-term-${n}`);
+  const cont = document.getElementById('modal-termen-container');
+  const blokken = [...cont.querySelectorAll('.term-blok')];
+  const idx = blokken.indexOf(blok);
+  const nieuwIdx = idx + richting;
+  if (nieuwIdx < 0 || nieuwIdx >= blokken.length) return;
+  if (richting === -1) cont.insertBefore(blok, blokken[nieuwIdx]);
+  else cont.insertBefore(blokken[nieuwIdx], blok);
+  modalHernoemTermen();
+}
+
+function modalVerwijderTerm(n) {
+  if (!confirm('Term verwijderen?')) return;
+  const el = document.getElementById(`modal-term-${n}`);
+  if (el) el.remove();
+  modalHernoemTermen();
+}
+
+function modalHernoemTermen() {
+  document.querySelectorAll('#modal-termen-container .term-blok').forEach((blok, i) => {
+    blok.querySelector('.term-nr').textContent = `Term ${i + 1}`;
+  });
+}
+
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) sluitModal();
+});
+
+// ============================================================
+// SPAN-CODE GENEREREN
+// ============================================================
+function genereerSpanCode(varNaam, ins) {
+  const data = spanVars[varNaam];
+  if (!data) return '';
+  const lijnen = [];
+  lijnen.push(`const ${varNaam} = document.createElement('span');`);
+
+  function getBreuk(idx) {
+    const b = data.breuken[idx - 1];
+    return b ? { t: b.teller, nm: b.noemer } : { t: '?', nm: '?' };
+  }
+  function escS(s) { return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+
+  function tokeniseer(str) {
+    const tokens = [];
+    const re = /\$B(\d+)\$|\$([^$]+)\$|B(\d+)/g;
+    let last = 0, m;
+    while ((m = re.exec(str)) !== null) {
+      if (m.index > last) tokens.push({ type:'tekst', val: str.slice(last, m.index), opl: false });
+      if (m[1]) tokens.push({ type:'breuk', idx: parseInt(m[1]), opl: true });
+      else if (m[2]) tokens.push({ type:'tekst', val: m[2], opl: true });
+      else if (m[3]) tokens.push({ type:'breuk', idx: parseInt(m[3]), opl: false });
+      last = m.index + m[0].length;
+    }
+    if (last < str.length) tokens.push({ type:'tekst', val: str.slice(last), opl: false });
+    if (tokens.length === 0) tokens.push({ type:'tekst', val: str, opl: false });
+    return tokens;
+  }
+
+  function parseInhoud(str, teller) {
+    const subLijnen = [];
+    if (str === "' '") return { subLijnen: [], ref: `htmlSpan(' ')` };
+    let rest = str.trim();
+
+    const markBreukMatch   = rest.match(/^\[B(\d+),'(.*)'\s*,\s*(true|false)\]$/);
+    const markBreukDefault = rest.match(/^\[B(\d+)\]$/);
+    const markBreukKleur   = rest.match(/^\[B(\d+),'(.*)'\]$/);
+    if (markBreukMatch || markBreukDefault || markBreukKleur) {
+      let idx, kleur, toggle;
+      if (markBreukMatch) { idx=parseInt(markBreukMatch[1]); kleur=markBreukMatch[2]; toggle=markBreukMatch[3]==='true'; }
+      else if (markBreukKleur) { idx=parseInt(markBreukKleur[1]); kleur=markBreukKleur[2]; toggle=true; }
+      else { idx=parseInt(markBreukDefault[1]); kleur='#bbdefb'; toggle=true; }
+      const {t,nm} = getBreuk(idx);
+      const vn = `${varNaam}_m${teller}`;
+      subLijnen.push(`const ${vn} = maakMarkering(maakBreuk('${escS(t)}','${escS(nm)}','opgave'), '${kleur}', ${toggle});`);
+      return { subLijnen, ref: vn };
+    }
+
+    const markMatch        = rest.match(/^\['(.*)','(.*)'\s*,\s*(true|false)\]$/);
+    const markMatchDefault = rest.match(/^\['(.*)'\]$/);
+    const markMatchKleur   = rest.match(/^\['(.*)','(.*)'\]$/);
+    if (markMatch || markMatchDefault || markMatchKleur) {
+      let tekst, kleur, toggle;
+      if (markMatch) { tekst=markMatch[1]; kleur=markMatch[2]; toggle=markMatch[3]==='true'; }
+      else if (markMatchKleur) { tekst=markMatchKleur[1]; kleur=markMatchKleur[2]; toggle=true; }
+      else { tekst=markMatchDefault[1]; kleur='#bbdefb'; toggle=true; }
+      const vn = `${varNaam}_m${teller}`;
+      const tokens = tokeniseer(tekst);
+      if (tokens.length === 1 && !tokens[0].opl) {
+        subLijnen.push(`const ${vn} = maakMarkering(htmlSpan('${escS(opmaak(tekst))}'), '${kleur}', ${toggle});`);
+      } else {
+        const sn = `${vn}_s`;
+        subLijnen.push(`const ${sn} = document.createElement('span');`);
+        tokens.forEach(tok => {
+          if (tok.opl) subLijnen.push(`${sn}.appendChild(zetOmNaarOpl('${escS(opmaak(tok.val))}'));`);
+          else subLijnen.push(`${sn}.appendChild(htmlSpan('${escS(opmaak(tok.val))}'));`);
+        });
+        subLijnen.push(`const ${vn} = maakMarkering(${sn}, '${kleur}', ${toggle});`);
+      }
+      return { subLijnen, ref: vn };
+    }
+
+    const breedteMatch = rest.match(/^£([^,£]+),'([^']*)'£$/) || rest.match(/^£([^,£]+)£$/);
+    if (breedteMatch) {
+      const breedte = breedteMatch[1].trim();
+      const inhoudTekst = breedteMatch[2] ? escS(opmaak(breedteMatch[2])) : '';
+      const vn = `${varNaam}_b${teller}`;
+      subLijnen.push(`const ${vn} = maakSpanBreedte('${breedte}', '${inhoudTekst}');`);
+      return { subLijnen, ref: vn };
+    }
+
+    const tokens = tokeniseer(rest);
+    if (tokens.length === 1 && tokens[0].type === 'tekst' && !tokens[0].opl) {
+      return { subLijnen: [], ref: `htmlSpan('${escS(opmaak(tokens[0].val))}')` };
+    }
+    const vn = `${varNaam}_s${teller}`;
+    subLijnen.push(`const ${vn} = document.createElement('span');`);
+    tokens.forEach(tok => {
+      if (tok.type === 'tekst') {
+        if (tok.opl) subLijnen.push(`${vn}.appendChild(zetOmNaarOpl('${escS(opmaak(tok.val))}'));`);
+        else subLijnen.push(`${vn}.appendChild(htmlSpan('${escS(opmaak(tok.val))}'));`);
+      } else if (tok.type === 'breuk') {
+        const stijl = tok.opl ? 'oplossing' : 'opgave';
+        const {t, nm} = getBreuk(tok.idx);
+        if (tok.opl) subLijnen.push(`${vn}.appendChild(zetOmNaarOpl(maakBreuk('${escS(t)}','${escS(nm)}','${stijl}')));`);
+        else subLijnen.push(`${vn}.appendChild(maakBreuk('${escS(t)}','${escS(nm)}','${stijl}'));`);
+      }
+    });
+    return { subLijnen, ref: vn };
+  }
+
+  data.termen.forEach((term, i) => {
+    const inhoudStr = term.inhoud;
+    if (inhoudStr.trim() === '') {
+      lijnen.push(`${varNaam}.appendChild(htmlSpan(' '));`);
+      return;
+    }
+    const { subLijnen, ref } = parseInhoud(inhoudStr, i + 1);
+    lijnen.push(...subLijnen);
+    if (term.stijl === 'geen') {
+      lijnen.push(`${varNaam}.appendChild(${ref});`);
+    } else {
+      const hoogteParam = term.hoogte ? `, '${term.hoogte}'` : '';
+      lijnen.push(`${varNaam}.appendChild(maakOnderstreping(${ref}, '${term.stijl}', '${term.diepte}', ${term.toggle}${hoogteParam}));`);
+    }
+  });
+
+  return lijnen.map(l => ins + l).join('\n');
+}
+
+// ============================================================
+// GENEREER CODE
+// ============================================================
+function genereer() {
+  toonMelding('');
+  if (!document.getElementById('inhoud-sectie').classList.contains('zichtbaar')) {
+    toonMelding('Ga eerst naar de inhoud.', 'fout'); return;
+  }
+
+  const hoofdstuk  = document.getElementById('inp-hoofdstuk')?.value || 'H??';
+  const paragraaf  = document.getElementById('inp-paragraaf')?.value || 'P??';
+  const id         = document.getElementById('inp-id')?.value || 'oe_???';
+  const soortEl    = document.querySelector('input[name="soort"]:checked');
+  const soort      = soortEl ? soortEl.value : 'inoefenen';
+  const niveauCbs  = document.querySelectorAll('input[name="niveau"]:checked');
+  const niveaus    = [...niveauCbs].map(cb => cb.value).filter(v => v !== 'geen');
+  const niveausStr = niveaus.length ? `['${niveaus.join("','")}']` : '[]';
+  const introHTML  = escStr(tekstNaarHTML(document.getElementById('inp-intro')?.value || ''));
+
+  const heeftBreukenInSpans = Object.values(spanVars).some(v => v.breuken && v.breuken.length > 0);
+  const breuk = heeftBreuken || heeftBreukenInSpans;
+  const ins   = '  ';
+
+  const alfabet = 'abcdefghijklmnopqrstuvwxyz';
+  const labels  = Array.from({length: aantalOpgaven}, (_, i) => alfabet[i]);
+
+  // ---- Verzamel gebruikte span-variabelen ----
+  const gebruikteVars = [];
+  function verzamelVar(veldId) {
+    const vn = getSpanVarNaam(veldId);
+    if (vn && !gebruikteVars.includes(vn)) gebruikteVars.push(vn);
+  }
+
+  labels.forEach(lbl => {
+    verzamelVar(`opgave-${lbl}`);
+    const data = opgaveData[lbl];
+    if (!data || !data.type) return;
+
+    if (data.type === 'schrijflijnen') {
+      const slC = document.getElementById(`sl-container-${lbl}`);
+      const n = slC ? slC.querySelectorAll('.opl-rij').length : 1;
+      for (let s = 0; s < n; s++) verzamelVar(`opl-${lbl}-${s}`);
+
+    } else if (data.type === 'subopgaven') {
+      const subType  = data.subType;
+      const subAantal = data.subAantal || 2;
+      const subSl     = data.subSl || 3;
+      if (!subType) return;
+
+      if (subType === 'K1SLT1V') {
+        for (let nr = 1; nr <= subAantal; nr++) {
+          const subId = `${lbl}-sub${nr}`;
+          verzamelVar(`subopg-${subId}`);
+          const slC = document.getElementById(`sub-sl-${subId}`);
+          const n = slC ? slC.querySelectorAll('.opl-rij').length : 1;
+          for (let s = 0; s < n; s++) verzamelVar(`subopl-${subId}-${s}`);
+        }
+      } else if (subType === 'K2SLT1') {
+        for (let nr = 1; nr <= subAantal; nr++) {
+          const subIdL = `${lbl}-sub${nr}`;
+          const subIdR = `${lbl}-sub${nr + subAantal}`;
+          c += `${ins}  /* rij ${nr} — labels */\n`;
+          c += `${ins}  {\n`;
+          c += `${ins}    const trL = document.createElement('tr');\n`;
+          [[subIdL,'L',`'${nr}'`,'kolom-links'],[subIdR,'R',`''`,'kolom-rechts']].forEach(([sid,,lTxt,kls]) => {
+            const subOpgVn = veldExpr(`subopg-${sid}`);
+            c += `${ins}    const tdLbl${sid} = maakOpTdaz(${lTxt}, ${subOpgVn}, ${breuk});\n`;
+            c += `${ins}    tdLbl${sid}.querySelector('.rij').style.alignItems = 'flex-start';\n`;
+            c += `${ins}    tdLbl${sid}.querySelector('.lbl').style.paddingTop = '0cm';\n`;
+            c += `${ins}    tdLbl${sid}.classList.add('${kls}');\n`;
+            c += `${ins}    trL.appendChild(tdLbl${sid});\n`;
+          });
+          c += `${ins}    tbody2.appendChild(trL);\n`;
+          c += `${ins}  }\n`;
+
+          c += `${ins}  {\n`;
+          c += `${ins}    const oplL${nr} = [\n`;
+          for (let s = 0; s < subSl; s++) c += `${ins}      ${veldExpr(`subopl-${subIdL}-${s}`)}${s < subSl-1 ? ',' : ''}\n`;
+          c += `${ins}    ];\n`;
+          c += `${ins}    const oplR${nr} = [\n`;
+          for (let s = 0; s < subSl; s++) c += `${ins}      ${veldExpr(`subopl-${subIdR}-${s}`)}${s < subSl-1 ? ',' : ''}\n`;
+          c += `${ins}    ];\n`;
+          c += `${ins}    for (let i=0; i<${subSl}; i++) {\n`;
+          c += `${ins}      const tr = document.createElement('tr');\n`;
+          [[subIdL,'L','kolom-links'],[subIdR,'R','kolom-rechts']].forEach(([sid,kant,kls]) => {
+            c += `${ins}      const td${kant}${nr} = maakSlTd(opl${kant}${nr}[i], ${breuk});\n`;
+            for (let s = 0; s < subSl; s++) {
+              if (isVg(`vg-subopl-${sid}-${s}`))
+                c += `${ins}      if (i===${s}) td${kant}${nr}.querySelector('.opl').classList.add('zichtbaar', 'opl-vast');\n`;
+            }
+            c += `${ins}      td${kant}${nr}.classList.add('${kls}');\n`;
+            c += `${ins}      tr.appendChild(td${kant}${nr});\n`;
+          });
+          c += `${ins}      tbody2.appendChild(tr);\n`;
+          c += `${ins}    }\n`;
+          c += `${ins}  }\n\n`;
+        }
+      } else if (subType === 'K2SLT2') {
+        for (let nr = 1; nr <= subAantal; nr++) {
+          const subIdL = `${lbl}-sub${nr}`;
+          const subIdR = `${lbl}-sub${nr + subAantal}`;
+          c += `${ins}  /* rij ${nr} */\n`;
+          c += `${ins}  {\n`;
+          c += `${ins}    const tr = document.createElement('tr');\n`;
+          [[subIdL,`'${nr}'`,'kolom-links'],[subIdR,`''`,'kolom-rechts']].forEach(([sid,lTxt,kls]) => {
+            const subOpgVn = veldExpr(`subopg-${sid}`);
+            const oplVn    = veldExpr(`subopl-${sid}-0`);
+            c += `${ins}    const td${sid} = maakOpTd(${lTxt}, ${subOpgVn}, TW, ${breuk}, ${oplVn});\n`;
+            if (isVg(`vg-subopl-${sid}-0`))
+              c += `${ins}    td${sid}.querySelector('.opl').classList.add('zichtbaar', 'opl-vast');\n`;
+            c += `${ins}    td${sid}.classList.add('${kls}');\n`;
+            c += `${ins}    tr.appendChild(td${sid});\n`;
+          });
+          c += `${ins}    tbody2.appendChild(tr);\n`;
+          c += `${ins}  }\n\n`;
+        }
+      }
+    }
+  });
+
+  function isVg(cbId) { return document.getElementById(cbId)?.checked || false; }
+  function veldExpr(veldId) { const vn = getSpanVarNaam(veldId); return vn ? vn : 'null'; }
+
+  // ---- Opbouw code ----
+  let c = '';
+  c += `/* ============================================================\n`;
+  c += `   ${hoofdstuk} / ${paragraaf} / ${id}.js\n`;
+  c += `   soort: ${soort}\n`;
+  c += `   ============================================================ */\n`;
+  c += `(function () {\n\n`;
+
+  if (gebruikteVars.length > 0) {
+    c += `${ins}/* ---- Span-variabelen ---- */\n`;
+    gebruikteVars.forEach(vn => {
+      c += genereerSpanCode(vn, ins) + '\n\n';
+    });
+  }
+
+  c += `${ins}const inhoud = maakOefening({\n`;
+  c += `${ins}  id:'${id}', nummer:'?', soort:'${soort}',\n`;
+  c += `${ins}  niveaus:${niveausStr}, tools:[],\n`;
+  c += `${ins}  toggleModus:'oefening'\n`;
+  c += `${ins}});\n\n`;
+  c += `${ins}voegTekstToe(inhoud, '${introHTML}', ['intro-tekst']);\n\n`;
+  c += `${ins}const {tbody} = maakOefTabel(inhoud, 1, false);\n\n`;
+
+  // ---- Per hoofdopgave ----
+  labels.forEach(lbl => {
+    const data  = opgaveData[lbl];
+    const opgVn = veldExpr(`opgave-${lbl}`);
+
+    c += `${ins}/* ---- Opgave ${lbl} ---- */\n`;
+    // Opgave-label rij
+    c += `${ins}{\n`;
+    c += `${ins}  const tr = document.createElement('tr');\n`;
+    c += `${ins}  const td = maakOpTdaz('${lbl}'', ${opgVn}, ${breuk});\n`;
+    c += `${ins}  td.querySelector('.rij').style.alignItems = 'flex-start';\n`;
+    c += `${ins}  td.querySelector('.lbl').style.paddingTop = '0cm';\n`;
+    c += `${ins}  td.classList.add('kolom-links');\n`;
+    c += `${ins}  tr.appendChild(td);\n`;
+    c += `${ins}  tbody.appendChild(tr);\n`;
+    c += `${ins}}\n\n`;
+
+    if (!data || !data.type) {
+      c += `${ins}/* (geen inhoud gekozen voor opgave ${lbl}) */\n\n`;
+      return;
+    }
+
+    // ---- SCHRIJFLIJNEN (geen subopgaven) ----
+    if (data.type === 'schrijflijnen') {
+      const slC    = document.getElementById(`sl-container-${lbl}`);
+      const nSl    = slC ? slC.querySelectorAll('.opl-rij').length : 1;
+      for (let s = 0; s < nSl; s++) {
+        const oplVn = veldExpr(`opl-${lbl}-${s}`);
+        c += `${ins}{\n`;
+        c += `${ins}  const tr = document.createElement('tr');\n`;
+        c += `${ins}  const td = maakSlTd(${oplVn}, ${breuk});\n`;
+        if (isVg(`vg-opl-${lbl}-${s}`)) {
+          c += `${ins}  td.querySelector('.opl').classList.add('zichtbaar', 'opl-vast');\n`;
+        }
+        c += `${ins}  td.classList.add('kolom-links');\n`;
+        c += `${ins}  tr.appendChild(td);\n`;
+        c += `${ins}  tbody.appendChild(tr);\n`;
+        c += `${ins}}\n`;
+      }
+      c += '\n';
+
+    // ---- SUBOPGAVEN ----
+    } else if (data.type === 'subopgaven') {
+      const subType   = data.subType;
+      const subAantal = data.subAantal || 2;
+      const subSl     = data.subSl || 3;
+      const subTab    = data.subTab || '2.4cm';
+
+      if (!subType) {
+        c += `${ins}/* (geen subtype gekozen voor opgave ${lbl}) */\n\n`;
+        return;
+      }
+
+      // Bepaal het aantal kolommen voor de binnenste tabel
+      const binnenKol = (subType === 'K2SLT1' || subType === 'K2SLT2') ? 2 : 1;
+      const binnenLijn = binnenKol === 2;
+
+      // Hulptabelstructuur
+      c += `${ins}/* hulptabel voor subopgaven */\n`;
+      c += `${ins}{\n`;
+      c += `${ins}  const trhulp = document.createElement('tr');\n`;
+      c += `${ins}  const tdhulp = document.createElement('td');\n`;
+      c += `${ins}  trhulp.appendChild(tdhulp);\n`;
+      c += `${ins}  tbody.appendChild(trhulp);\n\n`;
+      c += `${ins}  const tabelhulp = document.createElement('table');\n`;
+      c += `${ins}  tabelhulp.style.width = '100%';\n`;
+      c += `${ins}  tabelhulp.style.borderCollapse = 'collapse';\n`;
+      c += `${ins}  const colg = document.createElement('colgroup');\n`;
+      c += `${ins}  const col1 = document.createElement('col'); col1.style.width = '4.19%';\n`;
+      c += `${ins}  const col2 = document.createElement('col'); col2.style.width = '95.81%';\n`;
+      c += `${ins}  colg.appendChild(col1); colg.appendChild(col2);\n`;
+      c += `${ins}  tabelhulp.appendChild(colg);\n`;
+      c += `${ins}  const tbodyhulp = document.createElement('tbody');\n`;
+      c += `${ins}  tabelhulp.appendChild(tbodyhulp);\n`;
+      c += `${ins}  tdhulp.appendChild(tabelhulp);\n\n`;
+      c += `${ins}  const trtabel = document.createElement('tr');\n`;
+      c += `${ins}  const tdleer  = document.createElement('td');\n`;
+      c += `${ins}  trtabel.appendChild(tdleer);\n`;
+      c += `${ins}  const tdtabel = document.createElement('td');\n`;
+      c += `${ins}  const {tbody: tbody2} = maakOefTabel(tdtabel, ${binnenKol}, ${binnenLijn});\n`;
+
+      if (subType === 'K2SLT2') {
+        c += `${ins}  const TW = '${subTab}';\n`;
+      }
+
+      c += '\n';
+
+      // ---- K1SLT1V subopgaven ----
+      if (subType === 'K1SLT1V') {
+        for (let nr = 1; nr <= subAantal; nr++) {
+          const subId = `${lbl}-sub${nr}`;
+          const subOpgVn = veldExpr(`subopg-${subId}`);
+          c += `${ins}  /* subopgave ${nr} */\n`;
+          c += `${ins}  {\n`;
+          c += `${ins}    const trLbl = document.createElement('tr');\n`;
+          c += `${ins}    const tdLbl = maakOpTdaz('${nr}', ${subOpgVn}, ${breuk});\n`;
+          c += `${ins}    tdLbl.querySelector('.rij').style.alignItems = 'flex-start';\n`;
+          c += `${ins}    tdLbl.querySelector('.lbl').style.paddingTop = '0cm';\n`;
+          c += `${ins}    tdLbl.classList.add('kolom-links');\n`;
+          c += `${ins}    trLbl.appendChild(tdLbl);\n`;
+          c += `${ins}    tbody2.appendChild(trLbl);\n`;
+          c += `${ins}  }\n`;
+          // Schrijflijnen
+          const slC  = document.getElementById(`sub-sl-${subId}`);
+          const nSl2 = slC ? slC.querySelectorAll('.opl-rij').length : 1;
+          for (let s = 0; s < nSl2; s++) {
+            const oplVn = veldExpr(`subopl-${subId}-${s}`);
+            c += `${ins}  {\n`;
+            c += `${ins}    const tr = document.createElement('tr');\n`;
+            c += `${ins}    const td = maakSlTd(${oplVn}, ${breuk});\n`;
+            if (isVg(`vg-subopl-${subId}-${s}`)) {
+              c += `${ins}    td.querySelector('.opl').classList.add('zichtbaar', 'opl-vast');\n`;
+            }
+            c += `${ins}    td.classList.add('kolom-links');\n`;
+            c += `${ins}    tr.appendChild(td);\n`;
+            c += `${ins}    tbody2.appendChild(tr);\n`;
+            c += `${ins}  }\n`;
+          }
+          c += '\n';
+        }
+
+      // ---- K2SLT1 subopgaven ----
+      } else if (subType === 'K2SLT1') {
+        for (let nr = 1; nr <= subAantal; nr++) {
+          c += `${ins}  /* subopgave rij ${nr} — labels */\n`;
+          c += `${ins}  {\n`;
+          c += `${ins}    const trL = document.createElement('tr');\n`;
+          ['L','R'].forEach((kant, k) => {
+            const subId    = `${lbl}-sub${nr}${kant}`;
+            const subOpgVn = veldExpr(`subopg-${subId}`);
+            const kolKls   = k === 0 ? 'kolom-links' : 'kolom-rechts';
+            const labelTxt = k === 0 ? `'${nr}'` : `''`;
+            c += `${ins}    const tdLbl${kant} = maakOpTdaz(${labelTxt}, ${subOpgVn}, ${breuk});\n`;
+            c += `${ins}    tdLbl${kant}.querySelector('.rij').style.alignItems = 'flex-start';\n`;
+            c += `${ins}    tdLbl${kant}.querySelector('.lbl').style.paddingTop = '0cm';\n`;
+            c += `${ins}    tdLbl${kant}.classList.add('${kolKls}');\n`;
+            c += `${ins}    trL.appendChild(tdLbl${kant});\n`;
+          });
+          c += `${ins}    tbody2.appendChild(trL);\n`;
+          c += `${ins}  }\n`;
+
+          // Oplossingen via array
+          c += `${ins}  /* subopgave rij ${nr} — oplossingen */\n`;
+          c += `${ins}  {\n`;
+          ['L','R'].forEach(kant => {
+            const subId = `${lbl}-sub${nr}${kant}`;
+            c += `${ins}    const opl${kant}${nr} = [\n`;
+            for (let s = 0; s < subSl; s++) {
+              c += `${ins}      ${veldExpr(`subopl-${subId}-${s}`)}${s < subSl-1 ? ',' : ''}\n`;
+            }
+            c += `${ins}    ];\n`;
+          });
+          c += `${ins}    for (let i=0; i<${subSl}; i++) {\n`;
+          c += `${ins}      const tr = document.createElement('tr');\n`;
+          ['L','R'].forEach((kant, k) => {
+            const subId  = `${lbl}-sub${nr}${kant}`;
+            const kolKls = k === 0 ? 'kolom-links' : 'kolom-rechts';
+            c += `${ins}      const td${kant} = maakSlTd(opl${kant}${nr}[i], ${breuk});\n`;
+            for (let s = 0; s < subSl; s++) {
+              if (isVg(`vg-subopl-${subId}-${s}`)) {
+                c += `${ins}      if (i===${s}) td${kant}.querySelector('.opl').classList.add('zichtbaar', 'opl-vast');\n`;
+              }
+            }
+            c += `${ins}      td${kant}.classList.add('${kolKls}');\n`;
+            c += `${ins}      tr.appendChild(td${kant});\n`;
+          });
+          c += `${ins}      tbody2.appendChild(tr);\n`;
+          c += `${ins}    }\n`;
+          c += `${ins}  }\n\n`;
+        }
+
+      // ---- K2SLT2 subopgaven ----
+      } else if (subType === 'K2SLT2') {
+        for (let nr = 1; nr <= subAantal; nr++) {
+          c += `${ins}  /* subopgave ${nr} */\n`;
+          c += `${ins}  {\n`;
+          c += `${ins}    const tr = document.createElement('tr');\n`;
+          ['L','R'].forEach((kant, k) => {
+            const subId    = `${lbl}-sub${nr}${kant}`;
+            const subOpgVn = veldExpr(`subopg-${subId}`);
+            const oplVn    = veldExpr(`subopl-${subId}-0`);
+            const kolKls   = k === 0 ? 'kolom-links' : 'kolom-rechts';
+            const labelTxt = k === 0 ? `'${nr}|'` : `''`;
+            c += `${ins}    const td${kant} = maakOpTd(${labelTxt}, ${subOpgVn}, TW, ${breuk}, ${oplVn});\n`;
+            if (isVg(`vg-subopl-${subId}-0`)) {
+              c += `${ins}    td${kant}.querySelector('.opl').classList.add('zichtbaar', 'opl-vast');\n`;
+            }
+            c += `${ins}    td${kant}.classList.add('${kolKls}');\n`;
+            c += `${ins}    tr.appendChild(td${kant});\n`;
+          });
+          c += `${ins}    tbody2.appendChild(tr);\n`;
+          c += `${ins}  }\n\n`;
+        }
+      }
+
+      // Sluit hulptabel
+      c += `${ins}  trtabel.appendChild(tdtabel);\n`;
+      c += `${ins}  tbodyhulp.appendChild(trtabel);\n`;
+      c += `${ins}}\n\n`;
+    }
+  });
+
+  c += `})();\n`;
+
+  document.getElementById('output-code').textContent = c;
+  document.getElementById('output-kaart').classList.add('zichtbaar');
+  updateStappen(4);
+  document.getElementById('output-kaart').scrollIntoView({behavior:'smooth'});
+  toonMelding('Code gegenereerd!', 'ok');
+}
+
+// ============================================================
+// HULPFUNCTIES
+// ============================================================
+function kopieerCode() {
+  navigator.clipboard.writeText(document.getElementById('output-code').textContent)
+    .then(() => toonMelding('Gekopieerd naar klembord!', 'ok'))
+    .catch(() => toonMelding('Kopiëren mislukt — selecteer handmatig.', 'fout'));
+}
+function resetAlles() {
+  if (!confirm('Ben je zeker dat je alles wil wissen?')) return;
+  location.reload();
+}
+function toonMelding(tekst, type) {
+  const el = document.getElementById('melding');
+  el.textContent = tekst;
+  el.className = 'melding' + (type ? ' '+type : '');
+}
+function updateStappen(actief) {
+  for (let i=1; i<=4; i++) {
+    const el = document.getElementById(`stap${i}`);
+    el.classList.remove('actief','gedaan');
+    if (i < actief) el.classList.add('gedaan');
+    else if (i === actief) el.classList.add('actief');
+  }
+}
+
+// Parameters sectie direct zichtbaar (er is maar 1 sjabloon)
+document.getElementById('param-sectie').classList.add('zichtbaar');
+updateStappen(2);
+</script>
+</body>
+</html>
