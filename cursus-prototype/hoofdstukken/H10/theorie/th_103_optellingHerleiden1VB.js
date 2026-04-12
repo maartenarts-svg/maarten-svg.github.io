@@ -67,7 +67,7 @@
     const th_101_B = document.createElement('span');
     th_101_B.appendChild(maakOnderstreping(htmlSpan('10<i>xy</i>'), 'enkel', '0.1cm', false));
     th_101_B.appendChild(htmlSpan(' '));
-    th_101_B.appendChild(maakOnderstreping(htmlSpan('- <span class="voorgedrukt">1</span><i>xy</i>'), 'enkel', '0.1cm', false));
+    th_101_B.appendChild(maakOnderstreping(htmlSpan('- <span class="voorgedrukt">1</span><i>xy</i>'), 'enkel', '0.08cm', false));
     th_101_B.appendChild(htmlSpan(' '));
     th_101_B.appendChild(maakOnderstreping(htmlSpan('- 13<i>xy</i>'), 'enkel', '0.1cm', false));
 

@@ -93,7 +93,11 @@
       SpL.style.flex = "0 0 10%";
       SpL.style.display = 'flex';
       SpL.style.alignItems = 'top';
-      const SpR = htmlSpan('Zet negatieve getallen en breuken tussen haakjes.');
+      const SpR = document.createElement('span');
+      voegLijstToe(SpR, 'bullet','0cm','0.3cm',[
+        'Zet negatieve getallen en breuken tussen haakjes.',
+        'Respecteer de volgorde van de bewerkingen.',
+      ]);
       SpR.style.flex = "1";
       SpR.style.minWidth = '0';
       SpR.classList.add('theorietekst');

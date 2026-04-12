@@ -153,7 +153,12 @@
       SpL.style.flex = "0 0 15%";
       SpL.style.display = 'flex';
       SpL.style.alignItems = 'top';
-      const SpR = htmlSpan('Alle eigenschappen gelden ook voor de natuurlijke en de gehele getallen, behalve de eigenschap van het symmetrisch element.<br>Deze eigenschap geldt niet voor de natuurlijke getallen.');
+      const SpR = document.createElement('span');
+      voegLijstToe(SpR, 'bullet','0cm','0.3cm',[
+        'Alle eigenschappen gelden ook voor de natuurlijke en de gehele getallen, behalve de eigenschap van het symmetrisch element.<br>Deze eigenschap geldt niet voor de natuurlijke getallen.',
+        '∀ <i>a</i> ∈ ℚ betekent: voor elk rationaal getal (voorgesteld door) <i>a</i>.<br>∀ <i>a</i> ∈ ℤ betekent: voor elk geheel getal (voorgesteld door) <i>a</i>.',
+      ]);
+      //htmlSpan();
       SpR.style.flex = "1";
       SpR.style.minWidth = '0';
       SpR.classList.add('theorietekst');

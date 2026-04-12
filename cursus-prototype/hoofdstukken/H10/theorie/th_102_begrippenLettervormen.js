@@ -67,8 +67,8 @@
 
       voegLijstToe2(div01, 'streep','0.4cm','0.3cm',
         [
-          '‘Het getal kun je berekenen door het vijf bij het nummer van het getal op te tellen’ kun je schrijven als <i>g</i> = <i>n</i> + 5. Hierbij stelt <i>g</i> het getal voor en <i>n</i> het nummer van dat getal.',
-          '‘De lengte van een brandende kaars kun je berekenen door 20 te verminderen met 4 keer de tijd die de kaars gebrand heeft’ kun je schrijven als <i>l</i> = 20 - 4<i>t</i>.Hierbij is <i>l</i> de lengte van de kaars en <i>t</i> de tijd die ze gebrand heeft.',
+          '‘Het getal kun je berekenen door vijf bij het nummer van het getal op te tellen’ kun je schrijven als <i>g</i> = <i>n</i> + 5. Hierbij stelt <i>g</i> het getal voor en <i>n</i> het nummer van dat getal.',
+          '‘De lengte van een brandende kaars kun je berekenen door 20 te verminderen met 4 keer de tijd die de kaars gebrand heeft’ kun je schrijven als <i>l</i> = 20 - 4<i>t</i>. Hierbij is <i>l</i> de lengte van de kaars en <i>t</i> de tijd die ze gebrand heeft.',
           'De commutatieve eigenschap van de optelling kun je noteren als <i>a</i> + <i>b</i> = <i>b</i> + <i>a</i>.',
         ],'1.2','0.05cm');
       voegWitruimteToe(tdInhoud,'0.3cm');
@@ -180,7 +180,7 @@
       th_102_begrC.appendChild(th_102_begrC_m1);
       th_102_begrC.appendChild(htmlSpan(' '));
       th_102_begrC.appendChild(htmlSpan('de '));
-      const th_102_begrC2 = htmlSpan('coëfficënt');
+      const th_102_begrC2 = htmlSpan('coëfficiënt');
       th_102_begrC2.classList.add('theorie');
       th_102_begrC.appendChild(th_102_begrC2);
       th_102_begrC.appendChild(htmlSpan(';'));
