@@ -1,0 +1,495 @@
+/* ============================================================
+   css/taak.css  —  stijlen voor weektaken wiskunde
+   Aansluitend bij cursus.css palet
+   ============================================================ */
+
+/* ── Variabelen ──────────────────────────────────────────────── */
+:root {
+  --groen-donker:     #4a7c59;
+  --groen-midden:     #6aab7e;
+  --groen-pastel:     #c8e6c9;
+  --groen-scheiding:  #a5d6a7;
+  --wit:              #ffffff;
+  --tekst:            #1a1a1a;
+  --tekst-zacht:      #555555;
+  --blauw-oplossing:  #1a4fa0;
+  --oranje-rand:      #e65100;
+  --oranje-pastel:    #ffe0b2;
+  --lila-rand:        #7b1fa2;
+  --lila-tekst:       #d500f9;
+  --lila-pastel:      #f3e5f5;
+  --font:             Arial, Helvetica, sans-serif;
+  --font-oplossing:   'Comic Sans MS', 'Comic Sans', cursive;
+  --fontsize:         10pt;
+  --marge-links:      3cm;
+  --marge-rechts:     2.5cm;
+  --marge-top:        2.5cm;
+  --marge-bottom:     2.5cm;
+  --badge-grootte:    0.75cm;
+  --insprong-stap:    0.65cm;
+  --rij-hoogte:       0.9cm;
+  --rij-hoogte-breuk: 1.2cm;
+  --sl-kleur:         #b0b0b0;
+  --radius:           8px;
+  --radius-groot:     14px;
+  --schaduw:          0 2px 10px rgba(0,0,0,0.10);
+  --schaduw-groot:    0 4px 20px rgba(0,0,0,0.13);
+}
+
+.markeer-lila {
+  color: #d500f9;
+  font-weight: bold;
+}
+.markeer-oranje {
+  color: #f97c00;
+}
+
+/* ── Reset ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  color: var(--tekst);
+  background: #f0f0f0;
+  min-height: 100vh;
+}
+
+.verborgen { display: none !important; }
+
+/* ── Pagina (A4-stijl, zoals cursus.css) ─────────────────────── */
+.pagina {
+  width: 21cm;
+  min-height: 29.7cm;
+  margin: 1cm auto;
+  padding: var(--marge-top) var(--marge-rechts) var(--marge-bottom) var(--marge-links);
+  background: var(--wit);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ── Login ───────────────────────────────────────────────────── */
+.login-pagina {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e8f5e9 0%, #f0f4f0 60%, #e3f2fd 100%);
+}
+
+.login-kaart {
+  background: var(--wit);
+  border-radius: var(--radius-groot);
+  box-shadow: var(--schaduw-groot);
+  padding: 2.5rem 2.2rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.login-logo {
+  width: 56px; height: 56px;
+  background: var(--groen-donker);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.4rem;
+}
+.login-logo-letter { color: var(--wit); font-size: 1.8rem; font-weight: bold; }
+.login-titel       { font-size: 1.5rem; font-weight: 700; color: var(--groen-donker); }
+.login-subtitel    { font-size: 0.85rem; color: var(--tekst-zacht); margin-bottom: 0.8rem; text-align: center; }
+.login-fout        { font-size: 0.85rem; color: #c62828; min-height: 1.2em; text-align: center; width: 100%; }
+
+.login-kaart form  { width: 100%; display: flex; flex-direction: column; gap: 0.8rem; }
+.veld-groep        { display: flex; flex-direction: column; gap: 0.3rem; }
+.veld-label        { font-size: 0.85rem; font-weight: 600; color: var(--groen-donker); }
+.veld-invoer {
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid var(--groen-scheiding);
+  border-radius: var(--radius);
+  font-size: var(--fontsize); font-family: var(--font);
+  color: var(--tekst); background: #fafafa; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.veld-invoer:focus {
+  border-color: var(--groen-donker);
+  box-shadow: 0 0 0 3px rgba(74,124,89,0.15);
+  background: var(--wit);
+}
+
+/* ── Knoppen ─────────────────────────────────────────────────── */
+.knop-primair {
+  padding: 0.65rem 1.4rem;
+  background: var(--groen-donker); color: var(--wit);
+  border: none; border-radius: var(--radius);
+  font-size: var(--fontsize); font-family: var(--font); font-weight: 600;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+}
+.knop-primair:hover    { background: var(--groen-midden); }
+.knop-primair:active   { transform: scale(0.98); }
+.knop-primair:disabled { background: #aaa; cursor: not-allowed; }
+.knop-breed            { width: 100%; }
+
+.knop-secundair {
+  padding: 0.5rem 1.1rem;
+  background: var(--wit); color: var(--groen-donker);
+  border: 1.5px solid var(--groen-scheiding);
+  border-radius: var(--radius);
+  font-size: var(--fontsize); font-family: var(--font); font-weight: 600;
+  cursor: pointer; transition: background 0.2s, border-color 0.2s;
+}
+.knop-secundair:hover { background: var(--groen-pastel); border-color: var(--groen-donker); }
+.knop-secundair:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Navigatiebalk onderaan ──────────────────────────────────── */
+.nav-balk {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--wit);
+  border-top: 2px solid var(--groen-scheiding);
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+}
+.nav-balk-midden {
+  font-size: 0.85rem;
+  color: var(--tekst-zacht);
+}
+
+/* ── Stap-indicator bovenaan ─────────────────────────────────── */
+.stap-balk {
+  position: sticky;
+  top: 0;
+  background: var(--groen-donker);
+  color: var(--wit);
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  font-size: 0.85rem;
+}
+.stap-balk-naam  { font-weight: 700; font-size: 1rem; }
+.stap-balk-info  { opacity: 0.85; }
+
+/* ── Welkomstpagina ──────────────────────────────────────────── */
+.welkom-pagina {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 4rem);
+  text-align: center;
+  padding: 2rem;
+}
+.welkom-code {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--groen-donker);
+  line-height: 1.1;
+}
+.welkom-naam {
+  font-size: 1.2rem;
+  color: var(--tekst-zacht);
+  margin: 0.4rem 0 1.5rem;
+}
+.welkom-start {
+  padding: 0.8rem 2.5rem;
+  font-size: 1.1rem;
+  background: var(--groen-donker); color: var(--wit);
+  border: none; border-radius: var(--radius);
+  font-family: var(--font); font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+  box-shadow: var(--schaduw);
+}
+.welkom-start:hover  { background: var(--groen-midden); }
+.welkom-start:active { transform: scale(0.98); }
+
+/* ── Banner (zoals dashboard) ────────────────────────────────── */
+.banner {
+  display: flex;
+  align-items: stretch;
+  margin: 0.3cm 0;
+  position: relative;
+  left: calc(-1 * var(--marge-links) + 1.2cm);
+  width: calc(21cm - 3.7cm);
+}
+.banner-icoon {
+  background-color: var(--groen-pastel);
+  display: flex; align-items: center; justify-content: center;
+  width: calc(var(--marge-links) - 1.5cm);
+  flex-shrink: 0;
+  font-size: 1.1em; padding: 0.2cm 0;
+}
+.banner-tekst {
+  background-color: var(--groen-pastel);
+  flex: 1;
+  display: flex; align-items: center;
+  padding: 0.15cm 0.3cm;
+  font-size: 14pt; font-weight: bold;
+  color: var(--groen-donker);
+  font-family: var(--font);
+}
+
+/* ── Criteria-tabel (voorkennis + succescriteria) ────────────── */
+.criteria-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.2cm 0 0.4cm;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+}
+.criteria-tabel tr {
+  border-bottom: 1px solid var(--groen-scheiding);
+  min-height: var(--rij-hoogte);
+}
+.criteria-tabel tr:last-child { border-bottom: none; }
+.criteria-tekst-cel {
+  padding: 0.15cm 0.2cm;
+  vertical-align: middle;
+}
+.criteria-check-cel {
+  padding: 0.15cm 0.2cm;
+  text-align: center;
+  vertical-align: middle;
+}
+.criteria-checkbox {
+  width: 16px; height: 16px;
+  cursor: pointer;
+  accent-color: var(--groen-donker);
+}
+.criteria-checkbox:disabled { cursor: default; opacity: 0.5; }
+
+/* ── Instructies ─────────────────────────────────────────────── */
+.instructie-rij {
+  height: auto;
+  min-height: var(--rij-hoogte);
+  padding: 0.1cm 0;
+  align-items: flex-start;
+}
+.instructie-sub {
+  padding-left: 1cm;
+}
+.instructie-sub .lbl {
+  width: 1cm;
+}
+
+/* ── Benodigdheden ───────────────────────────────────────────── */
+.benodigd-rij {
+  height: auto;
+  min-height: var(--rij-hoogte);
+  padding: 0.1cm 0;
+  align-items: flex-start;
+}
+
+/* ── Oefening (zoals cursus.css) ─────────────────────────────── */
+.oefening {
+  position: relative;
+  padding-bottom: 0.4cm;
+  display: flex;
+}
+.oefening + .oefening {
+  border-top: 2px solid var(--groen-scheiding);
+  padding-top: 0.4cm;
+  margin-top: 0.2cm;
+}
+.oefening-marge {
+  position: relative;
+  width: calc(var(--marge-links) - 0.5cm);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: calc(-1 * var(--marge-links) + 1cm);
+  padding-right: 0.3cm;
+}
+.oefening-inhoud {
+  flex: 1;
+  min-width: 0;
+}
+.badge {
+  width: var(--badge-grootte);
+  height: var(--badge-grootte);
+  background-color: var(--groen-pastel);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font);
+  font-size: var(--fontsize);
+  font-weight: bold;
+  color: var(--groen-donker);
+  user-select: none;
+  flex-shrink: 0;
+}
+.vierkant-badge { border-radius: 3px; }
+
+/* ── Rijen en schrijflijnen (zoals cursus.css) ───────────────── */
+.rij {
+  display: flex;
+  align-items: center;
+  height: var(--rij-hoogte);
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+}
+.rij.breuk { height: var(--rij-hoogte-breuk); }
+
+.lbl {
+  font-weight: bold;
+  color: var(--groen-donker);
+  flex-shrink: 0;
+  width: 0.65cm;
+  display: inline-block;
+}
+.txt {
+  flex-shrink: 1;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.is  { flex-shrink: 0; padding: 0 0.15cm; }
+.tab { flex-shrink: 0; width: var(--insprong-stap); }
+
+.sl {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--sl-kleur);
+  letter-spacing: -0.08em;
+  font-size: var(--fontsize);
+  font-family: var(--font);
+  line-height: 1;
+  user-select: none;
+}
+
+.intro-tekst { margin: 0 0 0cm 0; padding: 0; }
+
+/* ── Oef-tabel ───────────────────────────────────────────────── */
+.oef-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.oef-tabel td { padding: 0; border: none; vertical-align: middle; }
+.oef-tabel.met-lijn .kolom-links  { border-right: 1.2px solid var(--groen-donker); padding-right: 0.2cm; }
+.oef-tabel.met-lijn .kolom-midden { border-right: 1.2px solid var(--groen-donker); padding-right: 0.2cm; padding-left: 0.2cm; }
+.oef-tabel.met-lijn .kolom-rechts { padding-left: 0.2cm; }
+
+/* ── Eindpagina ──────────────────────────────────────────────── */
+.eind-pagina {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 8rem);
+  text-align: center;
+  padding: 2rem;
+}
+.eind-titel {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--groen-donker);
+  margin-bottom: 1rem;
+}
+.eind-info {
+  font-size: 1rem;
+  color: var(--tekst-zacht);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.eind-info strong { color: #c62828; }
+
+/* ── Verbeterd-modus banner ──────────────────────────────────── */
+.verbeterd-banner {
+  background: #fff8e1;
+  border-bottom: 2px solid #f9a825;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  color: #5d4037;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ── Beheerder-stijlen ───────────────────────────────────────── */
+.tabs-balk {
+  display: flex; gap: 0.3rem;
+  padding: 0.7rem 1.5rem 0;
+  background: var(--wit);
+  border-bottom: 2px solid var(--groen-scheiding);
+}
+.tab-knop {
+  padding: 0.55rem 1.1rem;
+  border: none; border-bottom: 3px solid transparent;
+  background: transparent;
+  font-size: 0.9rem; font-family: var(--font); font-weight: 600;
+  color: var(--tekst-zacht); cursor: pointer;
+  border-radius: var(--radius) var(--radius) 0 0;
+  transition: color 0.2s;
+}
+.tab-knop:hover  { color: var(--groen-donker); background: var(--groen-pastel); }
+.tab-knop.actief { color: var(--groen-donker); border-bottom-color: var(--groen-donker); }
+
+.tab-inhoud  { padding: 1.2rem 1.5rem; }
+.tab-paneel  { display: none; }
+.tab-paneel.actief { display: block; }
+
+.formulier-kaart {
+  background: var(--wit);
+  border: 1.5px solid var(--groen-scheiding);
+  border-radius: var(--radius);
+  padding: 1.2rem; margin-top: 1rem; max-width: 640px;
+}
+
+.beheer-tabel { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.beheer-tabel th {
+  background: var(--groen-pastel); color: var(--groen-donker);
+  padding: 0.4rem 0.6rem; text-align: left; font-weight: 700;
+}
+.beheer-tabel td { padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--groen-scheiding); }
+.beheer-tabel tr:last-child td { border-bottom: none; }
+
+.sectie-leeg { font-size: 0.82rem; color: var(--tekst-zacht); font-style: italic; }
+
+/* ── Score-aanpassing ────────────────────────────────────────── */
+.score-invoer {
+  width: 60px;
+  padding: 0.2rem 0.4rem;
+  border: 1.5px solid var(--groen-scheiding);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: var(--font);
+  text-align: center;
+}
+
+/* ── Volgorde-knoppen (oefeningen beheer) ────────────────────── */
+.volgorde-knop {
+  background: none;
+  border: 1px solid var(--groen-scheiding);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.85rem;
+  color: var(--groen-donker);
+  transition: background 0.15s;
+}
+.volgorde-knop:hover { background: var(--groen-pastel); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 800px) {
+  .pagina {
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+  .banner {
+    left: -1rem;
+    width: calc(100% + 2rem);
+  }
+}
