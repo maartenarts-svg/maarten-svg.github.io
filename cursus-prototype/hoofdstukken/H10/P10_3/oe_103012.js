@@ -57,10 +57,10 @@
     td.style.textAlign = 'center';
 
     if (i === 4) {
-      const span = htmlSpan('som coëfficiënten');
+      const span = htmlSpan('getallen vermenigvuldigen');
       td.appendChild(span);
     } else if (i === 7) {
-      const span = htmlSpan('letterdeel');
+      const span = htmlSpan('letters alfabetisch');
       td.appendChild(span);
     }
 
@@ -76,7 +76,7 @@
   oe10301201.appendChild(oe10301201_s1);
 
   const rijen = [
-    [ htmlSpan('a|'), htmlSpan('5<i>a</i> · 8<i>b</i>'), htmlSpan('5 · 8'), htmlSpan('<i>a</i> · <i>b</i>'), htmlSpan('40<i>a</i>') ],
+    [ htmlSpan('a|'), htmlSpan('5<i>a</i> · 8<i>b</i>'), htmlSpan('5 · 8'), htmlSpan('<i>a</i> · <i>b</i>'), htmlSpan('40<i>ab</i>') ],
     [ htmlSpan('b|'), htmlSpan('-5<i>p</i> · (-3)'), htmlSpan('-5 · (-3)'), htmlSpan('<i>p</i>'), htmlSpan('15<i>p</i>') ],
     [ htmlSpan('c|'), htmlSpan('-4 · 6<i>x</i>'), htmlSpan('-4 · 6'), htmlSpan('<i>x</i>'), htmlSpan('-24<i>x</i>') ],
     [ htmlSpan('d|'), oe10301201, htmlSpan('-1 · 2'), htmlSpan('<i>y</i> · <i>z</i>'), htmlSpan('-2<i>yz</i>') ],

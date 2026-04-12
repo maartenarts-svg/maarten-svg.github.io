@@ -763,7 +763,7 @@ function maakSamengesteldeTd2(subblokken=[], breuk=false) {
       oplDiv.style.width = 'auto';
       oplDiv.style.textAlign = 'center';
       oplDiv.style.fontFamily = 'Comic Sans MS';
-      oplDiv.style.color = '#d500f9';
+      //oplDiv.style.color = '#d500f9';
       oplDiv.appendChild(verwerkInhoud(inhoud));
       subEl.appendChild(oplDiv);
     } 

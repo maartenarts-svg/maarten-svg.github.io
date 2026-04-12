@@ -985,7 +985,7 @@ RRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH/9k="></image>
   <path d="M -102.21 -620.02 L -102.21 913.32 L 2891.1 913.32 L 2891.1 -620.02 z"/>
 </clipPath>
 <g clip-path="url(#clip5)">
-<text font-weight="normal" font-size="100.00" font-family="arial, sans-serif" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">+</text>
+<text font-weight="normal" font-size="100.00" font-family="arial, sans-serif" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">-</text>
 </g> <!-- clip5 -->
 </g> <!-- transform -->
 <g transform="matrix(.15000, 0.0000, 0.0000, .15000, 21.991, 93.003)">

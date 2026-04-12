@@ -12,7 +12,7 @@
 
   const inhoud = maakOefening({
     id:'oe_102K04', nummer:'?', soort:'inoefenen',
-    niveaus:['vierkant','zeshoek'], tools:[],
+    niveaus:['vierkant','zeshoek'], tools:['rekenmachine'],
     toggleModus:'oefening'
   });
   inhoud.style.position = 'relative';

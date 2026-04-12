@@ -61,7 +61,7 @@
   oe_104014_9.appendChild(htmlSpan('= -12<i>z</i> + 2'));
 
   const oe_104014_10 = document.createElement('span');
-  oe_104014_10.appendChild(htmlSpan('15 - 10(<i>s</i> + 3) + 24'));
+  oe_104014_10.appendChild(htmlSpan('15<i>s</i> - 10(<i>s</i> + 3) + 24'));
 
   const oe_104014_11 = document.createElement('span');
   oe_104014_11.appendChild(htmlSpan('='));
@@ -329,7 +329,7 @@
 
   //opgave d
   maak2Parabolen(tdLblD, {
-    sx: 1.6,           // ← x-coördinaat startpunt links in cm
+    sx: 1.8,           // ← x-coördinaat startpunt links in cm
     sy: 0.3,            // ← y-coördinaat startpunt links in cm
     br1: 0.95,           // ← afstand tussen eindpunten grote parabool in cm
     br2: 0.3,           // ← afstand tussen eindpunten kleine parabool in cm

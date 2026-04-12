@@ -132,7 +132,7 @@ const tabelInhoud = [
 const tabel = maakZichtbareTabel(inhoud, 5, 2, {
   hoofding: 'boven', // 'links' | 'boven'
   matrix: tabelInhoud,
-  rijHoogtes: ['0.9cm', '1.5cm', '1.5cm', '1.5cm', '1.5cm'],
+  rijHoogtes: ['0.9cm', '2.2cm', '2.2cm', '2.2cm', '2.2cm'],
   kolomBreedtes: ['40%','60%']
 });
 

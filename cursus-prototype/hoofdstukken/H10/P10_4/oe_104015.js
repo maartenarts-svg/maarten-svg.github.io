@@ -29,7 +29,7 @@
   {
     const _p = document.createElement('p');
     _p.classList.add('intro-tekst');
-    _p.innerHTML = 'Noteer de oppervlakte van elke rechthoek zo kort mogelijk.';
+    _p.innerHTML = 'Noteer de oppervlakte <i>A</i> van elke rechthoek zo kort mogelijk.';
     inhoud.appendChild(_p);
   }
 

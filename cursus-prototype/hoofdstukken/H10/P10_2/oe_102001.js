@@ -45,6 +45,7 @@
   }
 
   const {tbody} = maakOefTabel(inhoud, 1, false);
+  voegWitruimteToe(tbody);
 
   /* Opgave a */
   {

@@ -64,7 +64,7 @@
   {
     const _p = document.createElement('p');
     _p.classList.add('intro-tekst');
-    { const _v='Noteer een formule voor de oppervlakte van het grijze gebied.'; if(typeof _v==='string') _p.innerHTML=_v; else _p.appendChild(_v); }
+    { const _v='Noteer een formule voor de oppervlakte <i>A</i> van het grijze gebied.'; if(typeof _v==='string') _p.innerHTML=_v; else _p.appendChild(_v); }
     inhoud.appendChild(_p);
   }
 

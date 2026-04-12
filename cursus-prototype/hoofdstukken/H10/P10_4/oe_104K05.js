@@ -72,42 +72,42 @@
         ],
         [
           { inhoud: 'Neem het nummer van de maand.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '10', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '10', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: 'eigen antwoord', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
         [
           { inhoud: 'Vermenigvuldig met 4.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '4 · 10 = 40', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '4 · 10 = 40', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: '', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
         [
           { inhoud: 'Tel hier 2 bij op.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '40 + 2 = 42', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '40 + 2 = 42', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: '', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
         [
           { inhoud: 'Vermenigvuldig dit resultaat met 5.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '42 · 5 = 210', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '42 · 5 = 210', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: '', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
         [
           { inhoud: 'Trek van deze uitkomst 9 af.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '210 - 9 = 201', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '210 - 9 = 201', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: '', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
         [
           { inhoud: 'Vermenigvuldig nogmaals met 5.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '201 · 5 = 1 005', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '201 · 5 = 1 005', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: '', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
         [
           { inhoud: 'Tel je geboortedag erbij op.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '1 005 + 17 = 1 022', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '1 005 + 17 = 1 022', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: '', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
         [
           { inhoud: 'Trek er tot slot nog 5 van af.', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-          { inhoud: '1 022 - 5 = 1 017', type: 'oplossing', hAlign: 'center', vAlign: 'middle' },
+          { inhoud: '1 022 - 5 = 1 017', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
           { inhoud: '', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
         ],
       ];

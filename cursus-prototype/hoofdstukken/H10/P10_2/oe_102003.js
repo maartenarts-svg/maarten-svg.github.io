@@ -101,7 +101,7 @@
       const p0=document.createElement('span'); p0.innerHTML='2 · '; s.appendChild(p0);
       const p1=maakBreuk('1','3','oplossing'); p1.style.color='#d500f9'; s.appendChild(p1);
       const p2=document.createElement('span'); p2.innerHTML=' · '; s.appendChild(p2);
-      const p3=maakBreuk('2','3','oplossing'); p3.style.color='#d500f9'; s.appendChild(p3);
+      const p3=maakBreuk('2','3','oplossing'); p3.style.color='#f97c00'; s.appendChild(p3);
       const p4=document.createElement('span'); p4.innerHTML=' + 3'; s.appendChild(p4);
       return s;})(),
   (function(){
@@ -128,7 +128,7 @@
       s.style.fontFamily='var(--font-oplossing)';
       s.style.color='var(--blauw-oplossing)';
       s.appendChild(maakBreuk('-3','4','oplossing'));
-      const p1=document.createElement('span'); p1.innerHTML=' · <span class="markeer-lila">4</span>\u200A · <span class="markeer-lila">(-1)</span>\u200A + 8'; s.appendChild(p1);
+      const p1=document.createElement('span'); p1.innerHTML=' · <span class="markeer-lila">4</span>\u200A · <span class="markeer-oranje">(-1)</span>\u200A + 8'; s.appendChild(p1);
       return s;})(),
   (function(){
       const s=document.createElement('span');

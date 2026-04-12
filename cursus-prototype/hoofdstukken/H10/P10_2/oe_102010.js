@@ -26,10 +26,10 @@
 
   /* Rij 1: labels */
   const trL1 = document.createElement('tr');
-  const tdLblA = maakOpTdazExtra('a', '4<i>n</i> - 3<i>q</i>', 'voor <i>n</i> = 7 en <i>q</i> = -5', BREEDTE, false);
+  const tdLblA = maakOpTdazExtra('a', '4<i>n</i> - 3<i>q</i>', 'voor <i>n</i> = <span class="markeer-lila">7</span> en <i>q</i> = <span class="markeer-oranje">-5</span>', BREEDTE, false);
   tdLblA.classList.add('kolom-links');
   trL1.appendChild(tdLblA);
-  const tdLblC = maakOpTdazExtra('c', '-4<i>a</i><sup>2</sup> + 3<i>a</i> + 1', 'voor <i>a</i> = -3', BREEDTE, false);
+  const tdLblC = maakOpTdazExtra('c', '-4<i>a</i><sup>2</sup> + 3<i>a</i> + 1', 'voor <i>a</i> = <span class="markeer-lila">-3</span>', BREEDTE, false);
   tdLblC.classList.add('kolom-rechts');
   trL1.appendChild(tdLblC);
   tbody.appendChild(trL1);
@@ -37,16 +37,16 @@
   /* Rij 1: invullen */
   const subblokkenA = [
     ['vast','4 · ','berekenen',false],
-    ['SL','<font: comic sans>7</font>','1cm',false],
+    ['SL','<font ="comic sans" color="#d500f9">7</font>','1cm',false],
     ['vast',' - 3 · (','berekenen',false],
-    ['SL','-5','1cm',false],
+    ['SL','<font ="comic sans" color="#f97c00">-5</font>','1cm',false],
     ['vast',')','berekenen',false],
   ];
   const subblokkenC = [
     ['vast','-4 · (','berekenen',false],
-    ['SL','-3','1cm',true],
+    ['SL','<font ="comic sans" color="#d500f9">-3</font>','1cm',true],
     ['vast',')<sup>2</sup> + 3 · (','berekenen',false],
-    ['SL','-3','1cm',true],
+    ['SL','<font ="comic sans" color="#d500f9">-3</font>','1cm',true],
     ['vast',') + 1','berekenen',false],
   ];
   const tr1 = document.createElement('tr');
@@ -87,10 +87,10 @@
 
   /* Rij 2: labels */
   const trL2 = document.createElement('tr');
-  const tdLblB = maakOpTdazExtra('b', '7<i>x</i> - 3<i>y</i>', 'voor <i>x</i> = 5 en <i>y</i> = -6', BREEDTE, false);
+  const tdLblB = maakOpTdazExtra('b', '7<i>x</i> - 3<i>y</i>', 'voor <i>x</i> = <span class="markeer-lila">5</span> en <i>y</i> = <span class="markeer-oranje">-6</span>', BREEDTE, false);
   tdLblB.classList.add('kolom-links');
   trL2.appendChild(tdLblB);
-  const tdLblD = maakOpTdazExtra('d', '-<i>a</i> + 3<i>b</i> + 2', 'voor <i>a</i> = -2 en <i>b</i> = 0', BREEDTE, false);
+  const tdLblD = maakOpTdazExtra('d', '-<i>a</i> + 3<i>b</i> + 2', 'voor <i>a</i> = <span class="markeer-lila">-2</span> en <i>b</i> = <span class="markeer-oranje">0</span>', BREEDTE, false);
   tdLblD.classList.add('kolom-rechts');
   trL2.appendChild(tdLblD);
   tbody.appendChild(trL2);
@@ -98,16 +98,16 @@
   /* Rij 2: invullen */
   const subblokkenB = [
     ['vast','7 · ','berekenen',false],
-    ['SL','5','1cm',true],
+    ['SL','<font ="comic sans" color="#d500f9">5</font>','1cm',true],
     ['vast',' - 3 · (','berekenen',false],
-    ['SL','-6','1cm',true],
+    ['SL','<font ="comic sans" color="#f97c00">-6</font>','1cm',true],
     ['vast',')','berekenen',false],
   ];
     const subblokkenD = [
     ['vast','-(','berekenen',false],
-    ['SL','-2','1cm',true],
+    ['SL','<font ="comic sans" color="#d500f9">-2</font>','1cm',true],
     ['vast',') + 3 · ','berekenen',false],
-    ['SL','0','1cm',true],
+    ['SL','<font ="comic sans" color="#f97c00">0</font>','1cm',true],
     ['vast',' + 2','berekenen',false],
   ];
   const tr2 = document.createElement('tr');

@@ -45,15 +45,12 @@
   }
 
   const {tbody} = maakOefTabel(inhoud, 1, false);
+  voegWitruimteToe(tbody,'0.1cm');
 
   /* Opgave a */
   {
     const _trLbl = document.createElement('tr');
     const _tdLbl = maakOpTdaz('a', 'Bestudeer het voorbeeld.', false);
-    /* zet bovenaan */
-    _tdLbl.querySelector('.rij').style.alignItems = 'flex-start';
-    /* geef extra ruimte boven */
-    _tdLbl.querySelector('.lbl').style.paddingTop = '0cm';
     _tdLbl.classList.add('kolom-links');
     _trLbl.appendChild(_tdLbl); tbody.appendChild(_trLbl);
     _tdLbl.querySelector('.rij').style.height = '0.5cm';  // ← HIER AANPASSEN

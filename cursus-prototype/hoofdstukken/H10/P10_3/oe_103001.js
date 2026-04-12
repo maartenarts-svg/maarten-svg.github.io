@@ -99,7 +99,7 @@
   /* Opgave b */
   {
     const _trLbl = document.createElement('tr');
-    const _tdLbl = maakOpTdaz('a', 'Vul de tabel in voor weiland 1 en 2.<br>Op de eerste rij staat de lengte van een zijde. <br>Op de tweede rij staat hoeveel meter omheining boer Teun voor dit weiland nodig heeft.', false);
+    const _tdLbl = maakOpTdaz('a', 'Vul de tabel in voor weiland 1 en 2.<br>Op de eerste rij staat de lengte van een zijde. <br>Op de tweede en de derde rij staat hoeveel meter omheining boer Teun voor dit weiland nodig heeft.', false);
     /* zet bovenaan */
     _tdLbl.querySelector('.rij').style.alignItems = 'flex-start';
     /* geef extra ruimte boven */
@@ -120,14 +120,14 @@
       { inhoud: '<i>x</i>', type: 'opgave', hAlign: 'center', vAlign: 'middle' },
     ],
     [
-      { inhoud: 'lengte omheining weiland 1', type: 'hoofding', hAlign: 'left', vAlign: 'middle' },
+      { inhoud: 'lengte omheining weiland 1 (m)', type: 'hoofding', hAlign: 'left', vAlign: 'middle' },
       { inhoud: '4 · <span class="markeer-lila">10</span> <br>= 40', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '4 · <span class="markeer-lila">25</span> <br>= 100', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '4 · <span class="markeer-lila">30</span> <br>= 120', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '4<i>x</i>\u200A', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
     ],
     [
-      { inhoud: 'lengte omheining weiland 2', type: 'hoofding', hAlign: 'left', vAlign: 'middle' },
+      { inhoud: 'lengte omheining weiland 2 (m)', type: 'hoofding', hAlign: 'left', vAlign: 'middle' },
       { inhoud: '5 · <span class="markeer-lila">10</span> <br>= 50', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '5 · <span class="markeer-lila">25</span> <br>= 125', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '5 · <span class="markeer-lila">30</span> <br>= 150', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
@@ -137,7 +137,7 @@
 
   const tabelWrapper0 = document.createElement('div');
   tabelWrapper0.style.paddingLeft = '0.65cm';  // ← HIER AANPASSEN
-  tabelWrapper0.style.marginTop = '0.5cm';  // ← HIER AANPASSEN
+  tabelWrapper0.style.marginTop = '0.8cm';  // ← HIER AANPASSEN
   tbody.appendChild(tabelWrapper0);
   maakZichtbareTabel(tabelWrapper0, 3, 5, {
     hoofding: 'links',
@@ -206,7 +206,7 @@
   /* Opgave d */
   {
     const _trLbl = document.createElement('tr');
-    const _tdLbl = maakOpTdaz('c', 'Boer Teun wil meer dan één afzetten.<br> Vul de tabel aan met de formule voor de lengte van de omheining voor alle weilanden.', false);
+    const _tdLbl = maakOpTdaz('c', 'Boer Teun wil meer dan één weiland afzetten.<br> Vul de tabel aan met de formule voor de lengte van de omheining voor alle weilanden.', false);
     /* zet bovenaan */
     _tdLbl.querySelector('.rij').style.alignItems = 'flex-start';
     /* geef extra ruimte boven */

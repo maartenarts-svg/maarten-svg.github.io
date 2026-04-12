@@ -12,7 +12,7 @@
 
   voegLijstToe(inhoud, 'bullet', '0cm', '0.2cm', [
   'Markeer in het blauw de lettervormen met coëfficiënt 1.',
-  'Markeer in het geel de lettervormen met coëfificiënt 1.'
+  'Markeer in het geel de lettervormen met coëfficiënt -1.'
   ]);
  
   const rijHoogtes = ['0.9cm', '0.9cm'];

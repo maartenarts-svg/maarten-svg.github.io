@@ -7,7 +7,7 @@
 
   /* ---- Span-variabelen ---- */
   const checkin_1 = document.createElement('span');
-  checkin_1.appendChild(htmlSpan('De afmetingen van elk bloemperk zijn weergegeven in functie van de zijde <i>z</i> van de zeshoek.'));
+  checkin_1.appendChild(htmlSpan('De afmetingen van elk bloemperk zijn weergegeven in functie van de zijde <i>z</i> (in m) van de zeshoek.'));
 
   const opgA = htmlSpan('Noteer bij elke uitdrukking met letters de juiste verwoording.<br>Kies uit:');
 
@@ -248,8 +248,6 @@
   {
     const _trLbl = document.createElement('tr');
     const _tdLbl = maakOpTdaz('b', checkin_2, false);
-    _tdLbl.querySelector('.rij').style.alignItems = 'flex-start';
-    _tdLbl.querySelector('.lbl').style.paddingTop = '0cm';
     _tdLbl.classList.add('kolom-links');
     _trLbl.appendChild(_tdLbl); tbody.appendChild(_trLbl);
   }
@@ -261,7 +259,7 @@
     oe_1.appendChild(htmlSpan('Noteer de afmetingen van de figuren in de cirkeltjes als de basis van de zeshoek 2 m is.'));
 
     const oe_2 = document.createElement('span');
-    oe_2.appendChild(htmlSpan('Bereken voor die afmetingen de omtrek van elke veelhoek.'));
+    oe_2.appendChild(htmlSpan('Bereken voor die afmetingen de omtrek <i>P</i> van elke veelhoek.'));
 
     const oe_3 = document.createElement('span');
     oe_3.appendChild(htmlSpan('Bereken hoeveel meter omheining in totaal nodig is voor deze drie perken.'));

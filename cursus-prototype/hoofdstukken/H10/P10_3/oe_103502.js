@@ -255,10 +255,6 @@
 
       tbodyhulpC.appendChild(trtabelC);
 
-  const trc0 = document.createElement('tr');
-  const tdc0 = maakSlTd('', false);
-  tdc0.classList.add('kolom-links');
-  trc0.appendChild(tdc0);
-  tbody.appendChild(trc0);
+
 
 })();
