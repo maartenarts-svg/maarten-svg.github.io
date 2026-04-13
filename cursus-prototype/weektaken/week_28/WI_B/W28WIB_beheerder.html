@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beheerder — WI X</title>
+  <title>Beheerder — WI B</title>
   <link rel="stylesheet" href="../../css/taak.css">
   <style>
     body { background: #f0f4f0; font-size: 13px; }
@@ -81,7 +81,7 @@
 <body class="beheer-pagina">
 
   <header class="topbalk">
-    <span class="topbalk-titel" id="topbalk-titel">Beheerder — WI X</span>
+    <span class="topbalk-titel" id="topbalk-titel">Beheerder — WI B</span>
     <div style="display:flex; gap:0.6rem;">
       <button class="topbalk-knop" id="knop-als-leerling">Leerlingenscherm</button>
       <button class="topbalk-knop" id="knop-uitloggen">Uitloggen</button>
@@ -258,8 +258,8 @@
     import { setTaakRef, fetchTaak, saveTaak } from '../../js/firebase.js';
 
     // ── Configuratie ──────────────────────────────────────────
-    const TAAK_ID   = 'W1WIA';
-    const TAAK_CODE = 'WI A';
+    const TAAK_ID   = 'W28WIB';
+    const TAAK_CODE = 'WI B';
 
     // ── Init ──────────────────────────────────────────────────
     setTaakRef(TAAK_ID);
@@ -291,6 +291,10 @@
     }
     
     async function _slaOp() {
+      if (!_taakData?.leerlingen?.length) {
+        console.warn('Opslaan geblokkeerd: leerlingenlijst is leeg.');
+        return;
+      }
       await saveTaak(_taakData);
       localStorage.setItem('taak_data', JSON.stringify(_taakData));
     }

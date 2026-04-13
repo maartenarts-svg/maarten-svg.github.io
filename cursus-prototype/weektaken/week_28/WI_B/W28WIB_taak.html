@@ -12,7 +12,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WI X — Weektaak</title>
+  <title>WI B — Voorkennis activeren</title>
   <link rel="stylesheet" href="../../css/taak.css">
 </head>
 <body>
@@ -23,13 +23,13 @@
   <div id="scherm-login" class="login-pagina">
     <div class="login-kaart">
       <div class="login-logo"><span class="login-logo-letter">W</span></div>
-      <h1 class="login-titel">WI X</h1>
-      <p class="login-subtitel">Weektaak wiskunde</p>
+      <h1 class="login-titel">WI B</h1>
+      <p class="login-subtitel">Voorkennis activeren</p>
       <form id="login-form" novalidate>
         <div class="veld-groep">
           <label class="veld-label" for="login-mail">Mailadres</label>
           <input type="email" id="login-mail" class="veld-invoer"
-            placeholder="voornaam.naam@school.be" autocomplete="email" required>
+            placeholder="voornaam.naam@labsintniklaas.be" autocomplete="email" required>
         </div>
         <div class="veld-groep verborgen" id="code-wrap">
           <label class="veld-label" for="login-code">Beheerderscode</label>
@@ -49,8 +49,8 @@
   ================================================================ -->
   <div id="scherm-welkom" class="verborgen">
     <div class="welkom-pagina">
-      <div class="welkom-code" id="welkom-code">WI X</div>
-      <div class="welkom-naam" id="welkom-naam">Naam van de taak</div>
+      <div class="welkom-code" id="welkom-code">WI B</div>
+      <div class="welkom-naam" id="welkom-naam">Voorkennis activeren</div>
       <button class="welkom-start" id="knop-start">START</button>
     </div>
   </div>
@@ -186,14 +186,13 @@
     // ================================================================
     //  CONFIGURATIE — pas dit aan per taak
     // ================================================================
-    const TAAK_ID       = 'W1WIA';          // Firebase document-id
-    const TAAK_CODE     = 'WI A';           // zichtbare code
-    const TAAK_NAAM     = 'Naam van de taak';
+    const TAAK_ID       = 'W28WIB';          // Firebase document-id
+    const TAAK_CODE     = 'WI B';           // zichtbare code
+    const TAAK_NAAM     = 'Voorkennis activeren';
 
     // Oefening-scripts (in volgorde)
     const OEFENING_SCRIPTS = [
-      'oefeningen/oe_1.js',
-      'oefeningen/oe_2.js',
+      'oefeningen/oe_3.js',
       // voeg hier oefeningen toe
     ];
 
@@ -449,7 +448,8 @@
       const toonVerbeterd   = stel.verbeterdModus === true || _leerling.verbeterd === true;
       const toonVast        = _leerling.ingediend === true && stel.wijzigenNaIndienen === false && !toonVerbeterd;
       const toonOpen        = _leerling.ingediend === true && stel.wijzigenNaIndienen === true  && !toonVerbeterd;
-      const verbeterd       = toonVerbeterd || toonVast;
+      const verbeterd  = toonVerbeterd;
+      const blokkeren  = toonVerbeterd || toonVast;
 
       document.getElementById('verbeterd-banner-oef').classList.toggle('verborgen', !toonVerbeterd);
       document.getElementById('ingediend-banner-vast').classList.toggle('verborgen', !toonVast);
@@ -466,7 +466,19 @@
         s.src = scriptPad;
         s.onload = () => {
           if (window.__taakOefening?.render) {
-            window.__taakOefening.render(container, antwoorden, verbeterd);
+            const _slaDirectOp = async () => {
+              _slaOefeningAntwoordenOp();
+              _syncLeerling();
+              await _slaOp();
+            };
+            const _herlaadLeerling = async () => {
+              _taakData = await fetchTaak();
+              _leerling = (_taakData.leerlingen || []).find(
+                l => l.mail.toLowerCase() === _leerling.mail.toLowerCase()
+              );
+              return _leerling;
+            };
+            window.__taakOefening.render(container, antwoorden, verbeterd, _leerling.mail, _slaDirectOp, _leerling, _herlaadLeerling, null, blokkeren);
           }
           ok();
         };
@@ -513,10 +525,12 @@
 
       _syncLeerling();
       await _slaOp();
+      await new Promise(r => setTimeout(r, 500));
 
       document.getElementById('knop-indienen').disabled    = true;
       document.getElementById('knop-indienen').textContent = 'Ingediend ✓';
       document.getElementById('eind-ingediend-bericht').classList.remove('verborgen');
+
 
       // Toon correcties onmiddellijk als de instelling aan staat
       if (stel.correctiesZichtbaar) {
@@ -655,7 +669,10 @@
     }
 
     async function _slaOp() {
-      // JSON-rondreis verwijdert alle undefined waarden
+      if (!_taakData?.leerlingen?.length) {
+        console.warn('Opslaan geblokkeerd: leerlingenlijst is leeg.');
+        return;
+      }
       const schoon = JSON.parse(JSON.stringify(_taakData));
       await saveTaak(schoon);
     }

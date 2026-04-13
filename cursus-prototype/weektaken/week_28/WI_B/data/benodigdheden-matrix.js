@@ -1,5 +1,4 @@
 var WxWIx_benodigdheden = [
-  { tekst: "kladblad", plaatscode: '10.1'},
-  { tekst: "schrijfmateriaal", plaatscode: '10.2'},
-  { tekst: "rekenmachine of geogebra", plaatscode: '10.3'},
+  { tekst: "Taak WI C op papier", plaatscode: '10.1'},
+  { tekst: "Een chromebook of smartphone om foto's te nemen.", plaatscode: '10.2'},
 ];

@@ -51,7 +51,7 @@ window.__taakOefening = (function() {
     tbody.appendChild(trL1);
 
     // Antwoord-rij met invoervelden
-    const { tr, invoer } = maakTrOpl(_antwoorden, verbeterd, 0, true, '4100', true, true);
+    const { tr, invoer } = maakTrOpl(_antwoorden, verbeterd, 0, true,'geheel', '4100', true, true);
     _invoerVelden.push(invoer);
     tbody.appendChild(tr);
 

@@ -657,7 +657,10 @@
     }
 
     async function _slaOp() {
-      // JSON-rondreis verwijdert alle undefined waarden
+      if (!_taakData?.leerlingen?.length) {
+        console.warn('Opslaan geblokkeerd: leerlingenlijst is leeg.');
+        return;
+      }
       const schoon = JSON.parse(JSON.stringify(_taakData));
       await saveTaak(schoon);
     }

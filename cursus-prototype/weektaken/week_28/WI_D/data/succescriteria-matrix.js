@@ -46,7 +46,7 @@ var WxWIx_succescriteria = [
     scores: "A: Ik doe dit.<br>C: Ik doe dit, maar niet alle eigenschappen staan op het kladblad." }, 
   { 
     id: 'W28WIDSC06', 
-    tekst: "Ik prent de eigenschappen van bewerkingen in.", 
+    tekst: "Ik prent de eigenschappen van bewerkingen in met flashcards.", 
     type: 'evalueer', 
     plaatscode: '10.8', 
     leerplandoelcodes: ["13.02"], 

@@ -29,7 +29,7 @@
         <div class="veld-groep">
           <label class="veld-label" for="login-mail">Mailadres</label>
           <input type="email" id="login-mail" class="veld-invoer"
-            placeholder="voornaam.naam@school.be" autocomplete="email" required>
+            placeholder="voornaam.naam@labsintniklaas.be" autocomplete="email" required>
         </div>
         <div class="veld-groep verborgen" id="code-wrap">
           <label class="veld-label" for="login-code">Beheerderscode</label>
@@ -513,10 +513,12 @@
 
       _syncLeerling();
       await _slaOp();
+      await new Promise(r => setTimeout(r, 500));
 
       document.getElementById('knop-indienen').disabled    = true;
       document.getElementById('knop-indienen').textContent = 'Ingediend ✓';
       document.getElementById('eind-ingediend-bericht').classList.remove('verborgen');
+
 
       // Toon correcties onmiddellijk als de instelling aan staat
       if (stel.correctiesZichtbaar) {
@@ -655,7 +657,10 @@
     }
 
     async function _slaOp() {
-      // JSON-rondreis verwijdert alle undefined waarden
+      if (!_taakData?.leerlingen?.length) {
+        console.warn('Opslaan geblokkeerd: leerlingenlijst is leeg.');
+        return;
+      }
       const schoon = JSON.parse(JSON.stringify(_taakData));
       await saveTaak(schoon);
     }

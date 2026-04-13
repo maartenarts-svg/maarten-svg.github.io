@@ -291,6 +291,10 @@
     }
     
     async function _slaOp() {
+      if (!_taakData?.leerlingen?.length) {
+        console.warn('Opslaan geblokkeerd: leerlingenlijst is leeg.');
+        return;
+      }
       await saveTaak(_taakData);
       localStorage.setItem('taak_data', JSON.stringify(_taakData));
     }
