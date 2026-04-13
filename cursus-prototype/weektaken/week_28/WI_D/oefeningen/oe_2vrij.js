@@ -1,5 +1,5 @@
 // ============================================================
-//  oefeningen/oe_5.js  —  Flashcards eigenschappen (deel 1)
+//  oefeningen/oe_2.js  —  Flashcards eigenschappen (deel 1)
 //
 //  Pas aan per deel:
 //    TOON_ITEM   : welk item verschijnt op de flashcard ('woorden', 'symbolen' of 'betekenis')
@@ -9,7 +9,7 @@
 window.__taakOefening = (function () {
 
   // ── Pas aan per oefening ──────────────────────────────────
-  const TOON_ITEM     = 'betekenis';   // zichtbaar op flashcard
+  const TOON_ITEM     = 'symbolen';   // zichtbaar op flashcard
   const CONTROLE_ITEM = 'woorden';  // zichtbaar na controle
 
   // ── Staat ─────────────────────────────────────────────────
@@ -18,12 +18,13 @@ window.__taakOefening = (function () {
   let _slaOpFn    = null;
   let _container  = null;
   let _verbeterd  = false;
+  let _terugNaarOverzicht = null;
 
   // Lokale voortgang: { index: 0 of 1 } voor elk element
   let _voortgang  = [];
 
   // ── render ────────────────────────────────────────────────
-  function render(container, opgeslagenAntwoorden, verbeterd, mail, slaOp, leerling) {
+  function render(container, opgeslagenAntwoorden, verbeterd, mail, slaOp, leerling, herlaadLeerling, terugNaarOverzicht) {
     if (opgeslagenAntwoorden && Array.isArray(opgeslagenAntwoorden)) {
       _antwoorden = opgeslagenAntwoorden.map(a =>
         (a && typeof a === 'object' && 'antwoord' in a)
@@ -37,36 +38,37 @@ window.__taakOefening = (function () {
     _slaOpFn      = slaOp;
     _container    = container;
     _verbeterd    = verbeterd;
+    _terugNaarOverzicht = terugNaarOverzicht;
 
     // Voortgang initialiseren: elk element start op 0
     _voortgang = (typeof Eigenschappen !== 'undefined')
       ? Eigenschappen.map(() => 0)
       : [];
 
-    // Als al eerder volledig doorlopen: toon meteen het eindscherm
+      // Als al eerder volledig doorlopen: toon meteen het eindscherm
     if (_antwoorden[0].antwoord === true) {
       _voortgang = Eigenschappen.map(() => 1);
     }
-
+    
     _container.innerHTML = '';
     _bouwOefening();
   }
 
   // ── Oefening bouwen ───────────────────────────────────────
   function _bouwOefening() {
-    const inhoud = maakOefening({ id: 'oe_5', nummer: 5, container: _container });
-    voegTekstToe(inhoud, 'Van betekenis naar woorden', ['intro-tekst']);
+    const inhoud = maakOefening({ id: 'oe_2', nummer: 2, container: _container });
+    voegTekstToe(inhoud, 'Van symbolen naar woorden', ['intro-tekst']);
     voegLijstToe(inhoud, 'bullet', '0cm', '0.3cm', [
-      'Je krijgt op de flashcard de betekenis van de eigenschap te zien.',
+      'Je krijgt op de flashcard de eigenschap in symbolen te zien.',
       'Zeg de eigenschap in woorden (hoef je niet op te schrijven).',
       'Klik daarna op controle en check.',
       'Kies daarna uit \'Ken ik!\' of \'Ken ik nog niet.\'.',
       'Herhaal totdat je alle eigenschappen geoefend hebt.',
-    ]);  
+    ]);    
 
     const spacer = document.createElement('div');
     spacer.style.height = '0.5cm';
-    inhoud.appendChild(spacer);        
+    inhoud.appendChild(spacer);
 
     // Voortgangsteller
     const teller = document.createElement('div');
@@ -101,9 +103,6 @@ window.__taakOefening = (function () {
     knoppen.style.cssText = 'display: flex; gap: 0.3cm; flex-wrap: wrap;';
     inhoud.appendChild(knoppen);
 
-    // Volgende-knop blokkeren
-    _blokkeerVolgende(true);
-
     // Eerste kaart tonen
     _toonVolgende(flashcard, knoppen, teller);
   }
@@ -134,9 +133,7 @@ window.__taakOefening = (function () {
       knoppen.innerHTML = '';
 
       // Antwoord opslaan
-      _antwoorden[0].antwoord = true;
-      _blokkeerVolgende(false);
-      if (_slaOpFn) _slaOpFn();
+      if (_terugNaarOverzicht) setTimeout(_terugNaarOverzicht, 1500);
       return;
     }
 
@@ -195,15 +192,6 @@ window.__taakOefening = (function () {
     });
 
     knoppen.appendChild(knopControle);
-  }
-
-  // ── Volgende-knop blokkeren ───────────────────────────────
-  function _blokkeerVolgende(geblokkeerd) {
-    const knop = document.getElementById('knop-volgende-oef');
-    if (knop) {
-      knop.disabled = geblokkeerd;
-      knop.title    = geblokkeerd ? 'Doorloop eerst alle flashcards.' : '';
-    }
   }
 
   // ── getAntwoorden ─────────────────────────────────────────

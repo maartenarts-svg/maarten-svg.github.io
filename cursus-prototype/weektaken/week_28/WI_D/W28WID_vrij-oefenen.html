@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eigenschappen van bewerkingen inprenten</title>
+  <link rel="stylesheet" href="../../css/taak.css">
+  <style>
+    .vrij-pagina {
+      max-width: 21cm;
+      margin: 0 auto;
+      padding: 1cm 2cm;
+    }
+    .vrij-banner {
+      font-size: 14pt;
+      font-weight: bold;
+      color: var(--groen-donker, #4a7c59);
+      border-bottom: 2px solid var(--groen-scheiding, #a5d6a7);
+      padding-bottom: 0.2cm;
+      margin-bottom: 0.4cm;
+    }
+    .vrij-intro {
+      font-family: var(--font, Arial);
+      font-size: var(--fontsize, 10pt);
+      color: var(--tekst, #1a1a1a);
+      margin-bottom: 0.5cm;
+      line-height: 1.6;
+    }
+    .vrij-knoppen {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3cm;
+      margin-bottom: 0.5cm;
+    }
+    .vrij-knop {
+      width: 4cm;
+      height: 4cm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--groen-pastel, #c8e6c9);
+      border: 2px solid var(--groen-donker, #4a7c59);
+      border-radius: var(--radius, 8px);
+      font-family: var(--font, Arial);
+      font-size: var(--fontsize, 10pt);
+      font-weight: bold;
+      color: var(--groen-donker, #4a7c59);
+      cursor: pointer;
+      transition: background 0.2s;
+      padding: 0.2cm;
+    }
+    .vrij-knop:hover { background: var(--groen-midden, #6aab7e); color: white; }
+
+    #oef-zone { display: none; }
+
+    .terug-knop-zone {
+      margin-top: 0.4cm;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="vrij-pagina">
+
+    <!-- ── Overzicht ────────────────────────────────────────── -->
+    <div id="overzicht">
+      <div class="vrij-banner">Eigenschappen van bewerkingen inprenten</div>
+      <div class="vrij-intro">
+        Prent hier de eigenschappen van bewerkingen in.<br>
+        Kies welke flashcards je wilt oefenen.
+      </div>
+      <div class="vrij-knoppen">
+        <button class="vrij-knop" data-oef="oe_1vrij">tekst1</button>
+        <button class="vrij-knop" data-oef="oe_2vrij">tekst2</button>
+        <button class="vrij-knop" data-oef="oe_3vrij">tekst3</button>
+        <button class="vrij-knop" data-oef="oe_4vrij">tekst4</button>
+      </div>
+    </div>
+
+    <!-- ── Oefening-zone ─────────────────────────────────────── -->
+    <div id="oef-zone">
+      <div id="oef-container"></div>
+      <div class="terug-knop-zone">
+        <button class="knop-secundair" id="knop-terug">← Terug naar overzicht</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../../js/helpers.js"></script>
+  <script src="data/eigenschappen-matrix.js"></script>
+  
+  <script>
+    // Globale variabelen die helpers.js nodig heeft
+    window.ACTIEVE_CONTAINER = '#oef-container';
+    window.OEFENING_TELLER   = 1;
+    window.TOGGLE_TOEGESTAAN = true;
+    window.TOON_OPLOSSINGEN  = false;
+
+    const overzicht    = document.getElementById('overzicht');
+    const oefZone      = document.getElementById('oef-zone');
+    const oefContainer = document.getElementById('oef-container');
+
+    // ── Knoppen ───────────────────────────────────────────────
+    document.querySelectorAll('.vrij-knop').forEach(knop => {
+      knop.addEventListener('click', () => {
+        const pad = `oefeningen/${knop.dataset.oef}.js`;
+        _laadOefening(pad);
+      });
+    });
+
+    document.getElementById('knop-terug').addEventListener('click', () => {
+      oefZone.style.display    = 'none';
+      overzicht.style.display  = '';
+      oefContainer.innerHTML   = '';
+      window.OEFENING_TELLER   = 1;
+      delete window.__taakOefening;
+    });
+
+    window.ACTIEVE_CONTAINER = '#oef-container';
+
+    // ── Oefening laden ────────────────────────────────────────
+    function _laadOefening(pad) {
+      oefContainer.innerHTML  = '';
+      window.OEFENING_TELLER  = 1;
+      delete window.__taakOefening;
+
+      // Eerder geladen script verwijderen
+      const oud = document.getElementById('vrij-oef-script');
+      if (oud) oud.remove();
+
+      const s    = document.createElement('script');
+      s.id       = 'vrij-oef-script';
+      s.src      = pad;
+      s.onload   = () => {
+        if (window.__taakOefening?.render) {
+          overzicht.style.display = 'none';
+          oefZone.style.display   = 'block';
+          // Geen antwoorden, niet verbeterd, geen mail, geen slaOp
+          window.__taakOefening.render(oefContainer, null, false, null, null, null, null, _keerTerug);
+        }
+      };
+      s.onerror  = () => {
+        alert(`Oefening kon niet geladen worden: ${pad}`);
+      };
+      document.head.appendChild(s);
+    }
+
+    // ── Terug naar overzicht (callback vanuit oefening) ───────
+    function _keerTerug() {
+      oefZone.style.display   = 'none';
+      overzicht.style.display = 'block';
+      oefContainer.innerHTML  = '';
+      window.OEFENING_TELLER  = 1;
+      delete window.__taakOefening;
+    }
+  </script>
+
+</body>
+</html>

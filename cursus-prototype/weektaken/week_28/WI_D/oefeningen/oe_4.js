@@ -55,7 +55,7 @@ window.__taakOefening = (function () {
   // ── Oefening bouwen ───────────────────────────────────────
   function _bouwOefening() {
     const inhoud = maakOefening({ id: 'oe_4', nummer: 4, container: _container });
-    voegTekstToe(inhoud, 'instructietekst', ['intro-tekst']);
+    voegTekstToe(inhoud, 'Van woorden naar betekenis', ['intro-tekst']);
     voegLijstToe(inhoud, 'bullet', '0cm', '0.3cm', [
       'Je krijgt op de flashcard de eigenschap in woorden te zien.',
       'Zeg de betekenis van de eigenschap (hoef je niet op te schrijven).',
