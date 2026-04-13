@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  WxWIx_taak.html  —  Sjabloon voor digitale weektaak
+  Pas aan:
+    TAAK_ID    : unieke Firebase-document-id  (bv. "W1WIA")
+    TAAK_CODE  : zichtbare code               (bv. "WI A")
+    TAAK_NAAM  : volledige naam               (bv. "Rekenen met letters")
+    TAAK_SUBTITEL : ondertitel voor loginscherm
+    Laad de juiste matrix-bestanden en oefening-scripts in.
+============================================================ -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WI D — Eigenschappen van bewerkingen inprenten</title>
+  <link rel="stylesheet" href="../../css/taak.css">
+</head>
+<body>
+
+  <!-- ================================================================
+       SCHERM 0: LOGIN
+  ================================================================ -->
+  <div id="scherm-login" class="login-pagina">
+    <div class="login-kaart">
+      <div class="login-logo"><span class="login-logo-letter">W</span></div>
+      <h1 class="login-titel">WI D</h1>
+      <p class="login-subtitel">Weektaak wiskunde</p>
+      <form id="login-form" novalidate>
+        <div class="veld-groep">
+          <label class="veld-label" for="login-mail">Mailadres</label>
+          <input type="email" id="login-mail" class="veld-invoer"
+            placeholder="voornaam.naam@labsintniklaas.be" autocomplete="email" required>
+        </div>
+        <div class="veld-groep verborgen" id="code-wrap">
+          <label class="veld-label" for="login-code">Beheerderscode</label>
+          <input type="password" id="login-code" class="veld-invoer"
+            placeholder="Voer je code in" autocomplete="off">
+        </div>
+        <p class="login-fout" id="login-fout" aria-live="polite"></p>
+        <button type="submit" id="login-knop" class="knop-primair knop-breed">
+          Inloggen
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SCHERM 1: WELKOM
+  ================================================================ -->
+  <div id="scherm-welkom" class="verborgen">
+    <div class="welkom-pagina">
+      <div class="welkom-code" id="welkom-code">WI D</div>
+      <div class="welkom-naam" id="welkom-naam">Eigenschappen van bewerkingen inprenten</div>
+      <button class="welkom-start" id="knop-start">START</button>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SCHERM 2: VOORKENNIS + SUCCESCRITERIA (alleen-lezen)
+  ================================================================ -->
+  <div id="scherm-voorkennis" class="verborgen">
+    <div class="stap-balk">
+      <span class="stap-balk-naam" id="stap-naam-2"></span>
+      <span class="stap-balk-info">Stap 1 van <span id="totaal-stappen-2"></span></span>
+    </div>
+    <div class="pagina" style="margin-bottom:4rem;">
+      <div id="inhoud-voorkennis"></div>
+      <div id="inhoud-succescriteria-1"></div>
+    </div>
+    <div class="nav-balk">
+      <span></span>
+      <span class="nav-balk-midden" id="naam-leerling-2"></span>
+      <button class="knop-primair" id="knop-volgende-2">VOLGENDE →</button>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SCHERM 3: INSTRUCTIES + BENODIGDHEDEN
+  ================================================================ -->
+  <div id="scherm-instructies" class="verborgen">
+    <div class="stap-balk">
+      <span class="stap-balk-naam" id="stap-naam-3"></span>
+      <span class="stap-balk-info">Stap 2 van <span id="totaal-stappen-3"></span></span>
+    </div>
+    <div class="pagina" style="margin-bottom:4rem;">
+      <div id="inhoud-instructies"></div>
+      <div id="inhoud-benodigdheden"></div>
+    </div>
+    <div class="nav-balk">
+      <button class="knop-secundair" id="knop-vorige-3">← VORIGE</button>
+      <span class="nav-balk-midden" id="naam-leerling-3"></span>
+      <button class="knop-primair"  id="knop-volgende-3">VOLGENDE →</button>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SCHERM 4+: OEFENINGEN (dynamisch gegenereerd)
+  ================================================================ -->
+  <div id="scherm-oefeningen" class="verborgen">
+    <div class="stap-balk">
+      <span class="stap-balk-naam" id="stap-naam-oef"></span>
+      <span class="stap-balk-info">
+        Oefening <span id="oef-huidig">1</span>
+        van <span id="oef-totaal">1</span>
+      </span>
+    </div>
+    <!-- Verbeterd-modus banner -->
+    <div class="verbeterd-banner verborgen" id="verbeterd-banner-oef">
+      ✓ Deze taak is verbeterd. Je ziet hieronder de correctie.
+    </div>
+    <!-- Ingediend, geen wijzigen -->
+    <div class="verbeterd-banner verborgen" id="ingediend-banner-vast">
+      ✓ Je hebt de taak al ingediend. Aanpassen is niet meer mogelijk.
+    </div>
+    <!-- Ingediend, wel wijzigen -->
+    <div class="verbeterd-banner verborgen" id="ingediend-banner-open">
+      ✓ Je hebt de taak al ingediend. Je kunt nog aanpassen.
+    </div>    
+    <div class="pagina" style="margin-bottom:4rem;" id="oef-container">
+    </div>
+    <div class="nav-balk">
+      <button class="knop-secundair" id="knop-vorige-oef">← VORIGE</button>
+      <span class="nav-balk-midden" id="naam-leerling-oef"></span>
+      <button class="knop-primair"  id="knop-volgende-oef">VOLGENDE →</button>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SCHERM 5: SUCCESCRITERIA (aanvinken)
+  ================================================================ -->
+  <div id="scherm-succescriteria" class="verborgen">
+    <div class="stap-balk">
+      <span class="stap-balk-naam" id="stap-naam-sc"></span>
+      <span class="stap-balk-info">
+        Stap <span id="stap-sc-nr"></span>
+        van <span id="totaal-stappen-sc"></span>
+      </span>
+    </div>
+    <div class="pagina" style="margin-bottom:4rem;">
+      <div id="inhoud-succescriteria-2"></div>
+    </div>
+    <div class="nav-balk">
+      <button class="knop-secundair" id="knop-vorige-sc">← VORIGE</button>
+      <span class="nav-balk-midden" id="naam-leerling-sc"></span>
+      <button class="knop-primair"  id="knop-volgende-sc">VOLGENDE →</button>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SCHERM 6: EINDPAGINA
+  ================================================================ -->
+  <div id="scherm-einde" class="verborgen">
+    <div class="stap-balk">
+      <span class="stap-balk-naam" id="stap-naam-einde"></span>
+      <span class="stap-balk-info">Laatste stap</span>
+    </div>
+    <div class="eind-pagina">
+      <div class="eind-titel">De taak is afgerond.</div>
+      <div class="eind-info" id="eind-info">
+        Je hebt nog <strong id="eind-ontbrekend">0</strong> antwoorden niet ingevuld.
+      </div>
+      <div id="eind-ingediend-bericht" class="verborgen"
+           style="color:var(--groen-donker); font-weight:600; margin-bottom:1rem;">
+        ✓ Taak succesvol ingediend!
+      </div>
+    </div>
+    <div class="nav-balk">
+      <button class="knop-secundair" id="knop-vorige-einde">← VORIGE</button>
+      <span class="nav-balk-midden" id="naam-leerling-einde"></span>
+      <button class="knop-primair"  id="knop-indienen">INDIENEN</button>
+    </div>
+  </div>
+
+  <!-- ── Matrix-scripts (pas paden aan per taak) ───────────────── -->
+  <!-- Volgorde: eerst matrices, dan helpers, dan oefeningen       -->
+  <script src="data/voorkennis-matrix.js"></script>
+  <script src="data/succescriteria-matrix.js"></script>
+  <script src="data/instructies-matrix.js"></script>
+  <script src="data/benodigdheden-matrix.js"></script>
+  <script src="../../js/helpers.js"></script>
+  <script src="data/eigenschappen-matrix.js"></script>  
+  <!-- Oefeningen worden dynamisch geladen door taak.js           -->
+
+  <script type="module">
+    import { setTaakRef, fetchTaak, saveTaak } from '../../js/firebase.js';
+
+    // ================================================================
+    //  CONFIGURATIE — pas dit aan per taak
+    // ================================================================
+    const TAAK_ID       = 'W28WID';          // Firebase document-id
+    const TAAK_CODE     = 'WI D';           // zichtbare code
+    const TAAK_NAAM     = 'Eigenschappen van bewerkingen inprenten';
+
+    // Oefening-scripts (in volgorde)
+    const OEFENING_SCRIPTS = [
+      'oefeningen/oe_1.js',
+      'oefeningen/oe_2.js',
+      'oefeningen/oe_3.js',
+      'oefeningen/oe_4.js',
+      'oefeningen/oe_5.js',
+      // voeg hier oefeningen toe
+    ];
+
+    // ================================================================
+    //  STAAT
+    // ================================================================
+    let _taakData     = null;   // volledige Firebase data
+    let _leerling     = null;   // huidig ingelogde leerling-object
+    let _isBeheerder  = false;
+    let _huidigScherm = 'login';
+    let _huidigOef    = 0;      // index in OEFENING_SCRIPTS
+    let _totaalStappen = 0;     // berekend na login
+
+    // ================================================================
+    //  INITIALISATIE
+    // ================================================================
+    setTaakRef(TAAK_ID);
+
+    // Simulatiemodus: automatisch inloggen als de opgegeven leerling
+    const _simMail = new URLSearchParams(window.location.search).get('sim');
+    if (_simMail) {
+      (async () => {
+        _taakData = await fetchTaak();
+        if (!_taakData) return;
+        const leerling = (_taakData.leerlingen || []).find(
+          l => l.mail.toLowerCase() === _simMail.toLowerCase()
+        );
+        if (!leerling) {
+          document.body.innerHTML = `<p style="padding:2rem;color:#c62828;">
+            Leerling niet gevonden: ${_simMail}</p>`;
+          return;
+        }
+        _leerling = leerling;
+        _initialiseerTaak();
+      })();
+    }
+
+    document.getElementById('welkom-code').textContent = TAAK_CODE;
+    document.getElementById('welkom-naam').textContent = TAAK_NAAM;
+    document.querySelectorAll('.stap-balk-naam').forEach(el => el.textContent = TAAK_CODE);
+
+    // ================================================================
+    //  LOGIN
+    // ================================================================
+    const mailInvoer  = document.getElementById('login-mail');
+    const codeWrap    = document.getElementById('code-wrap');
+    const codeInvoer  = document.getElementById('login-code');
+    const loginFout   = document.getElementById('login-fout');
+    const loginKnop   = document.getElementById('login-knop');
+
+    mailInvoer.addEventListener('blur', async () => {
+      const mail = mailInvoer.value.trim().toLowerCase();
+      if (!mail.includes('@')) {
+        codeWrap.classList.add('verborgen');
+        return;
+      }
+      // Laad data indien nog niet geladen
+      if (!_taakData) {
+        try {
+          _taakData = await fetchTaak();
+        } catch(e) { return; }
+      }
+      if (mail === _taakData?.instellingen?.beheerderMail) {
+        codeWrap.classList.remove('verborgen');
+        codeInvoer.focus();
+      } else {
+        codeWrap.classList.add('verborgen');
+      }
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      loginFout.textContent = '';
+      loginKnop.disabled    = true;
+      loginKnop.textContent = 'Even geduld…';
+
+      const mail = mailInvoer.value.trim().toLowerCase();
+      const code = codeInvoer.value.trim();
+
+      try {
+        _taakData = await fetchTaak();
+        if (!_taakData) {
+          // Eerste keer: maak lege structuur aan
+          _taakData = {
+            instellingen: {
+              wijzigenNaIndienen: false,
+              correctiesZichtbaar: false,
+              verbeterdModus: false,
+            },
+            leerlingen: []
+          };
+        }
+
+        // Beheerder?
+        if (mail === _taakData.instellingen?.beheerderMail) {
+          if (code !== _taakData.instellingen?.beheerderCode) {
+            _toonFout('Onjuiste code.');
+            return;
+          }
+          _isBeheerder = true;
+          // Redirect naar beheerderspagina
+          localStorage.setItem('taak_data', JSON.stringify(_taakData));
+          localStorage.setItem('taak_mail', mail);
+          window.location.href = window.location.pathname
+            .replace('_taak.html', '_beheerder.html');
+          return;
+        }
+
+        // Leerling
+        const leerling = (_taakData.leerlingen || []).find(
+          l => l.mail.toLowerCase() === mail
+        );
+        if (!leerling) {
+          _toonFout('Dit mailadres is niet gekend. Neem contact op met je leerkracht.');
+          return;
+        }
+
+        _leerling = leerling;
+        localStorage.setItem('taak_data', JSON.stringify(_taakData));
+        localStorage.setItem('taak_mail', mail);
+
+        _initialiseerTaak();
+
+      } catch (err) {
+        _toonFout('Technische fout. Probeer opnieuw.');
+        console.error(err);
+      } finally {
+        loginKnop.disabled    = false;
+        loginKnop.textContent = 'Inloggen';
+      }
+    });
+
+    function _toonFout(bericht) {
+      loginFout.textContent = bericht;
+      loginKnop.disabled    = false;
+      loginKnop.textContent = 'Inloggen';
+    }
+
+    // ================================================================
+    //  TAAK INITIALISEREN NA LOGIN
+    // ================================================================
+    function _initialiseerTaak() {
+      // Leerlingnaam in navigatiebalk
+      const naam = _leerling.voornaam || _leerling.volledigeNaam || _leerling.mail;
+      document.querySelectorAll('[id^="naam-leerling"]').forEach(el => el.textContent = naam);
+
+      // Totaal stappen berekenen
+      // 1 = voorkennis/criteria, 2 = instructies, x = oefeningen, 1 = criteria aanvinken, 1 = einde
+      _totaalStappen = 3 + OEFENING_SCRIPTS.length + 1;
+      document.querySelectorAll('[id^="totaal-stappen"]').forEach(
+        el => el.textContent = _totaalStappen
+      );
+      document.getElementById('oef-totaal').textContent = OEFENING_SCRIPTS.length;
+      document.getElementById('stap-sc-nr').textContent = 3 + OEFENING_SCRIPTS.length;
+      document.getElementById('totaal-stappen-sc').textContent = _totaalStappen;
+
+      // Verbeterd-modus tonen indien actief
+      if (_taakData.instellingen?.verbeterdModus) {
+        document.getElementById('verbeterd-banner-oef').classList.remove('verborgen');
+      }
+      if (_leerling.verbeterd) {
+        document.getElementById('verbeterd-banner-oef').classList.remove('verborgen');
+      }      
+
+      // Inhoud opbouwen
+      _bouwVoorkennis();
+      _bouwSuccescriteria1();
+      _bouwInstructies();
+      _bouwSuccescriteria2();
+
+      // Simulatiemodus: beheerder bekijkt leerling → sla welkom over
+      const simParam = new URLSearchParams(window.location.search).get('sim');
+      if (simParam) {
+        _toonScherm('oefeningen');
+        _huidigOef = 0;
+        _laadOefening(0);
+      } else {
+        _toonScherm('welkom');
+      }
+    }
+
+    // ================================================================
+    //  INHOUD OPBOUWEN
+    // ================================================================
+    function _bouwVoorkennis() {
+      const container = document.getElementById('inhoud-voorkennis');
+      container.appendChild(maakBanner('📍', 'VOORKENNIS'));
+      if (typeof WxWIx_voorkennis !== 'undefined') {
+        bouwVoorkennisTabel(container, WxWIx_voorkennis, false);
+      }
+    }
+
+    function _bouwSuccescriteria1() {
+      const container = document.getElementById('inhoud-succescriteria-1');
+      container.appendChild(maakBanner('🧗', 'SUCCESCRITERIA'));
+      if (typeof WxWIx_succescriteria !== 'undefined') {
+        bouwSuccescriteriaTabel(container, WxWIx_succescriteria, false,
+          _leerling.succescriteria || []);
+      }
+    }
+
+    function _bouwInstructies() {
+      const container = document.getElementById('inhoud-instructies');
+      container.appendChild(maakBanner('🖥️', 'INSTRUCTIES'));
+      if (typeof WxWIx_instructies !== 'undefined') {
+        bouwInstructieLijst(container, WxWIx_instructies);
+      }
+      if (typeof WxWIx_benodigdheden !== 'undefined') {
+        const benContainer = document.getElementById('inhoud-benodigdheden');
+        benContainer.appendChild(maakBanner('🖊️', 'WAT HEB JE NODIG?'));
+        bouwBenodigdhedenLijst(benContainer, WxWIx_benodigdheden);
+      }
+    }
+
+    function _bouwSuccescriteria2() {
+      const container = document.getElementById('inhoud-succescriteria-2');
+      container.appendChild(maakBanner('🧗', 'SUCCESCRITERIA'));
+      if (typeof WxWIx_succescriteria !== 'undefined') {
+        bouwSuccescriteriaTabel(
+          container,
+          WxWIx_succescriteria,
+          true,   // aanklikbaar
+          _leerling.succescriteria || [],
+          (idx, waarde) => {
+            const len = WxWIx_succescriteria.length;
+            if (!_leerling.succescriteria || _leerling.succescriteria.length < len) {
+              _leerling.succescriteria = Array.from({ length: len }, (_, i) =>
+                _leerling.succescriteria?.[i] === true ? true : false
+              );
+            }
+            _leerling.succescriteria[idx] = waarde;
+          }
+        );
+      }
+    }
+
+    // ================================================================
+    //  OEFENINGEN LADEN
+    // ================================================================
+    async function _laadOefening(idx) {
+      const container = document.getElementById('oef-container');
+      container.innerHTML = '';
+      document.getElementById('oef-huidig').textContent = idx + 1;
+
+      const scriptPad = OEFENING_SCRIPTS[idx];
+      const oefeningId = scriptPad.split('/').pop().replace('.js', '');
+
+      // Antwoorden voor deze oefening ophalen
+      const antwoorden = (_leerling.antwoorden || {})[oefeningId] || null;
+
+      // Verbeterd-modus
+      const stel = _taakData.instellingen || {};
+      const toonVerbeterd   = stel.verbeterdModus === true || _leerling.verbeterd === true;
+      const toonVast        = _leerling.ingediend === true && stel.wijzigenNaIndienen === false && !toonVerbeterd;
+      const toonOpen        = _leerling.ingediend === true && stel.wijzigenNaIndienen === true  && !toonVerbeterd;
+      const verbeterd       = toonVerbeterd || toonVast;
+
+      document.getElementById('verbeterd-banner-oef').classList.toggle('verborgen', !toonVerbeterd);
+      document.getElementById('ingediend-banner-vast').classList.toggle('verborgen', !toonVast);
+      document.getElementById('ingediend-banner-open').classList.toggle('verborgen', !toonOpen);
+
+      return new Promise((ok) => {
+        // Verwijder eerder geladen script indien aanwezig
+        const oudScript = document.getElementById('oef-script-' + idx);
+        if (oudScript) oudScript.remove();
+        delete window.__taakOefening;
+
+        const s = document.createElement('script');
+        s.id  = 'oef-script-' + idx;
+        s.src = scriptPad;
+        s.onload = () => {
+          if (window.__taakOefening?.render) {
+            const _slaDirectOp = async () => {
+              _slaOefeningAntwoordenOp();
+              _syncLeerling();
+              await _slaOp();
+            };
+            const _herlaadLeerling = async () => {
+              _taakData = await fetchTaak();
+              _leerling = (_taakData.leerlingen || []).find(
+                l => l.mail.toLowerCase() === _leerling.mail.toLowerCase()
+              );
+              return _leerling;
+            };
+            window.__taakOefening.render(container, antwoorden, verbeterd, _leerling.mail, _slaDirectOp, _leerling, _herlaadLeerling);
+          }
+          ok();
+        };
+        s.onerror = () => {
+          container.innerHTML = `<p style="color:#c62828; padding:1rem;">
+            Oefening ${oefeningId} kon niet geladen worden.</p>`;
+          ok();
+        };
+        document.head.appendChild(s);
+      });
+    }
+
+    function _slaOefeningAntwoordenOp() {
+      if (!window.__taakOefening?.getAntwoorden) return;
+      const scriptPad  = OEFENING_SCRIPTS[_huidigOef];
+      const oefeningId = scriptPad.split('/').pop().replace('.js', '');
+      if (!_leerling.antwoorden) _leerling.antwoorden = {};
+      _leerling.antwoorden[oefeningId] = window.__taakOefening.getAntwoorden();
+      _syncLeerling();
+    }
+
+    // ================================================================
+    //  INDIENEN
+    // ================================================================
+    async function _indienen() {
+      const stel = _taakData.instellingen || {};
+
+      if (_leerling.ingediend && !stel.wijzigenNaIndienen) {
+        alert('Je taak is al ingediend en kan niet meer gewijzigd worden.');
+        return;
+      }
+      if (stel.verbeterdModus) {
+        alert('De taak is al verbeterd. Indienen is niet meer mogelijk.');
+        return;
+      }
+
+      _leerling.ingediend = true;
+
+      // Als correctiesZichtbaar aan staat: blokkeer wijzigen en toon correcties
+      // enkel voor deze leerling (zoals verbeterdModus maar enkel persoonlijk)
+      if (stel.correctiesZichtbaar) {
+        _leerling.verbeterd = true;
+      }
+
+      _syncLeerling();
+      await _slaOp();
+
+      document.getElementById('knop-indienen').disabled    = true;
+      document.getElementById('knop-indienen').textContent = 'Ingediend ✓';
+      document.getElementById('eind-ingediend-bericht').classList.remove('verborgen');
+
+      // Toon correcties onmiddellijk als de instelling aan staat
+      if (stel.correctiesZichtbaar) {
+        alert('Je taak is ingediend. Je kunt nu de correcties bekijken.');
+        _huidigOef = 0;
+        await _laadOefening(0);
+        _toonScherm('oefeningen');
+      }
+    }
+
+    // ================================================================
+    //  NAVIGATIE
+    // ================================================================
+    document.getElementById('knop-start').addEventListener('click',
+      () => _toonScherm('voorkennis'));
+
+    document.getElementById('knop-volgende-2').addEventListener('click',
+      () => _toonScherm('instructies'));
+
+    document.getElementById('knop-vorige-3').addEventListener('click',
+      () => _toonScherm('voorkennis'));
+
+    document.getElementById('knop-volgende-3').addEventListener('click', async () => {
+      _huidigOef = 0;
+      await _laadOefening(0);
+      _toonScherm('oefeningen');
+    });
+
+    document.getElementById('knop-vorige-oef').addEventListener('click', async () => {
+      _slaOefeningAntwoordenOp();
+      _syncLeerling();
+      await _slaOp();
+      if (_huidigOef === 0) {
+        _toonScherm('instructies');
+      } else {
+        _huidigOef--;
+        await _laadOefening(_huidigOef);
+      }
+    });
+
+    document.getElementById('knop-volgende-oef').addEventListener('click', async () => {
+      _slaOefeningAntwoordenOp();
+      _syncLeerling();
+      await _slaOp();
+      if (_huidigOef >= OEFENING_SCRIPTS.length - 1) {
+        _toonScherm('succescriteria');
+      } else {
+        _huidigOef++;
+        await _laadOefening(_huidigOef);
+      }
+    });
+
+    document.getElementById('knop-vorige-sc').addEventListener('click', async () => {
+      _syncLeerling();
+      await _slaOp();
+      _huidigOef = OEFENING_SCRIPTS.length - 1;
+      await _laadOefening(_huidigOef);
+      _toonScherm('oefeningen');
+    });
+
+    document.getElementById('knop-volgende-sc').addEventListener('click', async () => {
+      _syncLeerling();
+      await _slaOp();
+      _berekenOntbrekend();
+      _toonScherm('einde');
+    });
+
+    document.getElementById('knop-vorige-einde').addEventListener('click',
+      () => _toonScherm('succescriteria'));
+
+    document.getElementById('knop-indienen').addEventListener('click', _indienen);
+
+    // ================================================================
+    //  SCHERMBEHEER
+    // ================================================================
+    const SCHERMEN = {
+      login:          'scherm-login',
+      welkom:         'scherm-welkom',
+      voorkennis:     'scherm-voorkennis',
+      instructies:    'scherm-instructies',
+      oefeningen:     'scherm-oefeningen',
+      succescriteria: 'scherm-succescriteria',
+      einde:          'scherm-einde',
+    };
+
+    function _toonScherm(naam) {
+      _huidigScherm = naam;
+      Object.values(SCHERMEN).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('verborgen');
+      });
+      const doel = document.getElementById(SCHERMEN[naam]);
+      if (doel) doel.classList.remove('verborgen');
+      window.scrollTo(0, 0);
+    }
+
+    // ================================================================
+    //  ONTBREKENDE ANTWOORDEN BEREKENEN
+    // ================================================================
+    function _berekenOntbrekend() {
+      let ontbrekend = 0;
+      OEFENING_SCRIPTS.forEach(pad => {
+        const id  = pad.split('/').pop().replace('.js', '');
+        const arr = (_leerling.antwoorden || {})[id] || [];
+        ontbrekend += arr.filter(a => 
+          a === null || a === undefined || 
+          a.antwoord === null || a.antwoord === undefined || a.antwoord === ''
+        ).length;
+      });
+      document.getElementById('eind-ontbrekend').textContent = ontbrekend;
+      const eindInfo = document.getElementById('eind-info');
+      eindInfo.style.display = ontbrekend === 0 ? 'none' : 'block';
+
+      // Indienen-knop tonen/verbergen
+      const stel = _taakData.instellingen || {};
+      const knop = document.getElementById('knop-indienen');
+      if (_leerling.ingediend && !stel.wijzigenNaIndienen) {
+        knop.disabled    = true;
+        knop.textContent = 'Al ingediend';
+        document.getElementById('eind-ingediend-bericht').classList.remove('verborgen');
+      } else if (stel.verbeterdModus) {
+        knop.disabled    = true;
+        knop.textContent = 'Verbeterd';
+      }
+    }
+
+    // ================================================================
+    //  DATA SYNCHRONISEREN
+    // ================================================================
+    function _syncLeerling() {
+      const idx = _taakData.leerlingen.findIndex(
+        l => l.mail.toLowerCase() === _leerling.mail.toLowerCase()
+      );
+      if (idx >= 0) _taakData.leerlingen[idx] = _leerling;
+      localStorage.setItem('taak_data', JSON.stringify(_taakData));
+    }
+
+    async function _slaOp() {
+      // JSON-rondreis verwijdert alle undefined waarden
+      const schoon = JSON.parse(JSON.stringify(_taakData));
+      await saveTaak(schoon);
+    }
+
+    // Auto-opslaan bij elke navigatiestap (enkel als niet verbeterd)
+    // Wordt aangeroepen door knoppen hierboven via _slaOefeningAntwoordenOp
+    // Voeg een periodieke opslag toe voor extra veiligheid
+    setInterval(async () => {
+      if (_leerling && !_taakData?.instellingen?.verbeterdModus) {
+        _syncLeerling();
+        await _slaOp();
+      }
+    }, 30000); // elke 30 seconden
+
+  </script>
+</body>
+</html>

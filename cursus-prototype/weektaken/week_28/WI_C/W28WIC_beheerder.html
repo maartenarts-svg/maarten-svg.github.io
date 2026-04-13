@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  WxWIx_beheerder.html  —  Beheerderspagina voor digitale weektaak
+  Pas TAAK_ID, TAAK_CODE, TAAK_NAAM en OEFENING_SCRIPTS aan.
+============================================================ -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beheerder — WI C</title>
+  <link rel="stylesheet" href="../../css/taak.css">
+  <style>
+    body { background: #f0f4f0; font-size: 13px; }
+    .beheer-pagina { min-height: 100vh; }
+    .topbalk {
+      background: var(--groen-donker); color: white;
+      padding: 0.6rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .topbalk-titel { font-size: 1rem; font-weight: 700; }
+    .topbalk-knop {
+      padding: 0.35rem 0.8rem;
+      background: rgba(255,255,255,0.15); color: white;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: var(--radius); font-size: 0.85rem;
+      font-family: var(--font); cursor: pointer;
+    }
+    .topbalk-knop:hover { background: rgba(255,255,255,0.28); }
+    .leerling-sim {
+      background: #fffde7; border-bottom: 1.5px solid #f9a825;
+      padding: 0.6rem 1.5rem;
+      display: flex; gap: 0.7rem; align-items: center; flex-wrap: wrap;
+    }
+    .sim-label { font-size: 0.85rem; font-weight: 600; color: #5d4037; }
+    .instelling-rij {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--groen-scheiding);
+      font-size: 0.9rem;
+    }
+    .instelling-rij:last-child { border-bottom: none; }
+    .instelling-toggle {
+      width: 44px; height: 24px; position: relative;
+      display: inline-block; flex-shrink: 0;
+    }
+    .instelling-toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; inset: 0; cursor: pointer;
+      background: #ccc; border-radius: 24px;
+      transition: background 0.2s;
+    }
+    .toggle-slider:before {
+      content: ""; position: absolute;
+      width: 18px; height: 18px; left: 3px; bottom: 3px;
+      background: white; border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    input:checked + .toggle-slider { background: var(--groen-donker); }
+    input:checked + .toggle-slider:before { transform: translateX(20px); }
+    .verbeter-knop {
+      padding: 0.7rem 1.5rem;
+      background: #e65100; color: white;
+      border: none; border-radius: var(--radius);
+      font-size: 0.9rem; font-family: var(--font); font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .verbeter-knop:hover    { background: #bf360c; }
+    .verbeter-knop:disabled { background: #aaa; cursor: not-allowed; }
+    .verbeter-knop.actief   { background: #2e7d32; }
+    .oef-rij {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 0.6rem;
+      border-bottom: 1px solid var(--groen-scheiding);
+    }
+    .oef-rij:last-child { border-bottom: none; }
+    .oef-naam { flex: 1; font-size: 0.85rem; font-family: monospace; }
+  </style>
+</head>
+<body class="beheer-pagina">
+
+  <header class="topbalk">
+    <span class="topbalk-titel" id="topbalk-titel">Beheerder — WI C</span>
+    <div style="display:flex; gap:0.6rem;">
+      <button class="topbalk-knop" id="knop-als-leerling">Leerlingenscherm</button>
+      <button class="topbalk-knop" id="knop-uitloggen">Uitloggen</button>
+    </div>
+  </header>
+
+  <!-- Leerling simulatie balk -->
+  <div class="leerling-sim verborgen" id="sim-balk">
+    <span class="sim-label">Leerling:</span>
+    <select id="sim-leerling" class="veld-invoer" style="max-width:280px; font-size:0.85rem;">
+      <option value="">— Kies leerling —</option>
+    </select>
+    <button class="knop-primair" id="knop-sim-bekijk" style="font-size:0.85rem; padding:0.4rem 0.9rem;">
+      Bekijk
+    </button>
+    <button class="knop-secundair" id="knop-terug-beheer" style="font-size:0.85rem; padding:0.4rem 0.9rem;">
+      ← Terug
+    </button>
+  </div>
+
+  <!-- Leerling-simulatiepagina (ingebed) -->
+  <div id="sim-container" class="verborgen"
+       style="background:white; min-height:calc(100vh - 120px);">
+  </div>
+
+  <!-- Beheerdersscherm -->
+  <div id="beheer-scherm">
+    <nav class="tabs-balk">
+      <button class="tab-knop actief" data-tab="instellingen">Instellingen</button>
+      <button class="tab-knop"        data-tab="leerlingen">Leerlingenbeheer</button>
+      <button class="tab-knop"        data-tab="taakbeheer">Taakbeheer</button>
+      <button class="tab-knop"        data-tab="scores">Scores</button>
+    </nav>
+
+    <div class="tab-inhoud">
+
+      <!-- ── Tab: Instellingen ── -->
+      <div class="tab-paneel actief" id="tab-instellingen">
+        <div class="formulier-kaart">
+          <h3 style="color:var(--groen-donker); margin-bottom:1rem;">Taakinstellingen</h3>
+
+          <div class="instelling-rij">
+            <label class="instelling-toggle">
+              <input type="checkbox" id="stel-wijzigen">
+              <span class="toggle-slider"></span>
+            </label>
+            <span>Leerlingen mogen antwoorden wijzigen na indienen</span>
+          </div>
+
+          <div class="instelling-rij">
+            <label class="instelling-toggle">
+              <input type="checkbox" id="stel-correcties">
+              <span class="toggle-slider"></span>
+            </label>
+            <span>Correcties zichtbaar na indienen</span>
+          </div>
+
+          <div class="instelling-rij" style="margin-top:0.8rem; border-top:2px solid var(--groen-scheiding); padding-top:0.8rem;">
+            <button class="verbeter-knop" id="knop-verbeter" disabled>
+              ✓ Verbeter taak
+            </button>
+            <span style="font-size:0.82rem; color:var(--tekst-zacht);" id="verbeter-status">
+              Klik om de taak te verbeteren. Daarna kunnen leerlingen niet meer indienen.
+            </span>
+          </div>
+
+          <div style="margin-top:1rem;">
+            <button class="knop-primair" id="knop-stel-opslaan">Instellingen opslaan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Tab: Leerlingenbeheer ── -->
+      <div class="tab-paneel" id="tab-leerlingen">
+        <div style="display:flex; gap:0.7rem; flex-wrap:wrap; margin-bottom:1rem; align-items:center;">
+          <input type="text" id="zoek-ll" class="veld-invoer"
+            placeholder="Zoek op naam of mail…" style="max-width:280px; font-size:0.85rem;">
+          <button class="knop-primair"   id="knop-nieuwe-ll"
+            style="font-size:0.85rem;">+ Leerling toevoegen</button>
+          <button class="knop-secundair" id="knop-upload-ll"
+            style="font-size:0.85rem;">CSV uploaden</button>
+          <button class="knop-secundair" id="knop-download-ll"
+            style="font-size:0.85rem;">Voorbeeld CSV</button>
+          <input type="file" id="csv-ll" accept=".csv" style="display:none;">
+        </div>
+        <div id="ll-tabel"></div>
+        <div id="ll-formulier" class="verborgen"></div>
+      </div>
+
+      <!-- ── Tab: Taakbeheer ── -->
+      <div class="tab-paneel" id="tab-taakbeheer">
+        <div class="formulier-kaart" style="max-width:700px;">
+          <h3 style="color:var(--groen-donker); margin-bottom:0.8rem;">Bestanden</h3>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin-bottom:0.8rem;">
+            <div class="veld-groep">
+              <label class="veld-label">Voorkennismatrix (js)</label>
+              <input type="text" id="tb-voorkennis" class="veld-invoer"
+                placeholder="voorkennis-matrix.js">
+            </div>
+            <div class="veld-groep">
+              <label class="veld-label">Succescriteria-matrix (js)</label>
+              <input type="text" id="tb-succescriteria" class="veld-invoer"
+                placeholder="succescriteria-matrix.js">
+            </div>
+            <div class="veld-groep">
+              <label class="veld-label">Instructiematrix (js)</label>
+              <input type="text" id="tb-instructies" class="veld-invoer"
+                placeholder="instructies-matrix.js">
+            </div>
+            <div class="veld-groep">
+              <label class="veld-label">Benodigdhedenmatrix (js)</label>
+              <input type="text" id="tb-benodigdheden" class="veld-invoer"
+                placeholder="benodigdheden-matrix.js">
+            </div>
+            <div class="veld-groep">
+              <label class="veld-label">Scoreberekening (js)</label>
+              <input type="text" id="tb-score" class="veld-invoer"
+                placeholder="score.js">
+            </div>
+          </div>
+
+          <h3 style="color:var(--groen-donker); margin-bottom:0.6rem;">Oefeningen</h3>
+          <p style="font-size:0.82rem; color:var(--tekst-zacht); margin-bottom:0.5rem;">
+            Volgorde bepaalt de weergave. Gebruik ↑↓ om te herordenen.
+          </p>
+          <div id="oef-lijst"></div>
+          <button class="knop-secundair" id="knop-oef-toevoeg"
+            style="margin-top:0.5rem; font-size:0.85rem; padding:0.3rem 0.8rem;">
+            + Oefening toevoegen
+          </button>
+
+          <div style="margin-top:1rem;">
+            <button class="knop-primair" id="knop-tb-opslaan">Opslaan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Tab: Scores ── -->
+      <div class="tab-paneel" id="tab-scores">
+        <div class="formulier-kaart" style="max-width:500px;">
+          <h3 style="color:var(--groen-donker); margin-bottom:0.8rem;">Scores downloaden</h3>
+          <p style="font-size:0.85rem; color:var(--tekst-zacht); margin-bottom:1rem;">
+            Download een CSV met de scores van alle leerlingen,
+            berekend via het scoreberekening-script.
+          </p>
+          <button class="knop-primair" id="knop-scores-download">
+            CSV downloaden
+          </button>
+          <p class="sectie-leeg" id="scores-info" style="margin-top:0.5rem;"></p>
+        </div>
+
+        <!-- Score-aanpassing per leerling -->
+        <div class="formulier-kaart" style="max-width:700px; margin-top:1rem;">
+          <h3 style="color:var(--groen-donker); margin-bottom:0.8rem;">
+            Scores aanpassen
+          </h3>
+          <div style="display:flex; gap:0.7rem; margin-bottom:0.8rem; align-items:center;">
+            <select id="score-leerling" class="veld-invoer" style="max-width:280px; font-size:0.85rem;">
+              <option value="">— Kies leerling —</option>
+            </select>
+            <button class="knop-secundair" id="knop-score-laden"
+              style="font-size:0.85rem;">Laden</button>
+          </div>
+          <div id="score-aanpas-wrap"></div>
+        </div>
+      </div>
+
+    </div><!-- .tab-inhoud -->
+  </div><!-- #beheer-scherm -->
+
+  <script src="../../js/helpers.js"></script>
+  <script type="module">
+    import { setTaakRef, fetchTaak, saveTaak } from '../../js/firebase.js';
+
+    // ── Configuratie ──────────────────────────────────────────
+    const TAAK_ID   = 'W28WIC';
+    const TAAK_CODE = 'WI C';
+
+    // ── Init ──────────────────────────────────────────────────
+    setTaakRef(TAAK_ID);
+    document.getElementById('topbalk-titel').textContent = `Beheerder — ${TAAK_CODE}`;
+
+    // Controleer login
+    const mail = localStorage.getItem('taak_mail');
+
+
+    let _taakData = null;
+
+    // Laad data
+    try {
+      _taakData = await fetchTaak();
+      if (!_taakData) {
+        _taakData = {
+          instellingen: { wijzigenNaIndienen: false, correctiesZichtbaar: false, verbeterdModus: false },
+          leerlingen:   [],
+          bestanden:    { voorkennis: '', succescriteria: '', instructies: '', benodigdheden: '', score: '', oefeningen: [] }
+        };
+      }
+      if (!_taakData.bestanden) _taakData.bestanden = { oefeningen: [] };
+    } catch (e) {
+      console.error('Kan data niet laden:', e);
+    }
+
+    if (mail !== _taakData?.instellingen?.beheerderMail) {
+      window.location.href = window.location.pathname.replace('_beheerder.html', '_taak.html');
+    }
+    
+    async function _slaOp() {
+      await saveTaak(_taakData);
+      localStorage.setItem('taak_data', JSON.stringify(_taakData));
+    }
+
+    // ── Tabs ──────────────────────────────────────────────────
+    document.querySelectorAll('.tab-knop').forEach(knop => {
+      knop.addEventListener('click', () => {
+        document.querySelectorAll('.tab-knop').forEach(k => k.classList.remove('actief'));
+        document.querySelectorAll('.tab-paneel').forEach(p => p.classList.remove('actief'));
+        knop.classList.add('actief');
+        document.getElementById('tab-' + knop.dataset.tab).classList.add('actief');
+      });
+    });
+
+    // ── Uitloggen ─────────────────────────────────────────────
+    document.getElementById('knop-uitloggen').addEventListener('click', () => {
+      localStorage.removeItem('taak_mail');
+      localStorage.removeItem('taak_data');
+      window.location.href = window.location.pathname.replace('_beheerder.html', '_taak.html');
+    });
+
+    // ================================================================
+    //  LEERLINGENSCHERM SIMULATIE
+    // ================================================================
+    const simBalk      = document.getElementById('sim-balk');
+    const simContainer = document.getElementById('sim-container');
+    const beheerScherm = document.getElementById('beheer-scherm');
+
+    document.getElementById('knop-als-leerling').addEventListener('click', () => {
+      simBalk.classList.remove('verborgen');
+      _vulSimDropdown();
+    });
+
+    document.getElementById('knop-terug-beheer').addEventListener('click', () => {
+      simBalk.classList.add('verborgen');
+      simContainer.classList.add('verborgen');
+      simContainer.innerHTML = '';
+      beheerScherm.classList.remove('verborgen');
+    });
+
+    document.getElementById('knop-sim-bekijk').addEventListener('click', () => {
+      const mail = document.getElementById('sim-leerling').value;
+      if (!mail) { alert('Kies eerst een leerling.'); return; }
+
+      const leerling = (_taakData.leerlingen || []).find(l => l.mail === mail);
+      if (!leerling) { alert('Leerling niet gevonden.'); return; }
+
+      beheerScherm.classList.add('verborgen');
+      simContainer.classList.remove('verborgen');
+      simContainer.innerHTML = `
+        <iframe
+          src="${window.location.pathname.replace('_beheerder.html', '_taak.html')}?sim=${encodeURIComponent(mail)}"
+          style="width:100%; height:calc(100vh - 120px); border:none;">
+        </iframe>`;
+    });
+
+    function _vulSimDropdown() {
+      const sel = document.getElementById('sim-leerling');
+      sel.innerHTML = '<option value="">— Kies leerling —</option>';
+      (_taakData.leerlingen || [])
+        .filter(l => !l.code)
+        .sort((a, b) => (a.volledigeNaam || '').localeCompare(b.volledigeNaam || ''))
+        .forEach(l => {
+          const opt = document.createElement('option');
+          opt.value = l.mail;
+          opt.textContent = l.volledigeNaam || l.mail;
+          sel.appendChild(opt);
+        });
+    }
+
+    // ================================================================
+    //  TAB: INSTELLINGEN
+    // ================================================================
+    const cbWijzigen   = document.getElementById('stel-wijzigen');
+    const cbCorrecties = document.getElementById('stel-correcties');
+    const knopVerbeter = document.getElementById('knop-verbeter');
+    const verbeterStatus = document.getElementById('verbeter-status');
+
+    // Vul huidige instellingen in
+    cbWijzigen.checked   = _taakData.instellingen?.wijzigenNaIndienen  || false;
+    cbCorrecties.checked = _taakData.instellingen?.correctiesZichtbaar || false;
+
+    if (_taakData.instellingen?.verbeterdModus) {
+      knopVerbeter.textContent = '✓ Verbeterd';
+      knopVerbeter.classList.add('actief');
+      knopVerbeter.disabled = true;
+      verbeterStatus.textContent = 'De taak is verbeterd. Leerlingen kunnen niet meer indienen.';
+    } else {
+      knopVerbeter.disabled = false;
+    }
+
+    document.getElementById('knop-stel-opslaan').addEventListener('click', async () => {
+      _taakData.instellingen.wijzigenNaIndienen  = cbWijzigen.checked;
+      _taakData.instellingen.correctiesZichtbaar = cbCorrecties.checked;
+      await _slaOp();
+      alert('Instellingen opgeslagen.');
+    });
+
+    knopVerbeter.addEventListener('click', async () => {
+      if (!confirm('Wil je de taak verbeteren? Daarna kunnen leerlingen niet meer indienen.')) return;
+      _taakData.instellingen.verbeterdModus = true;
+      await _slaOp();
+      knopVerbeter.textContent = '✓ Verbeterd';
+      knopVerbeter.classList.add('actief');
+      knopVerbeter.disabled = true;
+      verbeterStatus.textContent = 'De taak is verbeterd.';
+    });
+
+    // ================================================================
+    //  TAB: LEERLINGENBEHEER
+    // ================================================================
+    document.getElementById('zoek-ll').addEventListener('input', _renderLeerlingenTabel);
+    document.getElementById('knop-nieuwe-ll').addEventListener('click', () => _toonLeerlingForm(null));
+    document.getElementById('knop-upload-ll').addEventListener('click', () =>
+      document.getElementById('csv-ll').click());
+    document.getElementById('csv-ll').addEventListener('change', _verwerkCsv);
+    document.getElementById('knop-download-ll').addEventListener('click', () =>
+      _downloadCsv(
+        'mail,volledigeNaam,voornaam,familienaam\n' +
+        'jan.janssen@school.be,Jan Janssen,Jan,Janssen\n',
+        'voorbeeld_leerlingen.csv'
+      )
+    );
+
+    _renderLeerlingenTabel();
+
+    function _renderLeerlingenTabel() {
+      const zoek = (document.getElementById('zoek-ll')?.value || '').toLowerCase();
+      const wrap = document.getElementById('ll-tabel');
+      if (!wrap) return;
+
+      const items = (_taakData.leerlingen || []).filter(l =>
+        !l.code && (!zoek ||
+          l.volledigeNaam?.toLowerCase().includes(zoek) ||
+          l.mail?.toLowerCase().includes(zoek))
+      );
+
+      if (items.length === 0) {
+        wrap.innerHTML = '<p class="sectie-leeg">Geen leerlingen gevonden.</p>';
+        return;
+      }
+
+      wrap.innerHTML = `
+        <table class="beheer-tabel">
+          <thead><tr>
+            <th>Mail</th><th>Naam</th><th>Voornaam</th><th>Familienaam</th>
+            <th>Ingediend</th><th></th>
+          </tr></thead>
+          <tbody>
+            ${items.map(l => `
+              <tr>
+                <td>${l.mail}</td>
+                <td>${l.volledigeNaam || ''}</td>
+                <td>${l.voornaam || ''}</td>
+                <td>${l.familienaam || ''}</td>
+                <td>${l.ingediend ? '✓' : '—'}</td>
+                <td><button class="knop-secundair"
+                  style="padding:0.2rem 0.6rem; font-size:0.8rem;"
+                  data-mail="${l.mail}">Bewerk</button></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>`;
+
+      wrap.querySelectorAll('button[data-mail]').forEach(knop => {
+        knop.addEventListener('click', () => {
+          const idx = _taakData.leerlingen.findIndex(l => l.mail === knop.dataset.mail);
+          _toonLeerlingForm(_taakData.leerlingen[idx], idx);
+        });
+      });
+    }
+
+    function _toonLeerlingForm(leerling, idx = null) {
+      const wrap    = document.getElementById('ll-formulier');
+      const isNieuw = leerling === null;
+      const l       = leerling || {};
+
+      wrap.classList.remove('verborgen');
+      wrap.innerHTML = `
+        <div class="formulier-kaart">
+          <h3 style="color:var(--groen-donker); margin-bottom:0.8rem;">
+            ${isNieuw ? 'Nieuwe leerling' : 'Bewerk: ' + (l.volledigeNaam || '')}
+          </h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem;">
+            <div class="veld-groep">
+              <label class="veld-label">Mailadres</label>
+              <input type="text" id="ll-mail" class="veld-invoer" value="${_esc(l.mail || '')}">
+            </div>
+            <div class="veld-groep">
+              <label class="veld-label">Voornaam</label>
+              <input type="text" id="ll-voornaam" class="veld-invoer" value="${_esc(l.voornaam || '')}">
+            </div>
+            <div class="veld-groep">
+              <label class="veld-label">Familienaam</label>
+              <input type="text" id="ll-familienaam" class="veld-invoer" value="${_esc(l.familienaam || '')}">
+            </div>
+          </div>
+          <div style="display:flex; gap:0.7rem; margin-top:1rem;">
+            <button class="knop-primair"   id="ll-opslaan">Opslaan</button>
+            <button class="knop-secundair" id="ll-annuleer">Annuleer</button>
+            ${!isNieuw ? `<button class="knop-secundair" id="ll-verwijder"
+              style="margin-left:auto;color:#c62828;border-color:#c62828;">
+              Verwijder</button>` : ''}
+          </div>
+        </div>`;
+
+      wrap.querySelector('#ll-annuleer').addEventListener('click', () => {
+        wrap.classList.add('verborgen'); wrap.innerHTML = '';
+      });
+
+      wrap.querySelector('#ll-opslaan').addEventListener('click', async () => {
+        const vn  = wrap.querySelector('#ll-voornaam').value.trim();
+        const fn  = wrap.querySelector('#ll-familienaam').value.trim();
+        const nieuw = {
+          mail:         wrap.querySelector('#ll-mail').value.trim().toLowerCase(),
+          voornaam:     vn, familienaam: fn,
+          volledigeNaam: `${vn} ${fn}`.trim(),
+          antwoorden:   l.antwoorden    || {},
+          succescriteria: l.succescriteria || [],
+          ingediend:    l.ingediend     || false,
+          scores:       l.scores        || {},
+        };
+        if (!nieuw.mail) { alert('Mailadres verplicht.'); return; }
+        if (isNieuw) _taakData.leerlingen.push(nieuw);
+        else         _taakData.leerlingen[idx] = { ..._taakData.leerlingen[idx], ...nieuw };
+        await _slaOp();
+        wrap.classList.add('verborgen');
+        _renderLeerlingenTabel();
+        _vulSimDropdown();
+        _vulScoreDropdown();
+      });
+
+      if (!isNieuw) {
+        wrap.querySelector('#ll-verwijder').addEventListener('click', async () => {
+          if (!confirm(`Verwijder ${l.volledigeNaam}?`)) return;
+          _taakData.leerlingen.splice(idx, 1);
+          await _slaOp();
+          wrap.classList.add('verborgen');
+          _renderLeerlingenTabel();
+        });
+      }
+    }
+
+    async function _verwerkCsv(e) {
+      const bestand = e.target.files[0];
+      if (!bestand) return;
+      const lezer = new FileReader();
+      lezer.onload = async (ev) => {
+        const regels  = ev.target.result.split('\n').filter(r => r.trim());
+        const headers = regels[0].split(',').map(h => h.trim());
+        let toegevoegd = 0;
+        for (let i = 1; i < regels.length; i++) {
+          const w   = regels[i].split(',').map(v => v.trim());
+          const rij = {};
+          headers.forEach((h, j) => rij[h] = w[j] || '');
+          if (!rij.mail) continue;
+          rij.volledigeNaam = `${rij.voornaam || ''} ${rij.familienaam || ''}`.trim();
+          const bi = _taakData.leerlingen.findIndex(l => l.mail === rij.mail);
+          if (bi >= 0) {
+            _taakData.leerlingen[bi] = { ..._taakData.leerlingen[bi], ...rij };
+          } else {
+            _taakData.leerlingen.push({
+              ...rij, antwoorden: {}, succescriteria: [], ingediend: false, scores: {}
+            });
+            toegevoegd++;
+          }
+        }
+        await _slaOp();
+        _renderLeerlingenTabel();
+        alert(`CSV verwerkt. ${toegevoegd} nieuwe leerlingen.`);
+      };
+      lezer.readAsText(bestand);
+      e.target.value = '';
+    }
+
+    // ================================================================
+    //  TAB: TAAKBEHEER
+    // ================================================================
+    // Vul huidige bestandsnamen in
+    const best = _taakData.bestanden || {};
+    document.getElementById('tb-voorkennis').value    = best.voorkennis    || '';
+    document.getElementById('tb-succescriteria').value= best.succescriteria|| '';
+    document.getElementById('tb-instructies').value   = best.instructies   || '';
+    document.getElementById('tb-benodigdheden').value = best.benodigdheden || '';
+    document.getElementById('tb-score').value         = best.score         || '';
+
+    _renderOefeningenLijst();
+
+    function _renderOefeningenLijst() {
+      const wrap = document.getElementById('oef-lijst');
+      const oef  = _taakData.bestanden?.oefeningen || [];
+
+      if (oef.length === 0) {
+        wrap.innerHTML = '<p class="sectie-leeg" style="padding:0.5rem 0;">Nog geen oefeningen.</p>';
+        return;
+      }
+
+      wrap.innerHTML = '';
+      oef.forEach((naam, idx) => {
+        const rij = document.createElement('div');
+        rij.className = 'oef-rij';
+        rij.innerHTML = `
+          <span class="oef-naam">${naam}</span>
+          <button class="volgorde-knop" data-dir="up"   data-idx="${idx}" title="Omhoog">↑</button>
+          <button class="volgorde-knop" data-dir="down" data-idx="${idx}" title="Omlaag">↓</button>
+          <button class="knop-secundair" data-del="${idx}"
+            style="padding:0.2rem 0.5rem; font-size:0.8rem; color:#c62828; border-color:#c62828;">
+            ×
+          </button>`;
+
+        rij.querySelectorAll('.volgorde-knop').forEach(knop => {
+          knop.addEventListener('click', () => {
+            const i = parseInt(knop.dataset.idx);
+            const d = knop.dataset.dir;
+            if (d === 'up'   && i > 0)              [oef[i-1], oef[i]] = [oef[i], oef[i-1]];
+            if (d === 'down' && i < oef.length - 1) [oef[i], oef[i+1]] = [oef[i+1], oef[i]];
+            _renderOefeningenLijst();
+          });
+        });
+        rij.querySelector('[data-del]').addEventListener('click', () => {
+          oef.splice(idx, 1);
+          _renderOefeningenLijst();
+        });
+
+        wrap.appendChild(rij);
+      });
+    }
+
+    document.getElementById('knop-oef-toevoeg').addEventListener('click', () => {
+      const naam = prompt('Bestandsnaam van de oefening (bv. oefeningen/oe_1.js):');
+      if (!naam) return;
+      if (!_taakData.bestanden) _taakData.bestanden = { oefeningen: [] };
+      if (!_taakData.bestanden.oefeningen) _taakData.bestanden.oefeningen = [];
+      _taakData.bestanden.oefeningen.push(naam.trim());
+      _renderOefeningenLijst();
+    });
+
+    document.getElementById('knop-tb-opslaan').addEventListener('click', async () => {
+      if (!_taakData.bestanden) _taakData.bestanden = {};
+      _taakData.bestanden.voorkennis     = document.getElementById('tb-voorkennis').value.trim();
+      _taakData.bestanden.succescriteria = document.getElementById('tb-succescriteria').value.trim();
+      _taakData.bestanden.instructies    = document.getElementById('tb-instructies').value.trim();
+      _taakData.bestanden.benodigdheden  = document.getElementById('tb-benodigdheden').value.trim();
+      _taakData.bestanden.score          = document.getElementById('tb-score').value.trim();
+      await _slaOp();
+      alert('Taakbeheer opgeslagen.');
+    });
+
+    // ================================================================
+    //  TAB: SCORES
+    // ================================================================
+    _vulScoreDropdown();
+
+    function _vulScoreDropdown() {
+      const sel = document.getElementById('score-leerling');
+      if (!sel) return;
+      sel.innerHTML = '<option value="">— Kies leerling —</option>';
+      (_taakData.leerlingen || [])
+        .filter(l => !l.code)
+        .sort((a, b) => (a.volledigeNaam || '').localeCompare(b.volledigeNaam || ''))
+        .forEach(l => {
+          const opt = document.createElement('option');
+          opt.value = l.mail; opt.textContent = l.volledigeNaam || l.mail;
+          sel.appendChild(opt);
+        });
+    }
+
+    document.getElementById('knop-score-laden').addEventListener('click', () => {
+      const mail = document.getElementById('score-leerling').value;
+      if (!mail) { alert('Kies eerst een leerling.'); return; }
+      const leerling = (_taakData.leerlingen || []).find(l => l.mail === mail);
+      if (!leerling) return;
+      _toonScoreAanpassing(leerling);
+    });
+
+    function _toonScoreAanpassing(leerling) {
+      const wrap = document.getElementById('score-aanpas-wrap');
+      const scores = leerling.scores || {};
+
+      wrap.innerHTML = `
+        <p style="font-size:0.85rem; margin-bottom:0.5rem;">
+          <strong>${leerling.volledigeNaam}</strong>
+        </p>
+        <div id="score-velden" style="display:flex; flex-direction:column; gap:0.4rem;"></div>
+        <button class="knop-primair" id="knop-score-opslaan"
+          style="margin-top:0.8rem; font-size:0.85rem;">
+          Scores opslaan
+        </button>`;
+
+      const velden = wrap.querySelector('#score-velden');
+      Object.entries(scores).forEach(([sleutel, waarde]) => {
+        const rij = document.createElement('div');
+        rij.style.cssText = 'display:flex; align-items:center; gap:0.5rem; font-size:0.85rem;';
+        rij.innerHTML = `
+          <span style="min-width:120px;">${sleutel}</span>
+          <input type="text" class="score-invoer" data-sleutel="${sleutel}"
+            value="${_esc(String(waarde))}">`;
+        velden.appendChild(rij);
+      });
+
+      if (Object.keys(scores).length === 0) {
+        velden.innerHTML = '<p class="sectie-leeg">Nog geen scores beschikbaar.</p>';
+      }
+
+      wrap.querySelector('#knop-score-opslaan')?.addEventListener('click', async () => {
+        wrap.querySelectorAll('.score-invoer').forEach(inp => {
+          leerling.scores[inp.dataset.sleutel] = inp.value.trim();
+        });
+        const idx = _taakData.leerlingen.findIndex(l => l.mail === leerling.mail);
+        if (idx >= 0) _taakData.leerlingen[idx] = leerling;
+        await _slaOp();
+        alert('Scores opgeslagen.');
+      });
+    }
+
+    document.getElementById('knop-scores-download').addEventListener('click', async () => {
+      const info = document.getElementById('scores-info');
+      const scorePad = _taakData.bestanden?.score;
+      if (!scorePad) {
+        info.textContent = 'Geen scoreberekening-script ingesteld in Taakbeheer.';
+        return;
+      }
+
+      // Laad score.js dynamisch
+      await new Promise((ok, fout) => {
+        const s = document.createElement('script');
+        s.src = scorePad; s.onload = ok; s.onerror = fout;
+        document.head.appendChild(s);
+      }).catch(() => {
+        info.textContent = `Kon ${scorePad} niet laden.`;
+        return;
+      });
+
+      if (typeof window.__berekenScores !== 'function') {
+        info.textContent = 'score.js exporteert geen __berekenScores()-functie.';
+        return;
+      }
+
+      const leerlingen = (_taakData.leerlingen || []).filter(l => !l.code);
+      const regels = ['mail;volledigeNaam;voornaam;familienaam'];
+      const extraKolommen = [];
+
+      leerlingen.forEach((l, idx) => {
+        const scores = window.__berekenScores(l, _taakData);
+        if (idx === 0) extraKolommen.push(...Object.keys(scores));
+        const waarden = Object.values(scores).map(v => `"${String(v).replace(/"/g, "'")}"`);
+        regels.push([l.mail, l.volledigeNaam, l.voornaam, l.familienaam, ...waarden].join(';'));
+      });
+
+      if (extraKolommen.length > 0) {
+        regels[0] += ';' + extraKolommen.join(';');
+      }
+
+      _downloadCsv(regels.join('\n'), `scores_${TAAK_ID}.csv`);
+    });
+
+    // ── Hulpfuncties ──────────────────────────────────────────
+    function _esc(str) {
+      return String(str || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function _downloadCsv(inhoud, naam) {
+      const blob = new Blob([inhoud], { type: 'text/csv;charset=utf-8;' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href = url; a.download = naam; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+  </script>
+</body>
+</html>

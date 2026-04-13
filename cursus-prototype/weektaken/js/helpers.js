@@ -732,3 +732,25 @@ function _maakCriteriaTabel(items, aanklikbaar, metLeerplandoel, waardenArray = 
   wrap.appendChild(tabel);
   return wrap;
 }
+
+
+//uit andere helpers
+function maakBreuk(teller, noemer, stijl='opgave') {
+  const span = document.createElement('span');
+  span.classList.add('breuk-html');
+  if (stijl === 'oplossing') {
+    span.style.fontFamily = 'var(--font-oplossing)';
+    span.style.color = 'var(--blauw-oplossing)';
+  }
+  const t = document.createElement('span'); 
+  t.classList.add('teller'); 
+  if (teller instanceof Node) t.appendChild(teller);
+  else t.innerHTML = teller;
+  const n = document.createElement('span'); 
+  n.classList.add('noemer');
+  if (noemer instanceof Node) n.appendChild(noemer);
+  else n.innerHTML = noemer;
+  span.appendChild(t); 
+  span.appendChild(n);
+  return span;
+}

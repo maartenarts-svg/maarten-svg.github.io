@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  correctiesleutel-viewer-taak.html
+  Toont één oefening in een popup-venster.
+  Slaat verbeterdata op in Firebase van de taak.
+
+  URL-parameters:
+    pad  : pad naar het js-bestand van de oefening
+    nr   : nummer van het blokje (1, 2, 3 of 4)
+    mail : mailadres van de leerling
+============================================================ -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oefening</title>
+  <link rel="stylesheet" href="../../css/taak.css">
+  <link rel="stylesheet" href="../../../css/cursus.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: #f0f0f0; }
+
+    #zwevende-zone {
+      position: fixed;
+      bottom: 1cm;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: min(500px, 90vw);
+    }
+
+    #knop-verbeterd {
+      background: var(--groen-donker, #4a7c59);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 11pt;
+      font-family: var(--font, Arial);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      white-space: nowrap;
+    }
+    #knop-verbeterd:hover { background: var(--groen-midden, #6aab7e); }
+
+    #messagebox {
+      display: none;
+      background: white;
+      border: 1.5px solid var(--groen-donker, #4a7c59);
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      font-family: var(--font, Arial);
+      font-size: 10pt;
+    }
+
+    .mb-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 10pt;
+      line-height: 1.4;
+    }
+    .mb-label input { margin-top: 3px; cursor: pointer; accent-color: var(--groen-donker, #4a7c59); }
+
+    .mb-knop {
+      background: var(--groen-donker, #4a7c59);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 18px;
+      font-size: 10pt;
+      font-family: var(--font, Arial);
+      cursor: pointer;
+    }
+    .mb-knop:disabled { opacity: 0.4; cursor: not-allowed; }
+    .mb-knop:not(:disabled):hover { background: var(--groen-midden, #6aab7e); }
+
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 8px;
+      border: 1px solid var(--groen-scheiding, #a5d6a7);
+      border-radius: 4px;
+      font-family: var(--font, Arial);
+      font-size: 10pt;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    #laad-fout {
+      display: none;
+      padding: 1rem;
+      color: #c62828;
+      font-family: Arial, sans-serif;
+      font-size: 10pt;
+    }
+
+    .oefening-marge {
+      margin-left: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pagina" id="oefening-container" style="margin-bottom: 4cm; "></div>
+  <div id="laad-fout"></div>
+
+  <div id="zwevende-zone">
+    <button id="knop-verbeterd">Verbeterd, keer terug.</button>
+    <div id="messagebox"></div>
+  </div>
+
+<script type="module">
+import { fetchTaak, saveTaak, setTaakRef } from '../../js/firebase.js';
+
+// ── URL-parameters ────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const pad    = params.get('pad');
+const nr     = parseInt(params.get('nr') || '1');
+const mail   = params.get('mail');
+window.ACTIEVE_CONTAINER = '#oefening-container';
+
+// ── Pas TAAK_ID aan naar de juiste taak ───────────────────────
+const TAAK_ID = 'W28WIC';
+
+document.title = `Oefening ${nr}`;
+
+if (!pad || !mail) {
+  document.getElementById('laad-fout').style.display  = 'block';
+  document.getElementById('laad-fout').textContent    = 'Ongeldige parameters.';
+  document.getElementById('zwevende-zone').style.display = 'none';
+  throw new Error('stop');
+}
+
+setTaakRef(TAAK_ID);
+
+// ── Oefening laden ────────────────────────────────────────────
+function laadScript(src, id) {
+  return new Promise((ok, fout) => {
+    if (id && document.getElementById(id)) { ok(); return; }
+    const s   = document.createElement('script');
+    if (id) s.id = id;
+    s.src     = src;
+    s.onload  = ok;
+    s.onerror = () => fout(new Error(`Kan ${src} niet laden`));
+    document.head.appendChild(s);
+  });
+}
+
+try {
+  await laadScript('../../../js/helpers.js', 'oef-helpers');
+  OEFENING_TELLER = nr;
+  await laadScript(pad, null);
+} catch (e) {
+  const el = document.getElementById('laad-fout');
+  el.style.display = 'block';
+  el.textContent   = `Oefening kon niet geladen worden (${pad}).`;
+  console.error(e);
+}
+
+// ── Knop ──────────────────────────────────────────────────────
+document.getElementById('knop-verbeterd').addEventListener('click', toonMessagebox);
+
+// ── Messagebox ────────────────────────────────────────────────
+function toonMessagebox() {
+  document.getElementById('knop-verbeterd').style.display = 'none';
+  const box = document.getElementById('messagebox');
+  box.style.display = 'block';
+
+  box.innerHTML = `
+    <p style="font-weight:bold; margin-bottom:10px;">
+      Vink aan wat voor deze oefening van toepassing is.
+    </p>
+    <label class="mb-label">
+      <input type="radio" name="vk" value="1">
+      <span>Ik had geen enkele fout en begrijp de opdracht.</span>
+    </label>
+    <label class="mb-label">
+      <input type="radio" name="vk" value="2">
+      <span>Ik maakte af en toe een fout, maar begrijp mijn fouten en de juiste oplossing.</span>
+    </label>
+    <label class="mb-label" style="margin-bottom:14px;">
+      <input type="radio" name="vk" value="3">
+      <span>Ik begrijp deze oefening niet en ik heb nog vragen.</span>
+    </label>
+    <div style="text-align:right;">
+      <button class="mb-knop" id="mb-verder" disabled>Ga verder</button>
+    </div>
+    <div id="mb-invoer-zone" style="display:none; margin-top:14px;">
+      <p id="mb-invoer-label" style="margin-bottom:6px; font-size:10pt;"></p>
+      <textarea id="mb-invoer"></textarea>
+      <div style="text-align:right; margin-top:8px;">
+        <button class="mb-knop" id="mb-indienen" disabled>Indienen</button>
+      </div>
+    </div>
+  `;
+
+  const radios      = box.querySelectorAll('input[type="radio"]');
+  const btnVerder   = box.querySelector('#mb-verder');
+  const invoerZone  = box.querySelector('#mb-invoer-zone');
+  const invoerLabel = box.querySelector('#mb-invoer-label');
+  const invoer      = box.querySelector('#mb-invoer');
+  const btnIndienen = box.querySelector('#mb-indienen');
+
+  radios.forEach(r => r.addEventListener('change', () => {
+    btnVerder.disabled       = false;
+    invoerZone.style.display = 'none';
+    invoer.value             = '';
+    btnIndienen.disabled     = true;
+  }));
+
+  btnVerder.addEventListener('click', async () => {
+    const keuze = parseInt(box.querySelector('input[name="vk"]:checked')?.value || '0');
+    if (keuze === 1) {
+      await _slaOp(keuze, '');
+      window.close();
+    } else if (keuze === 2) {
+      invoerLabel.textContent   = 'Noteer wat je kan helpen om de volgende keer deze oefening zonder fouten te maken.';
+      invoerZone.style.display  = 'block';
+      btnIndienen.dataset.keuze = '2';
+    } else if (keuze === 3) {
+      invoerLabel.textContent   = 'Noteer je vraag bij deze oefening.';
+      invoerZone.style.display  = 'block';
+      btnIndienen.dataset.keuze = '3';
+    }
+  });
+
+  invoer.addEventListener('input', () => {
+    btnIndienen.disabled = invoer.value.trim() === '';
+  });
+
+  btnIndienen.addEventListener('click', async () => {
+    const keuze     = parseInt(btnIndienen.dataset.keuze);
+    const opmerking = invoer.value.trim();
+    await _slaOp(keuze, opmerking);
+    window.close();
+  });
+}
+
+// ── Opslaan in Firebase ───────────────────────────────────────
+async function _slaOp(keuze, opmerking) {
+  const taakData = await fetchTaak();
+  if (!taakData) return;
+
+  const idx = (taakData.leerlingen || []).findIndex(
+    l => l.mail.toLowerCase() === mail.toLowerCase()
+  );
+  if (idx < 0) return;
+
+  const leerling = taakData.leerlingen[idx];
+
+  // verbetering-structuur opbouwen
+  if (!leerling.verbetering)       leerling.verbetering       = {};
+  if (!leerling.verbetering[nr])   leerling.verbetering[nr]   = { pogingen: [] };
+
+  const datum = new Date().toLocaleDateString('nl-BE');
+  leerling.verbetering[nr].pogingen.push({ datum, keuze, opmerking, opgelost: false });
+
+  taakData.leerlingen[idx] = leerling;
+
+  const schoon = JSON.parse(JSON.stringify(taakData));
+  await saveTaak(schoon);
+}
+</script>
+</body>
+</html>
