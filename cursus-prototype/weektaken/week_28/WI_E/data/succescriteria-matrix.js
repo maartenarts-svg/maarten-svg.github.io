@@ -2,7 +2,7 @@
 var WxWIx_succescriteria = [
   { 
     id: 'W28WIE01', 
-    tekst: "Ik verzamel data voor een statitisch onderzoek.", 
+    tekst: "Ik verzamel data voor een statistisch onderzoek.", 
     type: 'leer', 
     plaatscode: '10.1', 
     leerplandoelcodes: ["6.19"], 
@@ -17,7 +17,7 @@ var WxWIx_succescriteria = [
     leerplandoelcodes: ["6.19"], 
     referenties: ["10.0","10.1"], 
     evalueerbaarheid: 'nee', 
-    scores: "A: Ik beantwood alle vragen.<br>B: Ik beantwoord maximaal twee vragen niet.<br>C: Ik beantwoord meer dan 2 vragen niet." },
+    scores: "A: Ik beantwoord alle vragen.<br>B: Ik beantwoord maximaal twee vragen niet.<br>C: Ik beantwoord meer dan 2 vragen niet." },
   { 
     id: 'W28WIE03', 
     tekst: "Ik duid op het overzicht van de succescriteria aan wat ik al kan.", 
