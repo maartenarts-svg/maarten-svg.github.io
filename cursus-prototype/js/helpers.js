@@ -2036,3 +2036,69 @@ function maakSpanMetRuimte(inhoud,hoogte = '0.1cm') {
   span.style.marginBottom = hoogte;
   inhoud.appendChild(span);
 }
+
+
+/*====pop-up voor instructievideos====*/
+function toonVideoPopup(link) {
+  // Verwijder eventuele bestaande popup
+  document.getElementById('video-popup-overlay')?.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'video-popup-overlay';
+  overlay.style.cssText = `
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
+
+  const box = document.createElement('div');
+  box.style.cssText = `
+    background: white;
+    border-radius: 6px;
+    padding: 0.4cm;
+    max-width: 90vw;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3cm;
+  `;
+
+  const sluitKnop = document.createElement('button');
+  sluitKnop.textContent = '✕ Sluiten';
+  sluitKnop.style.cssText = `
+    align-self: flex-end;
+    background: var(--groen-donker);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: var(--fontsize);
+    font-family: var(--font);
+    cursor: pointer;
+  `;
+  sluitKnop.addEventListener('click', () => overlay.remove());
+
+  const iframe = document.createElement('iframe');
+  iframe.src = link;
+  iframe.style.cssText = `
+    width: 80vw;
+    height: 70vh;
+    border: none;
+    border-radius: 4px;
+  `;
+  iframe.allow = 'autoplay';
+
+  box.appendChild(sluitKnop);
+  box.appendChild(iframe);
+  overlay.appendChild(box);
+
+  // Klik buiten box sluit popup
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.remove();
+  });
+
+  document.body.appendChild(overlay);
+}

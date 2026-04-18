@@ -324,7 +324,7 @@ TOGGLE_TOEGESTAAN = false;
 /* ============================================================
    CONFIGURATIE
    ============================================================ */
-const EERSTE_PAGINA    = 453;   // ← beginpaginanummer van dit hoofdstuk
+const EERSTE_PAGINA    = 1;   // ← beginpaginanummer van dit hoofdstuk
 const HOOFDSTUK_TITEL  = '10 Rekenen met letters';
 
 /* ============================================================
@@ -359,19 +359,17 @@ function nieuwePagina() {
   }
   pagina.appendChild(nr);
 
-  // Hoofdstuktitel in header (alle pagina's behalve de allereerste)
-  if (!eersteHoofdstukPagina) {
-    const hdr = document.createElement('div');
-    hdr.classList.add('hoofdstuk-titel-header');
-    hdr.textContent = HOOFDSTUK_TITEL;
-    // Even pagina: titel links; oneven pagina: titel rechts
-    if (huidigePaginaNummer % 2 === 0) {
-      hdr.classList.add('links');
-    } else {
-      hdr.classList.add('rechts');
-    }
-    pagina.appendChild(hdr);
+  const hdr = document.createElement('div');
+  hdr.classList.add('hoofdstuk-titel-header');
+  hdr.textContent = 'Waterkringloop - 1a - week 6 - WI C';
+  // Even pagina: titel links; oneven pagina: titel rechts
+  if (huidigePaginaNummer % 2 === 0) {
+    hdr.classList.add('links');
+  } else {
+    hdr.classList.add('rechts');
   }
+  pagina.appendChild(hdr);
+  
 
   //voettekst
   const voet = document.createElement('div');
@@ -461,9 +459,8 @@ voegParagraafToe = function(nummer, tekst) {
  * Voeg een onderdeeltitel (opmaak 4) toe aan de huidige pagina.
  * @param {string} icoon - emoji of tekst
  * @param {string} tekst - bv. 'Ontdekkingstocht'
- * voegOnderdeelToe('🧭', 'Zo doe je dat!', 'url');
  */
-function voegOnderdeelToe(icoon, tekst, videoLink = null) {
+function voegOnderdeelToe(icoon, tekst) {
   const div = document.createElement('div');
   div.classList.add('opmaak-onderdeel');
 
@@ -477,20 +474,6 @@ function voegOnderdeelToe(icoon, tekst, videoLink = null) {
 
   div.appendChild(icoonSpan);
   div.appendChild(txtSpan);
-
-  if (videoLink) {
-    const camera = document.createElement('span');
-    camera.textContent = '🎥';
-    camera.style.cssText = `
-      margin-left: 0.3cm;
-      cursor: pointer;
-      font-size: 1em;
-      vertical-align: middle;
-    `;
-    camera.addEventListener('click', () => toonVideoPopup(videoLink));
-    div.appendChild(camera);
-  }
-
   huidigePagina().appendChild(div);
   return div;
 }
@@ -595,480 +578,30 @@ const inhoudstafelData = [];  // { tekst, blz } — wordt gevuld hieronder
 
 /* BEGIN VANAF HIER MET TELLEN */
 
-// ── PAGINA 1: Hoofdstuktitel ─────────────────────────────────
-nieuwePagina();   // pagina 453
-witregel('12.21cm');
-const titelDiv = document.createElement('div');
-titelDiv.classList.add('opmaak-titel');
-titelDiv.textContent = HOOFDSTUK_TITEL;
-huidigePagina().appendChild(titelDiv);
-
-witregel('9cm');
-voegContentToe('content-titelpagina');
-laadOefeningen('#content-titelpagina', [
-  'P10_0/naamlabel.js',
+// ───────────────────────────────────
+nieuwePagina();   // pagina 1
+voegContentToe('content-pagina');
+laadOefeningen('#content-pagina', [
+  'P10_T/W28WID_hoofding.js',
 ]);
 
-// ── PAGINA 2: Inhoudstafel ───────────────────────────────────
-nieuwePagina();   // pagina 454
-const blzInhoudstafel = huidigePaginaNummer - 1;
-voegBannerToe('📋', 'Inhoudstafel');
-
-// De inhoudstafel wordt na de structuuropbouw ingevuld (zie onderaan)
-const inhoudstafelContainer = document.createElement('div');
-inhoudstafelContainer.classList.add('inhoudstafel-inhoud');
-inhoudstafelContainer.id = 'inhoudstafel-container';
-huidigePagina().appendChild(inhoudstafelContainer);
-
-// ── PAGINA 3: Inchecken ──────────────────────────────────────
-
-nieuwePagina();   // pagina 455
-inhoudstafelData.push({ tekst: 'Inchecken', blz: huidigePaginaNummer - 1 });
-voegBannerToe('✔️', 'Inchecken');
-voegContentToe('content-inchecken');
-laadOefeningen('#content-inchecken', [
-  'P10_0/checkin.js'
-]);
-
-
-// ── PAGINA 4: Succescriteria + voorkennis ────────────────────
-nieuwePagina();   // pagina 456
-inhoudstafelData.push({ tekst: 'Voorkennis', blz: huidigePaginaNummer - 1 });
-voegBannerToe('📍', 'Voorkennis');
-voegContentToe('content-voorkennis');
-laadOefeningen('#content-voorkennis', [
-  'H10-voorkennis-matrix.js',
-  'H10-datamatrix.js',
-  'H10-voorkennis.js',
-]);
-
-witregel(bovenTitel);
-inhoudstafelData.push({ tekst: 'Succescriteria', blz: huidigePaginaNummer - 1 });
-voegBannerToe('🧗', 'Succescriteria');
-voegContentToe('content-succescriteria');
-laadOefeningen('#content-succescriteria', [
-  'H10-succescriterium-matrix.js',
-  'H10-datamatrix.js',
-  'H10-succescriteria.js',
-]);
-
-// ── PAGINA 5: Overzicht opdrachten ───────────────────────────
-nieuwePagina();   // pagina 457
-inhoudstafelData.push({ tekst: 'Overzicht opdrachten', blz: huidigePaginaNummer - 1 });
-voegBannerToe('🏋️', 'Overzicht opdrachten');
-voegContentToe('content-overzicht');
-laadOefeningen('#content-overzicht', [
-  'H10-datamatrix.js',
-  'H10-visueel-overzicht.js',
-]);
-
-// ── PARAGRAAF 10.1 ───────────────────────────────────────────
-nieuwePagina();   // pagina 458
-inhoudstafelData.push({ tekst: '10.1 Eigenschappen van bewerkingen', blz: huidigePaginaNummer - 1 });
-voegParagraafToe('10.1', 'Eigenschappen van bewerkingen');
-
-voegOnderdeelToe('🔍', 'Ontdekkingstocht','https://drive.google.com/file/d/1pHZjK_d6Kz-bL0CoZbpk6lUwAxyvxMjL/preview?usp=drive_link');
-voegContentToe('content-101-ontdek');
-laadOefeningen('#content-101-ontdek', [
-  'P10_1/oe_101500.js',
-]);
-
-nieuwePagina();
-voegOnderdeelToe('🧠', 'Theorie');
-voegTheorieToe([
-  { nummer: '10.1', tekst: 'Eigenschappen van bewerkingen' },
-]);
-witregel(bovenTitel);
-
-voegOnderdeelToe('🧭', 'Zo doe je dat!');
 witregel(onderTitel);
-voegContentToe('content-101-zoeje');
-laadOefeningen('#content-101-zoeje', [
-  'P10_1/oe_101001.js',
-  'P10_1/oe_101002.js',
-  'P10_1/oe_101003.js',
+voegContentToe('content-pagina-1');
+laadOefeningen('#content-pagina-1', [
+  'P10_T/oe_10T001.js',
+  'P10_T/oe_10T002.js'
 ]);
 
-forceerPaginawissel();
-voegContentToe('content-101-zoeje-2');
-laadOefeningen('#content-101-zoeje-2', [
-  'P10_1/oe_101004.js',
-]);
+// ─────────────────────────────────────────────
+nieuwePagina();   // pagina 2
 
-forceerPaginawissel();
-voegContentToe('content-101-zoeje-3');
-laadOefeningen('#content-101-zoeje-3', [
-  'P10_1/oe_101013.js',
-]);
-
-// voegOnderdeelToe('🚦', 'Hoe ver sta ik?');-> nu niet nodig
-// voegContentToe('content-101-hoeveR');-> nu niet nodig
-
-// Oefenen! start op nieuwe pagina
-nieuwePagina();
-voegOnderdeelToe('🔄', 'Oefenen!');
-witregel(onderTitel);
-voegContentToe('content-101-oefenen');
-laadOefeningen('#content-101-oefenen', [
-  'P10_1/oe_101005.js',
-  'P10_1/oe_101006.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-101-oefenen-2');
-laadOefeningen('#content-101-oefenen-2', [
-  'P10_1/oe_101007.js',
-  'P10_1/oe_101008.js',
-  'P10_1/oe_101010.js',
+voegContentToe('content-pagina-2');
+laadOefeningen('#content-pagina-2', [
+  'P10_T/oe_10T003.js',
+  'P10_T/oe_10T004.js',
 ]);
 
 
-forceerPaginawissel();
-voegContentToe('content-101-oefenen-3');
-laadOefeningen('#content-101-oefenen-3', [
-  'P10_1/oe_101009.js',
-  'P10_1/oe_101011.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-101-oefenen-4');
-laadOefeningen('#content-101-oefenen-4', [
-  'P10_1/oe_101012.js',
-]);
-
-// ── PARAGRAAF 10.2 ───────────────────────────────────────────
-nieuwePagina();   // pagina 460
-inhoudstafelData.push({ tekst: '10.2 Lettervormen', blz: huidigePaginaNummer - 1 });
-voegParagraafToe('10.2', 'Lettervormen');
-
-voegOnderdeelToe('🔍', 'Ontdekkingstocht');
-witregel(onderTitel);
-voegContentToe('content-102-ontdek');
-laadOefeningen('#content-102-ontdek', [
-  'P10_2/oe_102001.js',
-]);
-
-voegOnderdeelToe('🧠', 'Theorie');
-voegTheorieToe([
-  { nummer: '10.2', tekst: 'Lettervormen' },
-]);
-witregel(bovenTitel);
-
-
-voegOnderdeelToe('🧭', 'Zo doe je dat!');
-witregel(onderTitel);
-voegContentToe('content-102-zoeje');
-laadOefeningen('#content-102-zoeje', [
-  'P10_2/oe_102002.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-102-zoeje-2');
-laadOefeningen('#content-102-zoeje-2', [
-  'P10_2/oe_102003.js',
-  'P10_2/oe_102004.js',
-]);
-
-
-nieuwePagina();
-voegOnderdeelToe('🚦', 'Hoe ver sta ik?');
-voegContentToe('content-102-hoeveR');
-laadOefeningen('#content-102-hoeveR', [
-  'P10_2/oe_102005.js',  
-]);
-voegHoeVerStaIkTekstToe('tekst2');
-witregel('0.7cm');
-voegContentToe('content-102-hoeveR-2');
-laadOefeningen('#content-102-hoeveR-2', [
-  'P10_2/oe_102009.js',  
-]);
-voegHoeVerStaIkTekstToe('tekst3');
-
-nieuwePagina();
-voegOnderdeelToe('🔄', 'Oefenen!');
-witregel(onderTitel);
-voegContentToe('content-102-oefenen');
-laadOefeningen('#content-102-oefenen', [
-  'P10_2/oe_102006.js',
-  'P10_2/oe_102007.js',
-  'P10_2/oe_102008.js'  
-]);
-
-forceerPaginawissel();
-voegContentToe('content-102-oefenen-2');
-laadOefeningen('#content-102-oefenen-2', [
-  'P10_2/oe_102010.js',
-  'P10_2/oe_102011.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-102-oefenen-3');
-laadOefeningen('#content-102-oefenen-3', [
-  'P10_2/oe_102012.js',
-  'P10_2/oe_102013.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-102-oefenen-4');
-laadOefeningen('#content-102-oefenen-4', [
-  'P10_2/oe_102K04.js',
-  'P10_2/oe_102K02.js',
-  'P10_2/oe_102K05.js',
-]);
-
-// ── PARAGRAAF 10.3 ───────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: '10.3 Lettervormen herleiden', blz: huidigePaginaNummer - 1 });
-voegParagraafToe('10.3', 'Lettervormen herleiden');
-
-voegOnderdeelToe('🔍', 'Ontdekkingstocht');
-witregel(onderTitel);
-voegContentToe('content-103-ontdek');
-laadOefeningen('#content-103-ontdek', [
-  'P10_3/oe_103001.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-103-ontdek-2');
-laadOefeningen('#content-103-ontdek-2', [
-  'P10_3/oe_103002.js',
-]);
-
-witregel(bovenTitel);
-voegOnderdeelToe('🧠', 'Theorie');
-voegTheorieToe([
-  { nummer: '10.3', tekst: 'Lettervormen herleiden' },
-]);
-
-
-nieuwePagina();
-voegOnderdeelToe('🧭', 'Zo doe je dat!');
-witregel(onderTitel);
-voegContentToe('content-103-zoeje');
-laadOefeningen('#content-103-zoeje', [
-  'P10_3/oe_103003.js',
-  'P10_3/oe_103004.js',
-  'P10_3/oe_103005.js',
-  'P10_3/oe_103006.js',
-  'P10_3/oe_103007.js',
-]);
-
-nieuwePagina();
-voegOnderdeelToe('🚦', 'Hoe ver sta ik?');
-witregel(onderTitel);
-voegContentToe('content-103-hoeveR');
-laadOefeningen('#content-103-hoeveR', [
-  'P10_3/oe_103008.js',
-  'P10_3/oe_103011.js',
-]);
-voegHoeVerStaIkTekstToe('tekst2');
-witregel('0.7cm');
-voegContentToe('content-103-hoeveR-2');
-laadOefeningen('#content-103-hoeveR-2', [
-  'P10_3/oe_103013.js',
-]);
-voegHoeVerStaIkTekstToe('tekst3');
-
-nieuwePagina();
-voegOnderdeelToe('🔄', 'Oefenen!');
-witregel(onderTitel);
-voegContentToe('content-103-oefenen');
-laadOefeningen('#content-103-oefenen', [
-  'P10_3/oe_103009.js',
-  'P10_3/oe_103010.js',
-  'P10_3/oe_103012.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-103-oefenen-2');
-laadOefeningen('#content-103-oefenen-2', [
-  'P10_3/oe_103014.js',
-  'P10_3/oe_103015.js',
-  'P10_3/oe_103016.js',
-  'P10_3/oe_103017.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-103-oefenen-3');
-laadOefeningen('#content-103-oefenen-3', [
-  'P10_3/oe_103018.js',
-  'P10_3/oe_103501.js',
-  'P10_3/oe_103K03.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-103-oefenen-4');
-laadOefeningen('#content-103-oefenen-4', [
-  'P10_3/oe_103K01.js',
-  'P10_3/oe_103502.js',
-]);
-
-// ── PARAGRAAF 10.4 ───────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: '10.4 Een getal vermenigvuldigen met een lettervorm', blz: huidigePaginaNummer - 1 });
-voegParagraafToe('10.4', 'Een getal vermenigvuldigen met een lettervorm');
-
-voegOnderdeelToe('🔍', 'Ontdekkingstocht');
-witregel(onderTitel);
-voegContentToe('content-104-ontdek');
-laadOefeningen('#content-104-ontdek', [
-  'P10_4/oe_104002.js',
-]);
-
-witregel(bovenTitel);
-voegOnderdeelToe('🧠', 'Theorie');
-voegTheorieToe([
-  { nummer: '10.4', tekst: 'Een getal vermenigvuldigen met een lettervorm' },
-]);
-
-nieuwePagina();
-
-voegOnderdeelToe('🧭', 'Zo doe je dat!');
-witregel(onderTitel);
-voegContentToe('content-104-zoeje');
-laadOefeningen('#content-104-zoeje', [
-  'P10_4/oe_104003.js',
-  'P10_4/oe_104004.js',
-  'P10_4/oe_104005.js',
-]);
-
-nieuwePagina();
-
-voegOnderdeelToe('🚦', 'Hoe ver sta ik?');
-witregel(onderTitel);
-voegContentToe('content-104-hoeveR');
-laadOefeningen('#content-104-hoeveR', [
-  'P10_4/oe_104006.js',
-  'P10_4/oe_104010.js',
-]);
-voegHoeVerStaIkTekstToe('tekst2');
-witregel('0.7cm');
-voegContentToe('content-104-hoeveR-2');
-laadOefeningen('#content-104-hoeveR-2', [
-  'P10_4/oe_104012.js',
-]);
-voegHoeVerStaIkTekstToe('tekst3');
-
-nieuwePagina();
-voegOnderdeelToe('🔄', 'Oefenen!');
-voegContentToe('content-104-oefenen');
-laadOefeningen('#content-104-oefenen', [
-  'P10_4/oe_104007.js',
-  'P10_4/oe_104008.js',
-  'P10_4/oe_104009.js',
-  'P10_4/oe_104011.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-104-oefenen-2');
-laadOefeningen('#content-104-oefenen-2', [
-  'P10_4/oe_104013.js',
-  'P10_4/oe_104014.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-104-oefenen-3');
-laadOefeningen('#content-104-oefenen-3', [
-  'P10_4/oe_104015.js',
-  'P10_4/oe_104K04.js',
-  'P10_4/oe_104K03.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-104-oefenen-4');
-laadOefeningen('#content-104-oefenen-4', [
-  'P10_4/oe_104K05.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-104-oefenen-5');
-laadOefeningen('#content-104-oefenen-5', [
-  'P10_4/oe_104K01.js',
-]);
-
-// ── Schema ───────────────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: 'Schema', blz: huidigePaginaNummer - 1 });
-voegBannerToe('🗂️', 'Schema');
-voegContentToe('content-schema');
-laadOefeningen('#content-schema', [
-  'P10_0/H10_schemadef.js',
-]);
-
-// ── Uitchecken ───────────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: 'Uitchecken', blz: huidigePaginaNummer - 1 });
-voegBannerToe('✔️', 'Uitchecken');
-voegContentToe('content-uitchecken');
-laadOefeningen('#content-uitchecken', [
-  'P10_0/checkout.js',
-]);
-
-/* ============================================================
-   INHOUDSTAFEL INVULLEN
-   Wordt pas hier ingevuld omdat de paginanummers pas bekend
-   zijn nadat de volledige structuur opgebouwd is.
-   ============================================================ */
-(function vulInhoudstafel() {
-  const container = document.getElementById('inhoudstafel-container');
-  if (!container) return;
-
-  const items = [
-    { tekst: 'Inhoudstafel',  blz: blzInhoudstafel, stijl: 'bold' },
-    { type: 'witregel' },
-    { tekst: 'Inchecken',     blz: null },
-    { type: 'witregel' },
-    { tekst: 'Voorkennis',    blz: null },
-    { tekst: 'Succescriteria', blz: null },
-    { tekst: 'Overzicht opdrachten', blz: null },
-    { type: 'witregel' },
-    { tekst: '10.1 Eigenschappen van bewerkingen', blz: null },
-    { tekst: '10.2 Lettervormen',                  blz: null },
-    { tekst: '10.3 Lettervormen herleiden',         blz: null },
-    { tekst: '10.4 Een getal vermenigvuldigen met een lettervorm', blz: null },
-    { type: 'witregel' },
-    { tekst: 'Schema',        blz: null },
-    { type: 'witregel' },
-    { tekst: 'Uitchecken',    blz: null },
-  ];
-
-  // Koppel paginanummers vanuit inhoudstafelData
-  inhoudstafelData.forEach(({ tekst, blz }) => {
-    const item = items.find(i => i.tekst === tekst);
-    if (item) item.blz = blz;
-  });
-
-  items.forEach(item => {
-    if (item.type === 'witregel') {
-      const br = document.createElement('div');
-      br.style.height = '0.5em';
-      container.appendChild(br);
-      return;
-    }
-
-    const rij = document.createElement('div');
-    rij.classList.add('inhoudstafel-rij');
-    if (item.stijl === 'bold') rij.style.fontWeight = 'bold';
-
-    const tekst = document.createElement('span');
-    tekst.classList.add('it-tekst');
-    tekst.textContent = item.tekst;
-    rij.appendChild(tekst);
-
-    // Stippen (alleen systeem 2)
-    const stippen = document.createElement('span');
-    stippen.classList.add('it-stippen');
-    rij.appendChild(stippen);
-
-    // Paginanummer (alleen systeem 2)
-    const blzSpan = document.createElement('span');
-    blzSpan.classList.add('it-blz');
-    blzSpan.textContent = item.blz !== null ? item.blz : '??';
-    rij.appendChild(blzSpan);
-
-    container.appendChild(rij);
-  });
-})();
 
 /* ============================================================
    SYSTEEM TOEPASSEN
