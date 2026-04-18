@@ -237,6 +237,7 @@
           const badge = inhoud.closest('.oefening')?.querySelector('.badge');
           if (badge) {
             badge.addEventListener('click', () => {
+              if (!TOGGLE_TOEGESTAAN) return;
               const zichtbaar = svg.querySelector('.svg-opl-laag')?.style.display !== 'none';
               oplLagen.forEach(id => {
                 const laag = svg.getElementById(id);

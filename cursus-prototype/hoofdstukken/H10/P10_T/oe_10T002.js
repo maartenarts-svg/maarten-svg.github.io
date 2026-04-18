@@ -51,7 +51,7 @@
   }
   
   const rijHoogtes = ['0.9cm', '0.9cm'];
-  const kolomBreedtes = ['14%', '14%', '14%', '14%', '14%', '14%', '14%'];
+  const kolomBreedtes = ['21%', '13%', '13%', '13%', '13%', '13%', '13%'];
 
   const matrix = [
     [
@@ -172,6 +172,7 @@
           const badge = inhoud.closest('.oefening')?.querySelector('.badge');
           if (badge) {
             badge.addEventListener('click', () => {
+              if (!TOGGLE_TOEGESTAAN) return;
               const zichtbaar = svg.querySelector('.svg-opl-laag')?.style.display !== 'none';
               oplLagen.forEach(id => {
                 const laag = svg.getElementById(id);
