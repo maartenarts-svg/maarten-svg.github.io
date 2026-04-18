@@ -493,3 +493,25 @@ html, body {
     width: calc(100% + 2rem);
   }
 }
+
+/* ============================================================
+   BREUK — teller en noemer op 10pt
+   ============================================================ */
+.breuk-html {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1.1;
+}
+.breuk-html .teller,
+.breuk-html .noemer {
+  display: block;
+  text-align: center;
+  font-size: var(--fontsize);
+  padding: 0 2px;
+}
+.breuk-html .noemer {
+  border-top: 0.8px solid currentColor;
+  margin-top: 1px;
+}
