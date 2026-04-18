@@ -754,3 +754,61 @@ function maakBreuk(teller, noemer, stijl='opgave') {
   span.appendChild(n);
   return span;
 }
+
+
+/*====knop theorie====*/
+function maakPdfKnop(inhoud, pdfUrl, knopTekst = '📄 Bekijk de theorie.') {
+  const witruimte = document.createElement('div');
+  witruimte.style.height = '0.3cm';
+  inhoud.appendChild(witruimte);
+
+  const knop = document.createElement('button');
+  knop.className = 'knop-secundair';
+  knop.textContent = knopTekst;
+  knop.style.marginTop = '1cm';
+
+  knop.addEventListener('click', () => {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+    `;
+
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+      background: white;
+      border-radius: var(--radius, 8px);
+      box-shadow: var(--schaduw-groot, 0 4px 20px rgba(0,0,0,0.2));
+      width: 90vw; height: 90vh;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    `;
+
+    const balk = document.createElement('div');
+    balk.style.cssText = `
+      display: flex; justify-content: flex-end;
+      padding: 0.3cm 0.3cm 0.2cm;
+      border-bottom: 1px solid var(--groen-scheiding, #a5d6a7);
+      flex-shrink: 0;
+    `;
+
+    const sluit = document.createElement('button');
+    sluit.className = 'knop-secundair';
+    sluit.textContent = '✕ Sluiten';
+    sluit.addEventListener('click', () => overlay.remove());
+    balk.appendChild(sluit);
+
+    const iframe = document.createElement('iframe');
+    iframe.src = pdfUrl;
+    iframe.style.cssText = 'flex: 1; border: none; width: 100%;';
+
+    popup.appendChild(balk);
+    popup.appendChild(iframe);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+  });
+
+  inhoud.appendChild(knop);
+}

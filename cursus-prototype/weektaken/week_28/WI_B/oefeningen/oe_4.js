@@ -1,21 +1,27 @@
 // ============================================================
-//  oefeningen/oe_4.js  —  Tabel: tegengestelde en omgekeerde
+//  oefeningen/oe_4.js  —  Aftrekking als optelling, deling als vermenigvuldiging
 // ============================================================
 
 window.__taakOefening = (function () {
 
   // ── Opgaven ───────────────────────────────────────────────
-  const RIJEN = [
-    { getal: { t: 9,  n: 1 }, tegengestelde: { t: -9, n: 1 }, omgekeerde: { t: 1,  n: 9 } },
-    { getal: { t: -3, n: 1 }, tegengestelde: { t: 3,  n: 1 }, omgekeerde: { t: -1, n: 3 } },
-    { getal: { t: 1,  n: 5 }, tegengestelde: { t: -1, n: 5 }, omgekeerde: { t: 5,  n: 1 } },
-    { getal: { t: -7, n: 4 }, tegengestelde: { t: 7,  n: 4 }, omgekeerde: { t: -4, n: 7 } },
+  // Pas hier de opgaven aan
+  const OPGAVEN = [
+    { label: 'a|', voor: '5 - 9 = 5 + ',       antwoord: '(-9)', breuk: false },
+    { label: 'b|', voor: '-10 - 8 = -10 + ',    antwoord: '(-8)', breuk: false },
+    { label: 'c|', voor: '-20 - (-5) = -20 + ', antwoord: '5',    breuk: false },
+    { label: 'd|', voor: '8 : 2 = 8 · ',        antwoord: '1/2',  breuk: true  },
+    { label: 'e|', voor: '10 : 7 = 10 · ',      antwoord: '1/7',  breuk: true  },
+    { label: 'f|', voor: null,                   antwoord: '9/4',  breuk: true  },
   ];
+
+  // ── Breedtes — pas hier aan ────────────────────────────────
+  const BR_OPG  = '3cm';   // breedte opgavetekst
+  const BR_INV  = '1cm';   // breedte invoerveld
+  const BR_OPL  = '1cm';   // breedte correcte oplossing
 
   // ── Staat ─────────────────────────────────────────────────
   let _antwoorden = [
-    { antwoord: null, score: 0 },
-    { antwoord: null, score: 0 },
     { antwoord: null, score: 0 },
     { antwoord: null, score: 0 },
     { antwoord: null, score: 0 },
@@ -36,7 +42,7 @@ window.__taakOefening = (function () {
           ? a
           : { antwoord: a, score: 0 }
       );
-      while (_antwoorden.length < 8) _antwoorden.push({ antwoord: null, score: 0 });
+      while (_antwoorden.length < 6) _antwoorden.push({ antwoord: null, score: 0 });
     }
 
     _container = container;
@@ -51,209 +57,127 @@ window.__taakOefening = (function () {
   // ── Oefening bouwen ───────────────────────────────────────
   function _bouwOefening() {
     const inhoud = maakOefening({ id: 'oe_4', nummer: 4, container: _container });
-    voegTekstToe(inhoud, 'Vul de tabel aan.', ['intro-tekst']);
 
-    voegTekstToe(inhoud,'<span class="markeer-lila">Om een breuk te noteren, klik je op /.</span>')
+    voegLijstToe(inhoud, 'bullet', '0cm', '0.3cm', [
+      'Noteer elke aftrekking als een optelling.',
+      'Noteer elke deling als een vermenigvuldiging.',
+    ]);
+    voegTekstToe(inhoud,'<span class="markeer-lila">Om een breuk te noteren, klik je op /.</span>')      
 
-    const stijl = document.createElement('style');
-    stijl.textContent = `
-      .tg-tabel {
-        border-collapse: collapse;
-        margin-top: 0.3cm;
-        font-family: var(--font, Arial);
-        font-size: var(--fontsize, 10pt);
-      }
-      .tg-tabel th {
-        background: var(--groen-pastel, #c8e6c9);
-        color: var(--tekst, #1a1a1a);
-        font-weight: bold;
-        padding: 0.15cm 0.4cm;
-        border: 1px solid var(--groen-scheiding, #a5d6a7);
-        text-align: center;
-      }
-      .tg-tabel td {
-        border: 1px solid var(--groen-scheiding, #a5d6a7);
-        padding: 0.15cm 0.3cm;
-        vertical-align: middle;
-        text-align: center;
-      }
-      .tg-tabel td .rij {
-        height: auto;
-        border-bottom: none;
-      }
-      .tg-getal {
-        font-weight: bold;
-      }
-      .tg-cel-wrap {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.2cm;
-      }
-      .tg-breuk-invoer {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        vertical-align: middle;
-        line-height: 1.1;
-      }
-      .tg-teller-invoer {
-        display: block;
-        border: none;
-        //border-bottom: 1.5px solid var(--sl-kleur, #1a1a1a);
-        background: transparent;
-        font-family: var(--font-oplossing, 'Comic Sans MS');
-        font-size: var(--fontsize, 10pt);
-        color: var(--blauw-oplossing, #1a4fa0);
-        outline: none;
-        text-align: center;
-        min-width: 0.4cm;
-        padding: 0 2px;
-        height: auto;
-        line-height: 1.1;
-      }
-      .tg-streep-invoer {
-        //width: 100%;
-        min-width: 0.4cm;
-        height: 0.8px;
-        background: var(--blauw-oplossing, #1a4fa0);
-        margin: 1px 0;
-      }
-      .tg-noemer-invoer {
-        display: block;
-        border: none;
-        background: transparent;
-        font-family: var(--font-oplossing, 'Comic Sans MS');
-        font-size: var(--fontsize, 10pt);
-        color: var(--blauw-oplossing, #1a4fa0);
-        outline: none;
-        text-align: center;
-        min-width: 0.4cm;
-        padding: 0 2px;
-        height: auto;
-        line-height: 1.1;
-        margin-top: 1px;
-      }
-      .tg-breuk-invoer.juist .tg-teller-invoer {
-        color: var(--groen-donker, #4a7c59);
-        border-bottom-color: var(--groen-donker, #4a7c59);
-      }
-      .tg-breuk-invoer.juist .tg-streep-invoer {
-        background: var(--groen-donker, #4a7c59);
-      }
-      .tg-breuk-invoer.juist .tg-noemer-invoer {
-        color: var(--groen-donker, #4a7c59);
-      }
-      .tg-breuk-invoer.fout .tg-teller-invoer {
-        color: var(--oranje-rand, #e65100);
-        text-decoration: line-through;
-        border-bottom-color: var(--oranje-rand, #e65100);
-      }
-      .tg-breuk-invoer.fout .tg-streep-invoer {
-        background: var(--oranje-rand, #e65100);
-      }
-      .tg-breuk-invoer.fout .tg-noemer-invoer {
-        color: var(--oranje-rand, #e65100);
-        text-decoration: line-through;
-      }
-      .tg-opl-span {
-        color: var(--lila-tekst, #d500f9);
-        font-family: var(--font-oplossing, 'Comic Sans MS');
-        font-size: var(--fontsize, 10pt);
-      }
-      .tg-opl-breuk {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        vertical-align: middle;
-        line-height: 1.1;
-        color: var(--lila-tekst, #d500f9);
-        font-family: var(--font-oplossing, 'Comic Sans MS');
-        font-size: var(--fontsize, 10pt);
-      }
-      .tg-opl-streep {
-        //width: 100%;
-        min-width: 0.4cm;
-        height: 0.8px;
-        background: var(--lila-tekst, #d500f9);
-        margin: 1px 0;
-      }
-    `;
-    inhoud.appendChild(stijl);
+    const { tbody } = maakOefTabel(inhoud, 2, true);
 
-    const tabel = document.createElement('table');
-    tabel.classList.add('tg-tabel');
-
-    const thead = document.createElement('thead');
-    const trH   = document.createElement('tr');
-    ['Getal', 'Tegengestelde', 'Omgekeerde'].forEach(kop => {
-      const th = document.createElement('th');
-      th.textContent = kop;
-      trH.appendChild(th);
-    });
-    thead.appendChild(trH);
-    tabel.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
-    RIJEN.forEach((rij, rijIdx) => {
+    // Paren: [links, rechts]
+    [[0, 3], [1, 4], [2, 5]].forEach(([links, rechts]) => {
       const tr = document.createElement('tr');
 
-      // Kolom 1: getal (gegeven)
-      const tdGetal = document.createElement('td');
-      tdGetal.classList.add('tg-getal');
-      if (rij.getal.n === 1) {
-        tdGetal.textContent = String(rij.getal.t);
-      } else {
-        tdGetal.appendChild(maakBreuk(String(rij.getal.t), String(rij.getal.n)));
-      }
-      tr.appendChild(tdGetal);
+      [links, rechts].forEach(idx => {
+        const td = document.createElement('td');
+        td.classList.add(idx === links ? 'kolom-links' : 'kolom-rechts');
 
-      // Kolom 2: tegengestelde
-      const tdTeg = document.createElement('td');
-      tdTeg.appendChild(_maakInvoerCel(rijIdx * 2, rij.tegengestelde));
-      tr.appendChild(tdTeg);
+        const div = document.createElement('div');
+        div.classList.add('rij', 'breuk');
+        div.style.cssText = 'display: flex; align-items: center;';
 
-      // Kolom 3: omgekeerde
-      const tdOmg = document.createElement('td');
-      tdOmg.appendChild(_maakInvoerCel(rijIdx * 2 + 1, rij.omgekeerde));
-      tr.appendChild(tdOmg);
+        // Label
+        const lblSpan = document.createElement('span');
+        lblSpan.classList.add('lbl');
+        lblSpan.textContent = OPGAVEN[idx].label;
+        div.appendChild(lblSpan);
+
+        // Opgavetekst
+        const opgSpan = document.createElement('span');
+        opgSpan.style.cssText = `width: ${BR_OPG}; flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.05cm;`;
+        if (idx === 5) {
+          // Opgave f: breuken in de tekst
+          opgSpan.appendChild(maakBreuk('5', '2'));
+          opgSpan.appendChild(htmlSpan(' '));
+          opgSpan.appendChild(htmlSpan(':'));
+          opgSpan.appendChild(htmlSpan(' '));
+          opgSpan.appendChild(maakBreuk('4', '9'));
+          opgSpan.appendChild(htmlSpan(' '));
+          opgSpan.appendChild(htmlSpan('='));
+          opgSpan.appendChild(htmlSpan(' '));
+          opgSpan.appendChild(maakBreuk('5', '2'));
+          opgSpan.appendChild(htmlSpan(' '));
+          opgSpan.appendChild(htmlSpan('·'));
+          opgSpan.appendChild(htmlSpan(' '));
+        } else {
+          opgSpan.textContent = OPGAVEN[idx].voor;
+        }
+        div.appendChild(opgSpan);
+
+        // Invoerveld
+        const invSpan = document.createElement('span');
+        invSpan.style.cssText = `width: ${BR_INV}; flex-shrink: 0; display: inline-flex; align-items: center;`;
+        invSpan.appendChild(_maakInvoer(idx));
+        div.appendChild(invSpan);
+
+        const WitSpan = document.createElement('span');
+        WitSpan.style.width = '0.6 cm';
+        div.appendChild(WitSpan);
+
+        // Correcte oplossing (alleen bij verbetering en fout)
+        const oplSpan = document.createElement('span');
+        oplSpan.style.cssText = `width: ${BR_OPL}; flex-shrink: 0; display: inline-flex; align-items: center; margin-left: 0.5cm;`;
+        if (_verbeterd) {
+          const ant     = _antwoorden[idx].antwoord;
+          const correct = OPGAVEN[idx].antwoord;
+          const isJuist = _vergelijk(ant, correct);
+          if (!isJuist) {
+            oplSpan.appendChild(_maakOplossing(correct));
+          }
+        }
+        div.appendChild(oplSpan);
+
+        td.appendChild(div);
+        tr.appendChild(td);
+      });
 
       tbody.appendChild(tr);
     });
 
-    tabel.appendChild(tbody);
-    inhoud.appendChild(tabel);
+    maakPdfKnop(inhoud, 'https://drive.google.com/file/d/1PJmbM9-YifW3Efm3sZ_THXqAgWhEJSp5/preview?usp=drive_link');
+
   }
 
-  // ── Invoercel ─────────────────────────────────────────────
-  function _maakInvoerCel(antIdx, correct) {
-    const celWrap = document.createElement('div');
-    celWrap.classList.add('tg-cel-wrap');
-
-    const breukInvoer = document.createElement('div');
-    breukInvoer.classList.add('tg-breuk-invoer');
+  // ── Invoerveld ────────────────────────────────────────────
+  function _maakInvoer(antIdx) {
+    const breukInvoer = document.createElement('span');
+    breukInvoer.style.cssText = 'display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.1;';
 
     const tellerInvoer = document.createElement('input');
-    tellerInvoer.classList.add('tg-teller-invoer');
     tellerInvoer.type        = 'text';
     tellerInvoer.placeholder = '___';
     tellerInvoer.disabled    = _blokkeren;
+    tellerInvoer.style.cssText = `
+      display: block; border: none;
+      //border-bottom: 1.5px solid var(--sl-kleur, #b0b0b0);
+      background: transparent;
+      font-family: var(--font-oplossing, 'Comic Sans MS'); font-size: var(--fontsize, 10pt);
+      color: var(--blauw-oplossing, #1a4fa0); outline: none;
+      text-align: center; width: ${BR_INV}; padding: 0 2px;
+      height: auto; line-height: 1.1;
+    `;
 
     const streep = document.createElement('div');
-    streep.classList.add('tg-streep-invoer');
-    streep.style.display = 'none';
+    streep.style.cssText = `min-width: 0.4cm; height: 0.8px; background: var(--blauw-oplossing, #1a4fa0); margin: 1px 0; display: none;`;
 
     const noemerInvoer = document.createElement('input');
-    noemerInvoer.classList.add('tg-noemer-invoer');
     noemerInvoer.type        = 'text';
     noemerInvoer.placeholder = '___';
     noemerInvoer.disabled    = _blokkeren;
-    noemerInvoer.style.display = 'none';
+    noemerInvoer.style.cssText = `
+      display: none; border: none;
+      background: transparent;
+      font-family: var(--font-oplossing, 'Comic Sans MS'); font-size: var(--fontsize, 10pt);
+      color: var(--blauw-oplossing, #1a4fa0); outline: none;
+      text-align: center; width: ${BR_INV}; padding: 0 2px;
+      height: auto; line-height: 1.1; margin-top: 1px;
+    `;
 
     breukInvoer.appendChild(tellerInvoer);
     breukInvoer.appendChild(streep);
     breukInvoer.appendChild(noemerInvoer);
-    celWrap.appendChild(breukInvoer);
 
     // Herstel opgeslagen waarde
     const opgeslagen = _antwoorden[antIdx].antwoord;
@@ -261,8 +185,8 @@ window.__taakOefening = (function () {
       const str = String(opgeslagen);
       if (str.includes('/')) {
         const delen = str.split('/');
-        tellerInvoer.value     = delen[0];
-        noemerInvoer.value     = delen[1];
+        tellerInvoer.value         = delen[0];
+        noemerInvoer.value         = delen[1];
         streep.style.display       = 'block';
         noemerInvoer.style.display = 'block';
       } else {
@@ -270,7 +194,7 @@ window.__taakOefening = (function () {
       }
     }
 
-    // / detectie: zet streep en noemer zichtbaar
+    // / detectie
     tellerInvoer.addEventListener('keydown', e => {
       if (e.key === '/') {
         e.preventDefault();
@@ -292,7 +216,7 @@ window.__taakOefening = (function () {
       }
     });
 
-    // Lokaal opslaan in _antwoorden (GEEN slaOp aanroep)
+    // Lokaal opslaan
     const _slaLokaalOp = () => {
       const t = tellerInvoer.value.trim();
       const n = noemerInvoer.value.trim();
@@ -308,58 +232,58 @@ window.__taakOefening = (function () {
     tellerInvoer.addEventListener('input', _slaLokaalOp);
     noemerInvoer.addEventListener('input', _slaLokaalOp);
 
-    _invoerVelden.push({ tellerInvoer, noemerInvoer, antIdx });
+    _invoerVelden.push(tellerInvoer);
 
-    // Verbetering: alleen visueel, geen wijzigingen aan _antwoorden
+    // Verbetering
     if (_verbeterd) {
-      const isJuist = _vergelijkAntwoord(_antwoorden[antIdx].antwoord, correct);
-      breukInvoer.classList.add(isJuist ? 'juist' : 'fout');
+      const ant     = _antwoorden[antIdx].antwoord;
+      const correct = OPGAVEN[antIdx].antwoord;
+      const isJuist = _vergelijk(ant, correct);
+      const kleur   = isJuist ? 'var(--groen-donker, #4a7c59)' : 'var(--oranje-rand, #e65100)';
+      tellerInvoer.style.color            = kleur;
+      tellerInvoer.style.borderBottomColor = kleur;
       if (!isJuist) {
-        celWrap.appendChild(_maakOplossing(correct));
+        tellerInvoer.style.textDecoration = 'line-through';
+      }
+      if (noemerInvoer.style.display !== 'none') {
+        noemerInvoer.style.color = kleur;
+        streep.style.background  = kleur;
+        if (!isJuist) {
+          noemerInvoer.style.textDecoration = 'line-through';
+        }
       }
     }
 
-    return celWrap;
+    return breukInvoer;
   }
 
-  // ── Antwoord vergelijken ──────────────────────────────────
-  function _vergelijkAntwoord(antwoord, correct) {
-    if (antwoord === null || antwoord === undefined || antwoord === '') return false;
-    const str = String(antwoord).replace(/\s+/g, '');
-    if (correct.n === 1) {
-      return str === String(correct.t);
-    } else {
-      if (!str.includes('/')) return false;
-      const delen = str.split('/');
-      if (delen.length !== 2) return false;
-      const t = parseInt(delen[0]);
-      const n = parseInt(delen[1]);
-      if (isNaN(t) || isNaN(n) || n <= 0) return false;
-      return t === correct.t && n === correct.n;
-    }
+  // ── Vergelijken ───────────────────────────────────────────
+  function _vergelijk(antwoord, correct) {
+    if (antwoord === null || antwoord === undefined) return false;
+    return String(antwoord).replace(/\s+/g, '') === correct.replace(/\s+/g, '');
   }
 
   // ── Oplossing weergeven ───────────────────────────────────
   function _maakOplossing(correct) {
-    if (correct.n === 1) {
+    if (!correct.includes('/')) {
       const span = document.createElement('span');
-      span.classList.add('tg-opl-span');
-      span.textContent = String(correct.t);
+      span.style.cssText = `color: var(--lila-tekst, #d500f9); font-family: var(--font-oplossing, 'Comic Sans MS'); font-size: var(--fontsize, 10pt);`;
+      span.textContent = correct;
       return span;
-    } else {
-      const wrap = document.createElement('div');
-      wrap.classList.add('tg-opl-breuk');
-      const t = document.createElement('span');
-      t.textContent = String(correct.t);
-      const s = document.createElement('div');
-      s.classList.add('tg-opl-streep');
-      const n = document.createElement('span');
-      n.textContent = String(correct.n);
-      wrap.appendChild(t);
-      wrap.appendChild(s);
-      wrap.appendChild(n);
-      return wrap;
     }
+    const delen = correct.split('/');
+    const wrap  = document.createElement('span');
+    wrap.style.cssText = `display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.1; color: var(--lila-tekst, #d500f9); font-family: var(--font-oplossing, 'Comic Sans MS'); font-size: var(--fontsize, 10pt);`;
+    const t = document.createElement('span');
+    t.textContent = delen[0];
+    const s = document.createElement('div');
+    s.style.cssText = `min-width: 0.6cm; height: 0.8px; background: var(--lila-tekst, #d500f9); margin: 1px 0;`;
+    const n = document.createElement('span');
+    n.textContent = delen[1];
+    wrap.appendChild(t);
+    wrap.appendChild(s);
+    wrap.appendChild(n);
+    return wrap;
   }
 
   // ── getAntwoorden ─────────────────────────────────────────
