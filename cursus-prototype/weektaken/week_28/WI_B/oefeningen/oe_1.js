@@ -49,7 +49,8 @@ window.__taakOefening = (function () {
     ITEMS.forEach(item => {
       const a = _antwoorden[item.veld].antwoord;
       if (a !== null && a !== undefined) {
-        if (a === item.id) _plaatsing[item.id] = item.veld;
+        // a is het item.id dat in dit veld gesleept werd
+        _plaatsing[a] = item.veld;
       }
     });
 
