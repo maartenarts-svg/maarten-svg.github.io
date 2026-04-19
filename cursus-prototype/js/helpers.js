@@ -338,6 +338,50 @@ function maakOpTd(label, tekst, tekstBreedte='2.7cm', breuk=false, oplossing=nul
 }
 
 /*
+  maakOpTdGeen — td met label + tekst (vaste breedte) + geen = + schrijflijn
+  oplossing: HTML-string of Node (optioneel)
+  tekstBreedte: CSS-waarde, standaard '2.7cm'
+  breuk: grotere rijhoogte
+*/
+function maakOpTdGeen(label, tekst, tekstBreedte='2.7cm', breuk=false, oplossing=null) {
+  tekst = tekst ?? '';  // null én undefined worden ''
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}<span class="streep">|</span>`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = tekstBreedte;
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  const sl = document.createElement('span');
+  sl.classList.add('sl');
+  sl.textContent = SL;
+  rij.appendChild(sl);
+
+  if (oplossing !== null) {
+    const ov = document.createElement('div');
+    ov.classList.add('opl');
+    // Oplossing-positie wordt na render berekend op basis van sl-positie
+    ov.style.left = `calc(${tekstBreedte} + 0.65cm)`; // label ~0.3cm + = ~0.3cm = ~0.6cm extra
+    if (typeof oplossing === 'string') ov.innerHTML = oplossing;
+    else ov.appendChild(oplossing);
+    rij.appendChild(ov);
+  }
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
   maakOpTdDubbel — td met label + tekst (vaste breedte) + : + schrijflijn
   oplossing: HTML-string of Node (optioneel)
   tekstBreedte: CSS-waarde, standaard '2.7cm'

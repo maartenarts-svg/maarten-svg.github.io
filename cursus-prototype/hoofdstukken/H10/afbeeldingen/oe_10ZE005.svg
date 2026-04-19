@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+
+<svg 
+     version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     width="3.4460252942048504cm"
+     height="4.434639108116078cm"
+     viewBox="0 0 121 156"
+     >
+<title>
+
+</title>
+<g stroke-dashoffset="0.0000" stroke-linejoin="miter" stroke-dasharray="none" stroke-width="1.0000" stroke-linecap="square" stroke-miterlimit="10.000">
+<g id="misc">
+</g><!-- misc -->
+<g id="layer0">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipb4d20ead-9593-4344-af32-1113254cf097">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip1)">
+<g fill="#6aab7e" fill-rule="evenodd" fill-opacity="1.0000" stroke="none">
+  <path d="M 130.40 395.43 L 130.40 289.22 L 165.81 289.22 L 165.81 324.62 L 201.21 324.62 L 201.21 360.03 L 236.61 360.03 L 236.61 395.43 z"/>
+<title>Veelhoek veelhoek1</title>
+<desc>Veelhoek veelhoek1: Veelhoek A, J, I, H, G, F, E, D</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip1 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clip6124cc09-0e74-4d87-8e2b-8ceef4532aad">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip2)">
+<g fill="#ff7f00" fill-rule="evenodd" fill-opacity="1.0000" stroke="none">
+  <path d="M 130.40 289.22 L 130.40 253.82 L 236.61 253.82 L 236.61 360.03 L 201.21 360.03 L 201.21 324.62 L 165.81 324.62 L 165.81 289.22 z"/>
+<title>Veelhoek veelhoek2</title>
+<desc>Veelhoek veelhoek2: Veelhoek J, K, N, E, F, G, H, I</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip2 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipb44b57b3-b926-4bf3-875c-2f2442e2cb8e">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip3)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 130.40 395.43 L 130.40 289.22"/>
+<title>Lijnstuk f</title>
+<desc>Lijnstuk f: Lijnstuk [A, J]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip3 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipf8bb194b-f42c-4920-bad7-2b4fbad067f3">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip4)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 130.40 289.22 L 130.40 253.82"/>
+<title>Lijnstuk g</title>
+<desc>Lijnstuk g: Lijnstuk [J, K]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip4 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipfe9b7ea1-e2ad-423d-aa96-965174cec48d">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip5)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 130.40 253.82 L 236.61 253.82"/>
+<title>Lijnstuk h</title>
+<desc>Lijnstuk h: Lijnstuk [K, N]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip5 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clip69b172a0-192f-4939-876b-bf918964a460">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip6)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 236.61 253.82 L 236.61 360.03"/>
+<title>Lijnstuk i</title>
+<desc>Lijnstuk i: Lijnstuk [N, E]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip6 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipa6fc70e1-f18c-40bb-9b48-432ebd5a284c">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip7)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 236.61 360.03 L 236.61 395.43"/>
+<title>Lijnstuk j</title>
+<desc>Lijnstuk j: Lijnstuk [E, D]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip7 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipda6ab67f-0375-4e14-9d66-8f63c38b619a">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip8)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 236.61 395.43 L 130.40 395.43"/>
+<title>Lijnstuk k</title>
+<desc>Lijnstuk k: Lijnstuk [D, A]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip8 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipabbbe45d-d8f9-419a-be60-20fd4d1b4857">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip9)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 236.61 360.03 L 130.40 360.03"/>
+<title>Lijnstuk l</title>
+<desc>Lijnstuk l: Lijnstuk [E, Q]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip9 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipe5695077-3111-45b5-b898-780c29c31f4d">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip10)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 130.40 324.62 L 236.61 324.62"/>
+<title>Lijnstuk m</title>
+<desc>Lijnstuk m: Lijnstuk [R, P]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip10 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipd4a5bf11-0807-4249-9334-21031d23695e">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip11)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 130.40 289.22 L 236.61 289.22"/>
+<title>Lijnstuk n</title>
+<desc>Lijnstuk n: Lijnstuk [J, O]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip11 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clip8c25b563-ea0a-4c0e-a253-81ed4fd93f48">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip12)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 165.81 253.82 L 165.81 395.43"/>
+<title>Lijnstuk p</title>
+<desc>Lijnstuk p: Lijnstuk [L, B]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip12 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clip7dd9daf1-1fed-4b54-b32a-f29ad388e008">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip13)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 201.21 395.43 L 201.21 253.82"/>
+<title>Lijnstuk q</title>
+<desc>Lijnstuk q: Lijnstuk [C, M]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip13 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clip1074e202-dcdb-49c5-8afe-326c9c4747c3">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip14)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="4.5000" stroke-linecap="round">
+  <path d="M 130.40 289.22 L 165.81 289.22"/>
+<title>Lijnstuk r</title>
+<desc>Lijnstuk r: Lijnstuk [J, I]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip14 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clip3e870b8c-6700-48a1-a41d-69a6506a8743">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip15)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="4.5000" stroke-linecap="round">
+  <path d="M 165.81 289.22 L 165.81 324.62"/>
+<title>Lijnstuk s</title>
+<desc>Lijnstuk s: Lijnstuk [I, H]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip15 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipaa15915d-8eaf-40f7-abc3-75fdde8dc01e">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip16)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="4.5000" stroke-linecap="round">
+  <path d="M 165.81 324.62 L 201.21 324.62"/>
+<title>Lijnstuk t</title>
+<desc>Lijnstuk t: Lijnstuk [H, G]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip16 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clipfcbc98dc-392d-49af-b0f0-dbe6d584cfc4">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip17)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="4.5000" stroke-linecap="round">
+  <path d="M 201.21 324.62 L 201.21 360.03"/>
+<title>Lijnstuk c</title>
+<desc>Lijnstuk c: Lijnstuk [G, F]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip17 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -123.32, -246.74)">
+<clipPath id="clip0af31dc2-1ab8-4fdb-b986-0aff0139943b">
+  <path d="M 123.32 246.74 L 123.32 403.74 L 245.32 403.74 L 245.32 246.74 z"/>
+</clipPath>
+<g clip-path="url(#clip18)">
+<g fill="none" stroke="#000000" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="4.5000" stroke-linecap="round">
+  <path d="M 201.21 360.03 L 236.61 360.03"/>
+<title>Lijnstuk l_1</title>
+<desc>Lijnstuk l_1: Lijnstuk [F, E]</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip18 -->
+</g> <!-- transform -->
+</g><!-- layer0 -->
+</g> <!-- default stroke -->
+</svg> <!-- bounding box -->
