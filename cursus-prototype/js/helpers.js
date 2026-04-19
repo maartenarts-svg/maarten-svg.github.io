@@ -2084,8 +2084,14 @@ function maakSpanMetRuimte(inhoud,hoogte = '0.1cm') {
 
 /*====pop-up voor instructievideos====*/
 function toonVideoPopup(link) {
-  // Verwijder eventuele bestaande popup
   document.getElementById('video-popup-overlay')?.remove();
+
+  // Zet gewone YouTube link om naar embed link
+  const embedLink = link.includes('youtube.com/watch?v=')
+    ? link.replace('watch?v=', 'embed/')
+    : link.includes('youtu.be/')
+    ? link.replace('youtu.be/', 'www.youtube.com/embed/')
+    : link;
 
   const overlay = document.createElement('div');
   overlay.id = 'video-popup-overlay';
@@ -2123,25 +2129,32 @@ function toonVideoPopup(link) {
     font-family: var(--font);
     cursor: pointer;
   `;
-  sluitKnop.addEventListener('click', () => overlay.remove());
+  sluitKnop.addEventListener('click', () => {
+    // Stop het filmpje bij sluiten
+    iframe.src = '';
+    overlay.remove();
+  });
 
   const iframe = document.createElement('iframe');
-  iframe.src = link;
+  iframe.src = embedLink;
   iframe.style.cssText = `
     width: 80vw;
     height: 70vh;
     border: none;
     border-radius: 4px;
   `;
-  iframe.allow = 'autoplay';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
 
   box.appendChild(sluitKnop);
   box.appendChild(iframe);
   overlay.appendChild(box);
 
-  // Klik buiten box sluit popup
   overlay.addEventListener('click', e => {
-    if (e.target === overlay) overlay.remove();
+    if (e.target === overlay) {
+      iframe.src = '';
+      overlay.remove();
+    }
   });
 
   document.body.appendChild(overlay);

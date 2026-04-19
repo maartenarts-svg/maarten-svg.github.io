@@ -51,7 +51,7 @@
   tbody.appendChild(trLblB);
 
   const trb0 = document.createElement('tr');
-  const tdb0 = maakSlTd('per dag:\u00A0 <i>b</i>\u200A = 13 + 5 · 4 + 3 · 7 = 13 + 20 + 21 = 54', false);
+  const tdb0 = maakSlTd('per nacht:\u00A0 <i>b</i>\u200A = 13 + 5 · 4 + 3 · 7 = 13 + 20 + 21 = 54', false);
   tdb0.classList.add('kolom-links');
   trb0.appendChild(tdb0);
   tbody.appendChild(trb0);
