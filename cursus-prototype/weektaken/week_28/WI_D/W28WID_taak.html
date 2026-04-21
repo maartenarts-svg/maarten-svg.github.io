@@ -182,7 +182,8 @@
   <!-- Oefeningen worden dynamisch geladen door taak.js           -->
 
   <script type="module">
-    import { setTaakRef, fetchTaak, saveTaak } from '../../js/firebase.js';
+
+    import { setTaakRef, fetchTaak, saveTaak, saveLeerling } from '../../js/firebase.js';
 
     // ================================================================
     //  CONFIGURATIE — pas dit aan per taak
@@ -676,7 +677,9 @@
         return;
       }
       const schoon = JSON.parse(JSON.stringify(_taakData));
-      await saveTaak(schoon);
+      await saveLeerling(_leerling.mail, schoon.leerlingen.find(
+        l => l.mail.toLowerCase() === _leerling.mail.toLowerCase()
+      ));
     }
 
     // Auto-opslaan bij elke navigatiestap (enkel als niet verbeterd)

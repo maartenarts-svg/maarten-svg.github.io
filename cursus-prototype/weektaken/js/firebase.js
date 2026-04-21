@@ -5,8 +5,10 @@
 
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc }
+import { getFirestore, doc, getDoc, setDoc, updateDoc }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+
 
 const firebaseConfig = {
   apiKey:            "AIzaSyDSU0eoW9Od_aoE-7yyDhv0vhkPjVCbWNw",
@@ -41,3 +43,26 @@ export async function saveTaak(data) {
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
   await setDoc(_taakRef, data);
 }
+
+// ── Write: alleen leerlingdata bijwerken ──────────────────────
+export async function saveLeerling(mail, leerlingData) {
+  if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
+  
+  const snap = await getDoc(_taakRef);
+  if (!snap.exists()) return;
+  
+  const data = snap.data();
+  const idx = (data.leerlingen || []).findIndex(
+    l => l.mail.toLowerCase() === mail.toLowerCase()
+  );
+  if (idx < 0) return;
+
+  // Vervang alleen dit leerling-object in de array
+  data.leerlingen[idx] = leerlingData;
+
+  // Sla alleen de leerlingenlijst op, niet de rest
+  await updateDoc(_taakRef, { leerlingen: data.leerlingen });
+}
+
+
+
