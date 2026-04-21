@@ -77,10 +77,8 @@ if (!mail) { window.location.href = "index.html"; }
 // ── Data uit sessionStorage ───────────────────────────────────
 const hstCode      = sessionStorage.getItem("actieve_taak_code") || "H10";
 const dataInhoud   = JSON.parse(sessionStorage.getItem("wiskunde_inhoud") || '{"hoofdstukken":[]}');
-const dataLL       = JSON.parse(sessionStorage.getItem("wiskunde_leerlingen") || '{"leerlingen":[]}');
-
 const hoofdstuk    = (dataInhoud.hoofdstukken || []).find(h => h.code === hstCode) || null;
-const leerling     = dataLL.leerlingen.find(l => l.mail.toLowerCase() === mail.toLowerCase()) || {};
+const leerling = JSON.parse(sessionStorage.getItem('wiskunde_leerlingen') || '{}');
 
 // ── Topbalk vullen ────────────────────────────────────────────
 document.getElementById("opdr-naam").textContent  = leerling.volledigeNaam || leerling.voornaam || mail;

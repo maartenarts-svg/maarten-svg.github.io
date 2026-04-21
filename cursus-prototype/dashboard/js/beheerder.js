@@ -2,7 +2,7 @@
 //  beheerder.js  —  beheerdersscherm (3 tabs)
 // ============================================================
 
-import { saveLeerlingen, saveInhoud } from "./firebase.js";
+import { saveLeerling, deleteLeerling, saveInhoud } from "./firebase.js";
 
 let _data   = null;   // { leerlingen: [...] }
 let _inhoud = null;   // { hoofdstukken: [...] }
@@ -21,10 +21,15 @@ export function init(dataLeerlingen, dataInhoud) {
 }
 
 // ── Opslaan ───────────────────────────────────────────────────
-async function _slaLeerlingenOp() {
+async function _slaLeerlingOp(leerling) {
+  const safemail = leerling.mail.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  _data[safemail] = leerling;
   sessionStorage.setItem("wiskunde_leerlingen", JSON.stringify(_data));
   localStorage.setItem("wiskunde_leerlingen",   JSON.stringify(_data));
-  await saveLeerlingen(_data);
+  await saveLeerling(leerling.mail, leerling);
+}
+function _leerlingenAlsArray() {
+  return Object.values(_data).filter(l => !l.code);
 }
 async function _slaInhoudOp() {
   sessionStorage.setItem("wiskunde_inhoud", JSON.stringify(_inhoud));
@@ -91,10 +96,10 @@ function _renderLeerlingenTabel() {
   const wrap = document.getElementById("ll-tabel");
   if (!wrap) return;
 
-  const items = (_data.leerlingen || []).filter(l =>
-    !l.code && (!zoek ||
-      l.volledigeNaam?.toLowerCase().includes(zoek) ||
-      l.mail?.toLowerCase().includes(zoek))
+  const items = _leerlingenAlsArray().filter(l =>
+    !zoek ||
+    l.volledigeNaam?.toLowerCase().includes(zoek) ||
+    l.mail?.toLowerCase().includes(zoek)
   );
 
   if (items.length === 0) {
@@ -123,13 +128,13 @@ function _renderLeerlingenTabel() {
 
   wrap.querySelectorAll("button[data-mail]").forEach(knop => {
     knop.addEventListener("click", () => {
-      const idx = _data.leerlingen.findIndex(l => l.mail === knop.dataset.mail);
-      _toonLeerlingFormulier(_data.leerlingen[idx], idx);
+      const safemail = knop.dataset.mail.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      _toonLeerlingFormulier(_data[safemail]);
     });
   });
 }
 
-function _toonLeerlingFormulier(leerling, idx = null) {
+function _toonLeerlingFormulier(leerling) {
   const wrap    = document.getElementById("ll-formulier");
   const isNieuw = leerling === null;
   const l       = leerling || {};
@@ -169,10 +174,9 @@ function _toonLeerlingFormulier(leerling, idx = null) {
     };
     if (!nieuw.mail) { alert("Mailadres is verplicht."); return; }
 
-    if (isNieuw) _data.leerlingen.push(nieuw);
-    else         _data.leerlingen[idx] = { ..._data.leerlingen[idx], ...nieuw };
-
-    await _slaLeerlingenOp();
+    const bestaand = isNieuw ? {} : leerling;
+    const op = { ...bestaand, ...nieuw };
+    await _slaLeerlingOp(op);
     wrap.classList.add("verborgen");
     _renderLeerlingenTabel();
   });
@@ -180,8 +184,11 @@ function _toonLeerlingFormulier(leerling, idx = null) {
   if (!isNieuw) {
     wrap.querySelector("#ll-verwijder").addEventListener("click", async () => {
       if (!confirm(`Verwijder ${l.volledigeNaam}?`)) return;
-      _data.leerlingen.splice(idx, 1);
-      await _slaLeerlingenOp();
+      const safemail = l.mail.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      delete _data[safemail];
+      sessionStorage.setItem("wiskunde_leerlingen", JSON.stringify(_data));
+      localStorage.setItem("wiskunde_leerlingen",   JSON.stringify(_data));
+      await deleteLeerling(l.mail);
       wrap.classList.add("verborgen");
       _renderLeerlingenTabel();
     });
@@ -203,11 +210,12 @@ async function _verwerkCsvLeerlingen(e) {
       if (!rij.mail) continue;
       if (!rij.volledigeNaam && (rij.voornaam || rij.familienaam))
         rij.volledigeNaam = `${rij.voornaam || ""} ${rij.familienaam || ""}`.trim();
-      const bi = _data.leerlingen.findIndex(l => l.mail === rij.mail);
-      if (bi >= 0) _data.leerlingen[bi] = { ..._data.leerlingen[bi], ...rij };
-      else { _data.leerlingen.push({ ...rij, verbetersleutel: {} }); toegevoegd++; }
+      const safemail = rij.mail.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      const bestaand = _data[safemail] || null;
+      const nieuw = { ...(bestaand || { verbetersleutel: {} }), ...rij };
+      await _slaLeerlingOp(nieuw);
+      if (!bestaand) toegevoegd++;
     }
-    await _slaLeerlingenOp();
     _renderLeerlingenTabel();
     alert(`CSV verwerkt. ${toegevoegd} nieuwe leerlingen toegevoegd.`);
   };
@@ -490,8 +498,7 @@ function _bouwEvolutie() {
   `;
 
   // ── Dropdowns vullen ────────────────────────────────────────
-  const leerlingen = (_data.leerlingen || [])
-    .filter(l => !l.code)
+  const leerlingen = _leerlingenAlsArray()
     .sort((a, b) => (a.volledigeNaam || "").localeCompare(b.volledigeNaam || ""));
 
   const selectLL = el.querySelector("#evo-leerling");
@@ -647,7 +654,7 @@ function _downloadScoreCsv(hstCode, par) {
   const cirkelHVSIv2 = hvsiOef.filter(o => (o.niveau||'geen').split('+').includes('cirkel'));
   const extraHVSIv2  = hvsiOef.filter(o => !(o.niveau||'geen').split('+').includes('cirkel'));
 
-  const leerlingen = (_data.leerlingen || []).filter(l => !l.code);
+  const leerlingen = _leerlingenAlsArray();
   const headers = ["mail","volledigeNaam","voornaam","familienaam","niveau","allesKeuze1","score","opmerking"];
   const regels  = [headers.join(";")];
 
@@ -788,7 +795,7 @@ function _toonOpmerkingen(hstCode, keuzeFilter, container) {
     return;
   }
 
-  const leerlingen = (_data.leerlingen || []).filter(l => !l.code);
+  const leerlingen = _leerlingenAlsArray();
   const isLila     = keuzeFilter === 3;
 
   // Verzamel per oefening alle opmerkingen van alle leerlingen

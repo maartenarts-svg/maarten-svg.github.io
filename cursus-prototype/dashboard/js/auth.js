@@ -2,7 +2,7 @@
 //  auth.js  —  login-logica
 // ============================================================
 
-import { fetchLeerlingen, fetchInhoud } from "./firebase.js";
+import { fetchLeerling, fetchAlleLeerlingen, fetchBeheerder, fetchInhoud } from "./firebase.js";
 
 const formulier   = document.getElementById("login-formulier");
 const mailInvoer  = document.getElementById("login-mail");
@@ -11,16 +11,13 @@ const codeInvoer  = document.getElementById("login-code");
 const loginKnop   = document.getElementById("login-knop");
 const foutBericht = document.getElementById("login-fout");
 
-let _cachedData = null;
-
 // Toon code-veld als mailadres een beheerder is
 mailInvoer.addEventListener("blur", async () => {
   const mail = mailInvoer.value.trim().toLowerCase();
   if (!mail) return;
-  const data    = await _laadData();
-  const persoon = _zoekOpMail(data, mail);
-  if (persoon?.code) codeWrap.classList.remove("verborgen");
-  else               codeWrap.classList.add("verborgen");
+  const beheerder = await fetchBeheerder(mail);
+  if (beheerder) codeWrap.classList.remove("verborgen");
+  else           codeWrap.classList.add("verborgen");
 });
 
 formulier.addEventListener("submit", async (e) => {
@@ -33,31 +30,34 @@ formulier.addEventListener("submit", async (e) => {
   const code = codeInvoer.value.trim();
 
   try {
-    const data    = await _laadData();
-    const persoon = _zoekOpMail(data, mail);
+    const persoon = await _zoekOpMail(mail);
 
     if (!persoon) {
       _toonFout("Dit mailadres is niet gekend. Neem contact op met de beheerder.");
       return;
     }
 
-    const isBeheerder = !!(persoon.code);
+    const isBeheerder = persoon._isBeheerder;
     if (isBeheerder && code !== persoon.code) {
       _toonFout("Onjuiste code. Neem contact op met de beheerder.");
       return;
     }
 
-    // Login geslaagd — laad inhoud en sla op
     const inhoud = await fetchInhoud();
+    sessionStorage.setItem("wiskunde_inhoud", JSON.stringify(inhoud));
+    sessionStorage.setItem("wiskunde_mail",   mail);
+    sessionStorage.setItem("wiskunde_rol",    isBeheerder ? "beheerder" : "leerling");
+    localStorage.setItem("wiskunde_mail",     mail);
 
-    // sessionStorage: voor deze tab
-    // localStorage: gedeeld met popup-vensters (correctiesleutel-viewer)
-    sessionStorage.setItem("wiskunde_leerlingen", JSON.stringify(data));
-    sessionStorage.setItem("wiskunde_inhoud",     JSON.stringify(inhoud));
-    sessionStorage.setItem("wiskunde_mail",        mail);
-    sessionStorage.setItem("wiskunde_rol",         isBeheerder ? "beheerder" : "leerling");
-    localStorage.setItem("wiskunde_leerlingen",    JSON.stringify(data));
-    localStorage.setItem("wiskunde_mail",          mail);
+    if (isBeheerder) {
+      const alleLeerlingen = await fetchAlleLeerlingen();
+      sessionStorage.setItem("wiskunde_leerlingen", JSON.stringify(alleLeerlingen));
+      localStorage.setItem("wiskunde_leerlingen",   JSON.stringify(alleLeerlingen));
+    } else {
+      const { _isBeheerder, ...leerlingData } = persoon;
+      sessionStorage.setItem("wiskunde_leerlingen", JSON.stringify(leerlingData));
+      localStorage.setItem("wiskunde_leerlingen",   JSON.stringify(leerlingData));
+    }
 
     window.location.href = "dashboard.html";
 
@@ -70,16 +70,12 @@ formulier.addEventListener("submit", async (e) => {
   }
 });
 
-async function _laadData() {
-  if (_cachedData) return _cachedData;
-  const cached = sessionStorage.getItem("wiskunde_leerlingen");
-  if (cached) { _cachedData = JSON.parse(cached); return _cachedData; }
-  _cachedData = await fetchLeerlingen();
-  return _cachedData;
-}
-
-function _zoekOpMail(data, mail) {
-  return (data.leerlingen || []).find(l => l.mail.toLowerCase() === mail);
+async function _zoekOpMail(mail) {
+  const leerling = await fetchLeerling(mail);
+  if (leerling) return { ...leerling, _isBeheerder: false };
+  const beheerder = await fetchBeheerder(mail);
+  if (beheerder) return { ...beheerder, _isBeheerder: true };
+  return null;
 }
 
 function _toonFout(bericht) {

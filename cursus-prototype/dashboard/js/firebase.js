@@ -4,7 +4,8 @@
 
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc }
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs,
+         deleteDoc as firestoreDeleteDoc }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -19,27 +20,52 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
 
-const REF_LEERLINGEN = doc(db, "leerlingen", "alle_leerlingen");
-const REF_INHOUD     = doc(db, "inhoud",     "alle_inhoud");
+const REF_INHOUD = doc(db, "inhoud", "alle_inhoud");
 
-// ── Reads (1× bij login) ──────────────────────────────────────
-export async function fetchLeerlingen() {
-  const snap = await getDoc(REF_LEERLINGEN);
-  if (!snap.exists()) return { leerlingen: [] };
-  return snap.data();
-}
-
+// ── Inhoud (hoofdstukken) ─────────────────────────────────────
 export async function fetchInhoud() {
   const snap = await getDoc(REF_INHOUD);
   if (!snap.exists()) return { hoofdstukken: [] };
   return snap.data();
 }
 
-// ── Writes (enkel bij expliciet opslaan) ─────────────────────
-export async function saveLeerlingen(data) {
-  await setDoc(REF_LEERLINGEN, data);
-}
-
 export async function saveInhoud(data) {
   await setDoc(REF_INHOUD, data);
+}
+
+// ── Per-leerling ──────────────────────────────────────────────
+function _leerlingRef(mail) {
+  const safemail = mail.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  return doc(db, "leerlingen", safemail);
+}
+
+export async function fetchLeerling(mail) {
+  const snap = await getDoc(_leerlingRef(mail));
+  if (!snap.exists()) return null;
+  return snap.data();
+}
+
+export async function saveLeerling(mail, data) {
+  await setDoc(_leerlingRef(mail), data);
+}
+
+export async function fetchAlleLeerlingen() {
+  const ref  = collection(db, "leerlingen");
+  const snap = await getDocs(ref);
+  const result = {};
+  snap.forEach(d => { result[d.id] = d.data(); });
+  return result;
+}
+
+export async function deleteLeerling(mail) {
+  await firestoreDeleteDoc(_leerlingRef(mail));
+}
+
+// ── Beheerder ─────────────────────────────────────────────────
+export async function fetchBeheerder(mail) {
+  const safemail = mail.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  const ref  = doc(db, "beheerders", safemail);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return null;
+  return snap.data();
 }

@@ -118,7 +118,7 @@
   </div>
 
 <script type="module">
-import { saveLeerlingen } from './js/firebase.js';
+import { saveLeerling } from './js/firebase.js';
 
 // ── URL-parameters ────────────────────────────────────────────
 const params       = new URLSearchParams(window.location.search);
@@ -257,19 +257,11 @@ function toonMessagebox() {
 // We lezen de MEEST RECENTE data uit localStorage (gedeeld
 // tussen vensters), zodat we nooit eerdere pogingen overschrijven.
 async function _slaOp(keuze, opmerking) {
-  // Altijd de meest recente data lezen uit localStorage
-  const dataLeerlingen = JSON.parse(
-    localStorage.getItem('wiskunde_leerlingen') || '{"leerlingen":[]}'
+  const leerling = JSON.parse(
+    localStorage.getItem('wiskunde_leerlingen') || 'null'
   );
+  if (!leerling) return;
 
-  const idx = dataLeerlingen.leerlingen.findIndex(
-    l => l.mail.toLowerCase() === mail.toLowerCase()
-  );
-  if (idx < 0) return;
-
-  const leerling = dataLeerlingen.leerlingen[idx];
-
-  // Verbetersleutel-structuur opbouwen (behoud bestaande data)
   if (!leerling.verbetersleutel)              leerling.verbetersleutel              = {};
   if (!leerling.verbetersleutel[sleutelCode]) leerling.verbetersleutel[sleutelCode] = { niveaus: {}, oefeningen: {} };
   const cr = leerling.verbetersleutel[sleutelCode];
@@ -277,16 +269,11 @@ async function _slaOp(keuze, opmerking) {
   if (!cr.oefeningen)                         cr.oefeningen                         = {};
   if (!cr.oefeningen[bestandsnaam])           cr.oefeningen[bestandsnaam]           = { pogingen: [] };
 
-  // Nieuwe poging TOEVOEGEN (niet overschrijven)
   const datum = new Date().toLocaleDateString('nl-BE');
   cr.oefeningen[bestandsnaam].pogingen.push({ datum, keuze, opmerking, opgelost: false });
 
-  // Bijgewerkte leerling terugzetten
-  dataLeerlingen.leerlingen[idx] = leerling;
-
-  // Opslaan in localStorage (zodat hoofdvenster het oppikt) én Firebase
-  localStorage.setItem('wiskunde_leerlingen', JSON.stringify(dataLeerlingen));
-  await saveLeerlingen(dataLeerlingen);
+  localStorage.setItem('wiskunde_leerlingen', JSON.stringify(leerling));
+  await saveLeerling(mail, leerling);
 }
 </script>
 </body>

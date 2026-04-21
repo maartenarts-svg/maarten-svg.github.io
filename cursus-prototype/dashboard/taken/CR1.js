@@ -140,18 +140,15 @@ function _herrender() {
   const versData = JSON.parse(
     localStorage.getItem('wiskunde_leerlingen') ||
     sessionStorage.getItem('wiskunde_leerlingen') ||
-    '{"leerlingen":[]}'
+    '{}'
   );
   // Altijd synchroniseren zodat de rest van de app ook actueel is
   sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(versData));
 
   const mailVanLeerling = _renderLeerling?.mail || mail;
-  const leerling = versData.leerlingen.find(
-    l => l.mail.toLowerCase() === mailVanLeerling.toLowerCase()
-  ) || _renderLeerling || {};
-  const crData      = leerling?.verbetersleutel?.[SLEUTEL_CODE] || { niveaus: {}, oefeningen: {} };
-  // Zichtbaarheid: lees de actieve zichtbaarheidsregels die door opdrachten.html
-  // in sessionStorage gezet zijn, en bereken totEnMet op basis van vandaag.
+  const safemail  = mailVanLeerling.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  const _leerling = versData[safemail] || versData.mail ? versData : _renderLeerling || {};
+  const crData      = _leerling?.verbetersleutel?.[SLEUTEL_CODE] || { niveaus: {}, oefeningen: {} };
   const _zichtbaarheid = JSON.parse(sessionStorage.getItem('actieve_zichtbaarheid') || '[]');
   const _nu = new Date(); _nu.setHours(0,0,0,0);
   const _parseDatum = s => { if (!s) return null; const [d,m,y]=s.split('/').map(Number); return new Date(y,m-1,d); };
@@ -161,7 +158,7 @@ function _herrender() {
     if (v && _nu >= v) totEnMet = r.totEnMet;
   }
 
-  _bouwPagina(_renderContainer, crData, totEnMet, leerling, _renderCallbacks);
+  _bouwPagina(_renderContainer, crData, totEnMet, _leerling, _renderCallbacks);
 }
 
 // ============================================================
@@ -521,28 +518,25 @@ function _toonNiveauPopup(popupInfo, leerling, callbacks) {
 }
 
 // ── Gekozen niveau opslaan ────────────────────────────────────
-async function _slaGekozenNiveauOp(par, niveau, leerling) {
-  const { saveLeerlingen } = await import('../js/firebase.js');
-  const mail        = sessionStorage.getItem('wiskunde_mail');
-  // Lees altijd uit localStorage want viewer heeft daar naartoe geschreven
-  const dataLL = JSON.parse(
+async function _slaGekozenNiveauOp(par, niveau) {
+  const { saveLeerling } = await import('../js/firebase.js');
+  const mail   = sessionStorage.getItem('wiskunde_mail');
+  const leerling = JSON.parse(
     localStorage.getItem('wiskunde_leerlingen') ||
     sessionStorage.getItem('wiskunde_leerlingen') ||
-    '{"leerlingen":[]}'
+    'null'
   );
-  const idx         = dataLL.leerlingen.findIndex(l => l.mail.toLowerCase() === mail.toLowerCase());
-  if (idx < 0) return;
+  if (!leerling) return;
 
-  if (!dataLL.leerlingen[idx].verbetersleutel)               dataLL.leerlingen[idx].verbetersleutel               = {};
-  if (!dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE]) dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE] = { niveaus: {}, oefeningen: {} };
-  if (!dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE].niveaus) dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE].niveaus = {};
+  if (!leerling.verbetersleutel)               leerling.verbetersleutel               = {};
+  if (!leerling.verbetersleutel[SLEUTEL_CODE]) leerling.verbetersleutel[SLEUTEL_CODE] = { niveaus: {}, oefeningen: {} };
+  if (!leerling.verbetersleutel[SLEUTEL_CODE].niveaus) leerling.verbetersleutel[SLEUTEL_CODE].niveaus = {};
 
-  dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE].niveaus[par] = niveau;
+  leerling.verbetersleutel[SLEUTEL_CODE].niveaus[par] = niveau;
 
-  // Beide opslaan zodat popup-vensters altijd de meest recente data zien
-  sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(dataLL));
-  localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(dataLL));
-  await saveLeerlingen(dataLL);
+  sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(leerling));
+  localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(leerling));
+  await saveLeerling(mail, leerling);
 }
 
 // _herlaadGrid verwijderd — gebruik _herrender()
@@ -680,19 +674,16 @@ function _maakOpmTabel(oefeningen, crData, kleur, keuzeFilter, leerling) {
 
       cb.addEventListener('change', async () => {
         // Zet opgelost op de meest recente poging van keuze 3
-        const { saveLeerlingen } = await import('../js/firebase.js');
+        const { saveLeerling } = await import('../js/firebase.js');
         const mailNu   = sessionStorage.getItem('wiskunde_mail');
-        const dataLL   = JSON.parse(localStorage.getItem('wiskunde_leerlingen')
+        const leerling = JSON.parse(localStorage.getItem('wiskunde_leerlingen')
                        || sessionStorage.getItem('wiskunde_leerlingen')
-                       || '{"leerlingen":[]}');
-        const llIdx    = dataLL.leerlingen.findIndex(l => l.mail.toLowerCase() === mailNu.toLowerCase());
-        if (llIdx < 0) return;
+                       || 'null');
+        if (!leerling) return;
 
-        const ll = dataLL.leerlingen[llIdx];
-        const pogs = ll?.verbetersleutel?.[SLEUTEL_CODE]?.oefeningen?.[o.bestandsnaam]?.pogingen;
+        const pogs = leerling?.verbetersleutel?.[SLEUTEL_CODE]?.oefeningen?.[o.bestandsnaam]?.pogingen;
         if (!pogs) return;
 
-        // Vind de laatste poging met keuze 3 en zet opgelost
         for (let i = pogs.length - 1; i >= 0; i--) {
           if (pogs[i].keuze === keuzeFilter) {
             pogs[i].opgelost = cb.checked;
@@ -700,10 +691,9 @@ function _maakOpmTabel(oefeningen, crData, kleur, keuzeFilter, leerling) {
           }
         }
 
-        dataLL.leerlingen[llIdx] = ll;
-        localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(dataLL));
-        sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(dataLL));
-        await saveLeerlingen(dataLL);
+        localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(leerling));
+        sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(leerling));
+        await saveLeerling(mailNu, leerling);
 
         // Visuele feedback
         tr.style.opacity      = cb.checked ? '0.6' : '1';

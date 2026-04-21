@@ -10,13 +10,14 @@ const rol  = sessionStorage.getItem("wiskunde_rol");
 if (!mail) { window.location.href = "index.html"; }
 
 // ── Data ─────────────────────────────────────────────────────
-const dataLeerlingen = JSON.parse(sessionStorage.getItem("wiskunde_leerlingen") || '{"leerlingen":[]}');
+const dataLeerlingen = JSON.parse(sessionStorage.getItem("wiskunde_leerlingen") || '{}');
 const dataInhoud     = JSON.parse(sessionStorage.getItem("wiskunde_inhoud")     || '{"hoofdstukken":[]}');
 const hoofdstukken   = dataInhoud.hoofdstukken || [];
 let _huidigHoofdstuk = null;
 
 // Leerling/beheerder ophalen
-const ikZelf = dataLeerlingen.leerlingen.find(l => l.mail.toLowerCase() === mail.toLowerCase()) || {};
+const safemail = mail.toLowerCase().replace(/[^a-z0-9]/g, '_');
+const ikZelf   = dataLeerlingen[safemail] || {};
 
 // ── DOM ───────────────────────────────────────────────────────
 const elNaam          = document.getElementById("topbalk-naam");
