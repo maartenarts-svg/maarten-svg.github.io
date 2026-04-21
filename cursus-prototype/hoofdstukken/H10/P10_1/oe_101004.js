@@ -28,7 +28,7 @@
     ],
     [
       { inhoud: '= 20 + 12', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
-      { inhoud: maakGelijkheidMetNummer('= 17', '(3)'), type: 'opgave', hAlign: 'left', vAlign: 'middle' },
+      { inhoud: maakGelijkheidMetNummer('= 47', '(3)'), type: 'opgave', hAlign: 'left', vAlign: 'middle' },
       { inhoud: '= 1 700 + 17', type: 'opgave', hAlign: 'left', vAlign: 'middle' },
     ],
     [

@@ -25,7 +25,7 @@
   oe_10ZE007_5.appendChild(htmlSpan('Bereken het aantal witte driehoeken.'));
 
   const oe_10ZE007_6 = document.createElement('span');
-  oe_10ZE007_6.appendChild(htmlSpan('Het aantal gekleurde driehoeken is een driehoeksgetal met basis 16.'));
+  oe_10ZE007_6.appendChild(htmlSpan('Het aantal witte driehoeken is een driehoeksgetal met basis 16.'));
 
   const oe_10ZE007_7 = document.createElement('span');
   oe_10ZE007_7.appendChild(htmlSpan('16 · 17 : 2 = 136'));
