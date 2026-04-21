@@ -183,7 +183,7 @@
 
   <script type="module">
 
-    import { setTaakRef, fetchTaak, saveTaak, saveLeerling } from '../../js/firebase.js';
+    import { setTaakRef, fetchTaak, saveTaak, saveLeerling, luisterVersie } from '../../js/firebase.js';
 
     // ================================================================
     //  CONFIGURATIE — pas dit aan per taak
@@ -379,6 +379,13 @@
         _toonScherm('welkom');
       }
     }
+
+    const _lokaleVersie = _taakData?.instellingen?.versie || 0;
+    luisterVersie(nieuweVersie => {
+      if (nieuweVersie !== _lokaleVersie) {
+        window.location.reload();
+      }
+    });
 
     // ================================================================
     //  INHOUD OPBOUWEN

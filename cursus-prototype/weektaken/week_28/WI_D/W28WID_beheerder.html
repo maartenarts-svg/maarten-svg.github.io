@@ -151,6 +151,9 @@
           <div style="margin-top:1rem;">
             <button class="knop-primair" id="knop-stel-opslaan">Instellingen opslaan</button>
           </div>
+          <div style="margin-top:0.5rem;">
+            <button class="knop-secundair" id="knop-refresh">↺ Forceer refresh bij leerlingen</button>
+          </div>
         </div>
       </div>
 
@@ -762,6 +765,14 @@
       a.href = url; a.download = naam; a.click();
       URL.revokeObjectURL(url);
     }
+
+    // Knop: forceer refresh bij alle leerlingen
+    document.getElementById('knop-refresh').addEventListener('click', async () => {
+      const huidigeVersie = _taakData?.instellingen?.versie || 0;
+      _taakData.instellingen.versie = huidigeVersie + 1;
+      await saveTaak(_taakData);
+      alert('Alle leerlingen worden herladen.');
+    });
 
   </script>
 </body>

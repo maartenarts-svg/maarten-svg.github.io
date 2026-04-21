@@ -5,7 +5,8 @@
 
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc }
+
+import { getFirestore, doc, getDoc, setDoc, updateDoc, runTransaction, onSnapshot }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 
@@ -28,6 +29,15 @@ let _taakRef = null;
 
 export function setTaakRef(documentId) {
   _taakRef = doc(db, "taken", documentId);
+}
+
+export function luisterVersie(callback) {
+  if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
+  onSnapshot(_taakRef, (snap) => {
+    if (!snap.exists()) return;
+    const versie = snap.data()?.instellingen?.versie || 0;
+    callback(versie);
+  });
 }
 
 // ── Read (1× bij login) ───────────────────────────────────────
