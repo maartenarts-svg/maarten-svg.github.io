@@ -8,6 +8,9 @@
     pad  : pad naar het js-bestand van de oefening
     nr   : nummer van het blokje (1, 2, 3 of 4)
     mail : mailadres van de leerling
+
+  Aanpassen per taak:
+    TAAK_ID  : unieke Firebase-document-id (bv. "W28WIC")
 ============================================================ -->
 <html lang="nl">
 <head>
@@ -109,7 +112,7 @@
 </head>
 <body>
 
-  <div class="pagina" id="oefening-container" style="margin-bottom: 4cm; "></div>
+  <div class="pagina" id="oefening-container" style="margin-bottom: 4cm;"></div>
   <div id="laad-fout"></div>
 
   <div id="zwevende-zone">
@@ -118,7 +121,12 @@
   </div>
 
 <script type="module">
-import { fetchTaak, saveTaak, setTaakRef } from '../../js/firebase.js';
+import { fetchLeerling, saveLeerling } from '../../js/firebase.js';
+
+// ================================================================
+//  CONFIGURATIE — pas dit aan per taak
+// ================================================================
+const TAAK_ID = 'W28WIC';
 
 // ── URL-parameters ────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
@@ -126,9 +134,6 @@ const pad    = params.get('pad');
 const nr     = parseInt(params.get('nr') || '1');
 const mail   = params.get('mail');
 window.ACTIEVE_CONTAINER = '#oefening-container';
-
-// ── Pas TAAK_ID aan naar de juiste taak ───────────────────────
-const TAAK_ID = 'W28WIC';
 
 document.title = `Oefening ${nr}`;
 
@@ -138,8 +143,6 @@ if (!pad || !mail) {
   document.getElementById('zwevende-zone').style.display = 'none';
   throw new Error('stop');
 }
-
-setTaakRef(TAAK_ID);
 
 // ── Oefening laden ────────────────────────────────────────────
 function laadScript(src, id) {
@@ -246,15 +249,9 @@ function toonMessagebox() {
 
 // ── Opslaan in Firebase ───────────────────────────────────────
 async function _slaOp(keuze, opmerking) {
-  const taakData = await fetchTaak();
-  if (!taakData) return;
-
-  const idx = (taakData.leerlingen || []).findIndex(
-    l => l.mail.toLowerCase() === mail.toLowerCase()
-  );
-  if (idx < 0) return;
-
-  const leerling = taakData.leerlingen[idx];
+  // Leerlingdocument ophalen (1 read)
+  const leerling = await fetchLeerling(TAAK_ID, mail);
+  if (!leerling) return;
 
   // verbetering-structuur opbouwen
   if (!leerling.verbetering)       leerling.verbetering       = {};
@@ -263,10 +260,8 @@ async function _slaOp(keuze, opmerking) {
   const datum = new Date().toLocaleDateString('nl-BE');
   leerling.verbetering[nr].pogingen.push({ datum, keuze, opmerking, opgelost: false });
 
-  taakData.leerlingen[idx] = leerling;
-
-  const schoon = JSON.parse(JSON.stringify(taakData));
-  await saveTaak(schoon);
+  // Leerlingdocument opslaan (1 write)
+  await saveLeerling(TAAK_ID, mail, leerling);
 }
 </script>
 </body>
