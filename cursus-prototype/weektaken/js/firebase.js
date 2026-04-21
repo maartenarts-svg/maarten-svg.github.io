@@ -50,15 +50,13 @@ export async function fetchTaak() {
 
 // ── Write ─────────────────────────────────────────────────────
 export async function saveTaak(data) {
+  console.log('=== saveTaak AANGEROEPEN ===');
+  console.trace(); // toont waar de aanroep vandaan komt
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
   
   const { leerlingen, ...rest } = data;
-  
-  // Instellingen/bestanden veilig schrijven (geen leerlingen)
   await setDoc(_taakRef, rest, { merge: true });
   
-  // Leerlingen alleen schrijven als de beheerder ze expliciet aanpaste
-  // (bv. bij toevoegen/verwijderen/CSV), via transactie
   if (leerlingen?.length) {
     await runTransaction(db, async (transaction) => {
       const snap = await transaction.get(_taakRef);
