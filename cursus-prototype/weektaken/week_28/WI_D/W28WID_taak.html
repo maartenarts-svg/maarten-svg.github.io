@@ -677,20 +677,12 @@
         return;
       }
       const schoon = JSON.parse(JSON.stringify(_taakData));
-      await saveLeerling(_leerling.mail, schoon.leerlingen.find(
+      const leerlingData = schoon.leerlingen.find(
         l => l.mail.toLowerCase() === _leerling.mail.toLowerCase()
-      ));
+      );
+      console.log('saveLeerling aangeroepen met:', JSON.stringify(leerlingData?.antwoorden));
+      await saveLeerling(_leerling.mail, leerlingData);
     }
-
-    // Auto-opslaan bij elke navigatiestap (enkel als niet verbeterd)
-    // Wordt aangeroepen door knoppen hierboven via _slaOefeningAntwoordenOp
-    // Voeg een periodieke opslag toe voor extra veiligheid
-    setInterval(async () => {
-      if (_leerling && !_taakData?.instellingen?.verbeterdModus) {
-        _syncLeerling();
-        await _slaOp();
-      }
-    }, 30000); // elke 30 seconden
 
   </script>
 </body>
