@@ -92,6 +92,10 @@ export async function saveTaak(data) {
 export async function saveLeerling(mail, leerlingData) {
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
 
+  console.log('=== saveLeerling START ===');
+  console.log('mail:', mail);
+  console.log('leerlingData.antwoorden:', JSON.stringify(leerlingData.antwoorden));
+
   await runTransaction(db, async (transaction) => {
     const snap = await transaction.get(_taakRef);
     if (!snap.exists()) return;
@@ -102,6 +106,8 @@ export async function saveLeerling(mail, leerlingData) {
     );
     if (idx < 0) return;
 
+    console.log('Firestore antwoorden VOOR merge:', JSON.stringify(leerlingen[idx].antwoorden));
+
     leerlingen[idx] = {
       ...leerlingen[idx],
       antwoorden:     leerlingData.antwoorden     ?? leerlingen[idx].antwoorden     ?? {},
@@ -109,6 +115,9 @@ export async function saveLeerling(mail, leerlingData) {
       ingediend:      leerlingData.ingediend      ?? leerlingen[idx].ingediend      ?? false,
       verbeterd:      leerlingData.verbeterd      ?? leerlingen[idx].verbeterd      ?? false,
     };
+
+    console.log('Firestore antwoorden NA merge:', JSON.stringify(leerlingen[idx].antwoorden));
+    console.log('=== saveLeerling END ===');
 
     transaction.update(_taakRef, { leerlingen });
   });
