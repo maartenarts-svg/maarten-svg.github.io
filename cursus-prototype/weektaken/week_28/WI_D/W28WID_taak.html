@@ -381,11 +381,17 @@
     }
 
     const _lokaleVersie = _taakData?.instellingen?.versie || 0;
-    luisterVersie(nieuweVersie => {
+    let _eersteKeer = true;
+    let _stopLuister = luisterVersie(nieuweVersie => {
+      if (_eersteKeer) { _eersteKeer = false; return; }
       if (nieuweVersie !== _lokaleVersie) {
         window.location.reload();
       }
     });
+
+window.addEventListener('beforeunload', () => {
+  if (_stopLuister) _stopLuister();
+});
 
     // ================================================================
     //  INHOUD OPBOUWEN
