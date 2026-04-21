@@ -51,12 +51,40 @@ export async function fetchTaak() {
 // ── Write ─────────────────────────────────────────────────────
 export async function saveTaak(data) {
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
-  // Schrijf alles BEHALVE leerlingen via setDoc
+  
   const { leerlingen, ...rest } = data;
+  
+  // Instellingen/bestanden veilig schrijven (geen leerlingen)
   await setDoc(_taakRef, rest, { merge: true });
-  // Leerlingen apart en veilig
+  
+  // Leerlingen alleen schrijven als de beheerder ze expliciet aanpaste
+  // (bv. bij toevoegen/verwijderen/CSV), via transactie
   if (leerlingen?.length) {
-    await updateDoc(_taakRef, { leerlingen });
+    await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(_taakRef);
+      if (!snap.exists()) return;
+      
+      const huidigeLeerlingen = snap.data().leerlingen || [];
+      
+      // Merge: voor elke leerling in de nieuwe lijst, bewaar antwoorden
+      // uit Firestore als die nieuwer zijn
+      const geMerged = leerlingen.map(nieuw => {
+        const huidig = huidigeLeerlingen.find(
+          l => l.mail.toLowerCase() === nieuw.mail.toLowerCase()
+        );
+        if (!huidig) return nieuw; // nieuwe leerling
+        return {
+          ...nieuw,
+          // Antwoorden en voortgang nooit overschrijven vanuit beheerder
+          antwoorden:     huidig.antwoorden     ?? nieuw.antwoorden     ?? {},
+          succescriteria: huidig.succescriteria ?? nieuw.succescriteria ?? [],
+          ingediend:      huidig.ingediend      ?? nieuw.ingediend      ?? false,
+          verbeterd:      huidig.verbeterd      ?? nieuw.verbeterd      ?? false,
+        };
+      });
+      
+      transaction.update(_taakRef, { leerlingen: geMerged });
+    });
   }
 }
 
