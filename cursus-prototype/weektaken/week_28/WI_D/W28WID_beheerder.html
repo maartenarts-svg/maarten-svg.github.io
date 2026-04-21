@@ -290,7 +290,7 @@
     }
 
     if (mail !== _taakData?.instellingen?.beheerderMail) {
-      window.location.href = window.location.pathname.replace('_beheerder.html', '_taak.html');
+      window.location.href = window.location.pathname.replace('_beheerder.html', '_taakv2.html');
     }
     
     async function _slaOp() {
@@ -316,7 +316,7 @@
     document.getElementById('knop-uitloggen').addEventListener('click', () => {
       localStorage.removeItem('taak_mail');
       localStorage.removeItem('taak_data');
-      window.location.href = window.location.pathname.replace('_beheerder.html', '_taak.html');
+      window.location.href = window.location.pathname.replace('_beheerder.html', '_taakv2.html');
     });
 
     // ================================================================
@@ -349,7 +349,7 @@
       simContainer.classList.remove('verborgen');
       simContainer.innerHTML = `
         <iframe
-          src="${window.location.pathname.replace('_beheerder.html', '_taak.html')}?sim=${encodeURIComponent(mail)}"
+          src="${window.location.pathname.replace('_beheerder.html', '_taakv2.html')}?sim=${encodeURIComponent(mail)}"
           style="width:100%; height:calc(100vh - 120px); border:none;">
         </iframe>`;
     });
