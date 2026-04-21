@@ -688,12 +688,15 @@
         console.warn('Opslaan geblokkeerd: leerlingenlijst is leeg.');
         return;
       }
-      const schoon = JSON.parse(JSON.stringify(_taakData));
-      const leerlingData = schoon.leerlingen.find(
-        l => l.mail.toLowerCase() === _leerling.mail.toLowerCase()
+      
+      // ✅ Stuur specifieke velden
+      await saveLeerling(
+        _leerling.mail,
+        _leerling.antwoorden,
+        _leerling.succescriteria,
+        _leerling.ingediend,
+        _leerling.verbeterd
       );
-      console.log('saveLeerling aangeroepen met:', JSON.stringify(leerlingData?.antwoorden));
-      await saveLeerling(_leerling.mail, leerlingData);
     }
 
   </script>
