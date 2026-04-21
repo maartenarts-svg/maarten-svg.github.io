@@ -298,8 +298,13 @@
         console.warn('Opslaan geblokkeerd: leerlingenlijst is leeg.');
         return;
       }
-      await saveTaak(_taakData);
-      localStorage.setItem('taak_data', JSON.stringify(_taakData));
+      await saveLeerling(
+        _leerling.mail,
+        _leerling.antwoorden     ?? null,
+        _leerling.succescriteria ?? null,
+        _leerling.ingediend      ?? null,
+        _leerling.verbeterd      ?? null,
+      );
     }
 
     // ── Tabs ──────────────────────────────────────────────────
