@@ -74,13 +74,12 @@ export async function saveLeerling(mail, leerlingData) {
     );
     if (idx < 0) return;
 
-    // Merge: begin met verse Firestore-data, overschrijf alleen wat de leerling aanpaste
     leerlingen[idx] = {
-      ...leerlingen[idx],       // verse data uit Firestore als basis
-      antwoorden:      leerlingData.antwoorden      ?? leerlingen[idx].antwoorden,
-      succescriteria:  leerlingData.succescriteria  ?? leerlingen[idx].succescriteria,
-      ingediend:       leerlingData.ingediend       ?? leerlingen[idx].ingediend,
-      verbeterd:       leerlingData.verbeterd       ?? leerlingen[idx].verbeterd,
+      ...leerlingen[idx],
+      antwoorden:     leerlingData.antwoorden     ?? leerlingen[idx].antwoorden     ?? {},
+      succescriteria: leerlingData.succescriteria ?? leerlingen[idx].succescriteria ?? [],
+      ingediend:      leerlingData.ingediend      ?? leerlingen[idx].ingediend      ?? false,
+      verbeterd:      leerlingData.verbeterd      ?? leerlingen[idx].verbeterd      ?? false,
     };
 
     transaction.update(_taakRef, { leerlingen });
