@@ -51,27 +51,32 @@ export async function fetchTaak() {
 // ── Write ─────────────────────────────────────────────────────
 export async function saveTaak(data) {
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
-  await setDoc(_taakRef, data);
+  // Schrijf alles BEHALVE leerlingen via setDoc
+  const { leerlingen, ...rest } = data;
+  await setDoc(_taakRef, rest, { merge: true });
+  // Leerlingen apart en veilig
+  if (leerlingen?.length) {
+    await updateDoc(_taakRef, { leerlingen });
+  }
 }
 
 // ── Write: alleen leerlingdata bijwerken ──────────────────────
 export async function saveLeerling(mail, leerlingData) {
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
-  
-  const snap = await getDoc(_taakRef);
-  if (!snap.exists()) return;
-  
-  const data = snap.data();
-  const idx = (data.leerlingen || []).findIndex(
-    l => l.mail.toLowerCase() === mail.toLowerCase()
-  );
-  if (idx < 0) return;
 
-  // Vervang alleen dit leerling-object in de array
-  data.leerlingen[idx] = leerlingData;
+  await runTransaction(db, async (transaction) => {
+    const snap = await transaction.get(_taakRef);
+    if (!snap.exists()) return;
 
-  // Sla alleen de leerlingenlijst op, niet de rest
-  await updateDoc(_taakRef, { leerlingen: data.leerlingen });
+    const leerlingen = snap.data().leerlingen || [];
+    const idx = leerlingen.findIndex(
+      l => l.mail.toLowerCase() === mail.toLowerCase()
+    );
+    if (idx < 0) return;
+
+    leerlingen[idx] = leerlingData;
+    transaction.update(_taakRef, { leerlingen });
+  });
 }
 
 
