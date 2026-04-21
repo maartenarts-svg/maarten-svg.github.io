@@ -12,7 +12,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WI D — Eigenschappen van bewerkingen inprenten</title>
+  <title>WI D2 — Eigenschappen van bewerkingen inprenten</title>
   <link rel="stylesheet" href="../../css/taak.css">
 </head>
 <body>
@@ -183,7 +183,7 @@
 
   <script type="module">
 
-    import { setTaakRef, fetchTaak, saveTaak, saveLeerling } from '../../js/firebase.js';
+    import { setTaakRef, fetchTaak, saveTaak, saveLeerling, luisterVersie } from '../../js/firebase.js';
 
     // ================================================================
     //  CONFIGURATIE — pas dit aan per taak
@@ -216,6 +216,18 @@
     //  INITIALISATIE
     // ================================================================
     setTaakRef(TAAK_ID);
+
+    
+
+    // Automatisch herladen als beheerder versie verhoogt
+    let _initieleVersie = null;
+    luisterVersie((versie) => {
+      if (_initieleVersie === null) {
+        _initieleVersie = versie;  // eerste keer: onthoud de versie
+      } else if (versie !== _initieleVersie) {
+        window.location.reload();  // versie gewijzigd: herlaad
+      }
+    });
 
     // Simulatiemodus: automatisch inloggen als de opgegeven leerling
     const _simMail = new URLSearchParams(window.location.search).get('sim');
