@@ -86,7 +86,7 @@ export async function saveTaak(data) {
   }
 }
 
-// ── Write: alleen leerlingdata bijwerken ──────────────────────
+// ── Write: alleen leerlingdata bijwerken 2 ──────────────────────
 export async function saveLeerling(mail, antwoorden, succescriteria, ingediend, verbeterd) {
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
 
