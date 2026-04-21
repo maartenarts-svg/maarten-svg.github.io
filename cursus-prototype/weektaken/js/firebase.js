@@ -86,7 +86,7 @@ export async function saveTaak(data) {
   }
 }
 
-// ── Write: alleen leerlingdata bijwerken 2 ──────────────────────
+// ── Write: alleen leerlingdata bijwerken ──────────────────────
 export async function saveLeerling(mail, antwoorden, succescriteria, ingediend, verbeterd) {
   if (!_taakRef) throw new Error("Taak-referentie niet ingesteld.");
 
@@ -100,15 +100,24 @@ export async function saveLeerling(mail, antwoorden, succescriteria, ingediend, 
     );
     if (idx < 0) return;
 
-    leerlingen[idx] = {
-      ...leerlingen[idx],
-      antwoorden:     antwoorden     ?? leerlingen[idx].antwoorden     ?? {},
-      succescriteria: succescriteria ?? leerlingen[idx].succescriteria ?? [],
-      ingediend:      ingediend      ?? leerlingen[idx].ingediend      ?? false,
-      verbeterd:      verbeterd      ?? leerlingen[idx].verbeterd      ?? false,
-    };
+    // ✅ Bouw update object met field paths
+    const updates = {};
+    
+    if (antwoorden !== undefined && antwoorden !== null) {
+      updates[`leerlingen.${idx}.antwoorden`] = antwoorden;
+    }
+    if (succescriteria !== undefined && succescriteria !== null) {
+      updates[`leerlingen.${idx}.succescriteria`] = succescriteria;
+    }
+    if (ingediend !== undefined && ingediend !== null) {
+      updates[`leerlingen.${idx}.ingediend`] = ingediend;
+    }
+    if (verbeterd !== undefined && verbeterd !== null) {
+      updates[`leerlingen.${idx}.verbeterd`] = verbeterd;
+    }
 
-    transaction.update(_taakRef, { leerlingen });
+    // ✅ Update alleen specifieke velden van deze leerling
+    transaction.update(_taakRef, updates);
   });
 }
 
