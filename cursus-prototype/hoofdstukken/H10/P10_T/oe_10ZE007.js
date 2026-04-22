@@ -31,7 +31,7 @@
   oe_10ZE007_7.appendChild(htmlSpan('16 · 17 : 2 = 136'));
 
   const oe_10ZE007_8 = document.createElement('span');
-  oe_10ZE007_8.appendChild(htmlSpan('Er zijn 136 gekleurde driehoeken.'));
+  oe_10ZE007_8.appendChild(htmlSpan('Er zijn 136 witte driehoeken.'));
 
   const oe_10ZE007_9 = document.createElement('span');
   oe_10ZE007_9.appendChild(htmlSpan('Bereken het totaal aantal kleine driehoeken.'));

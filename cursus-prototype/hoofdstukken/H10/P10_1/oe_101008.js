@@ -46,12 +46,12 @@
   tbody.appendChild(trLblB);
 
   const trb0 = document.createElement('tr');
-  const tdb0 = maakSlTd('Waar: de vermenigvuldiging van rationale getallen is distributief ten opzichte van de', false);
+  const tdb0 = maakSlTd('Waar: de vermenigvuldiging van rationale getallen is associatief.', false);
   tdb0.classList.add('kolom-links');
   trb0.appendChild(tdb0);
   tbody.appendChild(trb0);
   const trb1 = document.createElement('tr');
-  const tdb1 = maakSlTd('optelling van rationale getallen.', false);
+  const tdb1 = maakSlTd('', false);
   tdb1.classList.add('kolom-links');
   trb1.appendChild(tdb1);
   tbody.appendChild(trb1);
