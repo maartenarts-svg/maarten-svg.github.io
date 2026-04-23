@@ -46,7 +46,7 @@
 
   /* Oplossingen rij 1 */
   const oplA = [
-  '3 · (10 - <span class="markeer-lila">(-20)</span>)',
+  '3 · (10 - \u200A<span class="markeer-lila">(-20)</span>)',
   '= 3 · (10 + 20)',
   '= 3 · 30',
   '= 90'

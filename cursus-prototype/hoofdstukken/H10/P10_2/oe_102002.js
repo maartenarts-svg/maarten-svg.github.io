@@ -17,7 +17,7 @@
 
   const matrix = [
     [
-      { inhoud: 'lettervorrm', type: 'hoofding', hAlign: 'center', vAlign: 'middle' },
+      { inhoud: 'lettervorm', type: 'hoofding', hAlign: 'center', vAlign: 'middle' },
       { inhoud: 'coëfficiënt', type: 'hoofding', hAlign: 'center', vAlign: 'middle' },
       { inhoud: 'letterdeel', type: 'hoofding', hAlign: 'center', vAlign: 'middle' },
     ],
