@@ -79,7 +79,7 @@ const tabelInhoud = [
       vAlign: 'middle'  // 'top' | 'middle' | 'bottom'
     },
     {
-      inhoud: 'De optelling van gehele getallen is commutatief.',
+      inhoud: 'De vermenigvuldiging van gehele getallen is commutatief.',
       type: 'toggle', // 'opgave' | 'oplossing' | 'toggle'
       hAlign: 'left', // 'left' | 'center' | 'right'
       vAlign: 'middle'  // 'top' | 'middle' | 'bottom'
@@ -107,7 +107,7 @@ const tabelInhoud = [
       vAlign: 'middle'  // 'top' | 'middle' | 'bottom'
     },
     {
-      inhoud: '1 is het neutraal element voor de optelling van natuurlijke getallen.',
+      inhoud: '1 is het neutraal element voor de vermenigvuldiging van natuurlijke getallen.',
       type: 'toggle', // 'opgave' | 'oplossing' | 'toggle'
       hAlign: 'left', // 'left' | 'center' | 'right'
       vAlign: 'middle'  // 'top' | 'middle' | 'bottom'
