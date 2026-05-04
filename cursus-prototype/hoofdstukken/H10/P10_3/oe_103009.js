@@ -86,7 +86,7 @@
   const rijen = [
     [ htmlSpan('a|'), htmlSpan('3<i>a</i> - 2<i>a</i> + 7<i>a</i>'), htmlSpan('3 - 2 + 7'), htmlSpan('<i>a</i>'), htmlSpan('8<i>a</i>') ],
     [ htmlSpan('b|'), htmlSpan('-4<i>t</i><sup>2</sup> + 2<i>t</i><sup>2</sup> - 3,5<i>t</i><sup>2</sup>'), htmlSpan('-4 + 2 - 3,5'), htmlSpan('<i>t</i><sup>2</sup>'), htmlSpan('-5,5<i>t</i><sup>2</sup>') ],
-    [ htmlSpan('c|'), htmlSpan('4<i>q</i> - 8<i>q</i> - 2<i>q</i> + 3<i>q</i>'), htmlSpan('-4 - 8 - 2 + 3'), htmlSpan('<i>q</i>'), htmlSpan('-3<i>q</i>') ],
+    [ htmlSpan('c|'), htmlSpan('4<i>q</i> - 8<i>q</i> - 2<i>q</i> + 3<i>q</i>'), htmlSpan('4 - 8 - 2 + 3'), htmlSpan('<i>q</i>'), htmlSpan('-3<i>q</i>') ],
     [ htmlSpan('d|'), oe10300901, oe10300902, htmlSpan('<i>x</i>'), oe10300903 ],
   ];
 

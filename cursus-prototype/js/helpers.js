@@ -555,6 +555,33 @@ function maakOpTdaz(label, tekst, breuk=false) {
 }
 
 /*
+  maakOpTdazGeenStreep — td met label + tekst
+  tekstBreedte: 
+  breuk: grotere rijhoogte
+*/
+function maakOpTdazGeenStreep(label, tekst, breuk=false) {
+  tekst = tekst ?? '';  // null én undefined worden ''
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
   maakOpTdazZonder — td zonder label + tekst
   tekstBreedte: 
   breuk: grotere rijhoogte

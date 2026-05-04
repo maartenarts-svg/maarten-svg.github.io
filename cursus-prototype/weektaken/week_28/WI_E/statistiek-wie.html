@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Statistiek WI E — Data</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { color: #4fc3f7; font-size: 1.2rem; margin-bottom: 0.3rem; }
+    h2 { color: #4fc3f7; font-size: 1rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+    p.sub { color: #90a4ae; font-size: 0.85rem; margin-bottom: 2rem; }
+    #log {
+      background: #0d0d1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 1rem;
+      min-height: 60px;
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+    .ok   { color: #81c784; }
+    .err  { color: #e57373; }
+    .info { color: #4fc3f7; }
+    button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.8rem;
+      background: #4fc3f7;
+      color: #0d0d1a;
+      border: none;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:disabled { background: #455a64; color: #90a4ae; cursor: not-allowed; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    th {
+      background: #0d0d1a;
+      color: #4fc3f7;
+      text-align: left;
+      padding: 0.5rem 0.8rem;
+      border: 1px solid #333;
+    }
+    td {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid #333;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #0d0d1a; }
+  </style>
+</head>
+<body>
+  <h1>📊 Statistiek WI E — Data exporteren</h1>
+  <p class="sub">Haalt de antwoorden van alle leerlingen op uit Firebase en downloadt een CSV.</p>
+
+  <div id="log"><span class="info">Wacht op start...</span></div>
+  <button id="knop-start">▶ CSV downloaden</button>
+
+  <!-- Overzicht vragen -->
+  <h2>Overzicht vragen</h2>
+  <table>
+    <thead>
+      <tr><th>Code</th><th>Vraag</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>oe_1_a</td><td>Hoeveel kinderen telt je gezin?</td></tr>
+      <tr><td>oe_1_b</td><td>Hoeveel dagen per week doe je aan sport?</td></tr>
+      <tr><td>oe_1_c</td><td>Hoeveel boeken lees je per jaar (ongeveer)?</td></tr>
+      <tr><td>oe_1_d</td><td>Hoeveel keer per week eet je fruit?</td></tr>
+      <tr><td>oe_1_e</td><td>Hoeveel keer per week eet je fastfood?</td></tr>
+      <tr><td>oe_1_f</td><td>Hoeveel vakken vind je leuk op school?</td></tr>
+      <tr><td>oe_1_g</td><td>Hoeveel dagen per week ga je met de fiets naar school?</td></tr>
+      <tr><td>oe_1_h</td><td>Hoeveel huisdieren heb je?</td></tr>
+      <tr><td>oe_1_i</td><td>Hoeveel keer ben je dit schooljaar te laat gekomen?</td></tr>
+      <tr><td>oe_1_j</td><td>Hoeveel dagen per week help je thuis in het huishouden?</td></tr>
+      <tr><td>oe_2_a</td><td>Hoeveel minuten doe je erover om naar school te komen?</td></tr>
+      <tr><td>oe_2_b</td><td>Hoeveel uur slaap je gemiddeld per nacht?</td></tr>
+      <tr><td>oe_2_c</td><td>Hoeveel minuten per dag besteed je aan huiswerk?</td></tr>
+      <tr><td>oe_2_d</td><td>Hoeveel uur schermtijd heb je thuis per dag?</td></tr>
+      <tr><td>oe_2_e</td><td>Hoeveel minuten per dag luister je naar muziek?</td></tr>
+      <tr><td>oe_2_f</td><td>Hoeveel minuten per dag besteed je aan gamen?</td></tr>
+      <tr><td>oe_3</td><td>Stopwatch: hoeveel seconden telde je tot 60?</td></tr>
+    </tbody>
+  </table>
+
+  <script type="module">
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, getDocs }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey:            "AIzaSyDSU0eoW9Od_aoE-7yyDhv0vhkPjVCbWNw",
+      authDomain:        "weektaken-wiskunde.firebaseapp.com",
+      projectId:         "weektaken-wiskunde",
+      storageBucket:     "weektaken-wiskunde.firebasestorage.app",
+      messagingSenderId: "184817118821",
+      appId:             "1:184817118821:web:5967eafe44ad9dbb55e08c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    const TAAK_ID = 'W28WIE'; // pas aan indien nodig
+
+    const KOLOMMEN = [
+      { key: 'oe_1', idx: 0 }, { key: 'oe_1', idx: 1 }, { key: 'oe_1', idx: 2 },
+      { key: 'oe_1', idx: 3 }, { key: 'oe_1', idx: 4 }, { key: 'oe_1', idx: 5 },
+      { key: 'oe_1', idx: 6 }, { key: 'oe_1', idx: 7 }, { key: 'oe_1', idx: 8 },
+      { key: 'oe_1', idx: 9 },
+      { key: 'oe_2', idx: 0 }, { key: 'oe_2', idx: 1 }, { key: 'oe_2', idx: 2 },
+      { key: 'oe_2', idx: 3 }, { key: 'oe_2', idx: 4 }, { key: 'oe_2', idx: 5 },
+      { key: 'oe_3', idx: 0 },
+    ];
+
+    const LABELS = [
+      'oe_1_a','oe_1_b','oe_1_c','oe_1_d','oe_1_e',
+      'oe_1_f','oe_1_g','oe_1_h','oe_1_i','oe_1_j',
+      'oe_2_a','oe_2_b','oe_2_c','oe_2_d','oe_2_e','oe_2_f',
+      'oe_3',
+    ];
+
+    const logEl = document.getElementById('log');
+    function log(tekst, klasse = '') {
+      logEl.innerHTML += `<div class="${klasse}">${tekst}</div>`;
+    }
+
+    document.getElementById('knop-start').addEventListener('click', async () => {
+      const knop = document.getElementById('knop-start');
+      knop.disabled = true;
+      logEl.innerHTML = '';
+      log('▶ Leerlingen ophalen...', 'info');
+
+      try {
+        const ref  = collection(db, 'taken', TAAK_ID, 'leerlingen');
+        const snap = await getDocs(ref);
+
+        if (snap.empty) {
+          log('Geen leerlingen gevonden.', 'err');
+          knop.disabled = false;
+          return;
+        }
+
+        const regels = ['mail;naam;' + LABELS.join(';')];
+
+        snap.forEach(d => {
+          const l          = d.data();
+          const antwoorden = l.antwoorden || {};
+
+          const waarden = KOLOMMEN.map(({ key, idx }) => {
+            const arr = antwoorden[key] || [];
+            const a   = arr[idx];
+            if (a === null || a === undefined) return '';
+            if (typeof a === 'object') return a.antwoord ?? '';
+            return a;
+          });
+
+          regels.push([
+            l.mail || '',
+            l.volledigeNaam || '',
+            ...waarden,
+          ].join(';'));
+        });
+
+        log(`✓ ${snap.size} leerlingen verwerkt.`, 'ok');
+
+        const blob = new Blob([regels.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement('a');
+        a.href = url; a.download = `statistiek_${TAAK_ID}.csv`; a.click();
+        URL.revokeObjectURL(url);
+
+        log('🎉 CSV gedownload.', 'ok');
+        knop.textContent = '✓ Klaar';
+
+      } catch (e) {
+        log(`✗ Fout: ${e.message}`, 'err');
+        knop.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
