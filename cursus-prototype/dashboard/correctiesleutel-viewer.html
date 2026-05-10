@@ -146,7 +146,8 @@ if (!mail || !bestandsnaam) {
 
 // ── Oefening laden ────────────────────────────────────────────
 // Pad: ../hoofdstukken/H10/P10_<paragraafnr>/<bestandsnaam>.js
-const mapPad    = `../hoofdstukken/H10/P10_${paragraafnr}`;
+const hst = paragraaf.split('.')[0];  // '11'
+const mapPad = `../hoofdstukken/H${hst}/P${hst}_${paragraafnr}`;
 const scriptPad = `${mapPad}/${bestandsnaam}.js`;
 
 window.ACTIEVE_CONTAINER = '#oefening-container';

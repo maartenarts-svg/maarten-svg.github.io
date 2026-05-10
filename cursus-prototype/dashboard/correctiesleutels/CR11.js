@@ -1,23 +1,22 @@
 // ============================================================
-//  taken/CR1.js  —  Correctiesleutel Hoofdstuk 10
+//  correctiesleutels/CR11.js  —  Correctiesleutel Hoofdstuk 11
 //
 //  Exporteert: render(container, leerling, code, callbacks)
 //
-//  De matrix H10-datamatrix.js wordt dynamisch geladen via
-//  een <script>-tag (var H10_matrix beschikbaar als global).
-//  Pad: ../hoofdstukken/H10/H10-datamatrix.js
+//  De matrix H11-datamatrix.js wordt dynamisch geladen via
+//  een <script>-tag (var H11_matrix beschikbaar als global).
+//  Pad: ../hoofdstukken/H11/H11-datamatrix.js
 // ============================================================
 
 // ── Constanten ───────────────────────────────────────────────
-const HOOFDSTUK   = 'H10';
-const TITEL       = 'Rekenen met letters';
-const SLEUTEL_CODE = 'CR1';
+const HOOFDSTUK   = 'H11';
+const TITEL       = 'Vergelijkingen';
+const SLEUTEL_CODE = 'CR11';
 
 const PARAGRAAF_NAMEN = {
-  '10.1': 'Eigenschappen van bewerkingen',
-  '10.2': 'Lettervormen',
-  '10.3': 'Lettervormen herleiden',
-  '10.4': 'Een getal vermenigvuldigen met een lettervorm',
+  '11.1': 'Vergelijkingen',
+  '11.2': 'Vergelijkingen oplossen',
+  '11.3': 'Vraagstukken oplossen met een vergelijking',
 };
 
 // Iconen per niveau
@@ -92,15 +91,15 @@ function paragraafZichtbaar(par, totEnMet) {
   return parseInt(parts[1]) <= parseInt(limParts[1]);
 }
 
-// ── Matrix laden (eenmalig via global var H10_matrix) ─────────
+// ── Matrix laden (eenmalig via global var H11_matrix) ─────────
 let _matrixGeladen = false;
 function laadMatrix() {
   return new Promise((ok, fout) => {
-    if (typeof H10_matrix !== 'undefined') { ok(); return; }
+    if (typeof H11_matrix !== 'undefined') { ok(); return; }
     const s = document.createElement('script');
-    s.src = '../hoofdstukken/H10/H10-datamatrix.js';
+    s.src = '../hoofdstukken/H11/H11-datamatrix.js';
     s.onload  = () => { _matrixGeladen = true; ok(); };
-    s.onerror = () => fout(new Error('H10-datamatrix.js kon niet geladen worden'));
+    s.onerror = () => fout(new Error('H11-datamatrix.js kon niet geladen worden'));
     document.head.appendChild(s);
   });
 }
@@ -108,6 +107,7 @@ function laadMatrix() {
 // ── Module-niveau referenties voor herrender ─────────────────
 let _renderContainer = null;
 let _renderCallbacks = null;
+let _renderLeerling  = null;
 
 // ============================================================
 //  RENDER — hoofdfunctie
@@ -118,6 +118,7 @@ export async function render(container, leerling, code, callbacks) {
   // Bewaar referenties zodat _herrender() altijd opnieuw kan renderen
   _renderContainer = container;
   _renderCallbacks = callbacks;
+  _renderLeerling  = leerling || null;
 
   try {
     await laadMatrix();
@@ -138,15 +139,15 @@ function _herrender() {
   const versData = JSON.parse(
     localStorage.getItem('wiskunde_leerlingen') ||
     sessionStorage.getItem('wiskunde_leerlingen') ||
-    '{"leerlingen":[]}'
+    '{}'
   );
   // Altijd synchroniseren zodat de rest van de app ook actueel is
   sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(versData));
 
-  const leerling    = versData.leerlingen.find(l => l.mail.toLowerCase() === mail.toLowerCase()) || {};
-  const crData      = leerling?.verbetersleutel?.[SLEUTEL_CODE] || { niveaus: {}, oefeningen: {} };
-  // Zichtbaarheid: lees de actieve zichtbaarheidsregels die door opdrachten.html
-  // in sessionStorage gezet zijn, en bereken totEnMet op basis van vandaag.
+  const mailVanLeerling = _renderLeerling?.mail || mail;
+  const safemail  = mailVanLeerling.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  const _leerling = versData[safemail] || versData.mail ? versData : _renderLeerling || {};
+  const crData      = _leerling?.verbetersleutel?.[SLEUTEL_CODE] || { niveaus: {}, oefeningen: {} };
   const _zichtbaarheid = JSON.parse(sessionStorage.getItem('actieve_zichtbaarheid') || '[]');
   const _nu = new Date(); _nu.setHours(0,0,0,0);
   const _parseDatum = s => { if (!s) return null; const [d,m,y]=s.split('/').map(Number); return new Date(y,m-1,d); };
@@ -156,7 +157,7 @@ function _herrender() {
     if (v && _nu >= v) totEnMet = r.totEnMet;
   }
 
-  _bouwPagina(_renderContainer, crData, totEnMet, leerling, _renderCallbacks);
+  _bouwPagina(_renderContainer, crData, totEnMet, _leerling, _renderCallbacks);
 }
 
 // ============================================================
@@ -183,7 +184,7 @@ function _bouwPagina(container, crData, totEnMet, leerling, callbacks) {
   wrap.appendChild(titel);
 
   // ── Paragrafen ophalen en filteren ───────────────────────
-  const paragrafen = [...new Set(H10_matrix.map(o => o.paragraaf))].sort();
+  const paragrafen = [...new Set(H11_matrix.map(o => o.paragraaf))].sort();
   const zichtbareParagrafen = paragrafen.filter(p => paragraafZichtbaar(p, totEnMet));
 
   zichtbareParagrafen.forEach(par => {
@@ -200,7 +201,7 @@ function _bouwPagina(container, crData, totEnMet, leerling, callbacks) {
 //  PARAGRAAF BOUWEN
 // ============================================================
 function _bouwParagraaf(par, crData, leerling, callbacks) {
-  const oefeningen = H10_matrix.filter(o => o.paragraaf === par);
+  const oefeningen = H11_matrix.filter(o => o.paragraaf === par);
   if (oefeningen.length === 0) return null;
 
   const blok = document.createElement('div');
@@ -407,22 +408,28 @@ function _openViewer(oefening, leerling, naSluitenCb) {
   url.searchParams.set('paragraafnr',  pNr);
   url.searchParams.set('sleutelCode',  SLEUTEL_CODE);
 
-  const popup = window.open(url.toString(), 'oefening-viewer',
-    'width=900,height=700,resizable=yes,scrollbars=yes');
+  const popup = window.open(url.toString(), 'oefening-viewer');
 
   // Detecteer sluiten van popup
   // Na sluiten: herrender de volledige pagina met verse data.
   // Dit is robuuster dan callbacks met verouderde crData.
   const check = setInterval(() => {
-      if (popup && popup.closed) {
-        clearInterval(check);
-        if (naSluitenCb) {
-          naSluitenCb();
-        } else {
-          _herrender();
-        }
+    if (popup && popup.closed) {
+      clearInterval(check);
+      // Altijd eerst synchroniseren vanuit localStorage
+      const versData = JSON.parse(
+        localStorage.getItem('wiskunde_leerlingen') ||
+        sessionStorage.getItem('wiskunde_leerlingen') ||
+        '{"leerlingen":[]}'
+      );
+      sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(versData));
+      if (naSluitenCb) {
+        naSluitenCb();
+      } else {
+        _herrender();
       }
-    }, 300);
+    }
+  }, 300);
 }
 
 // ============================================================
@@ -510,23 +517,25 @@ function _toonNiveauPopup(popupInfo, leerling, callbacks) {
 }
 
 // ── Gekozen niveau opslaan ────────────────────────────────────
-async function _slaGekozenNiveauOp(par, niveau, leerling) {
-  const { saveLeerlingen } = await import('../js/firebase.js');
-  const mail        = sessionStorage.getItem('wiskunde_mail');
-  const dataLL      = JSON.parse(sessionStorage.getItem('wiskunde_leerlingen') || '{"leerlingen":[]}');
-  const idx         = dataLL.leerlingen.findIndex(l => l.mail.toLowerCase() === mail.toLowerCase());
-  if (idx < 0) return;
+async function _slaGekozenNiveauOp(par, niveau) {
+  const { saveLeerling } = await import('../js/firebase.js');
+  const mail   = sessionStorage.getItem('wiskunde_mail');
+  const leerling = JSON.parse(
+    localStorage.getItem('wiskunde_leerlingen') ||
+    sessionStorage.getItem('wiskunde_leerlingen') ||
+    'null'
+  );
+  if (!leerling) return;
 
-  if (!dataLL.leerlingen[idx].verbetersleutel)               dataLL.leerlingen[idx].verbetersleutel               = {};
-  if (!dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE]) dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE] = { niveaus: {}, oefeningen: {} };
-  if (!dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE].niveaus) dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE].niveaus = {};
+  if (!leerling.verbetersleutel)               leerling.verbetersleutel               = {};
+  if (!leerling.verbetersleutel[SLEUTEL_CODE]) leerling.verbetersleutel[SLEUTEL_CODE] = { niveaus: {}, oefeningen: {} };
+  if (!leerling.verbetersleutel[SLEUTEL_CODE].niveaus) leerling.verbetersleutel[SLEUTEL_CODE].niveaus = {};
 
-  dataLL.leerlingen[idx].verbetersleutel[SLEUTEL_CODE].niveaus[par] = niveau;
+  leerling.verbetersleutel[SLEUTEL_CODE].niveaus[par] = niveau;
 
-  // Beide opslaan zodat popup-vensters altijd de meest recente data zien
-  sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(dataLL));
-  localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(dataLL));
-  await saveLeerlingen(dataLL);
+  sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(leerling));
+  localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(leerling));
+  await saveLeerling(mail, leerling);
 }
 
 // _herlaadGrid verwijderd — gebruik _herrender()
@@ -544,7 +553,7 @@ function _bouwOpmerkingen(crData, zichtbareParagrafen, leerling) {
   const oefMetKeuze3 = [];
 
   zichtbareParagrafen.forEach(par => {
-    H10_matrix.filter(o => o.paragraaf === par).forEach(o => {
+    H11_matrix.filter(o => o.paragraaf === par).forEach(o => {
       const pogingen = crData?.oefeningen?.[o.bestandsnaam]?.pogingen || [];
       if (pogingen.some(p => p.keuze === 2 && p.opmerking)) oefMetKeuze2.push(o);
       if (pogingen.some(p => p.keuze === 3 && p.opmerking)) oefMetKeuze3.push(o);
@@ -664,19 +673,16 @@ function _maakOpmTabel(oefeningen, crData, kleur, keuzeFilter, leerling) {
 
       cb.addEventListener('change', async () => {
         // Zet opgelost op de meest recente poging van keuze 3
-        const { saveLeerlingen } = await import('../js/firebase.js');
+        const { saveLeerling } = await import('../js/firebase.js');
         const mailNu   = sessionStorage.getItem('wiskunde_mail');
-        const dataLL   = JSON.parse(localStorage.getItem('wiskunde_leerlingen')
+        const leerling = JSON.parse(localStorage.getItem('wiskunde_leerlingen')
                        || sessionStorage.getItem('wiskunde_leerlingen')
-                       || '{"leerlingen":[]}');
-        const llIdx    = dataLL.leerlingen.findIndex(l => l.mail.toLowerCase() === mailNu.toLowerCase());
-        if (llIdx < 0) return;
+                       || 'null');
+        if (!leerling) return;
 
-        const ll = dataLL.leerlingen[llIdx];
-        const pogs = ll?.verbetersleutel?.[SLEUTEL_CODE]?.oefeningen?.[o.bestandsnaam]?.pogingen;
+        const pogs = leerling?.verbetersleutel?.[SLEUTEL_CODE]?.oefeningen?.[o.bestandsnaam]?.pogingen;
         if (!pogs) return;
 
-        // Vind de laatste poging met keuze 3 en zet opgelost
         for (let i = pogs.length - 1; i >= 0; i--) {
           if (pogs[i].keuze === keuzeFilter) {
             pogs[i].opgelost = cb.checked;
@@ -684,10 +690,9 @@ function _maakOpmTabel(oefeningen, crData, kleur, keuzeFilter, leerling) {
           }
         }
 
-        dataLL.leerlingen[llIdx] = ll;
-        localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(dataLL));
-        sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(dataLL));
-        await saveLeerlingen(dataLL);
+        localStorage.setItem('wiskunde_leerlingen',   JSON.stringify(leerling));
+        sessionStorage.setItem('wiskunde_leerlingen', JSON.stringify(leerling));
+        await saveLeerling(mailNu, leerling);
 
         // Visuele feedback
         tr.style.opacity      = cb.checked ? '0.6' : '1';
@@ -717,7 +722,7 @@ export function berekenVooruitgang(leerling, sleutelItem) {
   const crData   = leerling?.verbetersleutel?.[SLEUTEL_CODE] || { niveaus: {}, oefeningen: {} };
   const totEnMet = sleutelItem?.totEnMet || null;
 
-  const paragrafen = [...new Set(H10_matrix.map(o => o.paragraaf))].sort()
+  const paragrafen = [...new Set(H11_matrix.map(o => o.paragraaf))].sort()
     .filter(p => paragraafZichtbaar(p, totEnMet));
 
   let totaalZichtbaar = 0;
@@ -725,7 +730,7 @@ export function berekenVooruitgang(leerling, sleutelItem) {
 
   paragrafen.forEach(par => {
     const gekozenNiveau = getNiveau(crData, par);
-    const oefeningen    = H10_matrix.filter(o => o.paragraaf === par);
+    const oefeningen    = H11_matrix.filter(o => o.paragraaf === par);
     const hvsiOef       = oefeningen.filter(o => {
       const s = ONDERDEEL_SLEUTEL[o.onderdeel];
       return s === 'hoever' || s === 'hoeveR';

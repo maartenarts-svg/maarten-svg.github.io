@@ -145,7 +145,7 @@
   oe_112011_b_opg.appendChild(htmlSpan('5 - <i>y</i> = -17<i>y</i> + 1'));
 
   const oe_112011_b_opl1 = document.createElement('span');
-  oe_112011_b_opl1.appendChild(htmlSpan('5 - <i>y</i> <span class="markeer-lila">- 1 + 17<i>y</i></span> = -17<i>y</i> + 1 <span class="markeer-lila">- 1 + 17<i>y</i></span>'));
+  oe_112011_b_opl1.appendChild(htmlSpan('5 - <i>y</i> <span class="markeer-lila">- 5 + 17<i>y</i></span> = -17<i>y</i> + 1 <span class="markeer-lila">- 5 + 17<i>y</i></span>'));
 
   const oe_112011_b_opl2 = document.createElement('span');
   oe_112011_b_opl2.appendChild(htmlSpan('16<i>y</i> = -4'));

@@ -25,7 +25,7 @@
     [
       { inhoud: '8', type: 'opgave', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '8 + 7 = 15', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
-      { inhoud: '6 · 15 = 90', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
+      { inhoud: '6 · 8 = 48', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '4 · 8 + 3 = 35', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
     ],
     [

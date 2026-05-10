@@ -9,7 +9,7 @@
   stap1_1.appendChild(htmlSpan('<i>x</i> + 12'));
 
   const stap1_2 = document.createElement('span');
-  stap1_2.appendChild(htmlSpan('getal: 3(<i>x</i> + 12)'));
+  stap1_2.appendChild(htmlSpan('3(<i>x</i> + 12)'));
 
   const stap2_1 = document.createElement('span');
   stap2_1.appendChild(maakBreuk('1','10'));
@@ -30,7 +30,7 @@
 
   const stap4_2 = document.createElement('span');
   stap4_2.appendChild(maakBreuk('1','2'));
-  stap4_2.appendChild(htmlSpan('<i>x</i> - 4'));
+  stap4_2.appendChild(htmlSpan('(<i>x</i> - 4)'));
 
   const inhoud = maakOefening({
     id:'oe_113006', nummer:'?', soort:'inoefenen',
@@ -153,7 +153,7 @@
   {
     const tr = document.createElement('tr');
     const opg = document.createElement('span');
-    opg.appendChild(maakOnderstreping(htmlSpan('een getal verminderd met 4'),'enkel','0cm',false));
+    opg.appendChild(maakOnderstreping(htmlSpan('het verschil van een getal en 4'),'enkel','0cm',false));
     opg.appendChild(htmlSpan(':'));
     const tdL = maakStapZStreep('d|', opg);
     tdL.classList.add('kolom-links');
@@ -167,7 +167,7 @@
     const tr = document.createElement('tr');
     const opg = document.createElement('span');
     opg.appendChild(htmlSpan('de helft van '));
-    opg.appendChild(maakOnderstreping(htmlSpan('een getal verminderd met 4'),'enkel','0cm',false));
+    opg.appendChild(maakOnderstreping(htmlSpan('het verschil van een getal en 4'),'enkel','0cm',false));
     opg.appendChild(htmlSpan(':'));
     const tdL = maakStapZStreep('', opg);
     tdL.classList.add('kolom-links');

@@ -2,7 +2,6 @@
 <!-- ============================================================
   OPDRACHTEN.HTML
   Laadt de correctiesleutel (niveaulogica) voor een hoofdstuk.
-  Vervangt de omweg via taak.html / taak.js.
 
   Leest uit sessionStorage:
     actieve_taak_code     : bv. "H10"
@@ -75,10 +74,10 @@ const mail = sessionStorage.getItem("wiskunde_mail");
 if (!mail) { window.location.href = "index.html"; }
 
 // ── Data uit sessionStorage ───────────────────────────────────
-const hstCode      = sessionStorage.getItem("actieve_taak_code") || "H10";
-const dataInhoud   = JSON.parse(sessionStorage.getItem("wiskunde_inhoud") || '{"hoofdstukken":[]}');
-const hoofdstuk    = (dataInhoud.hoofdstukken || []).find(h => h.code === hstCode) || null;
-const leerling = JSON.parse(sessionStorage.getItem('wiskunde_leerlingen') || '{}');
+const hstCode    = sessionStorage.getItem("actieve_taak_code") || "H10";
+const dataInhoud = JSON.parse(sessionStorage.getItem("wiskunde_inhoud") || '{"hoofdstukken":[]}');
+const hoofdstuk  = (dataInhoud.hoofdstukken || []).find(h => h.code === hstCode) || null;
+const leerling   = JSON.parse(sessionStorage.getItem('wiskunde_leerlingen') || '{}');
 
 // ── Topbalk vullen ────────────────────────────────────────────
 document.getElementById("opdr-naam").textContent  = leerling.volledigeNaam || leerling.voornaam || mail;
@@ -93,22 +92,19 @@ if (!hoofdstuk) {
   throw new Error("stop");
 }
 
-// ── Datamatrix laden (zet juist pad) ─────────────────────────
-// Maak de zichtbaarheidsdata beschikbaar voor de module via
-// een tijdelijk sessie-item (wordt door CR-module gelezen)
+// ── Zichtbaarheid beschikbaar maken voor de CR-module ─────────
 sessionStorage.setItem("actieve_zichtbaarheid", JSON.stringify(hoofdstuk.zichtbaarheid || []));
 
 // ── CR-module dynamisch laden ─────────────────────────────────
-// Conventie: taken/CR_H10.js voor hoofdstuk H10,
-// of we laden gewoon taken/CR1.js als er maar één is.
-// Voor nu: taken/CR1.js altijd (uitbreidbaar later).
-const modPad = `./taken/CR1.js`;
+// Conventie: taken/CR10.js voor H10, taken/CR11.js voor H11, enz.
+const hstNr  = hstCode.replace('H', '');
+const modPad = `./correctiesleutels/CR${hstNr}.js`;
 
 try {
   const mod = await import(modPad);
   if (mod.render) {
     await mod.render(container, leerling, hstCode, {
-      markeerGewijzigd: () => {} // geen opslaan-knop nodig hier
+      markeerGewijzigd: () => {}
     });
   } else {
     container.innerHTML = '<p style="color:#c62828;">Module heeft geen render()-functie.</p>';

@@ -16,7 +16,7 @@
 
   const oe_113008_5 = document.createElement('span');
   oe_113008_5.appendChild(maakSpanBreedte(breedte1,htmlSpan('3 · leeftijd Maarten - 35 = 100')));
-  oe_113008_5.appendChild(htmlSpan('2<i>l</i> - 30 = 60'));
+  oe_113008_5.appendChild(htmlSpan('3<i>l</i> - 35 = 100'));
 
   const oe_113008_7 = document.createElement('span');
   oe_113008_7.appendChild(htmlSpan('Als je'));

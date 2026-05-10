@@ -8,16 +8,16 @@
 
   /* ---- Span-variabelen ---- */
   const oe_113012_1 = document.createElement('span');
-  oe_113012_1.appendChild(htmlSpan('In de kast liggen 64 atlassen. Er zijn 13 aardrijkskundige atlassen meer dan er historische atlassen zijn. <br>Bereken het aantal atlassen van elke soort.'));
+  oe_113012_1.appendChild(htmlSpan('In de kast liggen 64 atlassen. Er zijn 16 aardrijkskundige atlassen meer dan er historische atlassen zijn. <br>Bereken het aantal atlassen van elke soort.'));
 
   const oe_113012_2 = document.createElement('span');
   oe_113012_2.appendChild(htmlSpan('<i>x</i>'));
 
   const oe_113012_6 = document.createElement('span');
-  oe_113012_6.appendChild(htmlSpan('<i>x</i> + 13'));
+  oe_113012_6.appendChild(htmlSpan('<i>x</i> + 16'));
 
   const oe_113012_5 = document.createElement('span');
-  oe_113012_5.appendChild(htmlSpan('<i>x</i> + <i>x</i> + 13 = 64'));
+  oe_113012_5.appendChild(htmlSpan('<i>x</i> + <i>x</i> + 16 = 64'));
 
   const oe_113012_12 = document.createElement('span');
   oe_113012_12.appendChild(htmlSpan('Op de bus richting taalstage zitten 72 mensen. Er zijn 11 keer zoveel leerlingen als coaches. <br>Bereken het aantal coaches op de bus.'));

@@ -19,7 +19,7 @@
   oe_113015_3.appendChild(oe_113015_3_b1);
   const oe_113015_3_b2 = maakSpanBreedte(breedte1, 'keuze onbekende:');
   oe_113015_3.appendChild(oe_113015_3_b2);
-  oe_113015_3.appendChild(htmlSpan('zijde: <i>p</i>'));
+  oe_113015_3.appendChild(htmlSpan('zijde: <i>z</i>'));
 
   const oe_113015_4 = document.createElement('span');
   const oe_113015_4_b1 = maakSpanBreedte('0.65cm', '2|');

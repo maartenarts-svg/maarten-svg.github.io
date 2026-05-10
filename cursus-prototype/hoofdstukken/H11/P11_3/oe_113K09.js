@@ -45,7 +45,7 @@
   oe_113K06_11.appendChild(oe_113K06_11_b1);
   const oe_113K06_11_b2 = maakSpanBreedte(breedte1, 'vergelijking oplossen:');
   oe_113K06_11.appendChild(oe_113K06_11_b2);
-  oe_113K06_11.appendChild(htmlSpan('<i>x</i> = 8'));
+  oe_113K06_11.appendChild(htmlSpan('<i>x</i> = 84'));
 
   const oe_113K05_4 = document.createElement('span');
   const oe_113K05_4_b1 = maakSpanBreedte('0.65cm', '4|');

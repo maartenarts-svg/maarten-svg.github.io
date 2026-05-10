@@ -72,7 +72,7 @@
   oe_113014_71.appendChild(oe_113014_71_b1);
   const oe_113014_71_b2 = maakSpanBreedte(breedte1, '');
   oe_113014_71.appendChild(oe_113014_71_b2);
-  oe_113014_71.appendChild(maakSpanBreedte(breedte2,'lengte Scgelde:  5<i>x</i> - 30'));
+  oe_113014_71.appendChild(maakSpanBreedte(breedte2,'lengte Schelde:  5<i>x</i> - 30'));
   oe_113014_71.appendChild(htmlSpan('<span class="markeer-lila">5 · 78 - 30 = 360</span>'));
 
   const oe_113014_72 = document.createElement('span');
