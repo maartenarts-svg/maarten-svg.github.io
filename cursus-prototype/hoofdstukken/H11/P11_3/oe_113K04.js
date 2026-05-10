@@ -47,6 +47,7 @@
   /* Rij 1 */
   const tr1 = document.createElement('tr');
   const tdA = maakOpTdDubbelZStrZdub('1|', oe113K04_2, TW, false, oe113K04_3);
+  tdA.querySelector('.opl').classList.add('zichtbaar', 'opl-vast');
   tdA.classList.add('kolom-links');
   tr1.appendChild(tdA);
   tbody.appendChild(tr1);

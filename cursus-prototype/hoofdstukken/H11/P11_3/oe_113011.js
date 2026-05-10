@@ -44,7 +44,7 @@
   oe_113011_12.appendChild(htmlSpan('<i>b</i> - 3'));
 
   const oe_113011_13 = document.createElement('span');
-  oe_113011_13.appendChild(htmlSpan('Siebe heeft 7 snoepjes minder dan Riene, en Yasser heeft er vier keer zoveel als Riene.'));
+  oe_113011_13.appendChild(htmlSpan('Siebe heeft 7 snoepjes minder dan Riene en Yasser heeft er vier keer zoveel als Riene.'));
 
   const oe_113011_14 = document.createElement('span');
   oe_113011_14.appendChild(htmlSpan('<i>x</i>'));
