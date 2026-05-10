@@ -6,5 +6,5 @@ var WxWIx_instructies = [
   { tekst: "Daarna verbeter je de oefeningen op de taak via de correctiesleutels die je hier vindt.", plaatscode: '10.3.2'},
   { tekst: "Tot slot geef je jezelf een score op elk succescriterium.", plaatscode: '10.3.3'},
   { tekst: "Vink tot slot de succescriteria aan op het einde van de taak.", plaatscode: '10.4'},
-  { tekst: "Klik op volgende en start dit deel van de taak.", plaatscode: '10.4'}  
+  { tekst: "Klik op volgende en start dit deel van de taak.", plaatscode: '10.5'}  
 ];

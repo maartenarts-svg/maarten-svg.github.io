@@ -8,10 +8,11 @@ window.__taakOefening = (function () {
 
   // ── Pas deze vier paden aan ───────────────────────────────
   const BLOKJES = [
-    { nr: 1, pad: '../../../hoofdstukken/H10/P10_T/oe_10T001.js' },
-    { nr: 2, pad: '../../../hoofdstukken/H10/P10_T/oe_10T002.js' },
-    { nr: 3, pad: '../../../hoofdstukken/H10/P10_T/oe_10T003.js' },
-    { nr: 4, pad: '../../../hoofdstukken/H10/P10_T/oe_10T004.js' },
+    { nr: 1, pad: '../../../hoofdstukken/H11/P11_T/oe_W31WIE_1.js' },
+    { nr: 2, pad: '../../../hoofdstukken/H11/P11_T/oe_W31WIE_2.js' },
+    { nr: 3, pad: '../../../hoofdstukken/H11/P11_T/oe_W31WIE_3.js' },
+    { nr: 4, pad: '../../../hoofdstukken/H11/P11_T/oe_W31WIE_4.js' },
+    { nr: 5, pad: '../../../hoofdstukken/H11/P11_T/oe_W31WIE_5.js' },
   ];
 
   const VAKJE = '0.9cm';
@@ -19,6 +20,7 @@ window.__taakOefening = (function () {
 
   // ── Staat ─────────────────────────────────────────────────
   let _antwoorden = [
+    { antwoord: null, score: 0 },
     { antwoord: null, score: 0 },
     { antwoord: null, score: 0 },
     { antwoord: null, score: 0 },
@@ -61,7 +63,7 @@ window.__taakOefening = (function () {
           ? a
           : { antwoord: a, score: 0 }
       );
-      while (_antwoorden.length < 4) _antwoorden.push({ antwoord: null, score: 0 });
+      while (_antwoorden.length < 5) _antwoorden.push({ antwoord: null, score: 0 });
     }
 
     _invoerVelden = [];
@@ -153,7 +155,7 @@ window.__taakOefening = (function () {
 
   // ── Viewer openen ─────────────────────────────────────────
   function _openViewer(blokje, idx) {
-    const url = new URL('../../week_28/WI_C/correctiesleutel-viewer-taak.html', window.location.href);
+    const url = new URL('../../week_31/WI_E/correctiesleutel-viewer-taak.html', window.location.href);
     url.searchParams.set('pad',  blokje.pad);
     url.searchParams.set('nr',   blokje.nr);
     url.searchParams.set('mail', _mail);
