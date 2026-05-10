@@ -1,0 +1,59 @@
+Klik om in te voegen op cursorpositie.
+Structuur
+1|	Genummerde stap
+-	Opsomming
+··1|	Geneste nummering
+··-	Geneste opsomming
+##	Subtitel
+tekst++	Zachte enter
++
+Tekstopmaak
+**tekst**	Vet
+*tekst*		Cursief
+__tekst__	Onderstrepen
+~tekst~		Kleiner
+^^tekst^^	Groter
+[kleur:rood]	Kleur
+
+Media & links		
+[label](url)		Link			
+![naam](./pictures/...)	Afbeelding		
+![video-thumb](url)	Video thumbnail		
+![video-embed](url)	Video ingesloten
+	
+Parameters		
+{parameternaam}		Variabele
+
+
+
+1|
+Maak opdracht 1, cursus blz. 458.
+2|
+Overloop de theorie bij 10.1 Eigenschappen van bewerkingen (theorie blz. 80-81).
+3|
+Maak de voorbeeldopdrachten. (cursus blz. 459-461, opdracht 2-6).
+4|
+Test hoe ver je staat. (cursus blz. 251)
+5|
+Start met de opdrachten. (cursus blz. 462-465)
+6|
+Verbeter de opdrachten met de correctiesleutel (zie bronnen).
+•
+Verbeter in kleur!
+•
+Fout gemaakt? Onderzoek je fout: Waarom is het niet juist? Wat kun je de volgende keer doen om die fout niet meer te maken?
+7|
+
+
+
+1| Ga naar de [taak in classroom](https://classroom.google.com/c/ODAwMTQ0NjA3MTU2/a/ODYyMjE2NzAyMDY0/details).
+2| **Berekeningen uitvoeren**
+  - Open het bestand *P5W1 WI E Data leerlingen*.
+  - Maak de berekeningen en tekeningen in dit bestand.
+  - Volg daarvoor de instructies in [deze video](https://drive.google.com/file/d/1swMkFbv_7ZX_At151aJS4DhCqe_stIjN/view?usp=drive_link).++ [kleur:rood] Opgelet! De video is gemaakt met andere data! Jouw antwoord zal anders zijn![/kleur]
+3| **Verslag maken**
+  - Open het bestand P5W1 WI E Statistisch onderzoek: hoelang duurt een minuut?
+  -  Vervolledig het rapport met behulp van de berekeningen en tekeningen in het andere bestand.
+4| Dien beide bestanden in!
+
+ 

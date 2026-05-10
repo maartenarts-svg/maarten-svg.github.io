@@ -213,6 +213,7 @@ function voegTekstToe(container, tekst, klasses=[]) {
   } else {
     const p=document.createElement('span');
     if (klasses.length) p.classList.add(...klasses);
+    p.appendChild(tekst);
     container.appendChild(p);
   } 
 }
@@ -431,6 +432,99 @@ function maakOpTdDubbel(label, tekst, tekstBreedte='2.7cm', breuk=false, oplossi
 }
 
 /*
+  maakOpTdDubbelZStreep — td met label + tekst (vaste breedte) + : + schrijflijn
+  oplossing: HTML-string of Node (optioneel)
+  tekstBreedte: CSS-waarde, standaard '2.7cm'
+  breuk: grotere rijhoogte
+*/
+function maakOpTdDubbelZStreep(label, tekst, tekstBreedte='2.7cm', breuk=false, oplossing=null) {
+  tekst = tekst ?? '';  // null én undefined worden ''
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = tekstBreedte;
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  const is = document.createElement('span');
+  is.classList.add('is');
+  is.textContent = ':';
+  rij.appendChild(is);
+
+  const sl = document.createElement('span');
+  sl.classList.add('sl');
+  sl.textContent = SL;
+  rij.appendChild(sl);
+
+  if (oplossing !== null) {
+    const ov = document.createElement('div');
+    ov.classList.add('opl');
+    // Oplossing-positie wordt na render berekend op basis van sl-positie
+    ov.style.left = `calc(${tekstBreedte} + 1.15cm)`; // label ~0.3cm + = ~0.3cm = ~0.6cm extra
+    if (typeof oplossing === 'string') ov.innerHTML = oplossing;
+    else ov.appendChild(oplossing);
+    rij.appendChild(ov);
+  }
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
+  maakOpTdDubbelZStrZdub — td met label + tekst (vaste breedte) + : + schrijflijn
+  oplossing: HTML-string of Node (optioneel)
+  tekstBreedte: CSS-waarde, standaard '2.7cm'
+  breuk: grotere rijhoogte
+*/
+function maakOpTdDubbelZStrZdub(label, tekst, tekstBreedte='2.7cm', breuk=false, oplossing=null) {
+  tekst = tekst ?? '';  // null én undefined worden ''
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = tekstBreedte;
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  const sl = document.createElement('span');
+  sl.classList.add('sl');
+  sl.textContent = SL;
+  rij.appendChild(sl);
+
+  if (oplossing !== null) {
+    const ov = document.createElement('div');
+    ov.classList.add('opl');
+    // Oplossing-positie wordt na render berekend op basis van sl-positie
+    ov.style.left = `calc(${tekstBreedte} + 0.65cm)`; // label ~0.3cm + = ~0.3cm = ~0.6cm extra
+    if (typeof oplossing === 'string') ov.innerHTML = oplossing;
+    else ov.appendChild(oplossing);
+    rij.appendChild(ov);
+  }
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
   maakOpTdKeuzeZ — td zonder label + tekst (vaste breedte) + = of : + schrijflijn naar keuze
   oplossing: HTML-string of Node (optioneel)
   tekstBreedte: CSS-waarde, standaard '2.7cm'
@@ -637,6 +731,89 @@ function maakOpTdazExtra(label, tekst, extraTekst,opgaveBreedte='4cm', breuk=fal
   return td;
 }
 
+/*
+  maakOpTdazExtraZStreep — td met label + tekst + tab + tekst
+  tekstBreedte: 
+  breuk: grotere rijhoogte
+*/
+function maakOpTdazExtraZStreep(label, tekst, extraTekst,opgaveBreedte='4cm', breuk=false) {
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = opgaveBreedte;
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  // extra tekst (start altijd op dezelfde positie)
+  const extra = document.createElement('span');
+  extra.classList.add('txt');
+  if (typeof extraTekst === 'string') extra.innerHTML = extraTekst;
+  else extra.appendChild(extraTekst);
+  rij.appendChild(extra);
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
+  maakStap — Stappenplan: label + tekst
+  tekstBreedte: 
+*/
+function maakStap(label, tekst) {
+  tekst = tekst ?? '';  // null én undefined worden ''
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rijstap');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}<span class="streep">|</span>`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  td.appendChild(rij);
+  return td;
+}
+
+/*
+  maakStapZStreep — Stappenplan: label zonder streep + tekst
+  tekstBreedte: 
+*/
+function maakStapZStreep(label, tekst) {
+  tekst = tekst ?? '';  // null én undefined worden ''
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rijstap');
+
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}`;
+  rij.appendChild(lbl);
+
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  td.appendChild(rij);
+  return td;
+}
 
 /* SVG helpers */
 function wiskundeNaarSVGTspan(ns, tekst) {
@@ -753,6 +930,90 @@ function maakSamengesteldeTd(label, tekst, tekstBreedte='2.7cm', subblokken=[], 
       subEl.appendChild(wiskundeNaarHTML(inhoud));
       if (breedte === 'berekenen') {
         // Breedte aanpassen op basis van inhoud
+        subEl.style.whiteSpace = 'nowrap';
+      } else {
+        subEl.style.width = breedte;
+      }
+      subEl.style.fontFamily = 'Comic Sans MS';
+      subEl.style.color = '#1a4fa0';
+    }
+
+    moeder.appendChild(subEl);
+  });
+
+  rij.appendChild(moeder);
+  td.appendChild(rij);
+  return td;
+}
+
+function maakSamengesteldeTdZlbl(label, tekst, tekstBreedte='2.7cm', subblokken=[], breuk=false) {
+  const td = document.createElement('td');
+  const rij = document.createElement('div');
+  rij.classList.add('rij');
+  if (breuk) rij.classList.add('breuk');
+
+  const rijHoogte = breuk ? 'var(--rij-hoogte-breuk)' : 'var(--rij-hoogte)';
+
+  td.style.height = rijHoogte;
+  td.style.verticalAlign = 'middle';
+
+  // Label + streep
+  const lbl = document.createElement('span');
+  lbl.classList.add('lbl', 'subopgave-label');
+  lbl.innerHTML = `${label}`;
+  rij.appendChild(lbl);
+
+  // Opgave zelf
+  const txt = document.createElement('span');
+  txt.classList.add('txt');
+  txt.style.width = tekstBreedte;
+  if (typeof tekst === 'string') txt.innerHTML = tekst;
+  else txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  // Moederblok voor subblokken
+  const moeder = document.createElement('span');
+  moeder.classList.add('samengestelde');
+  moeder.style.display = 'inline-flex';
+  moeder.style.alignItems = 'center';
+  moeder.style.gap = '0.0cm';
+
+  subblokken.forEach(sub => {
+    const [type, inhoud, breedte] = sub;
+    const subEl = document.createElement('span');
+    subEl.style.marginRight = '0.1cm';
+
+    if (type === 'SL') {
+      subEl.classList.add('sl-wrapper');
+      subEl.style.position = 'relative';
+      subEl.style.height = rijHoogte;
+      if (breedte !== 'berekenen') subEl.style.width = breedte;
+
+      // Schrijflijn als aparte laag
+      const basisDiv = document.createElement('span');
+      basisDiv.classList.add('sl');
+      basisDiv.textContent = SL;
+      basisDiv.style.display = 'block';
+      basisDiv.style.width = '100%';
+      basisDiv.style.height = rijHoogte;
+      basisDiv.style.lineHeight = rijHoogte;
+      subEl.appendChild(basisDiv);
+
+      // Oplossing als aparte laag erbovenop
+      const oplDiv = document.createElement('div');
+      oplDiv.classList.add('opl');
+      oplDiv.style.left = '0';
+      oplDiv.style.width = breedte !== 'berekenen' ? breedte : 'auto';
+      oplDiv.style.justifyContent = 'center';
+      if (typeof inhoud === 'string') oplDiv.innerHTML = inhoud;
+      else oplDiv.appendChild(inhoud);
+      subEl.appendChild(oplDiv);
+
+    } else if (type === 'vast') {
+      subEl.style.display = 'inline-block';
+      subEl.style.position = 'relative';
+      subEl.appendChild(typeof inhoud === 'string' ? (() => { const s = document.createElement('span'); s.innerHTML = inhoud; return s; })() : inhoud);
+      if (breedte === 'berekenen') {
         subEl.style.whiteSpace = 'nowrap';
       } else {
         subEl.style.width = breedte;

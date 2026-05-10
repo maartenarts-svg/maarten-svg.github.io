@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+
+<svg 
+     version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     width="37.08670960602165cm"
+     height="8.192288092076424cm"
+     viewBox="0 0 669 147"
+     >
+<title>
+
+</title>
+<g stroke-dashoffset="0.0000" stroke-linejoin="miter" stroke-dasharray="none" stroke-width="1.0000" stroke-linecap="square" stroke-miterlimit="10.000">
+<g id="misc">
+</g><!-- misc -->
+<g id="layer0">
+</g><!-- layer0 -->
+<g id="layer1">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip69f39ff1-0d3e-4048-b636-9ff025a21150">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip1)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 35.685 269.00 C 35.685 272.31 32.998 275.00 29.685 275.00 C 26.371 275.00 23.685 272.31 23.685 269.00 C 23.685 265.69 26.371 263.00 29.685 263.00 C 32.998 263.00 35.685 265.69 35.685 269.00 z"/>
+<title>Punt A</title>
+<desc>A = (-5, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip1 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip85b89ff1-574c-421f-ba61-e89d026f89ba">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip2)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 53.750 269.00 C 53.750 272.31 51.064 275.00 47.750 275.00 C 44.437 275.00 41.750 272.31 41.750 269.00 C 41.750 265.69 44.437 263.00 47.750 263.00 C 51.064 263.00 53.750 265.69 53.750 269.00 z"/>
+<title>Punt B</title>
+<desc>B = (-4, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip2 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip94e8a49a-a2e8-4861-aa3d-79fadecd12fb">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip3)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 71.816 269.00 C 71.816 272.31 69.130 275.00 65.816 275.00 C 62.502 275.00 59.816 272.31 59.816 269.00 C 59.816 265.69 62.502 263.00 65.816 263.00 C 69.130 263.00 71.816 265.69 71.816 269.00 z"/>
+<title>Punt C</title>
+<desc>C = (-3, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip3 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip6704d1b5-f5d5-4cae-a3f6-c223b6d213c3">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip4)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 89.882 269.00 C 89.882 272.31 87.196 275.00 83.882 275.00 C 80.568 275.00 77.882 272.31 77.882 269.00 C 77.882 265.69 80.568 263.00 83.882 263.00 C 87.196 263.00 89.882 265.69 89.882 269.00 z"/>
+<title>Punt D</title>
+<desc>D = (-2, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip4 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipd7f62603-9d94-474f-a624-710dfcd8a895">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip5)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 107.95 269.00 C 107.95 272.31 105.26 275.00 101.95 275.00 C 98.634 275.00 95.948 272.31 95.948 269.00 C 95.948 265.69 98.634 263.00 101.95 263.00 C 105.26 263.00 107.95 265.69 107.95 269.00 z"/>
+<title>Punt E</title>
+<desc>E = (-1, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip5 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipf267554d-041f-4c5d-852f-fd6f39922fbf">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip6)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 126.01 269.00 C 126.01 272.31 123.33 275.00 120.01 275.00 C 116.70 275.00 114.01 272.31 114.01 269.00 C 114.01 265.69 116.70 263.00 120.01 263.00 C 123.33 263.00 126.01 265.69 126.01 269.00 z"/>
+<title>Punt F</title>
+<desc>F = (0, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip6 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip80de7cbf-5ec5-4542-bfb9-3d6718b34591">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip7)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 144.08 269.00 C 144.08 272.31 141.39 275.00 138.08 275.00 C 134.77 275.00 132.08 272.31 132.08 269.00 C 132.08 265.69 134.77 263.00 138.08 263.00 C 141.39 263.00 144.08 265.69 144.08 269.00 z"/>
+<title>Punt G</title>
+<desc>G = (1, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip7 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipe6434ebd-a521-4f65-be1a-6d7b0793c41c">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip8)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 162.14 269.00 C 162.14 272.31 159.46 275.00 156.14 275.00 C 152.83 275.00 150.14 272.31 150.14 269.00 C 150.14 265.69 152.83 263.00 156.14 263.00 C 159.46 263.00 162.14 265.69 162.14 269.00 z"/>
+<title>Punt H</title>
+<desc>H = (2, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip8 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip35b7fa57-e28b-477a-93b5-654dc1499774">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip9)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 180.21 269.00 C 180.21 272.31 177.52 275.00 174.21 275.00 C 170.90 275.00 168.21 272.31 168.21 269.00 C 168.21 265.69 170.90 263.00 174.21 263.00 C 177.52 263.00 180.21 265.69 180.21 269.00 z"/>
+<title>Punt I</title>
+<desc>I = (3, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip9 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip5d4f46fc-f055-4226-a85a-88142f25e129">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip10)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 198.28 269.00 C 198.28 272.31 195.59 275.00 192.28 275.00 C 188.96 275.00 186.28 272.31 186.28 269.00 C 186.28 265.69 188.96 263.00 192.28 263.00 C 195.59 263.00 198.28 265.69 198.28 269.00 z"/>
+<title>Punt J</title>
+<desc>J = (4, 3)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip10 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipcf94f82e-7891-425a-a62d-7a12a86b0514">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip11)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 198.28 250.93 C 198.28 254.25 195.59 256.93 192.28 256.93 C 188.96 256.93 186.28 254.25 186.28 250.93 C 186.28 247.62 188.96 244.93 192.28 244.93 C 195.59 244.93 198.28 247.62 198.28 250.93 z"/>
+<title>Punt K</title>
+<desc>K = (4, 4)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip11 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip9afe9713-22b2-4f78-9e4e-f1b3202c859f">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip12)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 270.54 269.00 C 270.54 272.31 267.85 275.00 264.54 275.00 C 261.23 275.00 258.54 272.31 258.54 269.00 C 258.54 265.69 261.23 263.00 264.54 263.00 C 267.85 263.00 270.54 265.69 270.54 269.00 z"/>
+<title>Punt A'</title>
+<desc>Punt A': Verschuiving van A volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip12 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipe458e1e2-4ddb-48f3-9c45-518ab3458fb0">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip13)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 288.61 269.00 C 288.61 272.31 285.92 275.00 282.61 275.00 C 279.29 275.00 276.61 272.31 276.61 269.00 C 276.61 265.69 279.29 263.00 282.61 263.00 C 285.92 263.00 288.61 265.69 288.61 269.00 z"/>
+<title>Punt B'</title>
+<desc>Punt B': Verschuiving van B volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip13 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipe4be4c57-79a3-4d54-a298-186746d2bb90">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip14)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 306.67 269.00 C 306.67 272.31 303.98 275.00 300.67 275.00 C 297.36 275.00 294.67 272.31 294.67 269.00 C 294.67 265.69 297.36 263.00 300.67 263.00 C 303.98 263.00 306.67 265.69 306.67 269.00 z"/>
+<title>Punt C'</title>
+<desc>Punt C': Verschuiving van C volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip14 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipe367e275-21d2-4257-8ea0-14c806fffd7a">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip15)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 324.74 269.00 C 324.74 272.31 322.05 275.00 318.74 275.00 C 315.42 275.00 312.74 272.31 312.74 269.00 C 312.74 265.69 315.42 263.00 318.74 263.00 C 322.05 263.00 324.74 265.69 324.74 269.00 z"/>
+<title>Punt D'</title>
+<desc>Punt D': Verschuiving van D volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip15 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip5e6d7359-dcf8-4f55-8beb-7914f25cc2a6">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip16)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 342.80 269.00 C 342.80 272.31 340.12 275.00 336.80 275.00 C 333.49 275.00 330.80 272.31 330.80 269.00 C 330.80 265.69 333.49 263.00 336.80 263.00 C 340.12 263.00 342.80 265.69 342.80 269.00 z"/>
+<title>Punt E'</title>
+<desc>Punt E': Verschuiving van E volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip16 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip8ac8912d-766c-4a98-8b28-03a8de5bfe10">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip17)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 360.87 269.00 C 360.87 272.31 358.18 275.00 354.87 275.00 C 351.55 275.00 348.87 272.31 348.87 269.00 C 348.87 265.69 351.55 263.00 354.87 263.00 C 358.18 263.00 360.87 265.69 360.87 269.00 z"/>
+<title>Punt F'</title>
+<desc>Punt F': Verschuiving van F volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip17 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipf7eeb95a-574c-4b3c-8095-fd00650c506f">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip18)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 378.93 269.00 C 378.93 272.31 376.25 275.00 372.93 275.00 C 369.62 275.00 366.93 272.31 366.93 269.00 C 366.93 265.69 369.62 263.00 372.93 263.00 C 376.25 263.00 378.93 265.69 378.93 269.00 z"/>
+<title>Punt G'</title>
+<desc>Punt G': Verschuiving van G volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip18 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip69599207-f151-40ad-8319-0e596037e876">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip19)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 397.00 269.00 C 397.00 272.31 394.31 275.00 391.00 275.00 C 387.69 275.00 385.00 272.31 385.00 269.00 C 385.00 265.69 387.69 263.00 391.00 263.00 C 394.31 263.00 397.00 265.69 397.00 269.00 z"/>
+<title>Punt H'</title>
+<desc>Punt H': Verschuiving van H volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip19 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipffec19a8-8d4b-4e2a-acdd-2ff58b92401e">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip20)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 415.07 269.00 C 415.07 272.31 412.38 275.00 409.07 275.00 C 405.75 275.00 403.07 272.31 403.07 269.00 C 403.07 265.69 405.75 263.00 409.07 263.00 C 412.38 263.00 415.07 265.69 415.07 269.00 z"/>
+<title>Punt I'</title>
+<desc>Punt I': Verschuiving van I volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip20 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipaf495f93-e52e-45e8-b8e6-ddfc9d775de9">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip21)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 433.13 269.00 C 433.13 272.31 430.45 275.00 427.13 275.00 C 423.82 275.00 421.13 272.31 421.13 269.00 C 421.13 265.69 423.82 263.00 427.13 263.00 C 430.45 263.00 433.13 265.69 433.13 269.00 z"/>
+<title>Punt J'</title>
+<desc>Punt J': Verschuiving van J volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip21 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip841ad7db-05f7-400a-8102-9fbe6814cd9f">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip22)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 505.39 269.00 C 505.39 272.31 502.71 275.00 499.39 275.00 C 496.08 275.00 493.39 272.31 493.39 269.00 C 493.39 265.69 496.08 263.00 499.39 263.00 C 502.71 263.00 505.39 265.69 505.39 269.00 z"/>
+<title>Punt A''</title>
+<desc>Punt A'': Verschuiving van A' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip22 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip11ff89d8-39d4-42b5-a552-978cf12157cd">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip23)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 523.46 269.00 C 523.46 272.31 520.77 275.00 517.46 275.00 C 514.15 275.00 511.46 272.31 511.46 269.00 C 511.46 265.69 514.15 263.00 517.46 263.00 C 520.77 263.00 523.46 265.69 523.46 269.00 z"/>
+<title>Punt B''</title>
+<desc>Punt B'': Verschuiving van B' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip23 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip1fcd5e41-5294-4ec8-b4a0-612301aa11bc">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip24)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 541.53 269.00 C 541.53 272.31 538.84 275.00 535.53 275.00 C 532.21 275.00 529.53 272.31 529.53 269.00 C 529.53 265.69 532.21 263.00 535.53 263.00 C 538.84 263.00 541.53 265.69 541.53 269.00 z"/>
+<title>Punt C''</title>
+<desc>Punt C'': Verschuiving van C' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip24 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip740db90f-3deb-4411-828e-31d0c7b1ffb0">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip25)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 559.59 269.00 C 559.59 272.31 556.91 275.00 553.59 275.00 C 550.28 275.00 547.59 272.31 547.59 269.00 C 547.59 265.69 550.28 263.00 553.59 263.00 C 556.91 263.00 559.59 265.69 559.59 269.00 z"/>
+<title>Punt D''</title>
+<desc>Punt D'': Verschuiving van D' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip25 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip7d51a9d2-f2d9-4ad1-b168-82766872cabb">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip26)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 577.66 269.00 C 577.66 272.31 574.97 275.00 571.66 275.00 C 568.34 275.00 565.66 272.31 565.66 269.00 C 565.66 265.69 568.34 263.00 571.66 263.00 C 574.97 263.00 577.66 265.69 577.66 269.00 z"/>
+<title>Punt E''</title>
+<desc>Punt E'': Verschuiving van E' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip26 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip6c652e89-a9d1-42d8-8687-3685e122d546">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip27)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 595.72 269.00 C 595.72 272.31 593.04 275.00 589.72 275.00 C 586.41 275.00 583.72 272.31 583.72 269.00 C 583.72 265.69 586.41 263.00 589.72 263.00 C 593.04 263.00 595.72 265.69 595.72 269.00 z"/>
+<title>Punt F''</title>
+<desc>Punt F'': Verschuiving van F' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip27 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip2598a00f-7f41-4268-bf53-36a98ed614bd">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip28)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 613.79 269.00 C 613.79 272.31 611.10 275.00 607.79 275.00 C 604.48 275.00 601.79 272.31 601.79 269.00 C 601.79 265.69 604.48 263.00 607.79 263.00 C 611.10 263.00 613.79 265.69 613.79 269.00 z"/>
+<title>Punt G''</title>
+<desc>Punt G'': Verschuiving van G' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip28 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip5432d8a3-7945-4850-9dd2-0f2150441ff1">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip29)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 631.85 269.00 C 631.85 272.31 629.17 275.00 625.85 275.00 C 622.54 275.00 619.85 272.31 619.85 269.00 C 619.85 265.69 622.54 263.00 625.85 263.00 C 629.17 263.00 631.85 265.69 631.85 269.00 z"/>
+<title>Punt H''</title>
+<desc>Punt H'': Verschuiving van H' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip29 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip1dc149f2-7ae1-48db-8005-08ad69179556">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip30)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 649.92 269.00 C 649.92 272.31 647.23 275.00 643.92 275.00 C 640.61 275.00 637.92 272.31 637.92 269.00 C 637.92 265.69 640.61 263.00 643.92 263.00 C 647.23 263.00 649.92 265.69 649.92 269.00 z"/>
+<title>Punt I''</title>
+<desc>Punt I'': Verschuiving van I' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip30 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipb0195bc2-4e5a-4ce4-a0e0-f7f5a672c575">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip31)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 667.99 269.00 C 667.99 272.31 665.30 275.00 661.99 275.00 C 658.67 275.00 655.99 272.31 655.99 269.00 C 655.99 265.69 658.67 263.00 661.99 263.00 C 665.30 263.00 667.99 265.69 667.99 269.00 z"/>
+<title>Punt J''</title>
+<desc>Punt J'': Verschuiving van J' volgens u</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip31 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip011202b4-feef-4a36-83e2-77337d5530f6">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip32)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 270.54 250.93 C 270.54 254.25 267.85 256.93 264.54 256.93 C 261.23 256.93 258.54 254.25 258.54 250.93 C 258.54 247.62 261.23 244.93 264.54 244.93 C 267.85 244.93 270.54 247.62 270.54 250.93 z"/>
+<title>Punt A''_{1}</title>
+<desc>Punt A''_{1}: Verschuiving van A' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip32 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipe417479a-b6ab-4dcf-9f18-853a0f8a4b7e">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip33)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 288.61 250.93 C 288.61 254.25 285.92 256.93 282.61 256.93 C 279.29 256.93 276.61 254.25 276.61 250.93 C 276.61 247.62 279.29 244.93 282.61 244.93 C 285.92 244.93 288.61 247.62 288.61 250.93 z"/>
+<title>Punt B''_{1}</title>
+<desc>Punt B''_{1}: Verschuiving van B' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip33 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipdb56abda-e154-4668-aed3-7708e27c0c20">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip34)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 306.67 250.93 C 306.67 254.25 303.98 256.93 300.67 256.93 C 297.36 256.93 294.67 254.25 294.67 250.93 C 294.67 247.62 297.36 244.93 300.67 244.93 C 303.98 244.93 306.67 247.62 306.67 250.93 z"/>
+<title>Punt C''_{1}</title>
+<desc>Punt C''_{1}: Verschuiving van C' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip34 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip7d1e7d1b-2014-4443-9d75-240126167c70">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip35)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 324.74 250.93 C 324.74 254.25 322.05 256.93 318.74 256.93 C 315.42 256.93 312.74 254.25 312.74 250.93 C 312.74 247.62 315.42 244.93 318.74 244.93 C 322.05 244.93 324.74 247.62 324.74 250.93 z"/>
+<title>Punt D''_{1}</title>
+<desc>Punt D''_{1}: Verschuiving van D' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip35 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip4aa44f8d-bda1-4022-bc58-81ff2e30cd4f">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip36)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 342.80 250.93 C 342.80 254.25 340.12 256.93 336.80 256.93 C 333.49 256.93 330.80 254.25 330.80 250.93 C 330.80 247.62 333.49 244.93 336.80 244.93 C 340.12 244.93 342.80 247.62 342.80 250.93 z"/>
+<title>Punt E''_{1}</title>
+<desc>Punt E''_{1}: Verschuiving van E' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip36 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipfccf418e-a2c5-4ab9-92fd-c03fc18a5ff8">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip37)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 360.87 250.93 C 360.87 254.25 358.18 256.93 354.87 256.93 C 351.55 256.93 348.87 254.25 348.87 250.93 C 348.87 247.62 351.55 244.93 354.87 244.93 C 358.18 244.93 360.87 247.62 360.87 250.93 z"/>
+<title>Punt F''_{1}</title>
+<desc>Punt F''_{1}: Verschuiving van F' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip37 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipfa14bc82-95d6-4285-b16e-98b7e75c98ce">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip38)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 378.93 250.93 C 378.93 254.25 376.25 256.93 372.93 256.93 C 369.62 256.93 366.93 254.25 366.93 250.93 C 366.93 247.62 369.62 244.93 372.93 244.93 C 376.25 244.93 378.93 247.62 378.93 250.93 z"/>
+<title>Punt G''_{1}</title>
+<desc>Punt G''_{1}: Verschuiving van G' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip38 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip92075443-7136-43a3-b268-cf7940359fef">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip39)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 397.00 250.93 C 397.00 254.25 394.31 256.93 391.00 256.93 C 387.69 256.93 385.00 254.25 385.00 250.93 C 385.00 247.62 387.69 244.93 391.00 244.93 C 394.31 244.93 397.00 247.62 397.00 250.93 z"/>
+<title>Punt H''_{1}</title>
+<desc>Punt H''_{1}: Verschuiving van H' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip39 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip21b27a25-44aa-4333-96db-247c80f34ca1">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip40)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 415.07 250.93 C 415.07 254.25 412.38 256.93 409.07 256.93 C 405.75 256.93 403.07 254.25 403.07 250.93 C 403.07 247.62 405.75 244.93 409.07 244.93 C 412.38 244.93 415.07 247.62 415.07 250.93 z"/>
+<title>Punt I''_{1}</title>
+<desc>Punt I''_{1}: Verschuiving van I' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip40 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip2597db6e-4d2d-4098-aea0-9ab286dd82e6">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip41)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 433.13 250.93 C 433.13 254.25 430.45 256.93 427.13 256.93 C 423.82 256.93 421.13 254.25 421.13 250.93 C 421.13 247.62 423.82 244.93 427.13 244.93 C 430.45 244.93 433.13 247.62 433.13 250.93 z"/>
+<title>Punt J''_{1}</title>
+<desc>Punt J''_{1}: Verschuiving van J' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip41 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip0e03cc2a-469f-4a50-89bf-3466bfb5b3a7">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip42)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 505.39 250.93 C 505.39 254.25 502.71 256.93 499.39 256.93 C 496.08 256.93 493.39 254.25 493.39 250.93 C 493.39 247.62 496.08 244.93 499.39 244.93 C 502.71 244.93 505.39 247.62 505.39 250.93 z"/>
+<title>Punt A'''</title>
+<desc>Punt A''': Verschuiving van A'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip42 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip32da4449-68d1-40bf-8a34-4c30404f3373">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip43)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 523.46 250.93 C 523.46 254.25 520.77 256.93 517.46 256.93 C 514.15 256.93 511.46 254.25 511.46 250.93 C 511.46 247.62 514.15 244.93 517.46 244.93 C 520.77 244.93 523.46 247.62 523.46 250.93 z"/>
+<title>Punt B'''</title>
+<desc>Punt B''': Verschuiving van B'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip43 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip02ea1e77-5556-4568-81e2-e3615e09a1be">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip44)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 541.53 250.93 C 541.53 254.25 538.84 256.93 535.53 256.93 C 532.21 256.93 529.53 254.25 529.53 250.93 C 529.53 247.62 532.21 244.93 535.53 244.93 C 538.84 244.93 541.53 247.62 541.53 250.93 z"/>
+<title>Punt C'''</title>
+<desc>Punt C''': Verschuiving van C'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip44 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipd509e71a-757f-4ca7-b7e4-bfec01e0a876">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip45)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 559.59 250.93 C 559.59 254.25 556.91 256.93 553.59 256.93 C 550.28 256.93 547.59 254.25 547.59 250.93 C 547.59 247.62 550.28 244.93 553.59 244.93 C 556.91 244.93 559.59 247.62 559.59 250.93 z"/>
+<title>Punt D'''</title>
+<desc>Punt D''': Verschuiving van D'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip45 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip6c101fb9-55fe-4218-b5ec-1e7f1a31d428">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip46)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 577.66 250.93 C 577.66 254.25 574.97 256.93 571.66 256.93 C 568.34 256.93 565.66 254.25 565.66 250.93 C 565.66 247.62 568.34 244.93 571.66 244.93 C 574.97 244.93 577.66 247.62 577.66 250.93 z"/>
+<title>Punt E'''</title>
+<desc>Punt E''': Verschuiving van E'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip46 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip5355247d-509a-4896-914a-3b8bad0fb158">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip47)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 595.72 250.93 C 595.72 254.25 593.04 256.93 589.72 256.93 C 586.41 256.93 583.72 254.25 583.72 250.93 C 583.72 247.62 586.41 244.93 589.72 244.93 C 593.04 244.93 595.72 247.62 595.72 250.93 z"/>
+<title>Punt F'''</title>
+<desc>Punt F''': Verschuiving van F'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip47 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip7635541e-8661-4b40-8756-dc9f6947a6ab">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip48)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 613.79 250.93 C 613.79 254.25 611.10 256.93 607.79 256.93 C 604.48 256.93 601.79 254.25 601.79 250.93 C 601.79 247.62 604.48 244.93 607.79 244.93 C 611.10 244.93 613.79 247.62 613.79 250.93 z"/>
+<title>Punt G'''</title>
+<desc>Punt G''': Verschuiving van G'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip48 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip6939fb2d-cf05-458d-98b8-6a14dc08a734">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip49)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 631.85 250.93 C 631.85 254.25 629.17 256.93 625.85 256.93 C 622.54 256.93 619.85 254.25 619.85 250.93 C 619.85 247.62 622.54 244.93 625.85 244.93 C 629.17 244.93 631.85 247.62 631.85 250.93 z"/>
+<title>Punt H'''</title>
+<desc>Punt H''': Verschuiving van H'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip49 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip37bc7f3a-d625-4a7a-b761-5b2ae0d6d361">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip50)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 649.92 250.93 C 649.92 254.25 647.23 256.93 643.92 256.93 C 640.61 256.93 637.92 254.25 637.92 250.93 C 637.92 247.62 640.61 244.93 643.92 244.93 C 647.23 244.93 649.92 247.62 649.92 250.93 z"/>
+<title>Punt I'''</title>
+<desc>Punt I''': Verschuiving van I'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip50 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip0988f2a1-7e4f-41b2-847b-82946a828032">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip51)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 667.99 250.93 C 667.99 254.25 665.30 256.93 661.99 256.93 C 658.67 256.93 655.99 254.25 655.99 250.93 C 655.99 247.62 658.67 244.93 661.99 244.93 C 665.30 244.93 667.99 247.62 667.99 250.93 z"/>
+<title>Punt J'''</title>
+<desc>Punt J''': Verschuiving van J'' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip51 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip93193e8a-0cb9-475e-a15e-50fa0a7f124c">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip52)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 505.39 232.87 C 505.39 236.18 502.71 238.87 499.39 238.87 C 496.08 238.87 493.39 236.18 493.39 232.87 C 493.39 229.56 496.08 226.87 499.39 226.87 C 502.71 226.87 505.39 229.56 505.39 232.87 z"/>
+<title>Punt P</title>
+<desc>Punt P: Verschuiving van A''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip52 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip1cf999d8-e834-4537-b33b-b795bbadb7db">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip53)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 523.46 232.87 C 523.46 236.18 520.77 238.87 517.46 238.87 C 514.15 238.87 511.46 236.18 511.46 232.87 C 511.46 229.56 514.15 226.87 517.46 226.87 C 520.77 226.87 523.46 229.56 523.46 232.87 z"/>
+<title>Punt Q</title>
+<desc>Punt Q: Verschuiving van B''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip53 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip5b2620d6-e926-4459-b8c5-b37cba37bb8c">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip54)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 541.53 232.87 C 541.53 236.18 538.84 238.87 535.53 238.87 C 532.21 238.87 529.53 236.18 529.53 232.87 C 529.53 229.56 532.21 226.87 535.53 226.87 C 538.84 226.87 541.53 229.56 541.53 232.87 z"/>
+<title>Punt R</title>
+<desc>Punt R: Verschuiving van C''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip54 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipa7aa4f0e-6b1e-494a-b6b2-446bdeea95c6">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip55)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 559.59 232.87 C 559.59 236.18 556.91 238.87 553.59 238.87 C 550.28 238.87 547.59 236.18 547.59 232.87 C 547.59 229.56 550.28 226.87 553.59 226.87 C 556.91 226.87 559.59 229.56 559.59 232.87 z"/>
+<title>Punt S</title>
+<desc>Punt S: Verschuiving van D''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip55 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip72c7a5b5-5fe0-4a59-b2d2-6c760fc0f2b2">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip56)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 577.66 232.87 C 577.66 236.18 574.97 238.87 571.66 238.87 C 568.34 238.87 565.66 236.18 565.66 232.87 C 565.66 229.56 568.34 226.87 571.66 226.87 C 574.97 226.87 577.66 229.56 577.66 232.87 z"/>
+<title>Punt T</title>
+<desc>Punt T: Verschuiving van E''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip56 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipdc55e5da-2163-4b3e-879d-886f31383702">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip57)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 595.72 232.87 C 595.72 236.18 593.04 238.87 589.72 238.87 C 586.41 238.87 583.72 236.18 583.72 232.87 C 583.72 229.56 586.41 226.87 589.72 226.87 C 593.04 226.87 595.72 229.56 595.72 232.87 z"/>
+<title>Punt U</title>
+<desc>Punt U: Verschuiving van F''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip57 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip82c06594-35bb-4963-ada7-85d190b7da07">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip58)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 613.79 232.87 C 613.79 236.18 611.10 238.87 607.79 238.87 C 604.48 238.87 601.79 236.18 601.79 232.87 C 601.79 229.56 604.48 226.87 607.79 226.87 C 611.10 226.87 613.79 229.56 613.79 232.87 z"/>
+<title>Punt V</title>
+<desc>Punt V: Verschuiving van G''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip58 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipcc8f9ba7-8fea-47e8-9408-848acec06c95">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip59)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 631.85 232.87 C 631.85 236.18 629.17 238.87 625.85 238.87 C 622.54 238.87 619.85 236.18 619.85 232.87 C 619.85 229.56 622.54 226.87 625.85 226.87 C 629.17 226.87 631.85 229.56 631.85 232.87 z"/>
+<title>Punt W</title>
+<desc>Punt W: Verschuiving van H''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip59 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip4bc1339e-32c3-4a38-98e3-baa80f86ed88">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip60)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 649.92 232.87 C 649.92 236.18 647.23 238.87 643.92 238.87 C 640.61 238.87 637.92 236.18 637.92 232.87 C 637.92 229.56 640.61 226.87 643.92 226.87 C 647.23 226.87 649.92 229.56 649.92 232.87 z"/>
+<title>Punt Z</title>
+<desc>Punt Z: Verschuiving van I''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip60 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip422fe6af-daa1-4b92-a83f-65a8e3742ab1">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip61)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 667.99 232.87 C 667.99 236.18 665.30 238.87 661.99 238.87 C 658.67 238.87 655.99 236.18 655.99 232.87 C 655.99 229.56 658.67 226.87 661.99 226.87 C 665.30 226.87 667.99 229.56 667.99 232.87 z"/>
+<title>Punt A_1</title>
+<desc>Punt A_1: Verschuiving van J''' volgens v</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip61 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipb09c312a-c2f3-4e0e-bc73-08b340737da6">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip62)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 433.13 232.87 C 433.13 236.18 430.45 238.87 427.13 238.87 C 423.82 238.87 421.13 236.18 421.13 232.87 C 421.13 229.56 423.82 226.87 427.13 226.87 C 430.45 226.87 433.13 229.56 433.13 232.87 z"/>
+<title>Punt B_1</title>
+<desc>B_1 = (17, 5)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip62 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip34834199-6964-4d8f-aa7f-864051591720">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip63)">
+<g fill="#ff7f00" fill-rule="nonzero" fill-opacity="1.0000" stroke="none">
+  <path d="M 667.99 214.80 C 667.99 218.12 665.30 220.80 661.99 220.80 C 658.67 220.80 655.99 218.12 655.99 214.80 C 655.99 211.49 658.67 208.80 661.99 208.80 C 665.30 208.80 667.99 211.49 667.99 214.80 z"/>
+<title>Punt C_1</title>
+<desc>C_1 = (30, 6)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip63 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clipfb0b49ae-9399-4956-9752-855b1200030c">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip64)">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, 87.000, 212.00)">
+<text font-weight="normal" font-size="14.000" font-family="arial, sans-serif" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">figuur 1</text>
+</g> <!-- transform -->
+</g> <!-- clip64 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip7c87c22c-5a0e-4b6f-af68-ad0755977289">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip65)">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, 324.00, 212.00)">
+<text font-weight="normal" font-size="14.000" font-family="arial, sans-serif" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">figuur 2</text>
+</g> <!-- transform -->
+</g> <!-- clip65 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip490ea2b6-4433-4116-bffb-b63d4b93f70f">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip66)">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, 560.00, 212.00)">
+<text font-weight="normal" font-size="14.000" font-family="arial, sans-serif" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">figuur 3</text>
+</g> <!-- transform -->
+</g> <!-- clip66 -->
+</g> <!-- transform -->
+</g><!-- layer1 -->
+<g id="layer2">
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip37f99829-5ea7-4d01-a2fb-c0862d935bea">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip67)">
+<g fill="none" stroke="#1a4fa0" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 138.08 287.07 L 138.88 287.38 M 138.88 287.38 L 142.03 288.61 L 145.19 289.80 L 148.34 290.94 L 151.50 292.04 M 151.50 292.04 L 154.66 293.09 L 157.81 294.10 L 160.97 295.06 L 164.12 295.98 L 167.28 296.86 L 170.44 297.69 L 173.59 298.48 L 176.75 299.22 L 179.91 299.92 L 183.06 300.58 L 186.22 301.19 L 189.38 301.76 L 192.53 302.28 L 195.69 302.76 L 198.84 303.20 L 202.00 303.59 M 202.00 303.59 L 205.16 303.93 L 208.31 304.24 L 211.47 304.50 L 214.62 304.71 L 217.78 304.88 L 220.94 305.01 L 224.09 305.09 L 227.25 305.13 L 230.41 305.12 L 233.56 305.07 L 236.72 304.98 L 239.88 304.84 L 243.03 304.66 L 246.19 304.43 L 249.34 304.16 L 252.50 303.85 L 255.66 303.49 L 258.81 303.08 L 261.97 302.64 L 265.12 302.15 L 268.28 301.61 L 271.44 301.03 L 274.59 300.41 L 277.75 299.74 L 280.91 299.03 L 284.06 298.27 L 287.22 297.47 L 290.38 296.63 L 293.53 295.74 L 296.69 294.81 L 299.84 293.83 L 303.00 292.81 M 303.00 292.81 L 306.16 291.75 L 309.31 290.64 L 312.47 289.49 L 315.62 288.29 M 315.62 288.29 L 318.74 287.07"/>
+<title>Functie g</title>
+<desc>Functie g: Als(1 &#x2264; x &#x2264; 11, f(x))</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip67 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip402ed408-3f7e-423d-998f-5a758395d6cb">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip68)">
+<g fill="none" stroke="#1a4fa0" stroke-opacity="1.0000" stroke-linejoin="round" stroke-width="1.5000" stroke-linecap="round">
+  <path d="M 372.93 287.07 L 375.59 288.11 M 375.59 288.11 L 378.75 289.32 M 378.75 289.32 L 381.91 290.48 L 385.06 291.59 L 388.22 292.66 L 391.38 293.69 L 394.53 294.67 L 397.69 295.61 L 400.84 296.51 L 404.00 297.36 M 404.00 297.36 L 407.16 298.16 L 410.31 298.92 L 413.47 299.64 L 416.62 300.32 L 419.78 300.95 L 422.94 301.53 L 426.09 302.07 L 429.25 302.57 L 432.41 303.02 L 435.56 303.43 L 438.72 303.80 L 441.88 304.12 L 445.03 304.40 L 448.19 304.63 L 451.34 304.82 L 454.50 304.96 L 457.66 305.06 L 460.81 305.12 L 463.97 305.13 L 467.12 305.10 L 470.28 305.02 L 473.44 304.90 L 476.59 304.74 L 479.75 304.53 L 482.91 304.28 L 486.06 303.98 L 489.22 303.64 L 492.38 303.26 L 495.53 302.83 L 498.69 302.35 L 501.84 301.84 L 505.00 301.27 M 505.00 301.27 L 508.16 300.67 L 511.31 300.02 L 514.47 299.33 L 517.62 298.59 L 520.78 297.81 L 523.94 296.98 L 527.09 296.11 L 530.25 295.20 M 530.25 295.20 L 533.41 294.24 L 536.56 293.24 L 539.72 292.19 L 542.88 291.10 M 542.88 291.10 L 546.03 289.96 L 549.19 288.78 M 549.19 288.78 L 552.34 287.56 M 552.34 287.56 L 553.59 287.07"/>
+<title>Functie p</title>
+<desc>Functie p: Als(14 &#x2264; x &#x2264; 24, h(x))</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip68 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip79c5ff06-5ea8-4caf-8a33-e80876d6eae4">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip69)">
+<g stroke-opacity="1.0000" stroke-width="1.5000" fill="none" stroke="#1a4fa0">
+  <path d="M 231.41 305.13 L 226.91 307.73 L 226.91 302.53 L 231.41 305.13 z"/>
+<title>Punt E_1</title>
+<desc>E_1 = (6, 1)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip69 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip21c55bb2-9556-4149-bab9-f9c69edaf498">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip70)">
+<g fill="#1a4fa0" fill-rule="evenodd" fill-opacity="1.0000" stroke="none">
+  <path d="M 231.41 305.13 L 226.91 307.73 L 226.91 302.53 L 231.41 305.13 z"/>
+<title>Punt E_1</title>
+<desc>E_1 = (6, 1)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip70 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip8676a3d3-4a37-472e-a127-a0ef3d9fa600">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip71)">
+<g stroke-opacity="1.0000" stroke-width="1.5000" fill="none" stroke="#1a4fa0">
+  <path d="M 466.26 305.13 L 461.76 307.73 L 461.76 302.53 L 466.26 305.13 z"/>
+<title>Punt G_1</title>
+<desc>G_1 = (19, 1)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip71 -->
+</g> <!-- transform -->
+<g transform="matrix(1.0000, 0.0000, 0.0000, 1.0000, -11.619, -178.67)">
+<clipPath id="clip088acefa-5345-497d-bc47-da7e99fb95bd">
+  <path d="M 11.619 178.67 L 11.619 326.67 L 681.62 326.67 L 681.62 178.67 z"/>
+</clipPath>
+<g clip-path="url(#clip72)">
+<g fill="#1a4fa0" fill-rule="evenodd" fill-opacity="1.0000" stroke="none">
+  <path d="M 466.26 305.13 L 461.76 307.73 L 461.76 302.53 L 466.26 305.13 z"/>
+<title>Punt G_1</title>
+<desc>G_1 = (19, 1)</desc>
+
+</g> <!-- drawing style -->
+</g> <!-- clip72 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 208.38, 144.17)">
+<clipPath id="clipf177df8c-1e93-4fa3-8d63-e1f530e4ecdf">
+  <path d="M -1389.2 -961.12 L -1389.2 25.543 L 3077.5 25.543 L 3077.5 -961.12 z"/>
+</clipPath>
+<g clip-path="url(#clip73)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0">+</text>
+</g> <!-- clip73 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 215.04, 144.17)">
+<clipPath id="clipf58718c2-84ef-4949-ae5f-7ca672d0aac9">
+  <path d="M -1433.6 -961.12 L -1433.6 25.543 L 3033.1 25.543 L 3033.1 -961.12 z"/>
+</clipPath>
+<g clip-path="url(#clip74)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0"></text>
+</g> <!-- clip74 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 219.21, 144.17)">
+<clipPath id="clip43553132-5d65-4cde-bafd-8b5f678aa4a8">
+  <path d="M -1461.4 -961.12 L -1461.4 25.543 L 3005.3 25.543 L 3005.3 -961.12 z"/>
+</clipPath>
+<g clip-path="url(#clip75)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0">1</text>
+</g> <!-- clip75 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 226.71, 144.17)">
+<clipPath id="clipf238359d-e25a-4986-8ef3-de2ee83b02be">
+  <path d="M -1511.4 -961.12 L -1511.4 25.543 L 2955.3 25.543 L 2955.3 -961.12 z"/>
+</clipPath>
+<g clip-path="url(#clip76)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0">0</text>
+</g> <!-- clip76 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 442.38, 143.17)">
+<clipPath id="clipc8f53c2e-7f08-4874-9f98-8bcf14fe6065">
+  <path d="M -2949.2 -954.46 L -2949.2 32.209 L 1517.5 32.209 L 1517.5 -954.46 z"/>
+</clipPath>
+<g clip-path="url(#clip77)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0">+</text>
+</g> <!-- clip77 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 449.04, 143.17)">
+<clipPath id="clipa7cb0f31-b95c-46b7-ab53-28ac7c4156e7">
+  <path d="M -2993.6 -954.46 L -2993.6 32.209 L 1473.1 32.209 L 1473.1 -954.46 z"/>
+</clipPath>
+<g clip-path="url(#clip78)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0"></text>
+</g> <!-- clip78 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 453.21, 143.17)">
+<clipPath id="clip3fc255a5-269b-4509-a3cf-759af02846b1">
+  <path d="M -3021.4 -954.46 L -3021.4 32.209 L 1445.3 32.209 L 1445.3 -954.46 z"/>
+</clipPath>
+<g clip-path="url(#clip79)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0">1</text>
+</g> <!-- clip79 -->
+</g> <!-- transform -->
+<g transform="matrix(.15000, 0.0000, 0.0000, .15000, 460.71, 143.17)">
+<clipPath id="clip616c6aad-13ce-49cb-8748-84d53ed5de33">
+  <path d="M -3071.4 -954.46 L -3071.4 32.209 L 1395.3 32.209 L 1395.3 -954.46 z"/>
+</clipPath>
+<g clip-path="url(#clip80)">
+<text font-weight="normal" font-size="100.00" font-family="Comic Sans MS" font-style="normal" fill="#1a4fa0" fill-opacity="1.0000" stroke="none" x="0" y="0">0</text>
+</g> <!-- clip80 -->
+</g> <!-- transform -->
+</g><!-- layer2 -->
+<defs>
+<font id="Jlm_cmss10" horiz-adv-x="0" >
+<font-face font-family="Jlm_cmss10" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="75.899925" descent="24.999977" />
+<missing-glyph horiz-adv-x="33.300"  d=""/>
+<glyph unicode="&#x0031;" horiz-adv-x="50.000" d="M 29.906 67.797 L 29.906 5.7969 L 42.406 5.7969 L 42.406 0.0000 L 9.5000 0.0000 L 9.5000 5.7969 L 22.000 5.7969 L 22.000 57.797 Q 16.906 55.594 8.9062 55.406 L 8.9062 61.203 Q 22.000 61.703 27.906 67.797 L 29.906 67.797 z"/>
+<glyph unicode="&#x0030;" horiz-adv-x="50.000" d="M 45.703 32.594 Q 45.703 17.500 41.703 8.7969 Q 39.297 3.5938 34.844 .68750 Q 30.406 -2.2031 24.906 -2.2031 Q 21.703 -2.2031 18.750 -1.2031 Q 15.797 -.20312 12.641 2.6875 Q 9.5000 5.5938 7.5938 10.094 Q 4.2031 18.406 4.2031 32.594 Q 4.2031 47.797 8.0000 56.203 Q 10.797 62.406 15.391 65.094 Q 20.000 67.797 25.000 67.797 Q 29.406 67.797 33.844 65.438 Q 38.297 63.094 41.094 57.906 Q 45.703 49.000 45.703 32.594 z M 25.000 3.9062 Q 33.000 3.9062 36.094 14.594 Q 37.906 20.906 37.906 33.797 Q 37.906 46.703 36.000 52.297 Q 35.406 53.797 34.953 54.641 Q 34.500 55.500 33.203 57.500 Q 31.906 59.500 29.750 60.594 Q 27.594 61.703 24.906 61.703 Q 16.906 61.703 13.703 51.594 Q 12.000 46.094 12.000 33.797 Q 12.000 21.000 13.703 14.906 Q 16.797 3.9062 25.000 3.9062 z"/>
+<glyph unicode="&#x0065;" horiz-adv-x="44.400" d="M 41.406 21.906 L 10.500 21.906 Q 10.703 14.594 14.953 9.7969 Q 19.203 5.0000 25.203 5.0000 Q 33.594 5.0000 40.406 10.594 L 41.000 4.0938 Q 33.797 -1.0938 25.094 -1.0938 Q 16.094 -1.0938 9.7969 5.7969 Q 3.5000 12.703 3.5000 22.594 Q 3.5000 32.297 9.3906 39.188 Q 15.297 46.094 23.594 46.094 Q 32.594 46.094 37.406 38.797 Q 41.406 32.594 41.406 21.906 z M 11.000 27.406 L 35.703 27.406 Q 34.797 33.797 31.391 36.891 Q 28.000 40.000 23.594 40.000 Q 19.297 40.000 15.750 36.500 Q 12.203 33.000 11.000 27.406 z"/>
+<glyph unicode="&#x002e;" horiz-adv-x="27.700" d="M 18.000 8.2969 L 18.000 0.0000 L 9.7031 0.0000 L 9.7031 8.2969 L 18.000 8.2969 z"/>
+</font>
+<font id="arial, sans-serif" horiz-adv-x="0" >
+<font-face font-family="arial, sans-serif" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="100.53711" descent="21.972656" />
+<missing-glyph  d=""/>
+<glyph unicode="&#x0020;" horiz-adv-x="27.783" d=""/>
+<glyph unicode="&#x0075;" horiz-adv-x="55.615" d="M 40.578 0.0000 L 40.578 7.6250 Q 34.516 -1.1719 24.125 -1.1719 Q 19.531 -1.1719 15.547 .57812 Q 11.578 2.3438 9.6406 5.0000 Q 7.7188 7.6719 6.9375 11.531 Q 6.3906 14.109 6.3906 19.734 L 6.3906 51.859 L 15.188 51.859 L 15.188 23.094 Q 15.188 16.219 15.719 13.812 Q 16.547 10.359 19.234 8.3750 Q 21.922 6.3906 25.875 6.3906 Q 29.828 6.3906 33.297 8.4219 Q 36.766 10.453 38.203 13.938 Q 39.656 17.438 39.656 24.078 L 39.656 51.859 L 48.438 51.859 L 48.438 0.0000 L 40.578 0.0000 z"/>
+<glyph unicode="&#x0072;" horiz-adv-x="33.301" d="M 6.5000 0.0000 L 6.5000 51.859 L 14.406 51.859 L 14.406 44.000 Q 17.438 49.516 20.000 51.266 Q 22.562 53.031 25.641 53.031 Q 30.078 53.031 34.672 50.203 L 31.641 42.047 Q 28.422 43.953 25.203 43.953 Q 22.312 43.953 20.016 42.219 Q 17.719 40.484 16.750 37.406 Q 15.281 32.719 15.281 27.156 L 15.281 0.0000 L 6.5000 0.0000 z"/>
+<glyph unicode="&#x0033;" horiz-adv-x="55.615" d="M 4.2031 18.891 L 12.984 20.062 Q 14.500 12.594 18.141 9.2969 Q 21.781 6.0000 27.000 6.0000 Q 33.203 6.0000 37.469 10.297 Q 41.750 14.594 41.750 20.953 Q 41.750 27.000 37.797 30.922 Q 33.844 34.859 27.734 34.859 Q 25.250 34.859 21.531 33.891 L 22.516 41.609 Q 23.391 41.500 23.922 41.500 Q 29.547 41.500 34.031 44.422 Q 38.531 47.359 38.531 53.469 Q 38.531 58.297 35.250 61.469 Q 31.984 64.656 26.812 64.656 Q 21.688 64.656 18.266 61.422 Q 14.844 58.203 13.875 51.766 L 5.0781 53.328 Q 6.6875 62.156 12.391 67.016 Q 18.109 71.875 26.609 71.875 Q 32.469 71.875 37.391 69.359 Q 42.328 66.844 44.938 62.500 Q 47.562 58.156 47.562 53.266 Q 47.562 48.641 45.062 44.828 Q 42.578 41.016 37.703 38.766 Q 44.047 37.312 47.562 32.688 Q 51.078 28.078 51.078 21.141 Q 51.078 11.766 44.234 5.2500 Q 37.406 -1.2656 26.953 -1.2656 Q 17.531 -1.2656 11.297 4.3438 Q 5.0781 9.9688 4.2031 18.891 z"/>
+<glyph unicode="&#x0031;" horiz-adv-x="55.615" d="M 37.250 0.0000 L 28.469 0.0000 L 28.469 56.000 Q 25.297 52.984 20.141 49.953 Q 14.984 46.922 10.891 45.406 L 10.891 53.906 Q 18.266 57.375 23.781 62.297 Q 29.297 67.234 31.594 71.875 L 37.250 71.875 L 37.250 0.0000 z"/>
+<glyph unicode="&#x0032;" horiz-adv-x="55.615" d="M 50.344 8.4531 L 50.344 0.0000 L 3.0312 0.0000 Q 2.9375 3.1719 4.0469 6.1094 Q 5.8594 10.938 9.8281 15.625 Q 13.812 20.312 21.344 26.469 Q 33.016 36.031 37.109 41.625 Q 41.219 47.219 41.219 52.203 Q 41.219 57.422 37.469 61.000 Q 33.734 64.594 27.734 64.594 Q 21.391 64.594 17.578 60.781 Q 13.766 56.984 13.719 50.250 L 4.6875 51.172 Q 5.6094 61.281 11.656 66.578 Q 17.719 71.875 27.938 71.875 Q 38.234 71.875 44.234 66.156 Q 50.250 60.453 50.250 52.000 Q 50.250 47.703 48.484 43.547 Q 46.734 39.406 42.656 34.812 Q 38.578 30.219 29.109 22.219 Q 21.188 15.578 18.938 13.203 Q 16.703 10.844 15.234 8.4531 L 50.344 8.4531 z"/>
+<glyph unicode="&#x0069;" horiz-adv-x="22.217" d="M 6.6406 61.469 L 6.6406 71.578 L 15.438 71.578 L 15.438 61.469 L 6.6406 61.469 z M 6.6406 0.0000 L 6.6406 51.859 L 15.438 51.859 L 15.438 0.0000 L 6.6406 0.0000 z"/>
+<glyph unicode="&#x0067;" horiz-adv-x="55.615" d="M 4.9844 -4.2969 L 13.531 -5.5625 Q 14.062 -9.5156 16.500 -11.328 Q 19.781 -13.766 25.438 -13.766 Q 31.547 -13.766 34.859 -11.328 Q 38.188 -8.8906 39.359 -4.5000 Q 40.047 -1.8125 39.984 6.7812 Q 34.234 0.0000 25.641 0.0000 Q 14.938 0.0000 9.0781 7.7188 Q 3.2188 15.438 3.2188 26.219 Q 3.2188 33.641 5.9062 39.906 Q 8.5938 46.188 13.688 49.609 Q 18.797 53.031 25.688 53.031 Q 34.859 53.031 40.828 45.609 L 40.828 51.859 L 48.922 51.859 L 48.922 7.0312 Q 48.922 -5.0781 46.453 -10.125 Q 44.000 -15.188 38.641 -18.109 Q 33.297 -21.047 25.484 -21.047 Q 16.219 -21.047 10.500 -16.875 Q 4.7812 -12.703 4.9844 -4.2969 z M 12.250 26.859 Q 12.250 16.656 16.297 11.969 Q 20.359 7.2812 26.469 7.2812 Q 32.516 7.2812 36.609 11.938 Q 40.719 16.609 40.719 26.562 Q 40.719 36.078 36.500 40.906 Q 32.281 45.750 26.312 45.750 Q 20.453 45.750 16.344 40.984 Q 12.250 36.234 12.250 26.859 z"/>
+<glyph unicode="&#x0066;" horiz-adv-x="27.783" d="M 8.6875 0.0000 L 8.6875 45.016 L .92188 45.016 L .92188 51.859 L 8.6875 51.859 L 8.6875 57.375 Q 8.6875 62.594 9.6250 65.141 Q 10.891 68.562 14.078 70.672 Q 17.281 72.797 23.047 72.797 Q 26.766 72.797 31.250 71.922 L 29.938 64.266 Q 27.203 64.750 24.750 64.750 Q 20.750 64.750 19.094 63.031 Q 17.438 61.328 17.438 56.641 L 17.438 51.859 L 27.547 51.859 L 27.547 45.016 L 17.438 45.016 L 17.438 0.0000 L 8.6875 0.0000 z"/>
+</font>
+
+</defs> <!-- font definitions -->
+</g> <!-- default stroke -->
+</svg> <!-- bounding box -->

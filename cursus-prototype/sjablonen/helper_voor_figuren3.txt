@@ -329,6 +329,7 @@
     <div class="kaart-titel">⑤ Gegenereerde code — kopieer naar je bestand</div>
     <div class="output-acties">
       <button class="btn-secundair btn-klein" onclick="kopieerCode()">📋 Kopieer code</button>
+      <button class="btn-secundair btn-klein" onclick="downloadCode()">⬇ Download code</button>
     </div>
     <pre id="output-code"></pre>
   </div>
@@ -1082,7 +1083,8 @@ function genereerSvgBlok(afb, ins) {
     c += `${ins}    const _base   = inhoud.getBoundingClientRect();\n`;
     c += `${ins}    const _top    = _els[0].getBoundingClientRect().top    - _base.top    + inhoud.scrollTop;\n`;
     c += `${ins}    const _bottom = _els[_els.length-1].getBoundingClientRect().bottom - _base.top + inhoud.scrollTop;\n`;
-    c += `${ins}    _fig.style.top    = _top + 'px';\n`;
+    c += `${ins}    const FIG_OFFSET_${naam.toUpperCase()} = 0; /* ← offset in px: positief = naar beneden, negatief = naar boven */\n`;
+    c += `${ins}    _fig.style.top    = (_top + FIG_OFFSET_${naam.toUpperCase()}) + 'px';\n`;
     c += `${ins}    _fig.style.height = (_bottom - _top) + 'px';\n`;
     c += `${ins}    const _img = document.createElement('img');\n`;
     c += `${ins}    _img.src = 'afbeeldingen/${bestand}'; /* ← bestandsnaam */\n`;
@@ -1105,7 +1107,8 @@ function genereerSvgBlok(afb, ins) {
     c += `${ins}    const _base   = inhoud.getBoundingClientRect();\n`;
     c += `${ins}    const _top    = _els[0].getBoundingClientRect().top    - _base.top    + inhoud.scrollTop;\n`;
     c += `${ins}    const _bottom = _els[_els.length-1].getBoundingClientRect().bottom - _base.top + inhoud.scrollTop;\n`;
-    c += `${ins}    _fig.style.top    = _top + 'px';\n`;
+    c += `${ins}    const FIG_OFFSET_${naam.toUpperCase()} = 0; /* ← offset in px: positief = naar beneden, negatief = naar boven */\n`;
+    c += `${ins}    _fig.style.top    = (_top + FIG_OFFSET_${naam.toUpperCase()}) + 'px';\n`;
     c += `${ins}    _fig.style.height = (_bottom - _top) + 'px';\n`;
     c += `${ins}    fetch('afbeeldingen/${bestand}') /* ← bestandsnaam */\n`;
     c += `${ins}      .then(r => r.text())\n`;
@@ -1720,6 +1723,17 @@ function kopieerCode() {
   navigator.clipboard.writeText(document.getElementById('output-code').textContent)
     .then(() => toonMelding('Gekopieerd naar klembord!', 'ok'))
     .catch(() => toonMelding('Kopiëren mislukt — selecteer handmatig.', 'fout'));
+}
+function downloadCode() {
+  const tekst = document.getElementById('output-code').textContent;
+  const id = document.getElementById('inp-id')?.value || 'oe_???';
+  const blob = new Blob([tekst], { type: 'text/javascript' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${id}.js`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 function resetAlles() {
   if (!confirm('Ben je zeker dat je alles wil wissen?')) return;

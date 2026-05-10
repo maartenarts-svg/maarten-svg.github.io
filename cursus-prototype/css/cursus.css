@@ -169,6 +169,16 @@ html, body {
   position: relative;
 }
 
+.rijstap {
+  display: flex;
+  align-items: center;
+  height: auto;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  line-height: 1.2;
+}
+
 .rij.breuk { height: var(--rij-hoogte-breuk); }
 
 .lbl { font-weight: bold; color: var(--groen-donker); flex-shrink: 0; width: 0.65cm; display: inline-block; }
@@ -682,4 +692,14 @@ voor theoriewoorden
   position: relative;      
   top: -0.1em;             /* omhoog of omlaag verplaatsen */
   margin-left: 0.2em;
+}
+
+/*===========================================================================
+voor gemengde SL en vast
+===========================================================================*/
+
+.sl-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
 }
