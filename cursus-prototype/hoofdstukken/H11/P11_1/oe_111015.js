@@ -12,7 +12,7 @@
   oe_111015_2.appendChild(htmlSpan('117 + <i>x</i> <span class="markeer-lila">-117</span> = 67 <span class="markeer-lila">-117</span>'));
 
   const oe_111015_3 = document.createElement('span');
-  oe_111015_3.appendChild(htmlSpan('<i>x</i> = 50'));
+  oe_111015_3.appendChild(htmlSpan('<i>x</i> = -50'));
 
   const oe_111015_6 = document.createElement('span');
   oe_111015_6.appendChild(htmlSpan(' '));
