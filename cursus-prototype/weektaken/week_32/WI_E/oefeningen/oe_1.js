@@ -89,7 +89,7 @@ window.__taakOefening = (function () {
     _container.innerHTML = '';
     const inhoud = maakOefening({ id: 'oe_2', nummer: 2, container: _container });
 
-    voegTekstToe(inhoud, 'Verbeter de vier oefeningen.', ['intro-tekst']);
+    voegTekstToe(inhoud, 'Verbeter de zeven oefeningen.', ['intro-tekst']);
     voegLijstToe(inhoud, 'bullet', '0cm', '0.3cm', [
       'Klik op een blokje om de verbetering te zien.',
       'Klik daarna op \'Verbeterd, keer terug.\'',

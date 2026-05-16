@@ -10,16 +10,16 @@
   const criteria = [
     {
       nummer: '1|',
-      tekst:  'Ik bereken het gemiddelde, de mediaan en de modus bij een gegevensset. (06.19)',
+      tekst:  'Ik bereken het gemiddelde, de mediaan, de modus en de variatiebreedte bij een gegevensset. (06.19)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik kan de drie getallen foutloos berekenen.' },
-        { lbl: 'B:', tekst: 'Ik kan twee van de drie getallen foutloos berekenen.' },
+        { lbl: 'A:', tekst: 'Ik kan de vier getallen foutloos berekenen.' },
+        { lbl: 'B:', tekst: 'Ik kan drie van de vier getallen foutloos berekenen.' },
         { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
       ],
     },
     {
       nummer: '2|',
-      tekst:  'Ik verwoord de betekenis van de mediaan en de modus bij gegevenssets. (06.19)',
+      tekst:  'Ik verwoord de betekenis van de mediaan, de modus en de variatiebreedte bij gegevenssets. (06.19)',
       scores: [
         { lbl: 'A:', tekst: 'Ik verwoord de betekenis in de context en gebruik hierbij correcte Nederlandse zinnen.' },
         { lbl: 'B:', tekst: 'Ik verwoord de betekenis, maar ik gebruik de context onvoldoende of ik maak geen correcte Nederlandse zinnen.' },
@@ -28,23 +28,6 @@
     },
     {
       nummer: '3|',
-      tekst:  'Ik bereken de variatiebreedte bij een gegevensset. (06.19)',
-      scores: [
-        { lbl: 'A:', tekst: 'Ik kan dit.' },
-        { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
-      ],
-    },
-    {
-      nummer: '4|',
-      tekst:  'Ik verwoord de betekenis van de variatiebreedte bij gegevenssets. (06.19)',
-      scores: [
-        { lbl: 'A:', tekst: 'Ik verwoord de betekenis in de context en gebruik hierbij correcte Nederlandse zinnen.' },
-        { lbl: 'B:', tekst: 'Ik verwoord de betekenis, maar ik gebruik de context onvoldoende of ik maak geen correcte Nederlandse zinnen.' },
-        { lbl: 'C:', tekst: 'Ik kan de betekenis nog niet verwoorden.' },
-      ],
-    },
-    {
-      nummer: '5|',
       tekst:  'Ik stel gegevens voor in een frequentietabel. (06.19)',
       scores: [
         { lbl: 'A:', tekst: 'Ik kan dit en mijn tabel bevat bijna geen fouten.' },
@@ -53,7 +36,7 @@
       ],
     },
     {
-      nummer: '6|',
+      nummer: '4|',
       tekst:  'Ik stel gegevens voor met behulp van een grafische voorstelling: dotplot. (06.19)',
       scores: [
         { lbl: 'A:', tekst: 'Ik kan dit zonder fouten en de dotplot is netjes getekend.' },
@@ -62,7 +45,7 @@
       ],
     },
     {
-      nummer: '7|',
+      nummer: '5|',
       tekst:  'Ik voer een statistisch onderzoek uit. (06.19)',
       scores: [
         { lbl: 'A:', tekst: 'Ik vul mijn verslag volledig, bijna foutloos en verzorgd aan.' },
