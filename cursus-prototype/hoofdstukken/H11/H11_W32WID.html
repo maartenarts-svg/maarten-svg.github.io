@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P5W3 WI C - Toets H10</title>
+  <title>P5W3 WI D - Statistisch onderzoek</title>
   <link rel="stylesheet" href="../../css/cursus.css">
 
   <style>
@@ -317,9 +317,9 @@
    ============================================================ */
 const LAYOUT_SYSTEEM = 2;   // ← HIER AANPASSEN (1 of 2)
 // !! Zet op true voor oplossingensleutel, false voor normaal gebruik !!
-TOON_OPLOSSINGEN = false;
-const TOON_VULLINGSBALK = false; // ← hier aan/uit zetten
-TOGGLE_TOEGESTAAN = false;
+TOON_OPLOSSINGEN = true;
+const TOON_VULLINGSBALK = true; // ← hier aan/uit zetten
+TOGGLE_TOEGESTAAN = true;
 
 /* ============================================================
    CONFIGURATIE
@@ -361,7 +361,7 @@ function nieuwePagina() {
 
   const hdr = document.createElement('div');
   hdr.classList.add('hoofdstuk-titel-header');
-  hdr.textContent = 'TIAB - 1a - week 3 - WI C: toets';
+  hdr.textContent = 'TIAB - 1a - week 3 - WI D';
   // Even pagina: titel links; oneven pagina: titel rechts
   if (huidigePaginaNummer % 2 === 0) {
     hdr.classList.add('links');
@@ -582,15 +582,15 @@ const inhoudstafelData = [];  // { tekst, blz } — wordt gevuld hieronder
 nieuwePagina();   // pagina 1
 voegContentToe('content-pagina');
 laadOefeningen('#content-pagina', [
-  'P11_T2/W32WIC_hoofding.js',
-  'P11_T2/W32WIC_sc.js',
+  'P11_SO/W32WID_hoofding.js',
+  'P11_SO/W32WID_sc.js',
 ]);
 
 witregel(onderTitel);
 voegContentToe('content-pagina-1');
 laadOefeningen('#content-pagina-1', [
-  'P11_T2/oe_W32WIC_1.js',
-  'P11_T2/oe_W32WIC_2.js',
+  'P11_SO/oe_W32WID_1.js',
+  'P11_SO/oe_W32WIC_2.js',
 ]);
 
 // ─────────────────────────────────────────────
@@ -598,10 +598,9 @@ nieuwePagina();   // pagina 2
 
 voegContentToe('content-pagina-2');
 laadOefeningen('#content-pagina-2', [
-  'P11_T2/oe_W32WIC_3.js',
-  'P11_T2/oe_W32WIC_4.js',
-  'P11_T2/oe_W32WIC_5.js',
-  'P11_T2/W32WIC_ref.js',
+  'P11_SO/oe_W32WIC_3.js',
+  'P11_SO/oe_W32WIC_4.js',
+  'P11_SO/oe_W32WIC_5.js',
 ]);
 
 

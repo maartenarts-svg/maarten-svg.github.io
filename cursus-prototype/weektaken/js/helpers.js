@@ -595,13 +595,13 @@ function _maakCriteriaTabel(items, aanklikbaar, metLeerplandoel, waardenArray = 
   const heeftEvalueer = items.some(i => i.type === 'evalueer');
   const heeftTypes    = heeftLeer || heeftEvalueer;
 
-  // Als aanklikbaar: toon 'Vink aan!' bovenaan
+  // Als aanklikbaar: toon 'Vink aan wat volgens jou in orde is!' bovenaan
   const wrap = document.createElement('div');
 
   if (aanklikbaar) {
     const vinkAan = document.createElement('p');
     vinkAan.style.cssText = 'font-weight:bold; margin-bottom:0.3cm; font-family:var(--font,Arial); font-size:14pt ;color:var(--lila-tekst)';
-    vinkAan.textContent = 'Vink aan!';
+    vinkAan.textContent = 'Vink aan wat volgens jou in orde is!';
     wrap.appendChild(vinkAan);
   }
 

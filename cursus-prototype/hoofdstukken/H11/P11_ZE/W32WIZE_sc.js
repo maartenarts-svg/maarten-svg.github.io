@@ -10,50 +10,33 @@
   const criteria = [
     {
       nummer: '1|',
-      tekst:  'Ik noteer een lettervorm volgens de afspraken. (6.12, vraag 1)',
+      tekst:  'Ik herken een patroon en beschrijf het met een formule. (6.16)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik haal 4 op 4.' },
-        { lbl: 'B:', tekst: 'Ik haal minstens 3 op 4.' },
-        { lbl: 'C:', tekst: 'Ik haal minder dan 3 op 4.' },
+        { lbl: 'A:', tekst: 'Dit lukt mij goed.' },
+        { lbl: 'B:', tekst: 'Dit lukt mij vaak, maar soms heb ik hulp nodig.' },
+        { lbl: 'C:', tekst: 'Dit lukt mij nog niet.' },
       ],
     },
     {
       nummer: '2|',
-      tekst:  'Ik bereken de getalwaarde van een lettervorm. (6.13, vraag 2)',
+      tekst:  'Ik laat in mijn berekeningen duidelijk mijn tussenstaoppen zien. (V6.16)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik pas het principe juist toe in 2 oefeningen.' },
-        { lbl: 'B:', tekst: 'Ik pas het principe juist toe in 1 oefening.' },
-        { lbl: 'C:', tekst: 'Ik pas het principe nog niet juist toe.' },
+        { lbl: 'A:', tekst: 'Ik doe dit bijna altijd.' },
+        { lbl: 'B:', tekst: 'Ik laat dit soms zien, maar vaak ook niet.' },
+        { lbl: 'C:', tekst: 'Ik doe dit nog niet.' },
       ],
     },
     {
       nummer: '3|',
-      tekst:  'Ik herleid een lettervorm. (6.12, vraag 3)',
+      tekst:  'Ik los problemen op met behulp van formules. (V6.17)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik doe dit bijna foutloos.' },
-        { lbl: 'B:', tekst: 'Ik laat duidelijk zien dat ik de rekenregels ken, maar maak nog wel wat fouten.' },
-        { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
-      ],
-    },
-    {
-      nummer: '4|',
-      tekst:  'Ik vermenigvuldig een lettervorm met een getal. (6.12, vraag 4))',
-      scores: [
-        { lbl: 'A:', tekst: 'Ik doe dit bijna foutloos.' },
-        { lbl: 'B:', tekst: 'Ik laat duidelijk zien dat ik de rekenregels ken, maar maak nog wel wat fouten.' },
-        { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
-      ],
-    },
-    {
-      nummer: '5|',
-      tekst:  'Ik reken met lettervormen. (6.12, vraag 5)',
-      scores: [
-        { lbl: 'A:', tekst: 'Ik doe dit bijna foutloos.' },
-        { lbl: 'B:', tekst: 'Ik laat duidelijk zien dat ik de rekenregels ken, maar maak nog wel wat fouten.' },
+        { lbl: 'A:', tekst: 'Ik kan dit bijna foutloos.' },
+        { lbl: 'B:', tekst: 'Ik laat duidelijk mijn werkwijze zien, maar maak nog wel wat fouten.' },
         { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
       ],
     },
   ];
+
 
   /* ---- Buitenste kader ---- */
   const kader = document.createElement('table');
@@ -66,7 +49,7 @@
   /* ---- Kolombreedtes via colgroup ---- */
   const colgroup = document.createElement('colgroup');
   const col1 = document.createElement('col');
-  col1.style.width = 'calc(0.65cm + 0.2cm)';
+  col1.style.width = 'calc(0.65cm)';
   const col2 = document.createElement('col');
   col2.style.width = 'auto';
   colgroup.appendChild(col1);
@@ -123,7 +106,7 @@
       const divScore = document.createElement('div');
       divScore.style.display     = 'flex';
       divScore.style.alignItems  = 'baseline';
-      divScore.style.paddingLeft = '0.65cm';
+      divScore.style.paddingLeft = '0.15cm';
 
       const spanLbl = document.createElement('span');
       spanLbl.style.fontFamily  = 'var(--font)';
@@ -150,5 +133,7 @@
   });
 
   inhoud.appendChild(kader);
+  
+  voegWitruimteToe(inhoud,'0.5cm');
 
 })();

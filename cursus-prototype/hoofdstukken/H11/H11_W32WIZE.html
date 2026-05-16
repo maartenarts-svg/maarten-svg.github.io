@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P5W3 WI C - Toets H10</title>
+  <title>Onderzoek</title>
   <link rel="stylesheet" href="../../css/cursus.css">
 
   <style>
@@ -361,7 +361,7 @@ function nieuwePagina() {
 
   const hdr = document.createElement('div');
   hdr.classList.add('hoofdstuk-titel-header');
-  hdr.textContent = 'TIAB - 1a - week 3 - WI C: toets';
+  hdr.textContent = 'TIAB - 1a - week 3/4/5 - WI Z';
   // Even pagina: titel links; oneven pagina: titel rechts
   if (huidigePaginaNummer % 2 === 0) {
     hdr.classList.add('links');
@@ -514,6 +514,50 @@ function voegTheorieToe(items) {
 }
 
 /**
+ * Voeg theorie toe
+ * @param {array} items - [{nummer: '10.9', tekst 'blabla'},{}]
+ */
+function voegTheorieToe2(tekst,figuur,breedtefig,verkleining) {
+  const kader = document.createElement('div');
+  kader.classList.add('theorie-kader');
+  kader.style.width = '100%';
+
+  const rij = document.createElement('div');
+  rij.classList.add('theorie-rij');
+  rij.style.width = '100%';
+  rij.style.display = 'flex';
+  rij.style.alignItems = "stretch";
+  const txt = document.createElement('span');
+  txt.classList.add('theorie-tekst');
+  txt.style.display = "block";
+  txt.appendChild(tekst);
+  rij.appendChild(txt);
+
+  if (figuur === '') {
+    txt.style.width = '100%';
+  } else {
+    txt.style.width = `calc(100% - ${breedtefig})`;
+    const figSpan = document.createElement('span');
+    figSpan.style.width = breedtefig;
+    figSpan.style.display = "flex";
+    figSpan.style.justifyContent = "center"; // horizontaal centreren
+    figSpan.style.alignItems = "center";     // verticaal centreren
+
+    const img = document.createElement('img');
+    img.src = `afbeeldingen/${figuur}`;
+    img.style.width = `${verkleining}`;
+    img.style.height = "auto";
+    figSpan.appendChild(img);
+    rij.appendChild(figSpan);
+  }
+
+  kader.appendChild(rij);
+
+  huidigePagina().appendChild(kader);
+  return kader;
+}
+
+/**
  * Voeg een inhoudszone toe (lege ruimte voor later te vullen)
  * @param {string} id - optionele id voor later gebruik
  */
@@ -580,17 +624,25 @@ const inhoudstafelData = [];  // { tekst, blz } — wordt gevuld hieronder
 
 // ───────────────────────────────────
 nieuwePagina();   // pagina 1
+
 voegContentToe('content-pagina');
 laadOefeningen('#content-pagina', [
-  'P11_T2/W32WIC_hoofding.js',
-  'P11_T2/W32WIC_sc.js',
+  'P11_ZE/W32WIZE_hoofding.js',
+  'P11_ZE/W32WIZE_sc.js',
 ]);
+
+{
+  const theZE002 = document.createElement('span');
+  theZE002.appendChild(htmlSpan('In wiskunde gaat het vaak over getallen, figuren en regelmaat.<br>In dit onderzoek ontdek je regelmaat bij rijen figuren in een assenstelsel.<br>De ontdekte regelmaat gebruik je om met berekeningen uitspraken te doen over figuren in de rij die niet gekend zijn.'));
+  theZE002.classList.add("theorietekst");
+  voegTheorieToe2(theZE002,'');
+}
+
 
 witregel(onderTitel);
 voegContentToe('content-pagina-1');
 laadOefeningen('#content-pagina-1', [
-  'P11_T2/oe_W32WIC_1.js',
-  'P11_T2/oe_W32WIC_2.js',
+  'P11_ZE/oe_11ZE001.js',
 ]);
 
 // ─────────────────────────────────────────────
@@ -598,11 +650,36 @@ nieuwePagina();   // pagina 2
 
 voegContentToe('content-pagina-2');
 laadOefeningen('#content-pagina-2', [
-  'P11_T2/oe_W32WIC_3.js',
-  'P11_T2/oe_W32WIC_4.js',
-  'P11_T2/oe_W32WIC_5.js',
-  'P11_T2/W32WIC_ref.js',
+  'P11_ZE/oe_11ZE002.js',
+  
 ]);
+
+// ─────────────────────────────────────────────
+nieuwePagina();   // pagina 3
+
+voegContentToe('content-pagina-3');
+laadOefeningen('#content-pagina-3', [
+  'P11_ZE/oe_11ZE003.js',
+  
+]);
+
+// ───────────────────────────────────
+nieuwePagina();   // pagina 4
+
+voegContentToe('content-pagina-4');
+laadOefeningen('#content-pagina-4', [
+  'P11_ZE/oe_11ZE004.js',
+]);
+
+// ───────────────────────────────────
+nieuwePagina();   // pagina 5
+
+voegContentToe('content-pagina-5');
+laadOefeningen('#content-pagina-5', [
+  'P11_ZE/oe_11ZE005.js',
+]);
+
+
 
 
 

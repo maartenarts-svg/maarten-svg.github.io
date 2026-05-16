@@ -41,7 +41,7 @@
 
   const tbodyA = maakNestedTabel(tbody,'4.19%');
 
-    const rijHoogtes = ['0.9cm', '0.9cm', '0.9cm', '0.9cm', '0.9cm', '0.9cm', '0.9cm'];
+  const rijHoogtes = ['0.9cm', '0.9cm', '0.9cm', '0.9cm', '0.9cm', '0.9cm', '0.9cm'];
   const kolomBreedtes = ['25%', '25%', '50%'];
 
   const matrix = [

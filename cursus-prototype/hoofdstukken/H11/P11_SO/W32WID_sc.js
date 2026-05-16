@@ -10,47 +10,64 @@
   const criteria = [
     {
       nummer: '1|',
-      tekst:  'Ik noteer een lettervorm volgens de afspraken. (6.12, vraag 1)',
+      tekst:  'Ik bereken het gemiddelde, de mediaan en de modus bij een gegevensset. (06.19)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik haal 4 op 4.' },
-        { lbl: 'B:', tekst: 'Ik haal minstens 3 op 4.' },
-        { lbl: 'C:', tekst: 'Ik haal minder dan 3 op 4.' },
+        { lbl: 'A:', tekst: 'Ik kan de drie getallen foutloos berekenen.' },
+        { lbl: 'B:', tekst: 'Ik kan twee van de drie getallen foutloos berekenen.' },
+        { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
       ],
     },
     {
       nummer: '2|',
-      tekst:  'Ik bereken de getalwaarde van een lettervorm. (6.13, vraag 2)',
+      tekst:  'Ik verwoord de betekenis van de mediaan en de modus bij gegevenssets. (06.19)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik pas het principe juist toe in 2 oefeningen.' },
-        { lbl: 'B:', tekst: 'Ik pas het principe juist toe in 1 oefening.' },
-        { lbl: 'C:', tekst: 'Ik pas het principe nog niet juist toe.' },
+        { lbl: 'A:', tekst: 'Ik verwoord de betekenis in de context en gebruik hierbij correcte Nederlandse zinnen.' },
+        { lbl: 'B:', tekst: 'Ik verwoord de betekenis, maar ik gebruik de context onvoldoende of ik maak geen correcte Nederlandse zinnen.' },
+        { lbl: 'C:', tekst: 'Ik kan de betekenis nog niet verwoorden.' },
       ],
     },
     {
       nummer: '3|',
-      tekst:  'Ik herleid een lettervorm. (6.12, vraag 3)',
+      tekst:  'Ik bereken de variatiebreedte bij een gegevensset. (06.19)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik doe dit bijna foutloos.' },
-        { lbl: 'B:', tekst: 'Ik laat duidelijk zien dat ik de rekenregels ken, maar maak nog wel wat fouten.' },
+        { lbl: 'A:', tekst: 'Ik kan dit.' },
         { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
       ],
     },
     {
       nummer: '4|',
-      tekst:  'Ik vermenigvuldig een lettervorm met een getal. (6.12, vraag 4))',
+      tekst:  'Ik verwoord de betekenis van de variatiebreedte bij gegevenssets. (06.19)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik doe dit bijna foutloos.' },
-        { lbl: 'B:', tekst: 'Ik laat duidelijk zien dat ik de rekenregels ken, maar maak nog wel wat fouten.' },
-        { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
+        { lbl: 'A:', tekst: 'Ik verwoord de betekenis in de context en gebruik hierbij correcte Nederlandse zinnen.' },
+        { lbl: 'B:', tekst: 'Ik verwoord de betekenis, maar ik gebruik de context onvoldoende of ik maak geen correcte Nederlandse zinnen.' },
+        { lbl: 'C:', tekst: 'Ik kan de betekenis nog niet verwoorden.' },
       ],
     },
     {
       nummer: '5|',
-      tekst:  'Ik reken met lettervormen. (6.12, vraag 5)',
+      tekst:  'Ik stel gegevens voor in een frequentietabel. (06.19)',
       scores: [
-        { lbl: 'A:', tekst: 'Ik doe dit bijna foutloos.' },
-        { lbl: 'B:', tekst: 'Ik laat duidelijk zien dat ik de rekenregels ken, maar maak nog wel wat fouten.' },
+        { lbl: 'A:', tekst: 'Ik kan dit en mijn tabel bevat bijna geen fouten.' },
+        { lbl: 'B:', tekst: 'Ik kan dit, maar er staan nog wat te veel fouten in mijn tabel.' },
+        { lbl: 'C:', tekst: 'Ik kan dit niet.' },
+      ],
+    },
+    {
+      nummer: '6|',
+      tekst:  'Ik stel gegevens voor met behulp van een grafische voorstelling: dotplot. (06.19)',
+      scores: [
+        { lbl: 'A:', tekst: 'Ik kan dit zonder fouten en de dotplot is netjes getekend.' },
+        { lbl: 'B:', tekst: 'Ik kan dit, maar maak nog een klein aantal fouten en/of de dotplot is niet netjes getekend.' },
         { lbl: 'C:', tekst: 'Ik kan dit nog niet.' },
+      ],
+    },
+    {
+      nummer: '7|',
+      tekst:  'Ik voer een statistisch onderzoek uit. (06.19)',
+      scores: [
+        { lbl: 'A:', tekst: 'Ik vul mijn verslag volledig, bijna foutloos en verzorgd aan.' },
+        { lbl: 'B:', tekst: 'Ik vul het verslag aan, maar het bevat nog wat fouten en het is onvolledig en/of niet verzorgd.' },
+        { lbl: 'C:', tekst: 'Ik doe dit nog niet voldoende.' },
       ],
     },
   ];
@@ -66,7 +83,7 @@
   /* ---- Kolombreedtes via colgroup ---- */
   const colgroup = document.createElement('colgroup');
   const col1 = document.createElement('col');
-  col1.style.width = 'calc(0.65cm + 0.2cm)';
+  col1.style.width = 'calc(0.65cm)';
   const col2 = document.createElement('col');
   col2.style.width = 'auto';
   colgroup.appendChild(col1);
@@ -123,7 +140,7 @@
       const divScore = document.createElement('div');
       divScore.style.display     = 'flex';
       divScore.style.alignItems  = 'baseline';
-      divScore.style.paddingLeft = '0.65cm';
+      divScore.style.paddingLeft = '0.15cm';
 
       const spanLbl = document.createElement('span');
       spanLbl.style.fontFamily  = 'var(--font)';
@@ -150,5 +167,7 @@
   });
 
   inhoud.appendChild(kader);
+  
+  voegWitruimteToe(inhoud,'0.5cm');
 
 })();

@@ -4,7 +4,9 @@
    ============================================================ */
 (function () {
 
+
   const inhoud = maakTheorie();
+
   const FONT_KLEIN = '9pt';
 
   const criteria = [
@@ -63,6 +65,13 @@
   kader.style.border         = '1.2px solid black';
   kader.style.marginTop      = '0.2cm';
 
+  const {tbody} = maakOefTabel(kader, 1, true);
+
+  const trtest = document.createElement('tr');
+  tbody.appendChild(trtest);
+  const td = maakOpTd('1','test','3cm',false,'2x');
+  trtest.appendChild(td);
+
   /* ---- Kolombreedtes via colgroup ---- */
   const colgroup = document.createElement('colgroup');
   const col1 = document.createElement('col');
@@ -81,7 +90,7 @@
   tdTitel.style.fontFamily = 'var(--font)';
   tdTitel.style.fontSize   = 'var(--fontsize)';
   tdTitel.style.fontWeight = 'bold';
-  tdTitel.appendChild(htmlSpan('Succescriteria'));
+  tdTitel.appendChild(htmlSpan('Reflectie over je voorbereiding'));
   trTitel.appendChild(tdTitel);
   kader.appendChild(trTitel);
 
