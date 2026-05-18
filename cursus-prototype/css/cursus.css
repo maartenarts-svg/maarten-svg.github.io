@@ -325,6 +325,14 @@ html, body {
   top: 0.0em;
 }
 
+.bracket2 {
+  display: inline-block;
+  transform: scaleY(2.5);
+  transform-origin: center;
+  position: relative;
+  top: -0.2em;
+}
+
 /* ============================================================
    ZICHTBARE TABEL
    ============================================================ */
