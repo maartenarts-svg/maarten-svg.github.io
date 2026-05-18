@@ -14,7 +14,7 @@ window.__taakOefening = (function () {
     { nr: 4, pad: '../../../hoofdstukken/H10/P10_toets/oe_10T008.js' },
     { nr: 5, pad: '../../../hoofdstukken/H10/P10_toets/oe_10T009.js' },
     { nr: 6, pad: '../../../hoofdstukken/H10/P10_toets/oe_10T010.js' },
-    { nr: 7, pad: '../../../hoofdstukken/H10/P10_toets/oe_10T0011.js' },
+    { nr: 7, pad: '../../../hoofdstukken/H10/P10_toets/oe_10T011.js' },
   ];
 
   const VAKJE = '0.9cm';
