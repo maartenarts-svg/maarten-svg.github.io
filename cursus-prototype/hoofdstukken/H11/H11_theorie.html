@@ -739,14 +739,23 @@ laadTheorieOnderdeel('#content-111-theorie-4', [
 nieuwePagina();   // pagina 460
 inhoudstafelData.push({ tekst: '11.2 Vergelijkingen oplossen', blz: huidigePaginaNummer - 1,soort: 'par'});
 voegParagraafToe('11.2', 'Vergelijkingen oplossen');
-voegContentToe('content-102-theorie');
-laadTheorieOnderdeel('#content-102-theorie', [
+voegContentToe('content-112-theorie');
+laadTheorieOnderdeel('#content-112-theorie', [
   { 
     bestand: 'theorie/th_112_vergelijkingOplossen.js',
     trefwoorden: ['vergelijking oplossen'] 
   },
   { 
     bestand: 'theorie/th_112_vergelijkingOplossenVB.js', 
+  },
+]);
+
+forceerPaginawissel();
+voegContentToe('content-112-theorie-2');
+laadTheorieOnderdeel('#content-112-theorie-2', [
+  { 
+    bestand: 'theorie/th_112_formulesVergelijkingenVB.js',
+    trefwoorden: ['formules'] 
   },
 ]);
 
@@ -759,11 +768,34 @@ voegParagraafToe('11.3', 'Vraagstukken oplossen met een vergelijking');
 
 inhoudstafelData.push({ tekst: '11.3.1 Een vergelijking oplossen met ICT', blz: huidigePaginaNummer - 1,soort: 'subpar' });
 voegSubparagraafToe('11.3.1','Een vergelijking oplossen met ICT');
+voegContentToe('content-113-theorie');
+laadTheorieOnderdeel('#content-113-theorie', [
+  { 
+    bestand: 'theorie/th_113_vergelijkingOplossenICT.js',
+    trefwoorden: ['vergelijking oplossen met ICT'] 
+  },
+  { 
+    bestand: 'theorie/th_113_vergelijkingOplossenICTVB.js',
+  },
+]);
+
+
 
 
 forceerPaginawissel();
 inhoudstafelData.push({ tekst: '11.3.2 Vraagstukken oplossen', blz: huidigePaginaNummer - 1,soort: 'subpar' });
 voegSubparagraafToe('11.3.2','Vraagstukken oplossen');
+voegContentToe('content-113-theorie-2');
+laadTheorieOnderdeel('#content-113-theorie-2', [
+  { 
+    bestand: 'theorie/th_113_vraagstukkenEen.js',
+    trefwoorden: ['vraagstukken, één gevraagde'] 
+  },
+  { 
+    bestand: 'theorie/th_113_vraagstukkenMeer.js',
+    trefwoorden: ['vraagstukken, meer gevraagd'] 
+  },
+]);
 
 
 

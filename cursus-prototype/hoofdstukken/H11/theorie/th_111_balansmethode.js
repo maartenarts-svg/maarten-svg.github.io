@@ -230,7 +230,7 @@
       hulp03.appendChild(maakSpanBreedte('1cm',''));
       hulp03.appendChild(htmlSpan("<i>x</i> = 2"));
 
-      [htmlSpan("Door beide leden te vermeerderen met 3, blijft de balans in evenwicht."), htmlSpan(""), hulp01, hulp02, hulp03].forEach(t => {
+      [htmlSpan("Door beide leden te delen door 3, blijft de balans in evenwicht."), htmlSpan(""), hulp01, hulp02, hulp03].forEach(t => {
         const span = document.createElement("span");
         span.appendChild(t);
         textDiv.appendChild(span);
@@ -252,7 +252,6 @@
       th_102_begrB_b2.classList.add('theorie');
       th_102_begrA.appendChild(th_102_begrB_b2);
       th_102_begrA.appendChild(htmlSpan(' betekent dat je met de balansmethode gaat berekenen voor welke waarde van de onbekende je een gelijkheid krijgt.'));
-      th_102_begrA.appendChild(htmlSpan('.'));
 
       const div01 = document.createElement('div');
       div01.style.display = 'flex';

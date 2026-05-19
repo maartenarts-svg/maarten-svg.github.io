@@ -54,8 +54,9 @@
     //eerste twee zinnen
     {
       const th_102_begrA = document.createElement('span');
-      const th_102_begrA_b1 = maakSpanBreedte('0.4cm', '•');
-      th_102_begrA.appendChild(th_102_begrA_b1);
+      const lbl01 = maakSpanBreedte('0.4cm', '•');
+      lbl01.classList.add('lbl');
+      th_102_begrA.appendChild(lbl01);
       th_102_begrA.appendChild(htmlSpan('Een  '));
       const th_102_begrB_b2 = htmlSpan('vergelijking');
       th_102_begrB_b2.classList.add('theorie');
@@ -257,8 +258,9 @@
     //begrip oplossing
     {
       const th_102_begrA = document.createElement('span');
-      const th_102_begrA_b1 = maakSpanBreedte('0.4cm', '•');
-      th_102_begrA.appendChild(th_102_begrA_b1);
+      const lbl01 = maakSpanBreedte('0.4cm', '•');
+      lbl01.classList.add('lbl');
+      th_102_begrA.appendChild(lbl01);
       th_102_begrA.appendChild(htmlSpan('Een  '));
       const th_102_begrB_b2 = htmlSpan('oplossing');
       th_102_begrB_b2.classList.add('theorie');
@@ -276,7 +278,7 @@
       const th_102_begrA = document.createElement('span');
       const th_102_begrA_b1 = maakSpanBreedte('0.4cm', '');
       th_102_begrA.appendChild(th_102_begrA_b1);
-      th_102_begrA.appendChild(htmlSpan('De getalwaarde voor dat getal van het linkerlid is dan gelijk aan die van het rechterlid.'));
+      th_102_begrA.appendChild(htmlSpan('De getalwaarde van het linkerlid voor dat getal is dan gelijk aan die van het rechterlid.'));
       
       const div01 = document.createElement('div');
       div01.style.display = 'flex';

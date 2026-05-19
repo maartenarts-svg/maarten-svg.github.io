@@ -53,7 +53,9 @@
     //voorbeeld 1
     {
       const th_102_begrA = document.createElement('span');
-      th_102_begrA.appendChild(maakSpanBreedte('0.4cm', '•'));
+      const lbl01 = maakSpanBreedte('0.4cm', '•');
+      lbl01.classList.add('lbl');
+      th_102_begrA.appendChild(lbl01);
       th_102_begrA.appendChild(htmlSpan('Los de vergelijking 3<i>x</i> = 6 op.'));
       
       const div01 = document.createElement('div');
@@ -203,7 +205,9 @@
     //voorbeeld 2
     {
       const th_102_begrA = document.createElement('span');
-      th_102_begrA.appendChild(maakSpanBreedte('0.4cm', '•'));
+      const lbl01 = maakSpanBreedte('0.4cm', '•');
+      lbl01.classList.add('lbl');
+      th_102_begrA.appendChild(lbl01);
       th_102_begrA.appendChild(htmlSpan('Los de vergelijking -5 = 7<i>t</i> op.'));
       
       const div01 = document.createElement('div');

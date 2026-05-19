@@ -161,12 +161,14 @@
       const hulp2 = document.createElement('span');
       hulp2.appendChild(maakSpanBreedte('0.65cm',''));
       hulp2.appendChild(htmlSpan('= 3 · '));
+      const h1=document.createElement('span'); h1.innerHTML='<span class="bracket2">(</span>'; hulp2.appendChild(h1);
       const hulp2a = document.createElement('span');
       hulp2a.appendChild(maakBreuk('13','3','opgave'));
       hulp2.appendChild(hulp2a);
       hulp2.appendChild(htmlSpan(' + '));
       const hulp2b = document.createElement('span');
-      hulp2b.appendChild(maakBreuk('3','3','opgave'));        
+      hulp2b.appendChild(maakBreuk('3','3','opgave'));
+      const h2=document.createElement('span'); h2.innerHTML='<span class="bracket2">)</span>'; hulp2b.appendChild(h2);     
       hulp2.appendChild(hulp2b);
       hulp2.appendChild(htmlSpan(' + 2'));
       const tdSR = maakOpTdazZonder(hulp2);
