@@ -749,6 +749,23 @@
     </div>
   </div>
 
+  <!-- ── Modal: Indienen bevestigen ──────────────────────────── -->
+  <div id="modal-indienen" style="display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,0.45); align-items:center; justify-content:center;
+    z-index:1000;">
+    <div style="background:white; border-radius:10px; padding:2rem;
+      max-width:380px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.18);
+      text-align:center;">
+      <p style="font-size:1rem; font-weight:600; margin-bottom:1.5rem; line-height:1.5;">
+        Ben je zeker? Je kunt na het indienen niets meer aanpassen.
+      </p>
+      <div style="display:flex; flex-direction:column; gap:0.7rem;">
+        <button id="modal-bevestig" class="knop-primair">Ik ben zeker: ik dien in.</button>
+        <button id="modal-annuleer" class="knop-secundair">Ik wil nog niet indienen.</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Matrix-scripts ────────────────────────────────────── -->
   <script src="data/voorkennis-matrix.js"><\/script>
   <script src="data/succescriteria-matrix.js"><\/script>
@@ -1126,7 +1143,22 @@ ${oefScripts},
     document.getElementById('knop-vorige-einde').addEventListener('click',
       () => _toonScherm('succescriteria'));
 
-    document.getElementById('knop-indienen').addEventListener('click', _indienen);
+    document.getElementById('knop-indienen').addEventListener('click', () => {
+      if (!INSTELLINGEN.wijzigenNaIndienen && !_leerling.ingediend && !INSTELLINGEN.verbeterdModus) {
+        document.getElementById('modal-indienen').style.display = 'flex';
+      } else {
+        _indienen();
+      }
+    });
+
+    document.getElementById('modal-bevestig').addEventListener('click', () => {
+      document.getElementById('modal-indienen').style.display = 'none';
+      _indienen();
+    });
+
+    document.getElementById('modal-annuleer').addEventListener('click', () => {
+      document.getElementById('modal-indienen').style.display = 'none';
+    });
 
     // ================================================================
     //  SCHERMBEHEER

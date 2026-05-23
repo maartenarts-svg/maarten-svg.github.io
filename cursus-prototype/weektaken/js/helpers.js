@@ -515,6 +515,122 @@ function bouwInstructieLijst(container, matrix) {
   });
 }
 
+// ── bouwInstructieLijstBullets ────────────────────────────────
+// Bouwt de instructielijst op basis van een matrix.
+// @param {HTMLElement} container
+// @param {Array}       matrix  [{ tekst, plaatscode }]
+//   plaatscode x.y     = hoofdinstructie
+//   plaatscode x.y.z   = subinstructie bij x.y
+function bouwInstructieLijstBullets(container, matrix) {
+  // Groepeer: hoofdstappen (x.y) en subinstructies (x.y.z)
+  const hoofd = matrix
+    .filter(i => i.plaatscode.split('.').length === 2)
+    .sort((a, b) => _vergelijkPlaatscode(a.plaatscode, b.plaatscode));
+
+  hoofd.forEach(item => {
+    const [x, y] = item.plaatscode.split('.');
+
+    // Hoofdrij
+    const rijEl = document.createElement('div');
+    rijEl.classList.add('rij', 'instructie-rij');
+
+    const lbl = document.createElement('span');
+    lbl.classList.add('lbl');
+    lbl.textContent = y + '|';
+    rijEl.appendChild(lbl);
+
+    const txt = document.createElement('span');
+    txt.classList.add('txt');
+    txt.appendChild(htmlSpan(item.tekst));
+    rijEl.appendChild(txt);
+
+    container.appendChild(rijEl);
+
+    // Subinstructies
+    const subs = matrix
+      .filter(i => {
+        const delen = i.plaatscode.split('.');
+        return delen.length === 3 && delen[0] === x && delen[1] === y;
+      })
+      .sort((a, b) => _vergelijkPlaatscode(a.plaatscode, b.plaatscode));
+
+    subs.forEach(sub => {
+      const [, , z] = sub.plaatscode.split('.');
+
+      const subRij = document.createElement('div');
+      subRij.classList.add('rij', 'instructie-rij', 'instructie-sub');
+
+      const subLbl = document.createElement('span');
+      subLbl.classList.add('lbl');
+      subLbl.textContent = '•';
+      subRij.appendChild(subLbl);
+
+      const subTxt = document.createElement('span');
+      subTxt.classList.add('txt');
+      subTxt.appendChild(htmlSpan(sub.tekst));
+      subRij.appendChild(subTxt);
+
+      container.appendChild(subRij);
+    });
+  });
+}
+
+
+// ── bouwInstructieLijstZonder ─────────────────────────────────
+// Bouwt de instructielijst op basis van een matrix.
+// @param {HTMLElement} container
+// @param {Array}       matrix  [{ tekst, plaatscode }]
+//   plaatscode x.y     = hoofdinstructie
+//   plaatscode x.y.z   = subinstructie bij x.y
+function bouwInstructieLijstZonder(container, matrix) {
+  // Groepeer: hoofdstappen (x.y) en subinstructies (x.y.z)
+  const hoofd = matrix
+    .filter(i => i.plaatscode.split('.').length === 2)
+    .sort((a, b) => _vergelijkPlaatscode(a.plaatscode, b.plaatscode));
+
+  hoofd.forEach(item => {
+    const [x, y] = item.plaatscode.split('.');
+
+    // Hoofdrij
+    const rijEl = document.createElement('div');
+    rijEl.classList.add('rij', 'instructie-rij');
+
+    const lbl = document.createElement('span');
+    lbl.classList.add('lbl');
+    lbl.textContent = y + '|';
+    rijEl.appendChild(lbl);
+
+    const txt = document.createElement('span');
+    txt.classList.add('txt');
+    txt.appendChild(htmlSpan(item.tekst));
+    rijEl.appendChild(txt);
+
+    container.appendChild(rijEl);
+
+    // Subinstructies
+    const subs = matrix
+      .filter(i => {
+        const delen = i.plaatscode.split('.');
+        return delen.length === 3 && delen[0] === x && delen[1] === y;
+      })
+      .sort((a, b) => _vergelijkPlaatscode(a.plaatscode, b.plaatscode));
+
+    subs.forEach(sub => {
+      const [, , z] = sub.plaatscode.split('.');
+
+      const subRij = document.createElement('div');
+      subRij.classList.add('rij', 'instructie-rij', 'instructie-sub');
+
+      const subTxt = document.createElement('span');
+      subTxt.classList.add('txt');
+      subTxt.appendChild(htmlSpan(sub.tekst));
+      subRij.appendChild(subTxt);
+
+      container.appendChild(subRij);
+    });
+  });
+}
+
 // ── bouwBenodigdhedenLijst ────────────────────────────────────
 // Bouwt de lijst met benodigdheden.
 // @param {HTMLElement} container
