@@ -558,41 +558,34 @@ function _bouwEvolutie() {
   });
 }
 
-// ── Paragrafen ophalen uit H10_matrix (al geladen als global) ─
-function _getParagrafen(hstCode) {
-  // H10_matrix is een globale variabele geladen via de datamatrix
-  // We laden die dynamisch als die nog niet beschikbaar is
-  const matrixNaam = `H10_matrix`; // uitbreidbaar later per hoofdstuk
-  if (typeof H10_matrix !== 'undefined') {
-    return [...new Set(H10_matrix.map(o => o.paragraaf))].sort();
-  }
-  return [];
+function _getMatrix(hstCode) {
+  return window[hstCode + '_matrix'];
 }
 
 function _vulParagraafDropdown(hstCode, selectEl) {
   selectEl.innerHTML = '<option value="">— Kies een paragraaf —</option>';
   if (!hstCode) return;
 
-  // Matrix dynamisch laden indien nodig
   const hst = (_inhoud.hoofdstukken || []).find(h => h.code === hstCode);
   if (!hst?.bestanden?.datamatrix) {
     selectEl.innerHTML = '<option value="">Geen datamatrix ingesteld</option>';
     return;
   }
 
-  if (typeof H10_matrix !== 'undefined') {
-    _vulParagraafOpties(selectEl);
+  if (_getMatrix(hstCode)) {
+    _vulParagraafOpties(hstCode, selectEl);
   } else {
     const s = document.createElement('script');
     s.src = `../hoofdstukken/${hstCode}/${hst.bestanden.datamatrix}`;
-    s.onload = () => _vulParagraafOpties(selectEl);
+    s.onload = () => _vulParagraafOpties(hstCode, selectEl);
     document.head.appendChild(s);
   }
 }
 
-function _vulParagraafOpties(selectEl) {
-  if (typeof H10_matrix === 'undefined') return;
-  const paragrafen = [...new Set(H10_matrix.map(o => o.paragraaf))].sort();
+function _vulParagraafOpties(hstCode, selectEl) {
+  const matrix = _getMatrix(hstCode);
+  if (!matrix) return;
+  const paragrafen = [...new Set(matrix.map(o => o.paragraaf))].sort();
   paragrafen.forEach(p => {
     const opt = document.createElement("option");
     opt.value = p; opt.textContent = p;
@@ -630,11 +623,12 @@ function _toonLeerlingOverzicht(leerling, container) {
 
 // ── Deel 2: Score CSV ─────────────────────────────────────────
 function _downloadScoreCsv(hstCode, par) {
-  if (typeof H10_matrix === 'undefined') {
+  const matrix = _getMatrix(hstCode);
+  if (!matrix) {
     alert("Datamatrix nog niet geladen. Kies eerst een hoofdstuk."); return;
   }
 
-  const alleOef    = H10_matrix.filter(o => o.paragraaf === par);
+  const alleOef    = matrix.filter(o => o.paragraaf === par);
   const hvsiOef    = alleOef.filter(o => {
     const s = ONDERDEEL_SLEUTEL_SCORE[o.onderdeel];
     return s === 'hoever' || s === 'hoeveR';
@@ -790,7 +784,8 @@ function _berekenOpmerking(score, niveau, heeftHVSI, cirkelHVSI, extraHVSI, oefe
 
 // ── Deel 3: Opmerkingen overzicht ─────────────────────────────
 function _toonOpmerkingen(hstCode, keuzeFilter, container) {
-  if (typeof H10_matrix === 'undefined') {
+  const matrix = _getMatrix(hstCode);
+  if (!matrix) {
     container.innerHTML = '<p class="sectie-leeg">Datamatrix nog niet geladen.</p>';
     return;
   }
@@ -829,7 +824,7 @@ function _toonOpmerkingen(hstCode, keuzeFilter, container) {
 
   // Zoek het oefeningnummer op via de matrix
   const nrVan = (bestandsnaam) => {
-    const o = H10_matrix.find(o => o.bestandsnaam === bestandsnaam);
+    const o = matrix.find(o => o.bestandsnaam === bestandsnaam);
     return o ? o.nr : bestandsnaam;
   };
 
