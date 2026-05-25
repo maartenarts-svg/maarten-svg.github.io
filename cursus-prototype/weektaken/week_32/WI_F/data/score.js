@@ -5,42 +5,27 @@
 window.__berekenScores = function(leerling, taakData) {
   const antwoorden = leerling.antwoorden || {};
 
-  // ── Score 1: foto's indienen (oe_1) ──────────────────────
-  const fotoAntwoord = (antwoorden['oe_1'] || [])[0];
-  const fotoIngediend = fotoAntwoord?.antwoord === 'ja' || fotoAntwoord === 'ja';
-  const scoreFotos = fotoIngediend ? 'A' : 'NI';
+  function puntVoor(id) {
+    return (antwoorden[id] || [])[0]?.score || 0;
+  }
 
-  // ── Score 2: verbeteringen (oe_2) ────────────────────────
-  const verbetering  = leerling.verbetering || {};
-  const aantalVerbeterd = [1, 2, 3, 4, 5].filter(nr =>
-    (verbetering[nr]?.pogingen?.length || 0) > 0
-  ).length;
+  // ── Score 1: coördinaten aflezen (oe_2–oe_7) ─────────────
+  const puntenAflezen = [2, 3, 4, 5, 6, 7].reduce((som, n) => som + puntVoor(`oe_${n}`), 0);
 
-  let scoreVerbeteringen;
-  if (aantalVerbeterd === 5)      scoreVerbeteringen = 'A';
-  else if (aantalVerbeterd >= 1)  scoreVerbeteringen = 'C';
-  else                            scoreVerbeteringen = 'NI';
+  let scoreAflezen;
+  if (puntenAflezen === 6)      scoreAflezen = 'A';
+  else if (puntenAflezen >= 5)  scoreAflezen = 'B';
+  else                          scoreAflezen = 'C';
 
-  // ── Score 3: zelfevaluatie succescriteria (oe_3) ─────────
-  const oe3 = antwoorden['oe_3'] || [];
-  const aantalSC = 5;
-  const aangeduid = oe3.filter(a =>
-    a?.antwoord === 'A' || a?.antwoord === 'B' || a?.antwoord === 'C'
-  ).length;
+  // ── Score 2: coördinaten aanduiden (oe_8–oe_13) ──────────
+  const puntenAanduiden = [8, 9, 10, 11, 12, 13].reduce((som, n) => som + puntVoor(`oe_${n}`), 0);
 
-  let scoreZelfevaluatie;
-  if (aangeduid === aantalSC)     scoreZelfevaluatie = 'A';
-  else if (aangeduid >= 1)        scoreZelfevaluatie = 'C';
-  else                            scoreZelfevaluatie = 'NI';
+  let scoreAanduiden;
+  if (puntenAanduiden === 6)      scoreAanduiden = 'A';
+  else if (puntenAanduiden >= 5)  scoreAanduiden = 'B';
+  else                            scoreAanduiden = 'C';
 
-  // ── Individuele SC-scores uit oe_3 ────────────────────────
-  const scLabels = ['W31WIESC02', 'W31WIESC03', 'W31WIESC04', 'W31WIESC05', 'W31WIESC06'];
-  const scScores = {};
-  scLabels.forEach((id, i) => {
-    scScores[id] = oe3[i]?.antwoord || 'NI';
-  });
-
-  // ── Score 4: succescriteria eindscherm ───────────────────
+  // ── Score 3: succescriteria eindscherm ───────────────────
   const sc    = leerling.succescriteria || [];
   const scAan = sc.filter(Boolean).length;
   const scTot = sc.length;
@@ -51,12 +36,12 @@ window.__berekenScores = function(leerling, taakData) {
   else                      scoreSC = 'C';
 
   return {
-    scoreFotos,
-    scoreVerbeteringen,
-    scoreZelfevaluatie,
-    ...scScores,
+    scoreAflezen,
+    scoreAanduiden,
     scoreSC,
-    succescriteria: `${scAan}/${scTot}`,
-    ingediend:      leerling.ingediend ? 'ja' : 'nee',
+    puntenAflezen:   `${puntenAflezen}/6`,
+    puntenAanduiden: `${puntenAanduiden}/6`,
+    succescriteria:  `${scAan}/${scTot}`,
+    ingediend:       leerling.ingediend ? 'ja' : 'nee',
   };
 };
