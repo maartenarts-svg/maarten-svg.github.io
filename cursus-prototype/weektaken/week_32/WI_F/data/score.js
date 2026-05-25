@@ -8,27 +8,36 @@ window.__berekenScores = function(leerling, taakData) {
   const opgaven = leerling.opgaven || {};
 
   function puntVoor(id, groep, idx) {
-    const ant    = (antwoorden[id] || [])[0]?.antwoord;
-    const juist  = opgaven[groep]?.[idx];
+    const ant   = (antwoorden[id] || [])[0]?.antwoord;
+    const juist = opgaven[groep]?.[idx];
     if (!ant || !juist) return 0;
     return (ant.x === juist.x && ant.y === juist.y) ? 1 : 0;
   }
 
+  function heeftAntwoord(id) {
+    const ant = (antwoorden[id] || [])[0]?.antwoord;
+    return ant && (ant.x !== null || ant.y !== null);
+  }
+
   // ── Score 1: coördinaten aflezen (oe_2–oe_7) ─────────────
-  const puntenAflezen = [2, 3, 4, 5, 6, 7].reduce((som, n) =>
+  const ietsAflezenIngevuld = [2, 3, 4, 5, 6, 7].some(n => heeftAntwoord(`oe_${n}`));
+  const puntenAflezen       = [2, 3, 4, 5, 6, 7].reduce((som, n) =>
     som + puntVoor(`oe_${n}`, 'punten1', n - 2), 0);
 
   let scoreAflezen;
-  if (puntenAflezen === 6)      scoreAflezen = 'A';
+  if (!ietsAflezenIngevuld)     scoreAflezen = 'NI';
+  else if (puntenAflezen === 6) scoreAflezen = 'A';
   else if (puntenAflezen >= 5)  scoreAflezen = 'B';
   else                          scoreAflezen = 'C';
 
   // ── Score 2: coördinaten aanduiden (oe_8–oe_13) ──────────
-  const puntenAanduiden = [8, 9, 10, 11, 12, 13].reduce((som, n) =>
+  const ietsAanduidenIngevuld = [8, 9, 10, 11, 12, 13].some(n => heeftAntwoord(`oe_${n}`));
+  const puntenAanduiden       = [8, 9, 10, 11, 12, 13].reduce((som, n) =>
     som + puntVoor(`oe_${n}`, 'punten2', n - 8), 0);
 
   let scoreAanduiden;
-  if (puntenAanduiden === 6)      scoreAanduiden = 'A';
+  if (!ietsAanduidenIngevuld)     scoreAanduiden = 'NI';
+  else if (puntenAanduiden === 6) scoreAanduiden = 'A';
   else if (puntenAanduiden >= 5)  scoreAanduiden = 'B';
   else                            scoreAanduiden = 'C';
 
