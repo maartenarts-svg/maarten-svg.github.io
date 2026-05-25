@@ -418,6 +418,12 @@ function _toonHoofdstukFormulier(hst, idx = null) {
 //  TAB 3: EVOLUTIE & SCORES
 // ============================================================
 
+// Mapping hoofdstukcode → correctiesleutel-bestand en sleutelcode
+const CR_MAP = {
+  'H10': { pad: '../taken/CR1.js',              code: 'CR1'  },
+  'H11': { pad: '../correctiesleutels/CR11.js', code: 'CR11' },
+};
+
 // Constanten — onderdelen die meetellen voor score
 const NIVEAU_ONDERDELEN_SCORE = new Set(['oefenen', 'hoever', 'hoeveR']);
 const ONDERDEEL_SLEUTEL_SCORE = {
@@ -441,6 +447,9 @@ function _bouwEvolutie() {
             placeholder="Zoek op naam…" style="max-width:220px;">
           <select id="evo-leerling" class="veld-invoer" style="max-width:300px;">
             <option value="">— Kies een leerling —</option>
+          </select>
+          <select id="evo-hst" class="veld-invoer" style="max-width:200px;">
+            <option value="">— Kies een hoofdstuk —</option>
           </select>
         </div>
         <div id="evo-overzicht"></div>
@@ -518,13 +527,25 @@ function _bouwEvolutie() {
     });
   });
 
-  // Leerling kiezen → overzicht tonen
-  selectLL.addEventListener("change", () => {
-    const mail = selectLL.value;
-    if (!mail) { el.querySelector("#evo-overzicht").innerHTML = ""; return; }
-    const leerling = leerlingen.find(l => l.mail === mail);
-    _toonLeerlingOverzicht(leerling, el.querySelector("#evo-overzicht"));
+  // Hoofdstuk-dropdown voor leerling volgen vullen
+  const selectEvoHst = el.querySelector("#evo-hst");
+  (_inhoud.hoofdstukken || []).forEach(h => {
+    const opt = document.createElement("option");
+    opt.value = h.code; opt.textContent = h.titel;
+    selectEvoHst.appendChild(opt);
   });
+  if (_inhoud.hoofdstukken?.length === 1) selectEvoHst.value = _inhoud.hoofdstukken[0].code;
+
+  // Leerling of hoofdstuk kiezen → overzicht tonen
+  const _herlaadEvoOverzicht = () => {
+    const mail    = selectLL.value;
+    const hstCode = selectEvoHst.value;
+    if (!mail || !hstCode) { el.querySelector("#evo-overzicht").innerHTML = ""; return; }
+    const leerling = leerlingen.find(l => l.mail === mail);
+    _toonLeerlingOverzicht(leerling, hstCode, el.querySelector("#evo-overzicht"));
+  };
+  selectLL.addEventListener("change", _herlaadEvoOverzicht);
+  selectEvoHst.addEventListener("change", _herlaadEvoOverzicht);
 
   // Hoofdstuk dropdowns voor score en opmerkingen
   const hstOpties = (_inhoud.hoofdstukken || [])
@@ -593,31 +614,33 @@ function _vulParagraafOpties(hstCode, selectEl) {
   });
 }
 
-// ── Deel 1: Leerling overzicht via CR1.js ────────────────────
-function _toonLeerlingOverzicht(leerling, container) {
+// ── Deel 1: Leerling overzicht ───────────────────────────────
+function _toonLeerlingOverzicht(leerling, hstCode, container) {
   if (!leerling) { container.innerHTML = ""; return; }
 
-  const hst = (_inhoud.hoofdstukken || [])[0];
+  const hst = (_inhoud.hoofdstukken || []).find(h => h.code === hstCode);
   if (!hst?.bestanden?.datamatrix) {
     container.innerHTML = '<p class="sectie-leeg">Geen datamatrix beschikbaar.</p>';
     return;
   }
 
+  const cr = CR_MAP[hstCode];
+  if (!cr) {
+    container.innerHTML = `<p class="sectie-leeg">Geen correctiesleutel gevonden voor ${hstCode}.</p>`;
+    return;
+  }
+
   container.innerHTML = '<p style="color:#888;font-style:italic;padding:0.5rem;">Wordt geladen…</p>';
 
-  // Zet zichtbaarheid klaar (zoals opdrachten.html dat doet)
   sessionStorage.setItem("actieve_taak_code",     hst.code);
   sessionStorage.setItem("actieve_zichtbaarheid", JSON.stringify(hst.zichtbaarheid || []));
 
-  import("./CR1_stub.js").catch(() => null); // warm up — geen effect
-
-  // Laad CR1.js dynamisch en roep render() aan
-  import("../taken/CR1.js").then(mod => {
+  import(cr.pad).then(mod => {
     if (mod.render) {
       mod.render(container, leerling, hst.code, { markeerGewijzigd: () => {} });
     }
   }).catch(e => {
-    container.innerHTML = '<p style="color:#c62828;">Kon CR1.js niet laden: ' + e.message + '</p>';
+    container.innerHTML = `<p style="color:#c62828;">Kon ${cr.pad} niet laden: ${e.message}</p>`;
   });
 }
 
@@ -652,8 +675,9 @@ function _downloadScoreCsv(hstCode, par) {
   const headers = ["mail","volledigeNaam","voornaam","familienaam","niveau","allesKeuze1","score","opmerking"];
   const regels  = [headers.join(";")];
 
+  const crCode = CR_MAP[hstCode]?.code || 'CR1';
   leerlingen.forEach(l => {
-    const crData  = l?.verbetersleutel?.["CR1"] || { niveaus: {}, oefeningen: {} };
+    const crData  = l?.verbetersleutel?.[crCode] || { niveaus: {}, oefeningen: {} };
     const oefData = crData.oefeningen || {};
     const gekozenNiveau = (crData.niveaus || {})[par] || null;
     const definitiefNiveau = (gekozenNiveau && gekozenNiveau !== 'na_cirkel') ? gekozenNiveau : null;
@@ -796,8 +820,9 @@ function _toonOpmerkingen(hstCode, keuzeFilter, container) {
   // Verzamel per oefening alle opmerkingen van alle leerlingen
   const perOefening = {}; // { bestandsnaam: [ { nr, opmerking, leerling, opgelost } ] }
 
+  const crCode = CR_MAP[hstCode]?.code || 'CR1';
   leerlingen.forEach(l => {
-    const crData  = l?.verbetersleutel?.["CR1"] || { oefeningen: {} };
+    const crData  = l?.verbetersleutel?.[crCode] || { oefeningen: {} };
     const oefData = crData.oefeningen || {};
 
     Object.entries(oefData).forEach(([bestandsnaam, data]) => {
