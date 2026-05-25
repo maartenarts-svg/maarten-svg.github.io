@@ -5,12 +5,18 @@
 window.__berekenScores = function(leerling, taakData) {
   const antwoorden = leerling.antwoorden || {};
 
-  function puntVoor(id) {
-    return (antwoorden[id] || [])[0]?.score || 0;
+  const opgaven = leerling.opgaven || {};
+
+  function puntVoor(id, groep, idx) {
+    const ant    = (antwoorden[id] || [])[0]?.antwoord;
+    const juist  = opgaven[groep]?.[idx];
+    if (!ant || !juist) return 0;
+    return (ant.x === juist.x && ant.y === juist.y) ? 1 : 0;
   }
 
   // ── Score 1: coördinaten aflezen (oe_2–oe_7) ─────────────
-  const puntenAflezen = [2, 3, 4, 5, 6, 7].reduce((som, n) => som + puntVoor(`oe_${n}`), 0);
+  const puntenAflezen = [2, 3, 4, 5, 6, 7].reduce((som, n) =>
+    som + puntVoor(`oe_${n}`, 'punten1', n - 2), 0);
 
   let scoreAflezen;
   if (puntenAflezen === 6)      scoreAflezen = 'A';
@@ -18,7 +24,8 @@ window.__berekenScores = function(leerling, taakData) {
   else                          scoreAflezen = 'C';
 
   // ── Score 2: coördinaten aanduiden (oe_8–oe_13) ──────────
-  const puntenAanduiden = [8, 9, 10, 11, 12, 13].reduce((som, n) => som + puntVoor(`oe_${n}`), 0);
+  const puntenAanduiden = [8, 9, 10, 11, 12, 13].reduce((som, n) =>
+    som + puntVoor(`oe_${n}`, 'punten2', n - 8), 0);
 
   let scoreAanduiden;
   if (puntenAanduiden === 6)      scoreAanduiden = 'A';
