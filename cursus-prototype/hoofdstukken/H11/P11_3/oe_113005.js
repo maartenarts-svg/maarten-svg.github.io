@@ -30,7 +30,7 @@
     ],
     [
       { inhoud: '10', type: 'opgave', hAlign: 'center', vAlign: 'middle' },
-      { inhoud: '10 + 7 = 15', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
+      { inhoud: '10 + 7 = 17', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '6 · 10 = 60', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
       { inhoud: '4 · 10 + 3 = 43', type: 'toggle', hAlign: 'center', vAlign: 'middle' },
     ],
