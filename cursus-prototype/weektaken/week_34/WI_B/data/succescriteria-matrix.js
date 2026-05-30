@@ -1,0 +1,48 @@
+// Doelen matrix H10 — gegenereerd op 5/4/2026
+var WxWIx_succescriteria = [
+  { 
+    id: 'W34WIBSC01', 
+    tekst: "Ik noteer de correcte tussenstap bij het oplossen van een vergelijking.", 
+    type: 'leer', 
+    plaatscode: '11.1', 
+    leerplandoelcodes: ["6.17"], 
+    referenties: ["10.0","10.2"], 
+    evalueerbaarheid: 'ja', 
+    scores: "" },
+  { 
+    id: 'W34WIBSC02', 
+    tekst: "Ik los een vergelijking op.", 
+    type: 'leer', 
+    plaatscode: '11.1', 
+    leerplandoelcodes: ["6.17"], 
+    referenties: ["10.0","10.2"], 
+    evalueerbaarheid: 'ja', 
+    scores: "" },
+  { 
+    id: 'W34WIBSC03', 
+    tekst: "Ik verbeter de oefeningen met de correctiesleutel.", 
+    type: 'evalueer', 
+    plaatscode: '11.3', 
+    leerplandoelcodes: ["13.02"], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'ja', 
+    scores: "A: Ik bekijk de correctiesleutel van elke oefening.<br>C: Ik bekijk de correctiesleutels, maar niet van elke oefening." },
+  { 
+    id: 'W34WIBSC04', 
+    tekst: "Ik denk na over mijn manier van leren zodat ik in de toekomst mezelf beter kan voorbereiden.", 
+    type: 'evalueer', 
+    plaatscode: '11.4', 
+    leerplandoelcodes: ["13.1"], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'ja', 
+    scores: "A: Ik doe dit.<br>C: Ik doe dit niet en weet zo onvoldoende hoe ik in het leren kan groeien." },
+  { 
+    id: 'W34WIBSC05', 
+    tekst: "Ik duid op het overzicht van de succescriteria aan wat ik al kan.", 
+    type: 'evalueer', 
+    plaatscode: '11.5', 
+    leerplandoelcodes: ["13.02"], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'ja', 
+    scores: "A: Ik doe dit.<br>C: Ik doe dit niet en weet zo onvoldoende wat ik al kan en waar ik nog extra op moet oefenen." },        
+];
