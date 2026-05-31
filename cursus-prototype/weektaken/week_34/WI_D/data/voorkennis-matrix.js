@@ -1,0 +1,58 @@
+// Doelen matrix H10 — gegenereerd op 10/4/2026
+var WxWIx_voorkennis = [
+  { 
+    id: 'W34WIDVK01', 
+    tekst: "Ik kan rekenen met rationale getallen.", 
+    type: 'voorkennis', 
+    plaatscode: '10.1', 
+    leerplandoelcodes: [], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'nee', 
+    scores: "" },
+  { 
+    id: 'W34WIDVK02', 
+    tekst: "Ik kan werken met regelmaat en formules.", 
+    type: 'voorkennis', 
+    plaatscode: '10.2', 
+    leerplandoelcodes: [], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'nee', 
+    scores: "" },
+  { 
+    id: 'W34WIDVK03', 
+    tekst: "Ik kan de begrippen coëfficiënt en letterdeel gebruiken.", 
+    type: 'voorkennis', 
+    plaatscode: '10.3', 
+    leerplandoelcodes: [], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'nee', 
+    scores: "" },
+  { 
+    id: 'W34WIDVK04', 
+    tekst: "Ik kan een lettervorm volgens de afspraken noteren.", 
+    type: 'voorkennis', 
+    plaatscode: '10.4', 
+    leerplandoelcodes: [], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'nee', 
+    scores: "" },
+  { 
+    id: 'W34WIDVK05', 
+    tekst: "Ik kan de getalwaarde van een lettervorm berekenen.", 
+    type: 'voorkennis', 
+    plaatscode: '10.5', 
+    leerplandoelcodes: [], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'nee', 
+    scores: "" },
+  { 
+    id: 'W34WIDVK06', 
+    tekst: "Ik kan rekenen met letters.", 
+    type: 'voorkennis', 
+    plaatscode: '10.6', 
+    leerplandoelcodes: [], 
+    referenties: ["11.0"], 
+    evalueerbaarheid: 'nee', 
+    scores: "" },
+
+];
