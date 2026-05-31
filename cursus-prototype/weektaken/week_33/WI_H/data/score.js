@@ -5,42 +5,34 @@
 window.__berekenScores = function(leerling, taakData) {
   const antwoorden = leerling.antwoorden || {};
 
-  // ── Score 1: foto's indienen (oe_1) ──────────────────────
-  const fotoAntwoord = (antwoorden['oe_1'] || [])[0];
-  const fotoIngediend = fotoAntwoord?.antwoord === 'ja' || fotoAntwoord === 'ja';
-  const scoreFotos = fotoIngediend ? 'A' : 'NI';
-
-  // ── Score 2: verbeteringen (oe_2) ────────────────────────
-  const verbetering  = leerling.verbetering || {};
+  // ── Score 1: verbeteringen ────────────────────────────────
+  const verbetering     = leerling.verbetering || {};
   const aantalVerbeterd = [1, 2, 3, 4, 5].filter(nr =>
     (verbetering[nr]?.pogingen?.length || 0) > 0
   ).length;
 
   let scoreVerbeteringen;
-  if (aantalVerbeterd === 5)      scoreVerbeteringen = 'A';
-  else if (aantalVerbeterd >= 1)  scoreVerbeteringen = 'C';
-  else                            scoreVerbeteringen = 'NI';
+  if (aantalVerbeterd === 5)     scoreVerbeteringen = 'A';
+  else if (aantalVerbeterd >= 1) scoreVerbeteringen = 'C';
+  else                           scoreVerbeteringen = 'NI';
 
-  // ── Score 3: zelfevaluatie succescriteria (oe_3) ─────────
-  const oe3 = antwoorden['oe_3'] || [];
-  const aantalSC = 5;
-  const aangeduid = oe3.filter(a =>
-    a?.antwoord === 'A' || a?.antwoord === 'B' || a?.antwoord === 'C'
-  ).length;
+  // ── Score 2: leren reflecteren (oe_2) ────────────────────
+  const oe2Data    = (antwoorden['oe_2'] || [])[0]?.antwoord || {};
+  const secties    = ['stop', 'start', 'doorgaan'];
+  const ietsItems  = [
+    ...secties.map(s => (oe2Data[s]?.checks || []).length > 0),
+    (oe2Data.doel?.checks || []).length > 0,
+    ...secties.map(s => (oe2Data[s]?.anders || '').trim() !== ''),
+  ].some(Boolean);
+  const actieIngevuld = (oe2Data.actie || '').trim() !== '';
 
-  let scoreZelfevaluatie;
-  if (aangeduid === aantalSC)     scoreZelfevaluatie = 'A';
-  else if (aangeduid >= 1)        scoreZelfevaluatie = 'C';
-  else                            scoreZelfevaluatie = 'NI';
+  let scoreLeren;
+  if      (actieIngevuld && ietsItems)  scoreLeren = 'A';
+  else if (!actieIngevuld && ietsItems) scoreLeren = 'B';
+  else if (leerling.ingediend)          scoreLeren = 'C';
+  else                                  scoreLeren = 'NI';
 
-  // ── Individuele SC-scores uit oe_3 ────────────────────────
-  const scLabels = ['W31WIESC02', 'W31WIESC03', 'W31WIESC04', 'W31WIESC05', 'W31WIESC06'];
-  const scScores = {};
-  scLabels.forEach((id, i) => {
-    scScores[id] = oe3[i]?.antwoord || 'NI';
-  });
-
-  // ── Score 4: succescriteria eindscherm ───────────────────
+  // ── Score 3: succescriteria eindscherm ───────────────────
   const sc    = leerling.succescriteria || [];
   const scAan = sc.filter(Boolean).length;
   const scTot = sc.length;
@@ -51,10 +43,8 @@ window.__berekenScores = function(leerling, taakData) {
   else                      scoreSC = 'C';
 
   return {
-    scoreFotos,
     scoreVerbeteringen,
-    scoreZelfevaluatie,
-    ...scScores,
+    scoreLeren,
     scoreSC,
     succescriteria: `${scAan}/${scTot}`,
     ingediend:      leerling.ingediend ? 'ja' : 'nee',

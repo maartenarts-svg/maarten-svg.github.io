@@ -98,8 +98,8 @@ window.__berekenScores = function (leerling) {
   let scoreTussenstap;
   if (!leerling.ingediend)    scoreTussenstap = 'NI';
   else if (aantalTsJuist === 6) scoreTussenstap = 'A';
-  else if (aantalTsFout >= 4)   scoreTussenstap = 'B';
-  else                          scoreTussenstap = 'C';
+  else if (aantalTsFout >= 4)   scoreTussenstap = 'C';
+  else                          scoreTussenstap = 'B';
 
   // ── Oplossing juistheid per oefening ──────────────────────
   // oe_1/2/3: antwoord op index 2 (variabele) en 3 (waarde)
