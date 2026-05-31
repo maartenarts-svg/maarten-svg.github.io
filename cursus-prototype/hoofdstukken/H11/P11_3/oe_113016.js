@@ -115,7 +115,7 @@
   oe_113014_11.appendChild(oe_113014_11_b1);
   const oe_113014_11_b2 = maakSpanBreedte(breedte1, 'controle:');
   oe_113014_11.appendChild(oe_113014_11_b2);
-  oe_113014_11.appendChild(htmlSpan('25 + 13 · 13,50 = 200,50'));
+  oe_113014_11.appendChild(htmlSpan('78 + 360 + 925 = 1363'));
 
   const inhoud = maakOefening({
     id:'oe_113016', nummer:'?', soort:'inoefenen',
