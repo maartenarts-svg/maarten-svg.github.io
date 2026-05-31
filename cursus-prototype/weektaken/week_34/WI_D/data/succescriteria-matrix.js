@@ -14,7 +14,7 @@ var WxWIx_succescriteria = [
     tekst: "Ik controleer de oplossing van een vergelijking.", 
     type: 'evalueer', 
     plaatscode: '10.2', 
-    leerplandoelcodes: ["6.17"], 
+    leerplandoelcodes: ["6.13"], 
     referenties: ["11.2"], 
     evalueerbaarheid: 'ja', 
     scores: "A: Ik haal 3 op 3.<br>B: Ik haal minstens 2 op 3.<br>C: Ik haal minder dan 2 op 3." },

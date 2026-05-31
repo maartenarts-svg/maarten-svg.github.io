@@ -19,7 +19,7 @@
     },
     {
       nummer: '2|',
-      tekst:  'Ik controleer de oplossing van een vergelijking. (vraag 1 en 2, 6.17)',
+      tekst:  'Ik controleer de oplossing van een vergelijking. (vraag 1 en 2, 6.13)',
       scores: [
         { lbl: 'A:', tekst: 'Ik haal 3 op 3.' },
         { lbl: 'B:', tekst: 'Ik haal minstens 2 op 3.' },

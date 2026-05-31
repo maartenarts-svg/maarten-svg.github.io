@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P5W5 WI D</title>
+  <title>P5W5 WI E</title>
   <link rel="stylesheet" href="../../css/cursus.css">
 
   <style>
@@ -361,7 +361,7 @@ function nieuwePagina() {
 
   const hdr = document.createElement('div');
   hdr.classList.add('hoofdstuk-titel-header');
-  hdr.textContent = 'TIAB - 1a - week 5 - WI D';
+  hdr.textContent = 'TIAB - 1a - week 5 - WI E';
   // Even pagina: titel links; oneven pagina: titel rechts
   if (huidigePaginaNummer % 2 === 0) {
     hdr.classList.add('links');
@@ -369,7 +369,7 @@ function nieuwePagina() {
     hdr.classList.add('rechts');
   }
   pagina.appendChild(hdr);
-  
+
 
   //voettekst
   const voet = document.createElement('div');
@@ -486,7 +486,7 @@ function voegTheorieToe(items) {
   const kader = document.createElement('div');
   kader.classList.add('theorie-kader');
   kader.style.cursor = 'pointer';
-  
+
   items.forEach(({ nummer, tekst }) => {
     const rij = document.createElement('div');
     rij.classList.add('theorie-rij');
@@ -582,21 +582,21 @@ const inhoudstafelData = [];  // { tekst, blz } — wordt gevuld hieronder
 nieuwePagina();   // pagina 1
 voegContentToe('content-pagina');
 laadOefeningen('#content-pagina', [
-  'H11_W34WIB/W34WIB_hoofding.js',
-  'H11_W34WIB/W34WIB_sc.js',
+  'H11_W34WIE/W34WIE_hoofding.js',
+  'H11_W34WIE/W34WIE_sc.js',
 ]);
 
 witregel(onderTitel);
 voegContentToe('content-pagina-1');
 laadOefeningen('#content-pagina-1', [
-  'H11_W34WIB/oe_1.js',
+  'H11_W34WIE/oe_1.js',
 ]);
 
 forceerPaginawissel();
 voegContentToe('content-pagina-2');
 laadOefeningen('#content-pagina-2', [
-  'H11_W34WIB/oe_2.js',
-  'H11_W34WIB/oe_3.js',
+  'H11_W34WIE/oe_2.js',
+  'H11_W34WIE/oe_3.js',
 ]);
 
 

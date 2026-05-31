@@ -8,9 +8,9 @@ window.__taakOefening = (function () {
 
   // ── Pas deze vier paden aan ───────────────────────────────
   const BLOKJES = [
-    { nr: 1, pad: '../../../hoofdstukken/H11/H11_W34WIB/oe_1.js' },
-    { nr: 2, pad: '../../../hoofdstukken/H11/H11_W34WIB/oe_2.js' },
-    { nr: 3, pad: '../../../hoofdstukken/H11/H11_W34WIB/oe_3.js' },
+    { nr: 1, pad: '../../../hoofdstukken/H11/H11_W34WID/oe_1.js' },
+    { nr: 2, pad: '../../../hoofdstukken/H11/H11_W34WID/oe_2.js' },
+    { nr: 3, pad: '../../../hoofdstukken/H11/H11_W34WID/oe_3.js' },
   ];
 
   const VAKJE = '0.9cm';

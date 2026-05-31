@@ -76,7 +76,7 @@
     toggleModus:'oefening'
   });
 
-  voegTekstToe(inhoud, 'Los de vergelijking op.<br>Controleer je oplossing.', ['intro-tekst']);
+  voegTekstToe(inhoud, 'Los de vergelijkingen op.<br>Controleer je oplossing.', ['intro-tekst']);
 
   const {tbody} = maakOefTabel(inhoud, 2, true);
 
