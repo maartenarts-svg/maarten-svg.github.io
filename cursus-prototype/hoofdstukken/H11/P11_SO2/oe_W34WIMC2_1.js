@@ -55,7 +55,9 @@
   oe_9.appendChild(htmlSpan('data:'));
 
   const oe_10 = document.createElement('span');
-  oe_10.appendChild(htmlSpan('$$data[0]$$, $$data[1]$$, $$data[2]$$, $$data[3]$$, $$data[4]$$, $$data[5]$$, $$data[6]$$, $$data[7]$$, $$data[8]$$, $$data[9]$$, $$data[10]$$, $$data[11]$$, $$data[12]$$, $$data[13]$$, $$data[14]$$, $$data[15]$$, $$data[16]$$, $$data[17]$$, $$data[18]$$, $$data[19]$$'));
+  oe_10.appendChild(htmlSpan(
+    Array.from({ length: ACTIEVE_DATA.length }, (_, i) => `$$data[${i}]$$`).join(', ')
+  ));
 
   const {tbody} = maakOefTabel(inhoud, 1, false);
 
