@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P5W3 WI D - Statistisch onderzoek - alle leerlingen</title>
+  <link rel="stylesheet" href="../../css/cursus.css">
+
+  <style>
+    body.systeem-2 {
+      background: #f0f0f0;
+    }
+    body.systeem-2 .cursus-wrapper {
+      max-width: none;
+      margin: 0;
+      background: none;
+      padding: 0;
+      box-shadow: none;
+    }
+    body.systeem-2 .pagina-blok {
+      width: 21cm;
+      min-height: 29.7cm;
+      margin: 1cm auto;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      box-sizing: border-box;
+      padding: var(--marge-top) var(--marge-rechts) var(--marge-bottom) var(--marge-links);
+      position: relative;
+      overflow: hidden;
+    }
+    body.systeem-2 .pagina-scheiding {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 21cm;
+      margin: 0.3cm auto;
+      color: #999;
+      font-size: 9pt;
+      gap: 0.4cm;
+      user-select: none;
+    }
+    body.systeem-2 .pagina-scheiding::before,
+    body.systeem-2 .pagina-scheiding::after {
+      content: '';
+      flex: 1;
+      border-top: 1px dashed #bbb;
+    }
+
+    .paginanummer {
+      position: absolute;
+      top: 1cm;
+      font-size: var(--fontsize);
+      font-family: var(--font);
+      color: var(--tekst);
+    }
+    .paginanummer.links  { left:  calc(var(--marge-links) - 1.7cm); }
+    .paginanummer.rechts { right: var(--marge-rechts); }
+
+    .hoofdstuk-titel-header {
+      position: absolute;
+      top: 1cm;
+      font-size: var(--fontsize);
+      font-family: var(--font);
+      color: var(--tekst);
+    }
+    .hoofdstuk-titel-header.links  { right: var(--marge-rechts); }
+    .hoofdstuk-titel-header.rechts { left: calc(var(--marge-links) - 1.7cm); }
+
+    .banner {
+      display: flex;
+      align-items: stretch;
+      margin: 0.3cm 0;
+      position: relative;
+      left: calc(-1 * var(--marge-links) + 1.2cm);
+      width: calc(21cm - 3.7cm);
+    }
+    .banner-icoon {
+      background-color: var(--groen-pastel);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(var(--marge-links) - 1.5cm);
+      flex-shrink: 0;
+      font-size: 1.1em;
+      padding: 0.2cm 0;
+    }
+    .banner-tekst {
+      background-color: var(--groen-pastel);
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0.15cm 0.3cm;
+      font-size: 20pt;
+      font-weight: bold;
+      color: var(--groen-donker);
+      font-family: var(--font);
+    }
+
+    .opmaak-paragraaf {
+      display: flex;
+      align-items: baseline;
+      margin: 0.3cm 0 0.1cm 0;
+      position: relative;
+    }
+    .paragraaf-nummer {
+      position: absolute;
+      left: calc(-1 * var(--marge-links) + 1.2cm);
+      font-size: 20pt;
+      font-weight: bold;
+      color: var(--groen-donker);
+      font-family: var(--font);
+      white-space: nowrap;
+    }
+    .paragraaf-titel {
+      font-size: 20pt;
+      font-weight: bold;
+      color: var(--groen-donker);
+      font-family: var(--font);
+    }
+
+    .opmaak-onderdeel {
+      display: flex;
+      align-items: center;
+      margin: 0.25cm 0 0.1cm 0;
+      position: relative;
+    }
+    .onderdeel-icoon {
+      position: absolute;
+      left: calc(-1 * var(--marge-links) + 1.2cm);
+      width: calc(var(--marge-links) - 1.2cm);
+      text-align: center;
+      font-size: 1em;
+    }
+    .onderdeel-titel {
+      font-size: 14pt;
+      font-weight: bold;
+      color: var(--groen-donker);
+      text-decoration: underline;
+      font-family: var(--font);
+    }
+
+    .content-ruimte { min-height: 0.5cm; }
+
+    .oefening + .oefening {
+      border-top: 2px solid var(--groen-scheiding);
+      padding-top: 0.4cm;
+      margin-top: 0.2cm;
+    }
+
+    @media print {
+      body { background: white !important; }
+      .pagina-scheiding { display: none !important; }
+      .pagina-blok {
+        margin: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursus-wrapper" id="cursus-wrapper"></div>
+
+<script src="P11_SO2/leerlingen.js"></script>
+<script src="P11_SO2/datasets.js"></script>
+<script src="P11_SO2/statistiek_berekeningen.js"></script>
+<script src="P11_SO2/statistiek_antwoorden.js"></script>
+<script src="../../js/helpers.js"></script>
+
+<script>
+/* ============================================================
+   CONFIGURATIE
+   ============================================================ */
+const LAYOUT_SYSTEEM   = 2;
+TOON_OPLOSSINGEN       = true;
+const TOON_VULLINGSBALK = true;
+TOGGLE_TOEGESTAAN      = true;
+
+let huidigePaginaNummer = 1;
+let huidigePaginaEl     = null;
+let ACTIEVE_DATA        = [];
+const wrapper           = document.getElementById('cursus-wrapper');
+
+/* ============================================================
+   PAGINABEHEER — identiek aan het origineel
+   ============================================================ */
+function nieuwePagina() {
+  if (huidigePaginaEl !== null) {
+    const scheiding = document.createElement('div');
+    scheiding.classList.add('pagina-scheiding');
+    scheiding.textContent = 'volgende pagina';
+    wrapper.appendChild(scheiding);
+  }
+
+  const pagina = document.createElement('div');
+  pagina.classList.add('pagina-blok');
+
+  const nr = document.createElement('div');
+  nr.classList.add('paginanummer');
+  nr.textContent = huidigePaginaNummer;
+  nr.classList.add(huidigePaginaNummer % 2 === 0 ? 'links' : 'rechts');
+  pagina.appendChild(nr);
+
+  const hdr = document.createElement('div');
+  hdr.classList.add('hoofdstuk-titel-header');
+  hdr.textContent = 'TIAB - 1a - week 5 - WI MC2';
+  hdr.classList.add(huidigePaginaNummer % 2 === 0 ? 'links' : 'rechts');
+  pagina.appendChild(hdr);
+
+  const voet = document.createElement('div');
+  voet.style.cssText = `
+    position: absolute;
+    bottom: 1.5cm;
+    left: calc(var(--marge-links) - 1.7cm);
+    right: var(--marge-rechts);
+    border-top: 0.8px solid var(--tekst);
+    padding-top: 0.15cm;
+    font-size: var(--fontsize);
+    font-family: var(--font);
+    text-align: ${huidigePaginaNummer % 2 === 0 ? 'right' : 'left'};
+  `;
+  voet.textContent = 'math@LAB';
+  pagina.appendChild(voet);
+
+  wrapper.appendChild(pagina);
+  huidigePaginaEl = pagina;
+  huidigePaginaNummer++;
+  return pagina;
+}
+
+function huidigePagina() {
+  if (!huidigePaginaEl) nieuwePagina();
+  return huidigePaginaEl;
+}
+
+function forceerPaginawissel() { nieuwePagina(); }
+
+function nieuweLegePagina() {
+  if (huidigePaginaEl !== null) {
+    const scheiding = document.createElement('div');
+    scheiding.classList.add('pagina-scheiding');
+    scheiding.textContent = 'volgende pagina';
+    wrapper.appendChild(scheiding);
+  }
+
+  const pagina = document.createElement('div');
+  pagina.classList.add('pagina-blok');
+
+  wrapper.appendChild(pagina);
+  huidigePaginaEl = pagina;
+  huidigePaginaNummer++;
+  return pagina;
+}
+
+function voegContentToe(id = '') {
+  const div = document.createElement('div');
+  div.classList.add('content-ruimte');
+  if (id) div.id = id;
+  huidigePagina().appendChild(div);
+  return div;
+}
+
+function witregel(hoogte = '0.3cm') {
+  const div = document.createElement('div');
+  div.style.height = hoogte;
+  huidigePagina().appendChild(div);
+}
+
+/* ============================================================
+   VULLINGSINDICATOR
+   ============================================================ */
+function updateVulling() {
+  if (!TOON_VULLINGSBALK) return;
+  const BESCHIKBARE_HOOGTE = 24.7 * 39.191;
+  document.querySelectorAll('.pagina-blok').forEach(pagina => {
+    let balk = pagina.querySelector('.vullings-balk');
+    if (!balk) {
+      balk = document.createElement('div');
+      balk.classList.add('vullings-balk');
+      const vulling = document.createElement('div');
+      vulling.classList.add('vullings-balk-vulling');
+      balk.appendChild(vulling);
+      pagina.appendChild(balk);
+    }
+    const vullingDiv = balk.querySelector('.vullings-balk-vulling');
+    let gebruiktPx = 0;
+    pagina.childNodes.forEach(kind => {
+      if (kind.nodeType === 1 && !kind.classList.contains('vullings-balk'))
+        gebruiktPx += kind.offsetHeight;
+    });
+    const procent = Math.min((gebruiktPx / BESCHIKBARE_HOOGTE) * 100, 110);
+    vullingDiv.style.height = procent + '%';
+    if (procent > 100) {
+      vullingDiv.style.background = '#e53935';
+    } else if (procent > 80) {
+      vullingDiv.style.background = '#fb8c00';
+    } else {
+      vullingDiv.style.background = 'var(--groen-midden)';
+    }
+  });
+}
+
+/* ============================================================
+   PLACEHOLDER-VERVANGING
+   ============================================================ */
+function vervangPlaceholders(container, data) {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+  const nodes = [];
+  let node;
+  while ((node = walker.nextNode())) nodes.push(node);
+
+  nodes.forEach(node => {
+    let tekst = node.textContent;
+    if (!tekst.includes('$$')) return;
+    tekst = tekst.replace(/\$\$data\[(\d+)\]\$\$/g, (_, i) => data.data[parseInt(i)] ?? '');
+    tekst = tekst.replace(/\$\$(\w+)\$\$/g, (_, sleutel) => data[sleutel] ?? `$$${sleutel}$$`);
+    node.textContent = tekst;
+  });
+}
+
+/* ============================================================
+   WACHTRIJ — overschrijft de versie van helpers.js
+   ============================================================ */
+function verwerkWachtrij() {
+  function laadVolgende(index) {
+    if (index >= OEFENING_WACHTRIJ.length) {
+      if (TOON_OPLOSSINGEN) zetAlleOplossingen();
+      setTimeout(updateVulling, 500);
+      return;
+    }
+
+    const { container, src } = OEFENING_WACHTRIJ[index];
+    ACTIEVE_CONTAINER = container;
+
+    // Reset teller en stel ACTIEVE_DATA in vóór het eerste bestand van elke leerling
+    if (src.includes('W34WIMC2_hoofding.js')) {
+      OEFENING_TELLER = 1;
+      const paginaEl = document.querySelector(container)?.closest('[data-leerling-data]');
+      if (paginaEl) ACTIEVE_DATA = JSON.parse(paginaEl.dataset.leerlingData).data;
+    }
+
+    const s = document.createElement('script');
+    s.src = src;
+    s.dataset.container = container;
+    s.onload = () => {
+      // Vervang placeholders na elk geladen bestand
+      const el = document.querySelector(container);
+      const paginaEl = el?.closest('[data-leerling-data]');
+      if (paginaEl) {
+        vervangPlaceholders(paginaEl, JSON.parse(paginaEl.dataset.leerlingData));
+      }
+      laadVolgende(index + 1);
+    };
+    document.head.appendChild(s);
+  }
+
+  laadVolgende(0);
+}
+
+/* ============================================================
+   BUNDEL OPBOUWEN
+   ============================================================ */
+document.body.classList.add('systeem-' + LAYOUT_SYSTEEM);
+
+window.addEventListener('load', () => {
+  Object.keys(leerlingen)
+    .sort((a, b) => {
+      const coachA = leerlingen[a].coach;
+      const coachB = leerlingen[b].coach;
+      if (coachA < coachB) return -1;
+      if (coachA > coachB) return 1;
+      return leerlingen[a].nummer - leerlingen[b].nummer;
+    })
+    .forEach((leerlingId) => {
+    const leerling = leerlingen[leerlingId];
+    const dataset  = datasets[leerlingId];
+    if (!leerling || !dataset) return;
+
+    // Nieuwe pagina voor elke leerling
+    nieuwePagina();
+
+    // Sla leerlingdata op als attribuut op de pagina
+    const data = {
+      naam:       leerling.naam,
+      email:      leerling.email,
+      coach:      leerling.coach,
+      nummer:     leerling.nummer,
+      datum:      dataset.datum,
+      vraag:      dataset.vraag,
+      deelnemers: dataset.deelnemers,
+      variabele1: dataset.variabele1,
+      variabele2: dataset.variabele2,
+      aantal:     dataset.data.length,
+      data:       dataset.data,
+    };
+    huidigePaginaEl.dataset.leerlingData = JSON.stringify(data);
+
+    // Geef de pagina een unieke id als anker voor de container
+    const containerId = `leerling-${leerling.nummer}`;
+    huidigePaginaEl.id = containerId;
+    ACTIEVE_CONTAINER = `#${containerId}`;
+
+    // Laad de JS-bestanden voor deze leerling
+    laadOefeningen(`#${containerId}`, [
+      'P11_SO2/W34WIMC2_hoofding.js',
+      'P11_SO2/W34WIMC2_sc.js',
+    ]);
+
+    forceerPaginawissel();
+    huidigePaginaEl.dataset.leerlingData = JSON.stringify(data);
+    huidigePaginaEl.id = `${containerId}-p2`;
+
+    laadOefeningen(`#${containerId}-p2`, [
+      'P11_SO2/oe_W34WIMC2_1.js',
+      'P11_SO2/oe_W34WIMC2_2.js',
+    ]);
+
+    forceerPaginawissel();
+    huidigePaginaEl.dataset.leerlingData = JSON.stringify(data);
+    huidigePaginaEl.id = `${containerId}-p3`;
+    laadOefeningen(`#${containerId}-p3`, [
+      'P11_SO2/oe_W34WIMC2_3.js',
+      'P11_SO2/oe_W34WIMC2_4.js',
+      'P11_SO2/oe_W34WIMC2_5.js',
+    ]); 
+
+    forceerPaginawissel();
+  });
+  // Verwerk de volledige wachtrij in volgorde
+  verwerkWachtrij();
+});
+
+</script>
+
+</body>
+</html>
