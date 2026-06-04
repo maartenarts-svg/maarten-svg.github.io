@@ -53,6 +53,6 @@ const datasets = {
     deelnemers: "23",
     variabele1: "aantal woorden",
     variabele2: "aantal woorden",
-    data: [30, 20, 10, 15, 12, 45, 45, 20, 30, 12, 20, 30, 28, 13, 30, 40, 28, 30, 38, 30, 30, 37, 30]
+    data: [12, 13, 11, 13, 11, 10, 10, 13, 14, 4, 9, 9, 13, 7, 9, 12, 11, 14, 9, 11, 8, 11, 13]
   },
 };
