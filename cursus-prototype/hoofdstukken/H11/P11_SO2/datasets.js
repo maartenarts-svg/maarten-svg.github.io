@@ -37,7 +37,7 @@ const datasets = {
     deelnemers: "22",
     variabele1: "aantal woorden",
     variabele2: "aantal woorden",
-    data: [1, 2, 2, 2, 2, 1, 2, 2, 2, 3, 2, 2, 5, 3, 3, 2, 2, 3, 5, 5, 3, 2]
+    data: [8, 6, 7, 8, 8, 12, 9, 11, 9, 6, 11, 10, 12, 9, 9, 11, 8, 9, 9, 10, 10, 10]
   },
   "Leerling_6": {
     datum: "05/06/2026",
