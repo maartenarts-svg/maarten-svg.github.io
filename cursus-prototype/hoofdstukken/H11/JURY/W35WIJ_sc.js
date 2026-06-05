@@ -25,7 +25,7 @@
     },
     {
       nummer: '3|',
-      tekst:  'Overleg met een medeleerling: hebben jullie dezelfde succescriteria bij dezelfde oefeningen?<br>Leg ook aan elkaar uit waaorm je een succescriterium ergens bijplaats.',
+      tekst:  'Overleg met een medeleerling: hebben jullie dezelfde succescriteria bij dezelfde oefeningen?<br>Leg ook aan elkaar uit waarom je een succescriterium ergens bijplaatst.',
       scores: [
       ],
     },

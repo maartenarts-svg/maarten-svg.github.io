@@ -317,9 +317,9 @@
    ============================================================ */
 const LAYOUT_SYSTEEM = 2;   // ← HIER AANPASSEN (1 of 2)
 // !! Zet op true voor oplossingensleutel, false voor normaal gebruik !!
-TOON_OPLOSSINGEN = true;
-const TOON_VULLINGSBALK = true; // ← hier aan/uit zetten
-TOGGLE_TOEGESTAAN = true;
+TOON_OPLOSSINGEN = false;
+const TOON_VULLINGSBALK = false; // ← hier aan/uit zetten
+TOGGLE_TOEGESTAAN = false;
 
 /* ============================================================
    CONFIGURATIE
@@ -590,7 +590,6 @@ witregel(onderTitel);
 voegContentToe('content-pagina-1');
 laadOefeningen('#content-pagina-1', [
   'JURY/oe_W35WIJ_1.js',
-  'JURY/oe_W35WIJ_2.js',
 ]);
 
 // ─────────────────────────────────────────────
@@ -598,9 +597,9 @@ nieuwePagina();   // pagina 2
 
 voegContentToe('content-pagina-2');
 laadOefeningen('#content-pagina-2', [
+  'JURY/oe_W35WIJ_2.js',
   'JURY/oe_W35WIJ_3.js',
-  'P11_T/oe_W31WIE_4.js',
-  'P11_T/oe_W31WIE_5.js',
+  'JURY/oe_W35WIJ_4.js',
 ]);
 
 

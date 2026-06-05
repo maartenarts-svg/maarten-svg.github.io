@@ -2,6 +2,9 @@
   "permissions": {
     "additionalDirectories": [
       "c:\\Users\\maart\\.claude\\projects\\c--Users-maart-OneDrive-Documents-GitHub-maarten-svg-github-io\\memory"
+    ],
+    "allow": [
+      "WebFetch(domain:doc-10-78-docstext.googleusercontent.com)"
     ]
   }
 }

@@ -5,10 +5,18 @@
 (function () {
 
   /* ---- Span-variabelen ---- */
+  const ruimte1 = '1.4cm';
+  const SCT = document.createElement('span');
+  SCT.appendChild(htmlSpan('SC:'));
+  SCT.classList.add('theorie');
+  const THT = document.createElement('span');
+  THT.appendChild(htmlSpan('theorie:'));
+  THT.classList.add('theorie');
+
   const W35WIJ_1_1 = document.createElement('span');
   const W35WIJ_1_1_s1 = document.createElement('span');
   W35WIJ_1_1_s1.appendChild(maakBreuk('5','3','opgave'));
-  W35WIJ_1_1_s1.appendChild(htmlSpan(' + '));
+  W35WIJ_1_1_s1.appendChild(htmlSpan(' - '));
   W35WIJ_1_1_s1.appendChild(maakBreuk('-1','2','opgave'));
   W35WIJ_1_1.appendChild(W35WIJ_1_1_s1);
 
@@ -58,7 +66,7 @@
   const W35WIJ_1_8 = document.createElement('span');
   const W35WIJ_1_8_s1 = document.createElement('span');
   W35WIJ_1_8_s1.appendChild(htmlSpan('= '));
-  W35WIJ_1_8_s1.appendChild(maakBreuk('-8 · 7','3 · 7','opgave'));
+  W35WIJ_1_8_s1.appendChild(maakBreuk('-8 · 7','3 · 5','opgave'));
   W35WIJ_1_8.appendChild(W35WIJ_1_8_s1);
 
   const W35WIJ_1_9 = document.createElement('span');
@@ -112,14 +120,13 @@
   }
 
   /* succescriteria */
-  const ruimte1 = '1.3cm';
 
   {
     const tr = document.createElement('tr');
-    const tdL = maakOpTdDubbelZStrZdub("","SC:",ruimte1,false,"1, 2, 5");
+    const tdL = maakOpTdDubbelZStrZdub("",SCT.cloneNode(true),ruimte1,false,"1, 2, 5");
     tdL.classList.add('kolom-links');
     tr.appendChild(tdL);
-    const tdR = maakOpTdDubbelZStrZdub("","SC:",ruimte1,false,"3, 4, 5");;
+    const tdR = maakOpTdDubbelZStrZdub("",SCT.cloneNode(true),ruimte1,false,"3, 4, 5");;
     tdR.classList.add('kolom-rechts');
     tr.appendChild(tdR);
     tbody.appendChild(tr);    
@@ -128,10 +135,10 @@
   /* theorie */
   {
     const tr = document.createElement('tr');
-    const tdL = maakOpTdDubbelZStrZdub("","theorie:",ruimte1,false,"nog");
+    const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");
     tdL.classList.add('kolom-links');
     tr.appendChild(tdL);
-    const tdR = maakOpTdDubbelZStrZdub("","theorie:",ruimte1,false,"nog");;
+    const tdR = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");;
     tdR.classList.add('kolom-rechts');
     tr.appendChild(tdR);
     tbody.appendChild(tr);    

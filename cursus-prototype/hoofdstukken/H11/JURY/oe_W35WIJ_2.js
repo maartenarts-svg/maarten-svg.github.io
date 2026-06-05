@@ -5,6 +5,14 @@
 (function () {
 
   /* ---- Span-variabelen ---- */
+  const ruimte1 = '1.4cm';
+  const SCT = document.createElement('span');
+  SCT.appendChild(htmlSpan('SC:'));
+  SCT.classList.add('theorie');
+  const THT = document.createElement('span');
+  THT.appendChild(htmlSpan('theorie:'));
+  THT.classList.add('theorie');
+
   const oe_W35WIJ_2_1 = document.createElement('span');
   oe_W35WIJ_2_1.appendChild(htmlSpan('Bereken.'));
 
@@ -116,35 +124,30 @@
       }
     }
 
+
+
+    trtabel.appendChild(tdtabel);
+    tbodyhulp.appendChild(trtabel);
+  }
+
     /* succescriteria */
-    const ruimte1 = '1.3cm';
 
     {
       const tr = document.createElement('tr');
-      const tdL = maakOpTdDubbelZStrZdub("","SC:",ruimte1,false,"6, 8");
+      const tdL = maakOpTdDubbelZStrZdub("",SCT.cloneNode(true),ruimte1,false,"6, 8");
       tdL.classList.add('kolom-links');
       tr.appendChild(tdL);
-      const tdR = maakOpTdDubbelZStrZdub("","SC:",ruimte1,false,"6, 8");;
-      tdR.classList.add('kolom-rechts');
-      tr.appendChild(tdR);
-      tbody2.appendChild(tr);    
+      tbody.appendChild(tr);    
     }
 
     /* theorie */
     {
       const tr = document.createElement('tr');
-      const tdL = maakOpTdDubbelZStrZdub("","theorie:",ruimte1,false,"nog");
+      const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");
       tdL.classList.add('kolom-links');
       tr.appendChild(tdL);
-      const tdR = maakOpTdDubbelZStrZdub("","theorie:",ruimte1,false,"nog");;
-      tdR.classList.add('kolom-rechts');
-      tr.appendChild(tdR);
-      tbody2.appendChild(tr);    
-    }
-
-    trtabel.appendChild(tdtabel);
-    tbodyhulp.appendChild(trtabel);
-  }
+      tbody.appendChild(tr);    
+    }  
 
   /* ---- Opgave b ---- */
   {
@@ -193,34 +196,27 @@
       tbody2.appendChild(tr);
     }
 
-    /* succescriteria */
-    const ruimte1 = '1.3cm';
 
-    {
-      const tr = document.createElement('tr');
-      const tdL = maakOpTdDubbelZStrZdub("","SC:",ruimte1,false,"7, 8");
-      tdL.classList.add('kolom-links');
-      tr.appendChild(tdL);
-      const tdR = maakOpTdDubbelZStrZdub("","SC:",ruimte1,false,"7, 8");;
-      tdR.classList.add('kolom-rechts');
-      tr.appendChild(tdR);
-      tbody2.appendChild(tr);    
-    }
-
-    /* theorie */
-    {
-      const tr = document.createElement('tr');
-      const tdL = maakOpTdDubbelZStrZdub("","theorie:",ruimte1,false,"nog");
-      tdL.classList.add('kolom-links');
-      tr.appendChild(tdL);
-      const tdR = maakOpTdDubbelZStrZdub("","theorie:",ruimte1,false,"nog");;
-      tdR.classList.add('kolom-rechts');
-      tr.appendChild(tdR);
-      tbody2.appendChild(tr);    
-    }
     
     trtabel.appendChild(tdtabel);
     tbodyhulp.appendChild(trtabel);
   }
 
+
+    {
+      const tr = document.createElement('tr');
+      const tdL = maakOpTdDubbelZStrZdub("",SCT.cloneNode(true),ruimte1,false,"7, 8");
+      tdL.classList.add('kolom-links');
+      tr.appendChild(tdL);
+      tbody.appendChild(tr);    
+    }
+
+    /* theorie */
+    {
+      const tr = document.createElement('tr');
+      const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");
+      tdL.classList.add('kolom-links');
+      tr.appendChild(tdL);
+      tbody.appendChild(tr);    
+    }
 })();

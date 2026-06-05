@@ -95,7 +95,7 @@
     const divTitel = document.createElement('div');
     divTitel.style.display = "flex";
     const spanTitel = document.createElement("span");
-    spanTitel.appendChild(htmlSpan('Voorbereiding jury deel 1'));
+    spanTitel.appendChild(htmlSpan('Formules inprenten'));
     spanTitel.style.width = '75%';
     spanTitel.style.textAlign = 'left';
     divTitel.appendChild(spanTitel); 
@@ -105,7 +105,7 @@
     spanWerktijdTitel.style.textAlign = 'left';
     divTitel.appendChild(spanWerktijdTitel);
     const spanWerktijd = document.createElement("span");
-    spanWerktijd.appendChild(htmlSpan("50'"));
+    spanWerktijd.appendChild(htmlSpan("3 x 5'"));
     spanWerktijd.style.width = '10%';
     spanWerktijd.style.textAlign = 'left';
     divTitel.appendChild(spanWerktijd);
@@ -163,10 +163,10 @@
     divGeheel.style.display = 'flex';
     divGeheel.style.flexDirection = 'column';
     const spanIcoon = document.createElement('span');
-    spanIcoon.innerHTML = '📥';
+    spanIcoon.innerHTML = '🧑‍🏫';
     spanIcoon.style.fontSize = '50px';
     divGeheel.appendChild(spanIcoon);
-    const spanCoach = htmlSpan('bakje wiskunde<br>ten laatste vr 12/06');
+    const spanCoach = htmlSpan('laatste MC<br>voor toets');
     divGeheel.appendChild(spanCoach);
        
     tdIndienen.appendChild(divGeheel);

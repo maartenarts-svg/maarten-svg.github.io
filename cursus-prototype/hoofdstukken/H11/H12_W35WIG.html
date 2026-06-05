@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hoofdstuk 12 — Omtrek en oppervlakte</title>
+  <title>P5W6 WI J - Voorbereiding jury deel 1</title>
   <link rel="stylesheet" href="../../css/cursus.css">
 
   <style>
@@ -218,30 +218,6 @@
       font-family: var(--font);
     }
 
-    /* 3b) Opmaak subparagraaf */
-    .opmaak-subparagraaf {
-      display: flex;
-      align-items: baseline;
-      margin: 0.3cm 0 0.1cm 0;
-      position: relative;
-    }
-    .subparagraaf-nummer {
-      position: absolute;
-      /* Nummer staat op 1.5cm van linkerrand → t.o.v. content = -marge-links + 1.5cm */
-      left: calc(-1 * var(--marge-links) + 1.2cm);
-      font-size: 14pt;
-      font-weight: bold;
-      color: var(--groen-donker);
-      font-family: var(--font);
-      white-space: nowrap;
-    }
-    .subparagraaf-titel {
-      font-size: 14pt;
-      font-weight: bold;
-      color: var(--groen-donker);
-      font-family: var(--font);
-    }
-
     /* 4) Opmaak onderdeel */
     .opmaak-onderdeel {
       display: flex;
@@ -322,42 +298,6 @@
         page-break-after: always;
       }
     }
-
-    /* ============================================================
-      REGISTER
-      ============================================================ */
-    .register-kolommen {
-      column-count: 2;
-      column-gap: 1cm;
-    }
-    .register-letter {
-      font-size: 14pt;
-      font-weight: bold;
-      color: var(--groen-donker);
-      margin-top: 0.3cm;
-      margin-bottom: 0.05cm;
-      break-after: avoid;
-    }
-    .register-rij {
-      display: flex;
-      align-items: baseline;
-      break-inside: avoid;
-    }
-    .register-rij .reg-tekst  { flex-shrink: 0; }
-    .register-rij .reg-stippen {
-      flex: 1;
-      border-bottom: 1px dotted var(--tekst);
-      margin: 0 0.2cm;
-      position: relative;
-      top: -0.15em;
-    }
-    .register-rij .reg-blz {
-      flex-shrink: 0;
-      min-width: 1cm;
-      text-align: right;
-    }
-    body.systeem-1 .reg-stippen,
-    body.systeem-1 .reg-blz { display: none; }
   </style>
 </head>
 <body>
@@ -384,8 +324,8 @@ TOGGLE_TOEGESTAAN = true;
 /* ============================================================
    CONFIGURATIE
    ============================================================ */
-const EERSTE_PAGINA    = 97;   // ← beginpaginanummer van dit hoofdstuk
-const HOOFDSTUK_TITEL  = '12 Omtrek en oppervlakte';
+const EERSTE_PAGINA    = 1;   // ← beginpaginanummer van dit hoofdstuk
+const HOOFDSTUK_TITEL  = '10 Rekenen met letters';
 
 /* ============================================================
    PAGINA-BEHEER
@@ -419,19 +359,17 @@ function nieuwePagina() {
   }
   pagina.appendChild(nr);
 
-  // Hoofdstuktitel in header (alle pagina's behalve de allereerste)
-  if (!eersteHoofdstukPagina) {
-    const hdr = document.createElement('div');
-    hdr.classList.add('hoofdstuk-titel-header');
-    hdr.textContent = HOOFDSTUK_TITEL;
-    // Even pagina: titel links; oneven pagina: titel rechts
-    if (huidigePaginaNummer % 2 === 0) {
-      hdr.classList.add('links');
-    } else {
-      hdr.classList.add('rechts');
-    }
-    pagina.appendChild(hdr);
+  const hdr = document.createElement('div');
+  hdr.classList.add('hoofdstuk-titel-header');
+  hdr.textContent = 'TIAB - 1a - week 6 - WI J';
+  // Even pagina: titel links; oneven pagina: titel rechts
+  if (huidigePaginaNummer % 2 === 0) {
+    hdr.classList.add('links');
+  } else {
+    hdr.classList.add('rechts');
   }
+  pagina.appendChild(hdr);
+  
 
   //voettekst
   const voet = document.createElement('div');
@@ -444,7 +382,7 @@ function nieuwePagina() {
   voet.style.fontSize   = 'var(--fontsize)';
   voet.style.fontFamily = 'var(--font)';
   pagina.appendChild(voet);
-  voet.textContent = 'math@LAB: theorie';  // ← HIER AANPASSEN
+  voet.textContent = 'math@LAB';  // ← HIER AANPASSEN
   voet.style.textAlign = (huidigePaginaNummer) % 2 === 0 ? 'right' : 'left';
 
   wrapper.appendChild(pagina);
@@ -495,7 +433,6 @@ function voegBannerToe(icoon, tekst) {
 function voegParagraafToe(nummer, tekst) {
   const div = document.createElement('div');
   div.classList.add('opmaak-paragraaf');
-  div.id = `paragraaf-${nummer.replace('.', '-')}`;  // ← anker-id
 
   const nrSpan = document.createElement('span');
   nrSpan.classList.add('paragraaf-nummer');
@@ -517,29 +454,6 @@ voegParagraafToe = function(nummer, tekst) {
   _paragraafNamenGlobaal[nummer] = tekst;
   return _origVoegParagraafToe(nummer, tekst);
 };
-
-/**
- * Voeg een subparagraaftitel (opmaak 3) toe aan de huidige pagina.
- * @param {string} nummer - bv. '10.1'
- * @param {string} tekst  - bv. 'Eigenschappen van bewerkingen'
- */
-function voegSubparagraafToe(nummer, tekst) {
-  const div = document.createElement('div');
-  div.classList.add('opmaak-subparagraaf');
-
-  const nrSpan = document.createElement('span');
-  nrSpan.classList.add('subparagraaf-nummer');
-  nrSpan.textContent = nummer;
-
-  const txtSpan = document.createElement('span');
-  txtSpan.classList.add('subparagraaf-titel');
-  txtSpan.textContent = tekst;
-
-  div.appendChild(nrSpan);
-  div.appendChild(txtSpan);
-  huidigePagina().appendChild(div);
-  return div;
-}
 
 /**
  * Voeg een onderdeeltitel (opmaak 4) toe aan de huidige pagina.
@@ -564,6 +478,40 @@ function voegOnderdeelToe(icoon, tekst) {
   return div;
 }
 
+/**
+ * Voeg theorie toe
+ * @param {array} items - [{nummer: '10.9', tekst 'blabla'},{}]
+ */
+function voegTheorieToe(items) {
+  const kader = document.createElement('div');
+  kader.classList.add('theorie-kader');
+  kader.style.cursor = 'pointer';
+  
+  items.forEach(({ nummer, tekst }) => {
+    const rij = document.createElement('div');
+    rij.classList.add('theorie-rij');
+    const nr = document.createElement('span');
+    nr.classList.add('theorie-nummer');
+    nr.textContent = nummer;
+    const txt = document.createElement('span');
+    txt.classList.add('theorie-tekst');
+    txt.textContent = tekst;
+    rij.appendChild(nr);
+    rij.appendChild(txt);
+    kader.appendChild(rij);
+  });
+
+  // Link naar theorie-bestand
+  const eersteNummer = items[0]?.nummer?.replace('.', '-');
+  if (eersteNummer) {
+    kader.addEventListener('click', () => {
+      window.open(`H10_theorie.html#paragraaf-${eersteNummer}`, '_blank');
+    });
+  }
+
+  huidigePagina().appendChild(kader);
+  return kader;
+}
 
 /**
  * Voeg een inhoudszone toe (lege ruimte voor later te vullen)
@@ -619,25 +567,7 @@ function forceerPaginawissel() {
 const inhoudstafelData = [];  // { tekst, blz } — wordt gevuld hieronder
 
 /* ============================================================
-   TREFWOORDEN
-   ============================================================ */
-const trefwoordenData = [];  // { trefwoord, blz } — wordt gevuld bij laadTheorieOnderdeel
-
-const _origLaadTheorieOnderdeel = laadTheorieOnderdeel;
-laadTheorieOnderdeel = function(selector, onderdelen) {
-  const blz = huidigePaginaNummer - 1;
-  onderdelen.forEach(o => {
-    if (o.trefwoorden) {
-      o.trefwoorden.forEach(tw => {
-        trefwoordenData.push({ trefwoord: tw, blz: blz });
-      });
-    }
-  });
-  return _origLaadTheorieOnderdeel(selector, onderdelen);
-};
-
-/* ============================================================
-   OPBOUW VAN DE THEORIE
+   OPBOUW VAN HET HOOFDSTUK
    ============================================================
 
    De structuur hieronder bouwt het volledige hoofdstuk op.
@@ -648,316 +578,23 @@ laadTheorieOnderdeel = function(selector, onderdelen) {
 
 /* BEGIN VANAF HIER MET TELLEN */
 
-// ── PAGINA 1: Hoofdstuktitel + Inhoudstafel ──────────────────
-nieuwePagina(); 
-witregel('12.21cm');
-const titelDiv = document.createElement('div');
-titelDiv.classList.add('opmaak-titel');
-titelDiv.textContent = HOOFDSTUK_TITEL;
-huidigePagina().appendChild(titelDiv);
-
-witregel('4.3cm');
-const blzInhoudstafel = huidigePaginaNummer - 1;
-
-nieuwePagina();
-voegParagraafToe('', 'Inhoudstafel');
-
-// De inhoudstafel wordt na de structuuropbouw ingevuld (zie onderaan)
-const inhoudstafelContainer = document.createElement('div');
-inhoudstafelContainer.classList.add('inhoudstafel-inhoud');
-inhoudstafelContainer.id = 'inhoudstafel-container';
-huidigePagina().appendChild(inhoudstafelContainer);
-
-// ── PAGINA 2: Start ──────────────────────────────────────────
-
-// ── PARAGRAAF 12.1 ───────────────────────────────────────────
-nieuwePagina();   
-inhoudstafelData.push({ tekst: '12.1 Omtrek en oppervlakte', blz: huidigePaginaNummer - 1, soort: 'par'});
-voegParagraafToe('12.1', 'Omtrek en oppervlakte');
-
-voegContentToe('content-121-theorie');
-laadTheorieOnderdeel('#content-121-theorie', [
-  { 
-    bestand: 'theorie/th_121_omtrekOppervlakte.js',
-    trefwoorden: ['omtrek', 'oppervlakte','P','A'] 
-  },
-  { 
-    bestand: 'theorie/th_121_omtrekOppervlakteVB.js',
-  },
+// ───────────────────────────────────
+nieuwePagina();   // pagina 1
+voegContentToe('content-pagina');
+laadOefeningen('#content-pagina', [
+  'H12_W35WIG/W35WIJ_hoofding.js',
 ]);
 
-nieuwePagina();
-inhoudstafelData.push({ tekst: '12.2 Eenheden voor omtrek', blz: huidigePaginaNummer - 1, soort: 'par'});
-voegParagraafToe('12.2', 'Eenheden voor omtrek');
-
-inhoudstafelData.push({ tekst: '12.2.1 Lengte-eenheden', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('12.2.1','Lengte-eenheden');
-
-voegContentToe('content-122-theorie-1');
-laadTheorieOnderdeel('#content-122-theorie-1', [
-  { 
-    bestand: 'theorie/th_122_lengteEenheden.js',
-    trefwoorden: ['lengte-eenheid', 'meter'] 
-  },
-  { 
-    bestand: 'theorie/th_122_lengteEenhedenVB.js',
-  },
+witregel(onderTitel);
+voegContentToe('content-pagina-1');
+laadOefeningen('#content-pagina-1', [
+  'H12_W35WIG/drill.js',
 ]);
 
-nieuwePagina();
-
-inhoudstafelData.push({ tekst: '12.2.2 Referentie-eenheden voor afstand', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('12.2.2','Referentie-eenheden voor afstand');
-
-voegContentToe('content-122-theorie-2');
-laadTheorieOnderdeel('#content-122-theorie-2', [
-  { 
-    bestand: 'theorie/th_122_referentieLengte.js',
-    trefwoorden: ['referentie-eenheden afstand'] 
-  },
-  { 
-    bestand: 'theorie/th_122_lengteEenhedenVB.js',
-  },
-]);
-
-
-nieuwePagina();
-
-inhoudstafelData.push({ tekst: '11.1.3 Een term wegwerken', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.1.3','Een term wegwerken');
-voegContentToe('content-111-theorie-3');
-laadTheorieOnderdeel('#content-111-theorie-3', [
-  { 
-    bestand: 'theorie/th_111_termWegwerken.js',
-    trefwoorden: ['term wegwerken'] 
-  },
-  { 
-    bestand: 'theorie/th_111_termWegwerkenVB.js',
-  },
-
-]);
-
-nieuwePagina();
-
-inhoudstafelData.push({ tekst: '11.1.4 Een factor wegwerken', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.1.3','Een factor wegwerken');
-voegContentToe('content-111-theorie-4');
-laadTheorieOnderdeel('#content-111-theorie-4', [
-  { 
-    bestand: 'theorie/th_111_factorWegwerken.js',
-    trefwoorden: ['factor wegwerken'] 
-  },
-  { 
-    bestand: 'theorie/th_111_factorWegwerkenVB.js',
-  },
-
-]);
-
-
-// ── PARAGRAAF 11.2 ───────────────────────────────────────────
-nieuwePagina();   // pagina 460
-inhoudstafelData.push({ tekst: '11.2 Vergelijkingen oplossen', blz: huidigePaginaNummer - 1,soort: 'par'});
-voegParagraafToe('11.2', 'Vergelijkingen oplossen');
-voegContentToe('content-112-theorie');
-laadTheorieOnderdeel('#content-112-theorie', [
-  { 
-    bestand: 'theorie/th_112_vergelijkingOplossen.js',
-    trefwoorden: ['vergelijking oplossen'] 
-  },
-  { 
-    bestand: 'theorie/th_112_vergelijkingOplossenVB.js', 
-  },
-]);
-
-forceerPaginawissel();
-voegContentToe('content-112-theorie-2');
-laadTheorieOnderdeel('#content-112-theorie-2', [
-  { 
-    bestand: 'theorie/th_112_formulesVergelijkingenVB.js',
-    trefwoorden: ['formules'] 
-  },
-]);
+// ─────────────────────────────────────────────
 
 
 
-// ── PARAGRAAF 11.3 ───────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: '11.3 Vraagstukken oplossen met een vergelijking', blz: huidigePaginaNummer - 1,soort: 'par' });
-voegParagraafToe('11.3', 'Vraagstukken oplossen met een vergelijking');
-
-inhoudstafelData.push({ tekst: '11.3.1 Een vergelijking oplossen met ICT', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.3.1','Een vergelijking oplossen met ICT');
-voegContentToe('content-113-theorie');
-laadTheorieOnderdeel('#content-113-theorie', [
-  { 
-    bestand: 'theorie/th_113_vergelijkingOplossenICT.js',
-    trefwoorden: ['vergelijking oplossen met ICT'] 
-  },
-  { 
-    bestand: 'theorie/th_113_vergelijkingOplossenICTVB.js',
-  },
-]);
-
-
-
-
-forceerPaginawissel();
-inhoudstafelData.push({ tekst: '11.3.2 Vraagstukken oplossen', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.3.2','Vraagstukken oplossen');
-voegContentToe('content-113-theorie-2');
-laadTheorieOnderdeel('#content-113-theorie-2', [
-  { 
-    bestand: 'theorie/th_113_vraagstukkenEen.js',
-    trefwoorden: ['vraagstukken, één gevraagde'] 
-  },
-  { 
-    bestand: 'theorie/th_113_vraagstukkenMeer.js',
-    trefwoorden: ['vraagstukken, meer gevraagd'] 
-  },
-]);
-
-
-
-/* ============================================================
-   REGISTER OPBOUWEN
-   ============================================================ */
-nieuwePagina();
-inhoudstafelData.push({ tekst: 'Register', blz: huidigePaginaNummer - 1, soort: 'par'});
-voegBannerToe('📑', 'Register');
-witregel('0.3cm');
-
-(function vulRegister() {
-  const container = document.createElement('div');
-  container.classList.add('register-kolommen');
-
-  // Dedupliceer en sorteer
-  const uniek = {};
-  trefwoordenData.forEach(({ trefwoord, blz }) => {
-    const key = trefwoord.toLowerCase();
-    if (!uniek[key]) uniek[key] = { trefwoord, blzLijst: [] };
-    if (!uniek[key].blzLijst.includes(blz)) uniek[key].blzLijst.push(blz);
-  });
-  const gesorteerd = Object.values(uniek).sort((a, b) =>
-    a.trefwoord.localeCompare(b.trefwoord, 'nl')
-  );
-
-  // Groepeer per beginletter
-  const perLetter = {};
-  gesorteerd.forEach(item => {
-    const letter = item.trefwoord[0].toUpperCase();
-    if (!perLetter[letter]) perLetter[letter] = [];
-    perLetter[letter].push(item);
-  });
-
-  Object.keys(perLetter).sort().forEach(letter => {
-    const letterDiv = document.createElement('div');
-    letterDiv.classList.add('register-letter');
-    letterDiv.textContent = letter;
-    container.appendChild(letterDiv);
-
-    perLetter[letter].forEach(item => {
-      const rij = document.createElement('div');
-      rij.classList.add('register-rij');
-
-      const tekst = document.createElement('span');
-      tekst.classList.add('reg-tekst');
-      tekst.textContent = item.trefwoord;
-
-      const stippen = document.createElement('span');
-      stippen.classList.add('reg-stippen');
-
-      const blzSpan = document.createElement('span');
-      blzSpan.classList.add('reg-blz');
-      blzSpan.textContent = item.blzLijst.join(', ');
-
-      rij.appendChild(tekst);
-      rij.appendChild(stippen);
-      rij.appendChild(blzSpan);
-      container.appendChild(rij);
-    });
-  });
-
-  huidigePagina().appendChild(container);
-})();
-
-/* ============================================================
-   INHOUDSTAFEL INVULLEN
-   Wordt pas hier ingevuld omdat de paginanummers pas bekend
-   zijn nadat de volledige structuur opgebouwd is.
-   ============================================================ */
-(function vulInhoudstafel() {
-  const container = document.getElementById('inhoudstafel-container');
-  if (!container) return;
-
-  const items = [
-    { tekst: '12.1 Omtrek en oppervlakte', blz: null },
-    { tekst: '12.2 Eenheden voor omtrek', blz: null },
-    { tekst: '12.2.1 Lengte-eenheden',                  blz: null, soort: 'subpar' },
-    { tekst: '12.2.2 Referentie-eenheden voor afstand',   blz: null, soort: 'subpar' },    
-    { tekst: '12.2.3 Lengte-eenheden omzetten',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3 Formules voor omtrek',                  blz: null },
-    { tekst: '12.3.1 Omtrek van een veelhoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.2 Omtrek van een vierkant',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.3 Omtrek van een rechthoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.4 Omtrek van een ruit',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.5 Omtrek van een cirkel',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3 Eenheden voor oppervlakte', blz: null },
-    { tekst: '12.3.1 Oppervlakte-eenheden',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.2 Referentie-eenheden voor oppervlakte',   blz: null, soort: 'subpar' },    
-    { tekst: '12.3.3 Oppervlakte-eenheden omzetten',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4 Formules voor oppervlakte',                  blz: null },
-    { tekst: '12.4.1 Oppervlakte van een rechthoek en een vierkant',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.2 Oppervlakte van een parallellogram',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.3 Oppervlakte van een driehoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.4 Oppervlakte van een cirkel',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.5 Oppervlakte van een ruit en een trapezium',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5 Problemen oplossen',                  blz: null },
-    { tekst: '12.5.1 Problemen oplossen met omtrek en oppervlakte',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5.2 Figuren opsplitsen',                  blz: null, soort: 'subpar' },
-    { type: 'witregel' },
-    { tekst: 'Register', blz: null },
-  ];
-
-  // Koppel paginanummers vanuit inhoudstafelData
-  inhoudstafelData.forEach(({ tekst, blz }) => {
-    const item = items.find(i => i.tekst === tekst);
-    if (item) item.blz = blz;
-  });
-
-  items.forEach(item => {
-    if (item.type === 'witregel') {
-      const br = document.createElement('div');
-      br.style.height = '0.5em';
-      container.appendChild(br);
-      return;
-    }
-
-    const rij = document.createElement('div');
-    rij.classList.add('inhoudstafel-rij');
-    if (item.stijl === 'bold') rij.style.fontWeight = 'bold';
-
-    const tekst = document.createElement('span');
-    if (item.soort === 'subpar') {
-      tekst.style.paddingLeft = '1cm';
-    }
-    tekst.classList.add('it-tekst');
-    tekst.textContent = item.tekst;
-    rij.appendChild(tekst);
-
-    // Stippen (alleen systeem 2)
-    const stippen = document.createElement('span');
-    stippen.classList.add('it-stippen');
-    rij.appendChild(stippen);
-
-    // Paginanummer (alleen systeem 2)
-    const blzSpan = document.createElement('span');
-    blzSpan.classList.add('it-blz');
-    blzSpan.textContent = item.blz !== null ? item.blz : '??';
-    rij.appendChild(blzSpan);
-
-    container.appendChild(rij);
-  });
-})();
 
 /* ============================================================
    SYSTEEM TOEPASSEN

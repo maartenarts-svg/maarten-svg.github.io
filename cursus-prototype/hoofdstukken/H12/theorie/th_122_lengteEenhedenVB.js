@@ -52,7 +52,7 @@
     {
       const kolommen = document.createElement('div');
       kolommen.style.display = 'flex';
-      kolommen.style.alignItems = 'center';
+      kolommen.style.alignItems = 'flex-start';
       kolommen.style.gap = '0.3cm';
 
       // --- Linkerkolom: voorbeeld 1 + voorbeeld 2 ---
@@ -100,8 +100,27 @@
 
       const img = document.createElement('img');
       img.src = 'afbeeldingen/th_122_001_eenhedenladderVB.svg';
-      img.style.width = '180px';
+      img.style.width = '200px';
       rechtsDiv.appendChild(img);
+
+      maakSpanMetRuimte(linksDiv, '0.2cm');
+
+      {
+        const divTip = document.createElement('div');
+        divTip.style.display = 'flex';
+        const SpL = htmlSpan('Tip!');
+        SpL.style.fontWeight = 'bold';
+        SpL.style.flex = '0 0 10%';
+        SpL.style.display = 'flex';
+        SpL.style.alignItems = 'top';
+        const SpR = htmlSpan('Werk met machten van 10. De exponent geeft weer hoeveel stappen je naar boven of naar onder zet.');
+        SpR.style.flex = '1';
+        SpR.style.minWidth = '0';
+        SpR.classList.add('theorietekst');
+        divTip.appendChild(SpL);
+        divTip.appendChild(SpR);
+        linksDiv.appendChild(divTip);
+      }
 
       kolommen.appendChild(linksDiv);
       kolommen.appendChild(rechtsDiv);
