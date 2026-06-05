@@ -3,34 +3,60 @@
    ============================================================ */
 (function () {
 
-  const TOON_ANTWOORDEN = false;  // ← true = antwoorden zichtbaar
+  const TOON_SL = false;  // ← true = schrijflijn zichtbaar
 
+  // Elke cel: { tekst: '...', toon: true/false }
+  // toon: true  → antwoord zichtbaar
+  // toon: false → antwoord verborgen
   const DATA = [
-    { naam: 'rechthoek',      P: ['', '', ''], A: ['', '', ''] },
-    { naam: 'vierkant',       P: ['', '', ''], A: ['', '', ''] },
-    { naam: 'parallellogram', P: ['', '', ''], A: ['', '', ''] },
-    { naam: 'ruit',           P: ['', '', ''], A: ['', '', ''] },
-    { naam: 'trapezium',      P: ['', '', ''], A: ['', '', ''] },
-    { naam: 'driehoek',       P: ['', '', ''], A: ['', '', ''] },
-    { naam: 'cirkel',         P: ['', '', ''], A: ['', '', ''] },
+    { naam: 'rechthoek',
+      P: [{ tekst: '  2(<i>b</i> + <i>h</i>)', toon: false }, { tekst: '  2(<i>b</i> + <i>h</i>)', toon: false }, { tekst: '  2(<i>b</i> + <i>h</i>)', toon: false }],
+      A: [{ tekst: '  <i>bh</i>',               toon: false }, { tekst: '  <i>bh</i>',               toon: false }, { tekst: '  <i>bh</i>',               toon: false }],
+    },
+    { naam: 'vierkant',
+      P: [{ tekst: '  4<i>z</i>',               toon: false }, { tekst: '  4<i>z</i>',               toon: false }, { tekst: '  4<i>z</i>',               toon: false }],
+      A: [{ tekst: '  <i>z</i><sup>2</sup>',    toon: false }, { tekst: '  <i>z</i><sup>2</sup>',    toon: false }, { tekst: '  <i>z</i><sup>2</sup>',    toon: false }],
+    },
+    { naam: 'parallellogram',
+      P: [{ tekst: '  som van de zijden',        toon: false }, { tekst: '  som van de zijden',        toon: false }, { tekst: '  som van de zijden',        toon: false }],
+      A: [{ tekst: '  <i>bh</i>',               toon: false }, { tekst: '  <i>bh</i>',               toon: false }, { tekst: '  <i>bh</i>',               toon: false }],
+    },
+    { naam: 'ruit',
+      P: [{ tekst: '  4<i>z</i>',               toon: false }, { tekst: '  4<i>z</i>',               toon: false }, { tekst: '  4<i>z</i>',               toon: false }],
+      A: [{ tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }],
+    },
+    { naam: 'trapezium',
+      P: [{ tekst: '  som van de zijden',        toon: false }, { tekst: '  som van de zijden',        toon: false }, { tekst: '  som van de zijden',        toon: false }],
+      A: [{ tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }],
+    },
+    { naam: 'driehoek',
+      P: [{ tekst: '  som van de zijden',        toon: false }, { tekst: '  som van de zijden',        toon: false }, { tekst: '  som van de zijden',        toon: false }],
+      A: [{ tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }],
+    },
+    { naam: 'cirkel',
+      P: [{ tekst: '  2π<i>r</i>',         toon: false }, { tekst: '  2π<i>r</i>',         toon: false }, { tekst: '  2π<i>r</i>',         toon: false }],
+      A: [{ tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }, { tekst: '  XXXXXXXXXXXXXX',           toon: true }],
+    },
   ];
 
-  function maakAntwoordTd(tekst) {
+  function maakAntwoordTd(cel) {
     const td = document.createElement('td');
     const rij = document.createElement('div');
     rij.classList.add('rij');
 
-    const sl = document.createElement('span');
-    sl.classList.add('sl');
-    sl.textContent = SL;
-    rij.appendChild(sl);
+    if (TOON_SL) {
+      const sl = document.createElement('span');
+      sl.classList.add('sl');
+      sl.textContent = SL;
+      rij.appendChild(sl);
+    }
 
     const opl = document.createElement('div');
     opl.classList.add('opl');
     opl.style.left  = '0';
     opl.style.right = '0';
-    opl.appendChild(htmlSpan(tekst));
-    if (TOON_ANTWOORDEN) opl.classList.add('zichtbaar');
+    opl.appendChild(htmlSpan(cel.tekst));
+    if (cel.toon) opl.classList.add('zichtbaar', 'opl-vast');
     rij.appendChild(opl);
 
     td.appendChild(rij);
@@ -73,7 +99,7 @@
       /* Figuurcel (rowspan 2, enkel bij P-rij) */
       if (pi === 0) {
         const tdNaam = document.createElement('td');
-        tdNaam.rowSpan       = 2;
+        tdNaam.rowSpan         = 2;
         tdNaam.style.textAlign = 'left';
         tdNaam.style.padding   = '0 0.2cm';
         tdNaam.appendChild(htmlSpan(fig.naam));
@@ -88,8 +114,8 @@
       tr.appendChild(tdPA);
 
       /* Antwoordcellen dag 1 – 3 */
-      fig[pa].forEach(antw => {
-        const td = maakAntwoordTd(antw);
+      fig[pa].forEach(cel => {
+        const td = maakAntwoordTd(cel);
         if (pi === 0) td.style.borderBottom = '1.2px dashed var(--groen-scheiding)';
         if (pi === 1) td.style.borderTop    = '1.2px dashed var(--groen-scheiding)';
         tr.appendChild(td);

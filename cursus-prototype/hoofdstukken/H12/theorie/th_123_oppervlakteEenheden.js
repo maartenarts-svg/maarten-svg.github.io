@@ -1,5 +1,5 @@
 /* ============================================================
-   H12 / th_122_lengteEenheden.js
+   H12 / th_123_oppervlakteEenheden.js
    ============================================================ */
 (function () {
 
@@ -31,7 +31,7 @@
     tdKort.style.paddingLeft = paddingkader;
     tdKort.style.paddingRight = paddingkader;
     tdKort.style.verticalAlign = 'middle';
-    tdKort.appendChild(htmlSpan('lengte-eenheden'));
+    tdKort.appendChild(htmlSpan('oppervlakte-eenheden'));
 
     trTitel.appendChild(tdSoort);
     trTitel.appendChild(tdKort);
@@ -50,9 +50,9 @@
 
     // Intro-tekst over de volledige breedte
     [
-      'De omtrek is een afstand. Daarom gebruiken we voor omtrek de lengte-eenheden.',
-      'De standaardeenheid daarbij is 1 meter.',
-      'Omdat sommige afstanden veel groter of veel kleiner zijn dan 1 meter, gebruiken we extra onderverdelingen.'
+      'Voor de oppervlakte gebruiken we de oppervlakte-eenheden.',
+      'De standaardeenheid daarbij is 1 vierkante meter.',
+      'Omdat sommige oppervlaktes veel groter of veel kleiner zijn dan 1 vierkante meter, gebruiken we extra onderverdelingen.'
     ].forEach(tekst => {
       const span = document.createElement('span');
       span.appendChild(htmlSpan(tekst));
@@ -80,44 +80,44 @@
         kolomBreedtes: ['40%', '20%', '40%'],
         matrix: [
           [
-            { inhoud: 'Eenheid',              hAlign: 'center' },
-            { inhoud: 'Afkorting',            hAlign: 'center' },
-            { inhoud: 'Naar meter', hAlign: 'center' }
+            { inhoud: 'Eenheid',               hAlign: 'center' },
+            { inhoud: 'Afkorting',             hAlign: 'center' },
+            { inhoud: 'Omrekening naar m<sup>2</sup>', hAlign: 'center' }
           ],
           [
-            { inhoud: 'kilometer',  hAlign: 'center' },
-            { inhoud: 'km',         hAlign: 'center' },
-            { inhoud: '1 km = 1 000 m', hAlign: 'center' }
+            { inhoud: 'vierkante kilometer',   hAlign: 'center' },
+            { inhoud: 'km<sup>2</sup>',         hAlign: 'center' },
+            { inhoud: '1 km<sup>2</sup> = 1 000 000 m<sup>2</sup>', hAlign: 'center' }
           ],
           [
-            { inhoud: 'hectometer', hAlign: 'center' },
-            { inhoud: 'hm',         hAlign: 'center' },
-            { inhoud: '1 hm = 100 m', hAlign: 'center' }
+            { inhoud: 'vierkante hectometer',  hAlign: 'center' },
+            { inhoud: 'hm<sup>2</sup>',         hAlign: 'center' },
+            { inhoud: '1 hm<sup>2</sup> = 10 000 m<sup>2</sup>', hAlign: 'center' }
           ],
           [
-            { inhoud: 'decameter',  hAlign: 'center' },
-            { inhoud: 'dam',        hAlign: 'center' },
-            { inhoud: '1 dam = 10 m', hAlign: 'center' }
+            { inhoud: 'vierkante decameter',   hAlign: 'center' },
+            { inhoud: 'dam<sup>2</sup>',        hAlign: 'center' },
+            { inhoud: '1 dam<sup>2</sup> = 100 m<sup>2</sup>', hAlign: 'center' }
           ],
           [
-            { inhoud: 'meter',      hAlign: 'center' },
-            { inhoud: 'm',          hAlign: 'center' },
-            { inhoud: 'basiseenheid', hAlign: 'center' }
+            { inhoud: 'vierkante meter',       hAlign: 'center' },
+            { inhoud: 'm<sup>2</sup>',          hAlign: 'center' },
+            { inhoud: 'basiseenheid',           hAlign: 'center' }
           ],
           [
-            { inhoud: 'decimeter',  hAlign: 'center' },
-            { inhoud: 'dm',         hAlign: 'center' },
-            { inhoud: '1 dm = 0,1 m', hAlign: 'center' }
+            { inhoud: 'vierkante decimeter',   hAlign: 'center' },
+            { inhoud: 'dm<sup>2</sup>',         hAlign: 'center' },
+            { inhoud: '1 dm<sup>2</sup> = 0,01 m<sup>2</sup>', hAlign: 'center' }
           ],
           [
-            { inhoud: 'centimeter', hAlign: 'center' },
-            { inhoud: 'cm',         hAlign: 'center' },
-            { inhoud: '1 cm = 0,01 m', hAlign: 'center' }
+            { inhoud: 'vierkante centimeter',  hAlign: 'center' },
+            { inhoud: 'cm<sup>2</sup>',         hAlign: 'center' },
+            { inhoud: '1 cm<sup>2</sup> = 0,000 1 m<sup>2</sup>', hAlign: 'center' }
           ],
           [
-            { inhoud: 'millimeter', hAlign: 'center' },
-            { inhoud: 'mm',         hAlign: 'center' },
-            { inhoud: '1 mm = 0,001 m', hAlign: 'center' }
+            { inhoud: 'vierkante millimeter',  hAlign: 'center' },
+            { inhoud: 'mm<sup>2</sup>',         hAlign: 'center' },
+            { inhoud: '1 mm<sup>2</sup> = 0,000 001 m<sup>2</sup>', hAlign: 'center' }
           ]
         ]
       });
@@ -127,7 +127,7 @@
       rechtsDiv.style.flexShrink = '0';
 
       const img = document.createElement('img');
-      img.src = 'afbeeldingen/eenhedenladderLengtePijlen.svg';
+      img.src = 'afbeeldingen/eenhedenladderOppervlaktePijlen.svg';
       img.style.width = '200px';
       rechtsDiv.appendChild(img);
 
@@ -135,6 +135,8 @@
       kolommen.appendChild(rechtsDiv);
       tdInhoud.appendChild(kolommen);
     }
+
+    voegWitruimteToe(tdInhoud, '0.1cm');
 
     // --- Samenstellen ---
     kader.appendChild(trTitel);

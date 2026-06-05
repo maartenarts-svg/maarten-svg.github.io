@@ -686,6 +686,7 @@ laadTheorieOnderdeel('#content-121-theorie', [
   },
 ]);
 
+// ── PARAGRAAF 12.2 ───────────────────────────────────────────
 nieuwePagina();
 inhoudstafelData.push({ tekst: '12.2 Eenheden voor omtrek', blz: huidigePaginaNummer - 1, soort: 'par'});
 voegParagraafToe('12.2', 'Eenheden voor omtrek');
@@ -715,40 +716,64 @@ laadTheorieOnderdeel('#content-122-theorie-2', [
     bestand: 'theorie/th_122_referentieLengte.js',
     trefwoorden: ['referentie-eenheden afstand'] 
   },
+]);
+
+inhoudstafelData.push({ tekst: '12.2.3 Lengte-eenheden omzetten', blz: huidigePaginaNummer - 1,soort: 'subpar' });
+voegSubparagraafToe('12.2.3','Lengte-eenheden omzetten');
+
+voegContentToe('content-122-theorie-3');
+laadTheorieOnderdeel('#content-122-theorie-3', [
   { 
-    bestand: 'theorie/th_122_lengteEenhedenVB.js',
+    bestand: 'theorie/th_122_eenhedenOmzetten.js',
+    trefwoorden: ['omzetten lengte-eenheden'] 
+  },
+  { 
+    bestand: 'theorie/th_122_eenhedenOmzettenVB.js',
   },
 ]);
 
-
+// ── PARAGRAAF 12.3 ───────────────────────────────────────────
 nieuwePagina();
+inhoudstafelData.push({ tekst: '12.3 Eenheden voor oppervlakte', blz: huidigePaginaNummer - 1, soort: 'par'});
+voegParagraafToe('12.3', 'Eenheden voor oppervlakte');
 
-inhoudstafelData.push({ tekst: '11.1.3 Een term wegwerken', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.1.3','Een term wegwerken');
-voegContentToe('content-111-theorie-3');
-laadTheorieOnderdeel('#content-111-theorie-3', [
+inhoudstafelData.push({ tekst: '12.3.1 Oppervlakte-eenheden', blz: huidigePaginaNummer - 1,soort: 'subpar' });
+voegSubparagraafToe('12.3.1','Oppervlakte-eenheden');
+
+voegContentToe('content-123-theorie-1');
+laadTheorieOnderdeel('#content-123-theorie-1', [
   { 
-    bestand: 'theorie/th_111_termWegwerken.js',
-    trefwoorden: ['term wegwerken'] 
+    bestand: 'theorie/th_123_oppervlakteEenheden.js',
+    trefwoorden: ['oppervlakte-eenheid', 'vierkante meter'] 
   },
   { 
-    bestand: 'theorie/th_111_termWegwerkenVB.js',
+    bestand: 'theorie/th_123_oppervlakteEenhedenVB.js',
   },
-
 ]);
 
 nieuwePagina();
 
-inhoudstafelData.push({ tekst: '11.1.4 Een factor wegwerken', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.1.3','Een factor wegwerken');
-voegContentToe('content-111-theorie-4');
-laadTheorieOnderdeel('#content-111-theorie-4', [
+inhoudstafelData.push({ tekst: '12.3.2 Referentie-eenheden voor oppervlakte', blz: huidigePaginaNummer - 1,soort: 'subpar' });
+voegSubparagraafToe('12.3.2','Referentie-eenheden voor oppervlakte');
+voegContentToe('content-123-theorie-2');
+laadTheorieOnderdeel('#content-123-theorie-2', [
   { 
-    bestand: 'theorie/th_111_factorWegwerken.js',
-    trefwoorden: ['factor wegwerken'] 
+    bestand: 'theorie/th_123_referentieOppervlakte.js',
+    trefwoorden: ['referentie-eenheden oppervlakte'] 
+  },
+]);
+
+inhoudstafelData.push({ tekst: '12.3.3 Oppervlakte-eenheden omzetten', blz: huidigePaginaNummer - 1,soort: 'subpar' });
+voegSubparagraafToe('12.3.3','Oppervlakte-eenheden omzetten');
+voegContentToe('content-123-theorie-3');
+laadTheorieOnderdeel('#content-123-theorie-3', [
+  { 
+    bestand: 'theorie/th_123_eenhedenOmzetten.js',
+    trefwoorden: ['omzetten oppervlakte-eenheden'] 
   },
   { 
-    bestand: 'theorie/th_111_factorWegwerkenVB.js',
+    bestand: 'theorie/th_123_eenhedenOmzettenVB.js',
+    trefwoorden: ['omzetten oppervlakte-eenheden'] 
   },
 
 ]);
@@ -895,25 +920,25 @@ witregel('0.3cm');
     { tekst: '12.2.1 Lengte-eenheden',                  blz: null, soort: 'subpar' },
     { tekst: '12.2.2 Referentie-eenheden voor afstand',   blz: null, soort: 'subpar' },    
     { tekst: '12.2.3 Lengte-eenheden omzetten',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3 Formules voor omtrek',                  blz: null },
-    { tekst: '12.3.1 Omtrek van een veelhoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.2 Omtrek van een vierkant',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.3 Omtrek van een rechthoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.4 Omtrek van een ruit',                  blz: null, soort: 'subpar' },
-    { tekst: '12.3.5 Omtrek van een cirkel',                  blz: null, soort: 'subpar' },
     { tekst: '12.3 Eenheden voor oppervlakte', blz: null },
     { tekst: '12.3.1 Oppervlakte-eenheden',                  blz: null, soort: 'subpar' },
     { tekst: '12.3.2 Referentie-eenheden voor oppervlakte',   blz: null, soort: 'subpar' },    
-    { tekst: '12.3.3 Oppervlakte-eenheden omzetten',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4 Formules voor oppervlakte',                  blz: null },
-    { tekst: '12.4.1 Oppervlakte van een rechthoek en een vierkant',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.2 Oppervlakte van een parallellogram',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.3 Oppervlakte van een driehoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.4 Oppervlakte van een cirkel',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.5 Oppervlakte van een ruit en een trapezium',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5 Problemen oplossen',                  blz: null },
-    { tekst: '12.5.1 Problemen oplossen met omtrek en oppervlakte',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5.2 Figuren opsplitsen',                  blz: null, soort: 'subpar' },
+    { tekst: '12.3.3 Oppervlakte-eenheden omzetten',                  blz: null, soort: 'subpar' },    
+    { tekst: '12.4 Formules voor omtrek',                  blz: null },
+    { tekst: '12.4.1 Omtrek van een veelhoek',                  blz: null, soort: 'subpar' },
+    { tekst: '12.4.2 Omtrek van een vierkant',                  blz: null, soort: 'subpar' },
+    { tekst: '12.4.3 Omtrek van een rechthoek',                  blz: null, soort: 'subpar' },
+    { tekst: '12.4.4 Omtrek van een ruit',                  blz: null, soort: 'subpar' },
+    { tekst: '12.4.5 Omtrek van een cirkel',                  blz: null, soort: 'subpar' },
+    { tekst: '12.5 Formules voor oppervlakte',                  blz: null },
+    { tekst: '12.5.1 Oppervlakte van een rechthoek en een vierkant',                  blz: null, soort: 'subpar' },
+    { tekst: '12.5.2 Oppervlakte van een parallellogram',                  blz: null, soort: 'subpar' },
+    { tekst: '12.5.3 Oppervlakte van een driehoek',                  blz: null, soort: 'subpar' },
+    { tekst: '12.5.4 Oppervlakte van een cirkel',                  blz: null, soort: 'subpar' },
+    { tekst: '12.5.5 Oppervlakte van een ruit en een trapezium',                  blz: null, soort: 'subpar' },
+    { tekst: '12.6 Problemen oplossen',                  blz: null },
+    { tekst: '12.6.1 Problemen oplossen met omtrek en oppervlakte',                  blz: null, soort: 'subpar' },
+    { tekst: '12.6.2 Figuren opsplitsen',                  blz: null, soort: 'subpar' },
     { type: 'witregel' },
     { tekst: 'Register', blz: null },
   ];
