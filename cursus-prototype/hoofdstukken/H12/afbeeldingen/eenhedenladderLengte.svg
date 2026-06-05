@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="350" viewBox="0 0 200 350">
+  <!-- Stijlen van de ladder -->
+  <rect x="20"  y="10" width="15" height="330" fill="#A8D8A8" stroke="#8BC68B" stroke-width="2" rx="5"/>
+  <rect x="165" y="10" width="15" height="330" fill="#A8D8A8" stroke="#8BC68B" stroke-width="2" rx="5"/>
+  <!-- Sporten en eenheidslabels -->
+  <rect x="35" y="25"  width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="100" y="37"  text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">km</text>
+  <rect x="35" y="73"  width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="100" y="85"  text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">hm</text>
+  <rect x="35" y="121" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="100" y="133" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">dam</text>
+  <rect x="35" y="169" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="100" y="181" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">m</text>
+  <rect x="35" y="217" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="100" y="229" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">dm</text>
+  <rect x="35" y="265" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="100" y="277" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">cm</text>
+  <rect x="35" y="313" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="100" y="325" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">mm</text>
+</svg>
