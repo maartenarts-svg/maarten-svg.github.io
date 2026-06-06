@@ -164,7 +164,7 @@
     td1.style.textAlign = 'center';
     td1.style.verticalAlign = 'middle';
     td1.appendChild(maakOmzetVoorbeeld(
-      '513', 'cm²', '0,513', 'm²',
+      '513', 'cm²', '0,051 3', 'm²',
       'de eenheid wordt 100² keer groter',
       'het maatgetal wordt 100² keer kleiner',
       'pijl-vb3'
@@ -196,7 +196,7 @@
       span.classList.add('theorietekst');
       span.innerHTML = 'In plaats van te delen door 100<sup>2</sup>, kun je ook 2 keer delen door 100.<br>'
                      + '513 : 100 = 5,13<br>'
-                     + '5,13 : 100 = 0,513';
+                     + '5,13 : 100 = 0,051 3';
       td3.appendChild(span);
     }
 

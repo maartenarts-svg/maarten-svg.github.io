@@ -698,7 +698,7 @@ voegContentToe('content-122-theorie-1');
 laadTheorieOnderdeel('#content-122-theorie-1', [
   { 
     bestand: 'theorie/th_122_lengteEenheden.js',
-    trefwoorden: ['lengte-eenheid', 'meter'] 
+    trefwoorden: ['lengte-eenheden', 'meter'] 
   },
   { 
     bestand: 'theorie/th_122_lengteEenhedenVB.js',
@@ -707,14 +707,14 @@ laadTheorieOnderdeel('#content-122-theorie-1', [
 
 nieuwePagina();
 
-inhoudstafelData.push({ tekst: '12.2.2 Referentie-eenheden voor afstand', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('12.2.2','Referentie-eenheden voor afstand');
+inhoudstafelData.push({ tekst: '12.2.2 Referentie-eenheden voor lengte', blz: huidigePaginaNummer - 1,soort: 'subpar' });
+voegSubparagraafToe('12.2.2','Referentie-eenheden voor lengte');
 
 voegContentToe('content-122-theorie-2');
 laadTheorieOnderdeel('#content-122-theorie-2', [
   { 
     bestand: 'theorie/th_122_referentieLengte.js',
-    trefwoorden: ['referentie-eenheden afstand'] 
+    trefwoorden: ['referentie-eenheden lengte'] 
   },
 ]);
 
@@ -744,7 +744,7 @@ voegContentToe('content-123-theorie-1');
 laadTheorieOnderdeel('#content-123-theorie-1', [
   { 
     bestand: 'theorie/th_123_oppervlakteEenheden.js',
-    trefwoorden: ['oppervlakte-eenheid', 'vierkante meter'] 
+    trefwoorden: ['oppervlakte-eenheden', 'vierkante meter'] 
   },
   { 
     bestand: 'theorie/th_123_oppervlakteEenhedenVB.js',
@@ -773,71 +773,140 @@ laadTheorieOnderdeel('#content-123-theorie-3', [
   },
   { 
     bestand: 'theorie/th_123_eenhedenOmzettenVB.js',
-    trefwoorden: ['omzetten oppervlakte-eenheden'] 
   },
 
 ]);
 
-
-// ── PARAGRAAF 11.2 ───────────────────────────────────────────
-nieuwePagina();   // pagina 460
-inhoudstafelData.push({ tekst: '11.2 Vergelijkingen oplossen', blz: huidigePaginaNummer - 1,soort: 'par'});
-voegParagraafToe('11.2', 'Vergelijkingen oplossen');
-voegContentToe('content-112-theorie');
-laadTheorieOnderdeel('#content-112-theorie', [
-  { 
-    bestand: 'theorie/th_112_vergelijkingOplossen.js',
-    trefwoorden: ['vergelijking oplossen'] 
-  },
-  { 
-    bestand: 'theorie/th_112_vergelijkingOplossenVB.js', 
-  },
-]);
-
-forceerPaginawissel();
-voegContentToe('content-112-theorie-2');
-laadTheorieOnderdeel('#content-112-theorie-2', [
-  { 
-    bestand: 'theorie/th_112_formulesVergelijkingenVB.js',
-    trefwoorden: ['formules'] 
-  },
-]);
-
-
-
-// ── PARAGRAAF 11.3 ───────────────────────────────────────────
+// ── PARAGRAAF 12.4 ───────────────────────────────────────────
 nieuwePagina();
-inhoudstafelData.push({ tekst: '11.3 Vraagstukken oplossen met een vergelijking', blz: huidigePaginaNummer - 1,soort: 'par' });
-voegParagraafToe('11.3', 'Vraagstukken oplossen met een vergelijking');
+inhoudstafelData.push({ tekst: '12.4 Formules voor omtrek', blz: huidigePaginaNummer - 1, soort: 'par'});
+voegParagraafToe('12.4', 'Formules voor omtrek');
 
-inhoudstafelData.push({ tekst: '11.3.1 Een vergelijking oplossen met ICT', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.3.1','Een vergelijking oplossen met ICT');
-voegContentToe('content-113-theorie');
-laadTheorieOnderdeel('#content-113-theorie', [
-  { 
-    bestand: 'theorie/th_113_vergelijkingOplossenICT.js',
-    trefwoorden: ['vergelijking oplossen met ICT'] 
+inhoudstafelData.push({ tekst: '12.4.1 Omtrek van een veelhoek', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.4.1', 'Omtrek van een veelhoek');
+
+voegContentToe('content-124-theorie-1');
+laadTheorieOnderdeel('#content-124-theorie-1', [
+  {
+    bestand: 'theorie/th_124_omtrekVeelhoek.js',
+    trefwoorden: ['omtrek veelhoek', 'omtrek vierkant', 'omtrek ruit', 'omtrek rechthoek', 'basis rechthoek', 'hoogte rechthoek', 'zijde vierkant', 'zijde ruit', 'formule omtrek rechthoek', 'formule omtrek vierkant', 'formule omtrek ruit']
   },
-  { 
-    bestand: 'theorie/th_113_vergelijkingOplossenICTVB.js',
+  {
+    bestand: 'theorie/th_124_omtrekVeelhoekVB.js',
   },
 ]);
 
+nieuwePagina()
 
+inhoudstafelData.push({ tekst: '12.4.2 Omtrek van een cirkel', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.4.2', 'Omtrek van een cirkel');
 
-
-forceerPaginawissel();
-inhoudstafelData.push({ tekst: '11.3.2 Vraagstukken oplossen', blz: huidigePaginaNummer - 1,soort: 'subpar' });
-voegSubparagraafToe('11.3.2','Vraagstukken oplossen');
-voegContentToe('content-113-theorie-2');
-laadTheorieOnderdeel('#content-113-theorie-2', [
-  { 
-    bestand: 'theorie/th_113_vraagstukkenEen.js',
-    trefwoorden: ['vraagstukken, één gevraagde'] 
+voegContentToe('content-124-theorie-2');
+laadTheorieOnderdeel('#content-124-theorie-2', [
+  {
+    bestand: 'theorie/th_124_omtrekCirkel.js',
+    trefwoorden: ['omtrek cirkel', 'getal π', 'straal']
   },
-  { 
-    bestand: 'theorie/th_113_vraagstukkenMeer.js',
-    trefwoorden: ['vraagstukken, meer gevraagd'] 
+  {
+    bestand: 'theorie/th_124_omtrekCirkelVB.js',
+  },
+]);
+
+// ── PARAGRAAF 12.5 ───────────────────────────────────────────
+nieuwePagina();
+inhoudstafelData.push({ tekst: '12.5 Formules voor oppervlakte', blz: huidigePaginaNummer - 1, soort: 'par'});
+voegParagraafToe('12.5', 'Formules voor oppervlakte');
+
+inhoudstafelData.push({ tekst: '12.5.1 Oppervlakte van een rechthoek en een vierkant', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.5.1', 'Oppervlakte van een rechthoek en een vierkant');
+
+voegContentToe('content-125-theorie-1');
+laadTheorieOnderdeel('#content-125-theorie-1', [
+  {
+    bestand: 'theorie/th_125_oppervlakteRechthoekVierkant.js',
+    trefwoorden: ['oppervlakte rechthoek', 'oppervlakte vierkant', 'basis rechthoek', 'hoogte rechthoek', 'zijde vierkant', 'formule oppervlakte vierkant', 'formule oppervlakte rechthoek']
+  },
+  {
+    bestand: 'theorie/th_125_oppervlakteRechthoekVierkantVB.js',
+  },
+]);
+
+nieuwePagina();
+
+inhoudstafelData.push({ tekst: '12.5.2 Oppervlakte van een parallellogram en een driehoek', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.5.2', 'Oppervlakte van een parallellogram en een driehoek');
+
+voegContentToe('content-125-theorie-2');
+laadTheorieOnderdeel('#content-125-theorie-2', [
+  {
+    bestand: 'theorie/th_125_oppervlakteParallellogramDriehoek.js',
+    trefwoorden: ['oppervlakte parallellogram', 'oppervlakte driehoek', 'basis parallellogram', 'basis driehoek', 'hoogte parallellogram', 'hoogte driehoek', 'formule oppervlakte parallellogram', 'formule oppervlakte driehoek']
+  },
+  {
+    bestand: 'theorie/th_125_oppervlakteParallellogramDriehoekVB.js',
+  },
+]);
+
+nieuwePagina();
+
+inhoudstafelData.push({ tekst: '12.5.3 Oppervlakte van een cirkel', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.5.3', 'Oppervlakte van een cirkel');
+
+voegContentToe('content-125-theorie-3');
+laadTheorieOnderdeel('#content-125-theorie-3', [
+  {
+    bestand: 'theorie/th_125_oppervlakteCirkel.js',
+    trefwoorden: ['oppervlakte cirkel', 'straal', 'formule oppervlakte cirkel']
+  },
+  {
+    bestand: 'theorie/th_125_oppervlakteCirkelVB.js',
+  },
+]);
+
+nieuwePagina();
+
+inhoudstafelData.push({ tekst: '12.5.4 Oppervlakte van een ruit en een trapezium', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.5.4', 'Oppervlakte van een ruit en een trapezium');
+
+voegContentToe('content-125-theorie-4');
+laadTheorieOnderdeel('#content-125-theorie-4', [
+  {
+    bestand: 'theorie/th_125_oppervlakteRuitTrapezium.js',
+    trefwoorden: ['oppervlakte ruit', 'oppervlakte trapezium', 'diagonaal ruit', 'basissen trapezium', 'hoogte trapezium', 'formule oppervlakte ruit', 'formule oppervlakte trapezium']
+  },
+  {
+    bestand: 'theorie/th_125_oppervlakteRuitTrapeziumVB.js',
+  },
+]);
+
+nieuwePagina();
+inhoudstafelData.push({ tekst: '12.6 Problemen oplossen', blz: huidigePaginaNummer - 1, soort: 'par' });
+voegParagraafToe('12.6', 'Problemen oplossen');
+
+inhoudstafelData.push({ tekst: '12.6.1 Problemen oplossen met omtrek en oppervlakte', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.6.1', 'Problemen oplossen met omtrek en oppervlakte');
+
+voegContentToe('content-126-theorie-1');
+laadTheorieOnderdeel('#content-126-theorie-1', [
+  {
+    bestand: 'theorie/th_126_problemenOplossen.js',
+    trefwoorden: ['problemen oplossen']
+  },
+  {
+    bestand: 'theorie/th_126_problemenOplossenVB.js',
+  },
+]);
+
+nieuwePagina();
+
+inhoudstafelData.push({ tekst: '12.6.2 Figuren opsplitsen', blz: huidigePaginaNummer - 1, soort: 'subpar' });
+voegSubparagraafToe('12.6.2', 'Figuren opsplitsen');
+
+voegContentToe('content-126-theorie-2');
+laadTheorieOnderdeel('#content-126-theorie-2', [
+  {
+    bestand: 'theorie/th_126_figuurSplitsenVB.js',
+    trefwoorden: ['figuur opsplitsen']
   },
 ]);
 
@@ -918,24 +987,20 @@ witregel('0.3cm');
     { tekst: '12.1 Omtrek en oppervlakte', blz: null },
     { tekst: '12.2 Eenheden voor omtrek', blz: null },
     { tekst: '12.2.1 Lengte-eenheden',                  blz: null, soort: 'subpar' },
-    { tekst: '12.2.2 Referentie-eenheden voor afstand',   blz: null, soort: 'subpar' },    
+    { tekst: '12.2.2 Referentie-eenheden voor lengte',   blz: null, soort: 'subpar' },    
     { tekst: '12.2.3 Lengte-eenheden omzetten',                  blz: null, soort: 'subpar' },
     { tekst: '12.3 Eenheden voor oppervlakte', blz: null },
     { tekst: '12.3.1 Oppervlakte-eenheden',                  blz: null, soort: 'subpar' },
     { tekst: '12.3.2 Referentie-eenheden voor oppervlakte',   blz: null, soort: 'subpar' },    
     { tekst: '12.3.3 Oppervlakte-eenheden omzetten',                  blz: null, soort: 'subpar' },    
     { tekst: '12.4 Formules voor omtrek',                  blz: null },
-    { tekst: '12.4.1 Omtrek van een veelhoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.2 Omtrek van een vierkant',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.3 Omtrek van een rechthoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.4 Omtrek van een ruit',                  blz: null, soort: 'subpar' },
-    { tekst: '12.4.5 Omtrek van een cirkel',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5 Formules voor oppervlakte',                  blz: null },
-    { tekst: '12.5.1 Oppervlakte van een rechthoek en een vierkant',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5.2 Oppervlakte van een parallellogram',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5.3 Oppervlakte van een driehoek',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5.4 Oppervlakte van een cirkel',                  blz: null, soort: 'subpar' },
-    { tekst: '12.5.5 Oppervlakte van een ruit en een trapezium',                  blz: null, soort: 'subpar' },
+    { tekst: '12.4.1 Omtrek van een veelhoek',             blz: null, soort: 'subpar' },
+    { tekst: '12.4.2 Omtrek van een cirkel',               blz: null, soort: 'subpar' },
+    { tekst: '12.5 Formules voor oppervlakte',                                         blz: null },
+    { tekst: '12.5.1 Oppervlakte van een rechthoek en een vierkant',                   blz: null, soort: 'subpar' },
+    { tekst: '12.5.2 Oppervlakte van een parallellogram en een driehoek', blz: null, soort: 'subpar' },
+    { tekst: '12.5.3 Oppervlakte van een cirkel',                         blz: null, soort: 'subpar' },
+    { tekst: '12.5.4 Oppervlakte van een ruit en een trapezium',          blz: null, soort: 'subpar' },
     { tekst: '12.6 Problemen oplossen',                  blz: null },
     { tekst: '12.6.1 Problemen oplossen met omtrek en oppervlakte',                  blz: null, soort: 'subpar' },
     { tekst: '12.6.2 Figuren opsplitsen',                  blz: null, soort: 'subpar' },
