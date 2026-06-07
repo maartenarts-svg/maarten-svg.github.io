@@ -1,12 +1,12 @@
 // ============================================================
-// H11-VOORKENNISCRITERIA.JS
+// H12-VOORKENNISCRITERIA.JS
 // Bouwt een tabel van voorkennis.
 //
 // Gebruik in de cursus (structuurbestand):
 //   voegContentToe('content-voorkennis');
 //   laadOefeningen('#content-voorkennis', [
-//     'H11-voorkennis-matrix.js',
-//     'H11-voorkennis.js',
+//     'H12-voorkennis-matrix.js',
+//     'H12-voorkennis.js',
 //   ]);
 //
 // Compatibel met layout-systeem 1 (doorlopend) en
@@ -19,11 +19,11 @@
 (function() {
   // ── HOOFDSTUK-INSTELLING ──────────────────────────────────────
   // !! Pas dit aan per hoofdstuk !!
-  const HOOFDSTUK = '11';   // wordt gebruikt om doelen te filteren
+  const HOOFDSTUK = '12';   // wordt gebruikt om doelen te filteren
 
   // ── VERWIJZING NAAR MATRIX ────────────────────────────────────
   // !! Pas aan als het bestand ergens anders staat !!
-  // H11-voorkennis-matrix.js moet H11_voorkennis als globale var aanbieden
+  // H12-voorkennis-matrix.js moet H12_voorkennis als globale var aanbieden
   // Laadvolgorde in laadOefeningen: doelen → dit bestand
 
   // ── MAATINSTELLINGEN ──────────────────────────────────────────
@@ -43,7 +43,7 @@
 
   const container = document.getElementById('content-voorkennis');
   if (!container) {
-    console.warn('H11-voorkennis.js: container #content-voorkennis niet gevonden.');
+    console.warn('H12-voorkennis.js: container #content-voorkennis niet gevonden.');
     return;
   }
 
@@ -79,7 +79,7 @@
   // ── Doelen filteren en sorteren ───────────────────────────
   // Alleen doelen met plaatscode van de vorm HOOFDSTUK.x
   const prefix = HOOFDSTUK + '.';
-  const doelen = H11_voorkennis
+  const doelen = H12_voorkennis
     .filter(d => d.plaatscode && d.plaatscode.startsWith(prefix))
     .sort((a, b) => {
       const xA = parseFloat(a.plaatscode.slice(prefix.length));

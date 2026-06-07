@@ -1121,7 +1121,7 @@ function genereerSvgBlok(afb, ins) {
     c += `${ins}        const oplLagen = ${lagenStr}; /* ← oplossingenlagen */\n`;
     c += `${ins}        oplLagen.forEach(id => {\n`;
     c += `${ins}          const laag = svg.getElementById(id);\n`;
-    c += `${ins}          if (laag) { laag.style.display = 'none'; laag.classList.add('svg-opl-laag'); }\n`;
+    c += `${ins}          if (laag) { laag.style.display = TOON_OPLOSSINGEN ? 'block' : 'none'; laag.classList.add('svg-opl-laag'); }\n`;
     c += `${ins}        });\n`;
     c += `${ins}        _fig.innerHTML = '';\n`;
     c += `${ins}        _fig.appendChild(svg);\n`;
@@ -1285,7 +1285,7 @@ function genereer() {
           c += `          const oplLagen = ${lagenStr}; /* ← oplossingenlagen ${afb.naam} */\n`;
           c += `          oplLagen.forEach(id => {\n`;
           c += `            const laag = svg.getElementById(id);\n`;
-          c += `            if (laag) { laag.style.display = 'none'; laag.classList.add('svg-opl-laag'); svgLagen.push(laag); }\n`;
+          c += `            if (laag) { laag.style.display = TOON_OPLOSSINGEN ? 'block' : 'none'; laag.classList.add('svg-opl-laag'); svgLagen.push(laag); }\n`;
           c += `          });\n`;
           c += `          ${tdVar}.innerHTML = '';\n`;
           c += `          ${tdVar}.appendChild(svg);\n`;

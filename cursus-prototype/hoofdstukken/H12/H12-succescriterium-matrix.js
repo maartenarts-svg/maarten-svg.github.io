@@ -1,5 +1,5 @@
-// Doelen matrix H11 — gegenereerd op 5/5/2026
-var H11_doelen = [
+// Doelen matrix H12 — gegenereerd op 5/5/2026
+var H12_doelen = [
   { id: 'd_1778006115184_4', tekst: "Ik herken een vergelijking.", type: 'succescriterium', plaatscode: '11.1', leerplandoelcodes: ["6.17"], referenties: ["11.0","11.1"], evalueerbaarheid: 'nee', scores: "" },
   { id: 'd_1778006115313_5', tekst: "Ik ken en gebruik het begrip onbekende.", type: 'succescriterium', plaatscode: '11.2', leerplandoelcodes: ["6.11"], referenties: ["11.0","11.1"], evalueerbaarheid: 'nee', scores: "" },
   { id: 'd_1778006115442_6', tekst: "Ik controleer of een getal een oplossing is van een vergelijking.", type: 'succescriterium', plaatscode: '11.3', leerplandoelcodes: ["6.13","6.17"], referenties: ["11.0","11.1"], evalueerbaarheid: 'nee', scores: "" },

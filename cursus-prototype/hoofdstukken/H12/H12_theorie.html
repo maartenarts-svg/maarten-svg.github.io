@@ -526,6 +526,7 @@ voegParagraafToe = function(nummer, tekst) {
 function voegSubparagraafToe(nummer, tekst) {
   const div = document.createElement('div');
   div.classList.add('opmaak-subparagraaf');
+  div.id = `paragraaf-${nummer.replace('.', '-')}`;  // ← anker-id
 
   const nrSpan = document.createElement('span');
   nrSpan.classList.add('subparagraaf-nummer');

@@ -1,13 +1,13 @@
 // ============================================================
-// H11-SUCCESCRITERIA.JS
+// H12-SUCCESCRITERIA.JS
 // Bouwt een tabel van succescriteria met bijbehorende oefeningen.
 //
 // Gebruik in de cursus (structuurbestand):
 //   voegContentToe('content-succescriteria');
 //   laadOefeningen('#content-succescriteria', [
-//     'H11-succescriterium-matrix.js',
-//     'H11-datamatrix.js',
-//     'H11-succescriteria.js',
+//     'H12-succescriterium-matrix.js',
+//     'H12-datamatrix.js',
+//     'H12-succescriteria.js',
 //   ]);
 //
 // Compatibel met layout-systeem 1 (doorlopend) en
@@ -19,12 +19,12 @@
 (function() {
   // ── HOOFDSTUK-INSTELLING ──────────────────────────────────────
   // !! Pas dit aan per hoofdstuk !!
-  const HOOFDSTUK = '11';   // wordt gebruikt om doelen en referenties te filteren
+  const HOOFDSTUK = '12';   // wordt gebruikt om doelen en referenties te filteren
 
   // ── VERWIJZING NAAR MATRICES ──────────────────────────────────
   // !! Pas aan als de bestanden ergens anders staan !!
-  // H11-succescriterium-matrix.js moet H11_doelen als globale var aanbieden
-  // H11-datamatrix.js   moet H11_matrix  als globale var aanbieden
+  // H12-succescriterium-matrix.js moet H12_doelen als globale var aanbieden
+  // H12-datamatrix.js   moet H12_matrix  als globale var aanbieden
   // Laadvolgorde in laadOefeningen: doelen → data → dit bestand
 
   // ── MAATINSTELLINGEN ──────────────────────────────────────────
@@ -49,7 +49,7 @@
 
   const container = document.getElementById('content-succescriteria');
   if (!container) {
-    console.warn('H11-succescriteria.js: container #content-succescriteria niet gevonden.');
+    console.warn('H12-succescriteria.js: container #content-succescriteria niet gevonden.');
     return;
   }
 
@@ -85,7 +85,7 @@
   // ── Doelen filteren en sorteren ───────────────────────────
   // Alleen doelen met plaatscode van de vorm HOOFDSTUK.x
   const prefix  = HOOFDSTUK + '.';
-  const doelen  = H11_doelen
+  const doelen  = H12_doelen
     .filter(d => d.plaatscode && d.plaatscode.startsWith(prefix))
     .sort((a, b) => {
       const xA = parseFloat(a.plaatscode.slice(prefix.length));
@@ -145,7 +145,7 @@
     tr.appendChild(td2);
 
     // ── Oefeningen bij dit doel ophalen uit de matrix ─────
-    const oefBijDoel = H11_matrix.filter(o =>
+    const oefBijDoel = H12_matrix.filter(o =>
       (o.doelen || []).includes(doel.id)
     );
 

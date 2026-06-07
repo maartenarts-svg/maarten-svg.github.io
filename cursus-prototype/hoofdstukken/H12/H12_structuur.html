@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hoofdstuk 11 — Vergelijkingen</title>
+  <title>Hoofdstuk 12 — Omtrek en oppervlakte</title>
   <link rel="stylesheet" href="../../css/cursus.css">
 
   <style>
@@ -218,6 +218,30 @@
       font-family: var(--font);
     }
 
+    /* 3b) Opmaak subparagraaf */
+    .opmaak-subparagraaf {
+      display: flex;
+      align-items: baseline;
+      margin: 0.3cm 0 0.1cm 0;
+      position: relative;
+    }
+    .subparagraaf-nummer {
+      position: absolute;
+      /* Nummer staat op 1.5cm van linkerrand → t.o.v. content = -marge-links + 1.5cm */
+      left: calc(-1 * var(--marge-links) + 1.2cm);
+      font-size: 14pt;
+      font-weight: bold;
+      color: var(--groen-donker);
+      font-family: var(--font);
+      white-space: nowrap;
+    }
+    .subparagraaf-titel {
+      font-size: 14pt;
+      font-weight: bold;
+      color: var(--groen-donker);
+      font-family: var(--font);
+    }
+
     /* 4) Opmaak onderdeel */
     .opmaak-onderdeel {
       display: flex;
@@ -317,15 +341,15 @@
    ============================================================ */
 const LAYOUT_SYSTEEM = 2;   // ← HIER AANPASSEN (1 of 2)
 // !! Zet op true voor oplossingensleutel, false voor normaal gebruik !!
-TOON_OPLOSSINGEN = false;
-const TOON_VULLINGSBALK = false; // ← hier aan/uit zetten
-TOGGLE_TOEGESTAAN = false;
+TOON_OPLOSSINGEN = true;
+const TOON_VULLINGSBALK = true; // ← hier aan/uit zetten
+TOGGLE_TOEGESTAAN = true;
 
 /* ============================================================
    CONFIGURATIE
    ============================================================ */
-const EERSTE_PAGINA    = 491;   // ← beginpaginanummer van dit hoofdstuk
-const HOOFDSTUK_TITEL  = '11 Vergelijkingen';
+const EERSTE_PAGINA    = 533;   // ← beginpaginanummer van dit hoofdstuk
+const HOOFDSTUK_TITEL  = '12 Omtrek en oppervlakte';
 
 /* ============================================================
    PAGINA-BEHEER
@@ -458,6 +482,30 @@ voegParagraafToe = function(nummer, tekst) {
 };
 
 /**
+ * Voeg een subparagraaftitel (opmaak 3b) toe aan de huidige pagina.
+ * @param {string} nummer - bv. '12.6.1'
+ * @param {string} tekst  - bv. 'Problemen oplossen met omtrek en oppervlakte'
+ */
+function voegSubparagraafToe(nummer, tekst) {
+  const div = document.createElement('div');
+  div.classList.add('opmaak-subparagraaf');
+  div.id = `paragraaf-${nummer.replace('.', '-')}`;  // ← anker-id
+
+  const nrSpan = document.createElement('span');
+  nrSpan.classList.add('subparagraaf-nummer');
+  nrSpan.textContent = nummer;
+
+  const txtSpan = document.createElement('span');
+  txtSpan.classList.add('subparagraaf-titel');
+  txtSpan.textContent = tekst;
+
+  div.appendChild(nrSpan);
+  div.appendChild(txtSpan);
+  huidigePagina().appendChild(div);
+  return div;
+}
+
+/**
  * Voeg een onderdeeltitel (opmaak 4) toe aan de huidige pagina.
  * @param {string} icoon - emoji of tekst
  * @param {string} tekst - bv. 'Ontdekkingstocht'
@@ -522,7 +570,7 @@ function voegTheorieToe(items) {
   const eersteNummer = items[0]?.nummer?.replace('.', '-');
   if (eersteNummer) {
     kader.addEventListener('click', () => {
-      window.open(`H11_theorie.html#paragraaf-${eersteNummer}`, '_blank');
+      window.open(`H12_theorie.html#paragraaf-${eersteNummer}`, '_blank');
     });
   }
 
@@ -603,10 +651,10 @@ titelDiv.classList.add('opmaak-titel');
 titelDiv.textContent = HOOFDSTUK_TITEL;
 huidigePagina().appendChild(titelDiv);
 
-witregel('9cm');
+witregel('7.5cm');
 voegContentToe('content-titelpagina');
 laadOefeningen('#content-titelpagina', [
-  'P11_0/naamlabel.js',
+  'P12_0/naamlabel.js',
 ]);
 
 // ── PAGINA 2: Inhoudstafel ───────────────────────────────────
@@ -624,376 +672,129 @@ huidigePagina().appendChild(inhoudstafelContainer);
 nieuwePagina();
 inhoudstafelData.push({ tekst: 'Inchecken', blz: huidigePaginaNummer - 1 });
 voegBannerToe('✔️', 'Inchecken');
-voegContentToe('content-inchecken');
+/*voegContentToe('content-inchecken');
 laadOefeningen('#content-inchecken', [
-  'P11_0/checkin.js'
-]);
+  'P12_0/checkin.js'
+]);*/
 
 witregel(bovenTitel);
 
 inhoudstafelData.push({ tekst: 'Voorkennis', blz: huidigePaginaNummer - 1 });
 voegBannerToe('📍', 'Voorkennis');
-voegContentToe('content-voorkennis');
+/*voegContentToe('content-voorkennis');
 laadOefeningen('#content-voorkennis', [
-  'H11-voorkennis-matrix.js',
-  'H11-datamatrix.js',
-  'H11-voorkennis.js',
-]);
+  'H12-voorkennis-matrix.js',
+  'H12-datamatrix.js',
+  'H12-voorkennis.js',
+]);*/
 
 // ── PAGINA 4: Succescriteria ─────────────────────────────────
 nieuwePagina();
 inhoudstafelData.push({ tekst: 'Succescriteria', blz: huidigePaginaNummer - 1 });
 voegBannerToe('🧗', 'Succescriteria');
-voegContentToe('content-succescriteria');
+/*voegContentToe('content-succescriteria');
 laadOefeningen('#content-succescriteria', [
-  'H11-succescriterium-matrix.js',
-  'H11-datamatrix.js',
-  'H11-succescriteria.js',
-]);
+  'H12-succescriterium-matrix.js',
+  'H12-datamatrix.js',
+  'H12-succescriteria.js',
+]);*/
 
 // ── PAGINA 5: Overzicht opdrachten ───────────────────────────
-nieuwePagina();
 inhoudstafelData.push({ tekst: 'Overzicht opdrachten', blz: huidigePaginaNummer - 1 });
 voegBannerToe('🏋️', 'Overzicht opdrachten');
-voegContentToe('content-overzicht');
+/*voegContentToe('content-overzicht');
 laadOefeningen('#content-overzicht', [
-  'H11-datamatrix.js',
-  'H11-visueel-overzicht.js',
-]);
+  'H12-datamatrix.js',
+  'H12-visueel-overzicht.js',
+]);*/
 
 // ── PARAGRAAF 11.1 ───────────────────────────────────────────
 nieuwePagina();
-inhoudstafelData.push({ tekst: '11.1 Vergelijkingen', blz: huidigePaginaNummer - 1 });
-voegParagraafToe('11.1', 'Vergelijkingen');
-
-voegOnderdeelToe('🔍', 'Ontdekkingstocht','');
-witregel(onderTitel);
-voegContentToe('content-111-ontdek');
-laadOefeningen('#content-111-ontdek', [
-  'P11_1/oe_111001.js',
-  'P11_1/oe_111002.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-111-ontdek-2');
-laadOefeningen('#content-111-ontdek-2', [
-  'P11_1/oe_111003.js',
-  'P11_1/oe_111501.js',
-]);
+inhoudstafelData.push({ tekst: '12.1 Problemen oplossen met omtrek en oppervlakte', blz: huidigePaginaNummer - 1 });
+voegParagraafToe('12.1', 'Problemen oplossen met omtrek en oppervlakte');
 
 voegOnderdeelToe('🧠', 'Theorie');
 voegTheorieToe([
-  { nummer: '11.1', tekst: 'Vergelijkingen' },
+  { nummer: '12.6.1', tekst: 'Problemen oplossen met omtrek en oppervlakte' },
 ]);
-witregel(bovenTitel);
+witregel('0.3cm');
 
-nieuwePagina();
 voegOnderdeelToe('🧭', 'Zo doe je dat!','');
 witregel(onderTitel);
-voegContentToe('content-111-zoeje');
-laadOefeningen('#content-111-zoeje', [
-  'P11_1/oe_111004.js',
-  'P11_1/oe_111005.js',
-  'P11_1/oe_111006.js',
+voegContentToe('content-121-zoeje');
+laadOefeningen('#content-121-zoeje', [
+  'P12_1/oe_121001.js',
+  'P12_1/oe_121002.js',
 ]);
 
 forceerPaginawissel();
-voegContentToe('content-111-zoeje-2');
-laadOefeningen('#content-111-zoeje-2', [
-  'P11_1/oe_111007.js',
+
+voegContentToe('content-121-zoeje-2');
+laadOefeningen('#content-121-zoeje-2', [
+  'P12_1/oe_121501.js',
+  'P12_1/oe_121502.js',
 ]);
 
-nieuwePagina();
-voegOnderdeelToe('🚦', 'Hoe ver sta ik?');
-witregel(onderTitel);
-voegContentToe('content-111-hoeveR');
-laadOefeningen('#content-111-hoeveR', [
-  'P11_1/oe_111009.js',
-]);
 
-voegHoeVerStaIkTekstToe('tekst2');
-witregel('0.7cm');
-
-voegContentToe('content-111-hoeveR-2');
-laadOefeningen('#content-111-hoeveR-2', [
-  'P11_1/oe_111011.js',
-]);
-
-voegHoeVerStaIkTekstToe('tekst3');
 
 // Oefenen! start op nieuwe pagina
 nieuwePagina();
 voegOnderdeelToe('🔄', 'Oefenen!');
 witregel(onderTitel);
-voegContentToe('content-111-oefenen');
-laadOefeningen('#content-111-oefenen', [
-  'P11_1/oe_111010.js',
-  'P11_1/oe_111012.js',
-  'P11_1/oe_111013.js',
+voegContentToe('content-121-oefenen');
+laadOefeningen('#content-121-oefenen', [
+  'P12_1/oe_121003.js',
 ]);
 
 forceerPaginawissel();
-voegContentToe('content-111-oefenen-2');
-laadOefeningen('#content-111-oefenen-2', [
-  'P11_1/oe_111014.js',
-  'P11_1/oe_111015.js',
-]);
 
 
-forceerPaginawissel();
-voegContentToe('content-111-oefenen-3');
-laadOefeningen('#content-111-oefenen-3', [
-  'P11_1/oe_111016.js',
-  'P11_1/oe_111K07.js',
-  'P11_1/oe_111K06.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-111-oefenen-4');
-laadOefeningen('#content-111-oefenen-4', [
-  'P11_1/oe_111K02.js',
-]);
 
 // ── PARAGRAAF 11.2 ───────────────────────────────────────────
 nieuwePagina();   
-inhoudstafelData.push({ tekst: '11.2 Vergelijkingen oplossen', blz: huidigePaginaNummer - 1 });
-voegParagraafToe('11.2', 'Vergelijkingen oplossen');
+inhoudstafelData.push({ tekst: '12.7 Vergelijkingen oplossen', blz: huidigePaginaNummer - 1 });
+voegParagraafToe('12.7', 'Vergelijkingen oplossen');
 
-voegOnderdeelToe('🔍', 'Ontdekkingstocht','');
-witregel(onderTitel);
-voegContentToe('content-112-ontdek');
-laadOefeningen('#content-112-ontdek', [
-  'P11_2/oe_112001.js',
-]);
 
 voegOnderdeelToe('🧠', 'Theorie');
 voegTheorieToe([
-  { nummer: '11.2', tekst: 'Vergelijkingen oplossen' },
+  { nummer: '12.7', tekst: 'Vergelijkingen oplossen' },
 ]);
 
 nieuwePagina();
 
 voegOnderdeelToe('🧭', 'Zo doe je dat!','');
 witregel(onderTitel);
-voegContentToe('content-112-zoeje');
-laadOefeningen('#content-112-zoeje', [
-  'P11_2/oe_112005.js',
-]);
 
-forceerPaginawissel();
-voegContentToe('content-112-zoeje-2');
-laadOefeningen('#content-112-zoeje-2', [
-  'P11_2/oe_112006.js',
-]);
-
-
-nieuwePagina();
-voegOnderdeelToe('🚦', 'Hoe ver sta ik?');
-witregel(onderTitel);
-voegContentToe('content-112-hoeveR');
-laadOefeningen('#content-112-hoeveR', [
- 'P11_2/oe_112007.js',  
-]);
-voegHoeVerStaIkTekstToe('tekst2');
-witregel('0.7cm');
-
-forceerPaginawissel();
-voegContentToe('content-112-hoeveR-2');
-laadOefeningen('#content-112-hoeveR-2', [
-  'P11_2/oe_112010.js',
-  'P11_2/oe_112012.js',  
-]);
-voegHoeVerStaIkTekstToe('tekst3');
 
 nieuwePagina();
 voegOnderdeelToe('🔄', 'Oefenen!');
 witregel(onderTitel);
-voegContentToe('content-112-oefenen');
-laadOefeningen('#content-112-oefenen', [
-  'P11_2/oe_112008.js',  
-]);
 
-forceerPaginawissel();
-voegContentToe('content-112-oefenen-2');
-laadOefeningen('#content-112-oefenen-2', [
-  'P11_2/oe_112009.js',
-]);
 
-forceerPaginawissel();
-voegContentToe('content-112-oefenen-3');
 
-laadOefeningen('#content-112-oefenen-3', [
-  'P11_2/oe_112011.js',
-]);
 
-forceerPaginawissel();
-voegContentToe('content-112-oefenen-4');
-laadOefeningen('#content-112-oefenen-4', [
-  'P11_2/oe_112013.js',
-  'P11_2/oe_112014.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-112-oefenen-5');
-laadOefeningen('#content-112-oefenen-5', [
-  'P11_2/oe_112501.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-112-oefenen-6');
-laadOefeningen('#content-112-oefenen-6', [
-  'P11_2/oe_112015.js',
-  'P11_2/oe_112016.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-112-oefenen-7');
-laadOefeningen('#content-112-oefenen-7', [
-  'P11_2/oe_112K01.js',
-  'P11_2/oe_112K02.js',
-  'P11_2/oe_112K03.js',
-]);
-
-// ── PARAGRAAF 10.3 ───────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: '11.3 Vraagstukken oplossen met een vergelijking', blz: huidigePaginaNummer - 1 });
-voegParagraafToe('11.3', 'Vraagstukken oplossen met een vergelijking');
-
-voegOnderdeelToe('🔍', 'Ontdekkingstocht','https://youtu.be/nb_A-sZhZh0');
-witregel(onderTitel);
-voegContentToe('content-113-ontdek');
-laadOefeningen('#content-113-ontdek', [
-  'P11_3/oe_113001.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-ontdek-2');
-laadOefeningen('#content-113-ontdek-2', [
-  'P11_3/oe_113501.js',
-]);
-
-witregel(bovenTitel);
-voegOnderdeelToe('🧠', 'Theorie');
-voegTheorieToe([
-  { nummer: '11.3', tekst: 'Vraagstukken oplossen met een vergelijking' },
-]);
-
-witregel(bovenTitel);
-voegOnderdeelToe('🧭', 'Zo doe je dat!','https://youtu.be/MvVmh4gJI_Y');
-witregel(onderTitel);
-voegContentToe('content-113-zoeje');
-laadOefeningen('#content-113-zoeje', [
-  'P11_3/oe_113502.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-zoeje-2');
-laadOefeningen('#content-113-zoeje-2', [
-  'P11_3/oe_113503.js',
-  'P11_3/oe_113002.js',
-  'P11_3/oe_113003.js',
-]);
-
-nieuwePagina();
-voegOnderdeelToe('🚦', 'Hoe ver sta ik?');
-witregel(onderTitel);
-voegContentToe('content-113-hoeveR');
-laadOefeningen('#content-113-hoeveR', [
-  'P11_3/oe_113004.js',
-  'P11_3/oe_113007.js',
-]);
-voegHoeVerStaIkTekstToe('tekst2');
-witregel('0.7cm');
-
-forceerPaginawissel();
-voegContentToe('content-113-hoeveR-2');
-laadOefeningen('#content-113-hoeveR-2', [
-  'P11_3/oe_113010.js',
-]);
-voegHoeVerStaIkTekstToe('tekst3');
-
-nieuwePagina();
-voegOnderdeelToe('🔄', 'Oefenen!');
-witregel(onderTitel);
-voegContentToe('content-113-oefenen');
-laadOefeningen('#content-113-oefenen', [
-  'P11_3/oe_113005.js',
-  'P11_3/oe_113006.js',
-  'P11_3/oe_113008.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-oefenen-2');
-laadOefeningen('#content-113-oefenen-2', [
-  'P11_3/oe_113009.js',
-  'P11_3/oe_113011.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-oefenen-3');
-laadOefeningen('#content-113-oefenen-3', [
-  'P11_3/oe_113012.js',
-  'P11_3/oe_113013.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-oefenen-4');
-laadOefeningen('#content-113-oefenen-4', [
-  'P11_3/oe_113014.js',
-  'P11_3/oe_113015.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-oefenen-5');
-laadOefeningen('#content-113-oefenen-5', [
-  'P11_3/oe_113016.js',
-  'P11_3/oe_113504.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-oefenen-6');
-laadOefeningen('#content-113-oefenen-6', [
-  'P11_3/oe_113K04.js',
-  'P11_3/oe_113K05.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-oefenen-7');
-laadOefeningen('#content-113-oefenen-7', [
-  'P11_3/oe_113K06.js',
-  'P11_3/oe_113K07.js',
-]);
-
-forceerPaginawissel();
-voegContentToe('content-113-oefenen-8');
-laadOefeningen('#content-113-oefenen-8', [
-  'P11_3/oe_113K09.js',
-]);
 
 
 // ── Schema ───────────────────────────────────────────────────
 nieuwePagina();
 inhoudstafelData.push({ tekst: 'Schema', blz: huidigePaginaNummer - 1 });
 voegBannerToe('🗂️', 'Schema');
-voegContentToe('content-schema');
+/*voegContentToe('content-schema');
 laadOefeningen('#content-schema', [
   'P11_0/H11_schemadefa.js',
-]);
+]);*/
 
-forceerPaginawissel();
-voegContentToe('content-schema-2');
-laadOefeningen('#content-schema-2', [
-  'P11_0/H11_schemadefb.js',
-]);
+
 
 // ── Uitchecken ───────────────────────────────────────────────
 nieuwePagina();
 inhoudstafelData.push({ tekst: 'Uitchecken', blz: huidigePaginaNummer - 1 });
 voegBannerToe('✔️', 'Uitchecken');
-voegContentToe('content-uitchecken');
+/*voegContentToe('content-uitchecken');
 laadOefeningen('#content-uitchecken', [
   'P11_0/checkout.js',
-]);
+]);+/
 
 /* ============================================================
    INHOUDSTAFEL INVULLEN
@@ -1041,6 +842,9 @@ laadOefeningen('#content-uitchecken', [
     if (item.stijl === 'bold') rij.style.fontWeight = 'bold';
 
     const tekst = document.createElement('span');
+    if (item.soort === 'subpar') {
+      tekst.style.paddingLeft = '1cm';
+    }
     tekst.classList.add('it-tekst');
     tekst.textContent = item.tekst;
     rij.appendChild(tekst);

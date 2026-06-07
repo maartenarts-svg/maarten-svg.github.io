@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../../css/cursus.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cursus Wiskunde — Oefeningoverzicht H11</title>
+<title>Cursus Wiskunde — Oefeningoverzicht H12</title>
 <style>
   :root {
     --groen-donker:  #4a7c59;
@@ -22,7 +22,7 @@
 
     /* ── Kleuren verbeteropties ──────────────────────────────
        Voeg deze ook toe aan cursus.css als je het visuele
-       overzicht in H11_structuur.html gebruikt.
+       overzicht in H12_structuur.html gebruikt.
     ─────────────────────────────────────────────────────── */
     --oranje-rand:   #e65100;
     --oranje-pastel: #ffe0b2;
@@ -146,7 +146,7 @@
 </style>
 </head>
 <body>
-<header>📐 Cursus Wiskunde <span>— Oefeningoverzicht H11</span></header>
+<header>📐 Cursus Wiskunde <span>— Oefeningoverzicht H12</span></header>
 
 <!-- ── Dialoog niet-opgeslagen wijzigingen ─────────────────── -->
 <div id="dialoog-overlay">
@@ -229,12 +229,12 @@ import { toonDoelenPopup }  from '../../js/doelen-popup.js';
 // ============================================================
 // INSTELLINGEN
 // ── Beginpaginanummer ────────────────────────────────────────
-// EERSTE_PAGINA_H11: pas aan als het hoofdstuk verschuift.
-const EERSTE_PAGINA_H11 = 491;
+// EERSTE_PAGINA_H12: pas aan als het hoofdstuk verschuift.
+const EERSTE_PAGINA_H12 = 533;
 
 // ── Pad naar structuurbestand ────────────────────────────────
 // Staat in dezelfde map als dit bestand.
-const PAD_STRUCTUUR = 'H11_structuur.html';
+const PAD_STRUCTUUR = 'H12_structuur.html';
 
 // ── Parameters voor het visuele overzicht ───────────────────
 // Zie overzicht-visueel.js voor uitleg van alle parameters.
@@ -261,7 +261,7 @@ let _niveaus           = {};   // sleutel = bestandsnaam
 let _verbeterdata      = {};   // sleutel = bestandsnaam
 let _doelkoppelingen   = {};   // sleutel = bestandsnaam, waarde = [doel-id, ...]
 let _doelen            = [];   // alle doelen uit Firestore
-let _paragraafNamen    = {};   // { "10.1": "Naam", ... }
+let _paragraafNamen    = {};   // { "12.1": "Naam", ... }
 let _gewijzigd         = false;
 
 // ── DOM ───────────────────────────────────────────────────────
@@ -520,7 +520,7 @@ function bouwStats() {
 // ── Structuurbestand verwerken ────────────────────────────────
 function verwerkInhoud(tekst) {
   // ── Paragraafnamen ophalen ──────────────────────────────────
-  // Zoekt naar: voegParagraafToe('10.1', 'Naam van de paragraaf')
+  // Zoekt naar: voegParagraafToe('12.1', 'Naam van de paragraaf')
   _paragraafNamen = {};
   const paragraafRegex = /voegParagraafToe\(\s*'([^']+)'\s*,\s*'([^']+)'\s*\)/g;
   let pm;
@@ -550,17 +550,17 @@ function verwerkInhoud(tekst) {
     const bestandenBlok = m[2];
 
     const aantalPaginawissels = paginaPosities.filter(p => p < positie).length;
-    const bladzijde = EERSTE_PAGINA_H11 + aantalPaginawissels - 1;
+    const bladzijde = EERSTE_PAGINA_H12 + aantalPaginawissels - 1;
 
     // ── Paragraaf uit container-id ──────────────────────────
-    // container-id formaat: content-103-oefenen
-    // "103" → hoofdstuk 10, paragraaf 3 → "10.3"
+    // container-id formaat: content-121-oefenen
+    // "121" → hoofdstuk 12, paragraaf 1 → "12.1"
     const paragraafMatch = containerId.match(/content-(\d+)-/);
     let paragraaf = '';
     if (paragraafMatch) {
-      const code        = paragraafMatch[1];         // bv. "103"
-      const hoofdstuk   = code.slice(0, -1);         // bv. "10"
-      const paragraafNr = parseInt(code.slice(-1));  // bv. 3
+      const code        = paragraafMatch[1];         // bv. "121"
+      const hoofdstuk   = code.slice(0, -1);         // bv. "12"
+      const paragraafNr = parseInt(code.slice(-1));  // bv. 1
       paragraaf = hoofdstuk + '.' + paragraafNr;
     }
 
@@ -620,7 +620,7 @@ window.downloadCSV = function() {
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
-  a.href = url; a.download = 'oefeningen_overzicht_H11.csv'; a.click();
+  a.href = url; a.download = 'oefeningen_overzicht_H12.csv'; a.click();
   URL.revokeObjectURL(url);
 };
 
@@ -646,15 +646,15 @@ window.downloadMatrix = function() {
   });
 
   const inhoud =
-    `// Matrix H11 — gegenereerd op ${new Date().toLocaleDateString('nl-BE')}\n` +
-    `var H11_matrix = [\n` +
+    `// Matrix H12 — gegenereerd op ${new Date().toLocaleDateString('nl-BE')}\n` +
+    `var H12_matrix = [\n` +
     regels.join(',\n') +
     `\n];\n`;
 
   const blob = new Blob([inhoud], { type: 'text/javascript;charset=utf-8;' });
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
-  a.href = url; a.download = 'H11-datamatrix.js'; a.click();
+  a.href = url; a.download = 'H12-datamatrix.js'; a.click();
   URL.revokeObjectURL(url);
 };
 

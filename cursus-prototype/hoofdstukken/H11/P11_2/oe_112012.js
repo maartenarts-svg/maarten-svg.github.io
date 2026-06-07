@@ -170,7 +170,7 @@
           const oplLagen = ['layer2']; /* ← oplossingenlagen */
           oplLagen.forEach(id => {
             const laag = svg.getElementById(id);
-            if (laag) { laag.style.display = 'none'; laag.classList.add('svg-opl-laag'); }
+            if (laag) { laag.style.display = TOON_OPLOSSINGEN ? 'block' : 'none'; laag.classList.add('svg-opl-laag'); }
           });
           _fig.innerHTML = '';
           _fig.appendChild(svg);

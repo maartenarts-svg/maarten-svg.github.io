@@ -1,23 +1,23 @@
 // ============================================================
-// H11-VISUEEL-OVERZICHT.JS
+// H12-VISUEEL-OVERZICHT.JS
 // Bouwt een statisch visueel overzicht van alle oefeningen
-// van H11 in de cursus.
+// van H12 in de cursus.
 //
 // Gebruik in de cursus (structuurbestand):
 //   voegContentToe('content-overzicht');
 //   (daarna wordt dit bestand geladen via een <script>-tag)
 //
-// Data komt uit H11-data.js (de geëxporteerde matrix).
-// Beide bestanden staan in dezelfde map (hoofdstukken/H11/).
+// Data komt uit H12-data.js (de geëxporteerde matrix).
+// Beide bestanden staan in dezelfde map (hoofdstukken/H12/).
 //
 // Compatibel met layout-systeem 1 (doorlopend) en
 // systeem 2 (pagina's met marges).
 // ============================================================
 
 // ── VERWIJZING NAAR MATRIX ────────────────────────────────────
-// !! Pas dit aan als H11-datamatrix.js ergens anders staat !!
-// H11-datamatrix.js moet geladen zijn vóór dit bestand
-// via laadOefeningen(['H11-data.js', 'H11-visueel-overzicht.js'])
+// !! Pas dit aan als H12-datamatrix.js ergens anders staat !!
+// H12-datamatrix.js moet geladen zijn vóór dit bestand
+// via laadOefeningen(['H12-data.js', 'H12-visueel-overzicht.js'])
 
 // ── MAATINSTELLINGEN ──────────────────────────────────────────
 // Speel hier met de afmetingen van de blokjes en de tussenruimtes.
@@ -45,7 +45,7 @@ const NIVEAU_ONDERDELEN = new Set(['oefenen', 'hoever', 'hoeveR']);
 (function() {
   const container = document.getElementById('content-overzicht');
   if (!container) {
-    console.warn('H11-visueel-overzicht.js: container #content-overzicht niet gevonden.');
+    console.warn('H12-visueel-overzicht.js: container #content-overzicht niet gevonden.');
     return;
   }
 
@@ -64,7 +64,7 @@ const NIVEAU_ONDERDELEN = new Set(['oefenen', 'hoever', 'hoeveR']);
 
   // ── Groepeer oefeningen per paragraaf ─────────────────────
   const perParagraaf = {};
-  H11_matrix.forEach(o => {
+  H12_matrix.forEach(o => {
     if (!perParagraaf[o.paragraaf]) perParagraaf[o.paragraaf] = [];
     perParagraaf[o.paragraaf].push(o);
   });

@@ -12,18 +12,18 @@ window.__berekenScores = function(leerling, taakData) {
 
   // ── Score 2: verbeteringen (oe_2) ────────────────────────
   const verbetering  = leerling.verbetering || {};
-  const aantalVerbeterd = [1, 2, 3, 4, 5].filter(nr =>
+  const aantalVerbeterd = [1, 2, 3].filter(nr =>
     (verbetering[nr]?.pogingen?.length || 0) > 0
   ).length;
 
   let scoreVerbeteringen;
-  if (aantalVerbeterd === 5)      scoreVerbeteringen = 'A';
+  if (aantalVerbeterd === 3)      scoreVerbeteringen = 'A';
   else if (aantalVerbeterd >= 1)  scoreVerbeteringen = 'C';
   else                            scoreVerbeteringen = 'NI';
 
   // ── Score 3: zelfevaluatie succescriteria (oe_3) ─────────
   const oe3 = antwoorden['oe_3'] || [];
-  const aantalSC = 5;
+  const aantalSC = 3;
   const aangeduid = oe3.filter(a =>
     a?.antwoord === 'A' || a?.antwoord === 'B' || a?.antwoord === 'C'
   ).length;
@@ -34,7 +34,7 @@ window.__berekenScores = function(leerling, taakData) {
   else                            scoreZelfevaluatie = 'NI';
 
   // ── Individuele SC-scores uit oe_3 ────────────────────────
-  const scLabels = ['W31WIESC02', 'W31WIESC03', 'W31WIESC04', 'W31WIESC05', 'W31WIESC06'];
+  const scLabels = ['W34WIDSC01', 'W34WIDSC02', 'W34WIDSC03'];
   const scScores = {};
   scLabels.forEach((id, i) => {
     scScores[id] = oe3[i]?.antwoord || 'NI';

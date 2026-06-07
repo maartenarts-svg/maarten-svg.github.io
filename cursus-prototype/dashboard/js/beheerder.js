@@ -422,6 +422,7 @@ function _toonHoofdstukFormulier(hst, idx = null) {
 const CR_MAP = {
   'H10': { pad: '../taken/CR1.js',              code: 'CR1'  },
   'H11': { pad: '../correctiesleutels/CR11.js', code: 'CR11' },
+  'H12': { pad: '../correctiesleutels/CR12.js', code: 'CR12' },
 };
 
 // Constanten — onderdelen die meetellen voor score

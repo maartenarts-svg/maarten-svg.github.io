@@ -1,6 +1,6 @@
 // ============================================================
-// H11-DATA.JS
-// Vaste matrix van oefeningen voor hoofdstuk 10.
+// H12-DATA.JS
+// Vaste matrix van oefeningen voor hoofdstuk 12.
 // Gebruik bij parameter locatie:'matrix' in bouwVisueel().
 //
 // Vul deze array in als het hoofdstuk volledig klaar is.
@@ -22,24 +22,24 @@
 //   Waarde  = naam van de paragraaf
 // ============================================================
 
-export const H11_PARAGRAAF_NAMEN = {
+export const H12_PARAGRAAF_NAMEN = {
   // !! Vul hier de paragraafnamen in !!
-  // "11.1": "Vergelijkingen",
-  // "11.2": "Vergelijkingen oplossen",
-  // "11.3": "Vraagstukken oplossen met een vergelijking",
+  // "12.1": "Vergelijkingen",
+  // "12.2": "Vergelijkingen oplossen",
+  // "12.3": "Vraagstukken oplossen met een vergelijking",
 };
 
-export const H11_OEFENINGEN = [
+export const H12_OEFENINGEN = [
   // !! Vul hier de oefeningen in als het hoofdstuk klaar is !!
   // Voorbeeld:
   // {
-  //   bestandsnaam: "oe_101001",
+  //   bestandsnaam: "oe_121001",
   //   nr:           1,
-  //   paragraaf:    "10.1",
+  //   paragraaf:    "12.1",
   //   onderdeel:    "Zo doe je dat!",
   //   sleutelRaw:   "zoeje",
   //   bladzijde:    453,
-  //   containerId:  "content-101-zoeje",
+  //   containerId:  "content-121-zoeje",
   //   niveau:       ["cirkel"],
   // },
 ];
