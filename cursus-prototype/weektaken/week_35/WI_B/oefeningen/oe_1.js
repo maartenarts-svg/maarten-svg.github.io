@@ -17,9 +17,7 @@ window.__taakOefening = (function () {
   const GAP   = '0.15cm';
 
   // ── Staat ─────────────────────────────────────────────────
-  let _antwoorden = [
-    { antwoord: null, score: 0 },
-  ];
+  let _antwoorden = BLOKJES.map(() => ({ antwoord: null, score: 0 }));
   let _invoerVelden = [];
   let _slaOpFn      = null;
   let _verbeterd    = false;
@@ -57,7 +55,7 @@ window.__taakOefening = (function () {
           ? a
           : { antwoord: a, score: 0 }
       );
-      while (_antwoorden.length < 1) _antwoorden.push({ antwoord: null, score: 0 });
+      while (_antwoorden.length < BLOKJES.length) _antwoorden.push({ antwoord: null, score: 0 });
     }
 
     _invoerVelden = [];
