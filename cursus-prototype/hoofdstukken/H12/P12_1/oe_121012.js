@@ -1,69 +1,92 @@
 /* ============================================================
-   H12 / P12_1 / oe_121002.js
-   soort: voorbeeld
+   H12 / P12_1 / oe_121012.js
+   soort: inoefenen
    ============================================================ */
 
 (function () {
 
   /* ---- Span-variabelen ---- */
-  const oe_121002_1 = document.createElement('span');
-  oe_121002_1.appendChild(htmlSpan('Bereken hoeveel plaats de draaimolen inneemt op het marktplein.'));
+  const oe_121012_2 = document.createElement('span');
+  oe_121012_2.appendChild(htmlSpan('Onderzoek welk parkeerterrein het grootst is.'));
 
-  const oe_121002_2 = document.createElement('span');
-  const oe_121002_2_b1 = maakSpanBreedte('0.4cm', '•');
-  oe_121002_2.appendChild(oe_121002_2_b1);
-  oe_121002_2.appendChild(maakSpanBreedte('1cm','Plan:'));
-  oe_121002_2.appendChild(htmlSpan('Om de plaats te berekenen die de draaimolen'));
+  const oe_121012_1 = document.createElement('span');
+  const oe_121012_1_b1 = maakSpanBreedte('0.4cm', '•');
+  oe_121012_1.appendChild(oe_121012_1_b1);
+  const oe_121012_1_b2 = maakSpanBreedte('1cm', 'Plan:');
+  oe_121012_1.appendChild(oe_121012_1_b2);
+  oe_121012_1.appendChild(htmlSpan('De grootte van het parkeerterrein is de'));
 
-  const oe_121002_3 = document.createElement('span');
-  const oe_121002_3_b1 = maakSpanBreedte('1.4cm', '');
-  oe_121002_3.appendChild(oe_121002_3_b1);
-  oe_121002_3.appendChild(htmlSpan('inneemt, bereken je de <b>oppervlakte</b> van de <b>cirkel</b>.'));
+  const oe_121012_3 = document.createElement('span');
+  const oe_121012_3_b1 = maakSpanBreedte('1.4cm', '');
+  oe_121012_3.appendChild(oe_121012_3_b1);
+  oe_121012_3.appendChild(htmlSpan('oppervlakte ervan.'));
 
-  const oe_121002_5 = document.createElement('span');
-  const oe_121002_5_b1 = maakSpanBreedte('0.4cm', '•');
-  oe_121002_5.appendChild(oe_121002_5_b1);
-  oe_121002_5.appendChild(htmlSpan('Berekening in m<sup>2</sup>: oppervlakte cirkel: π · 5<sup>2</sup> ≈ 78,54'));
+  const oe_121012_4 = document.createElement('span');
+  const oe_121012_4_b1 = maakSpanBreedte('1.4cm', '');
+  oe_121012_4.appendChild(oe_121012_4_b1);
+  oe_121012_4.appendChild(htmlSpan('Je moet dus de <b>oppervlakte</b> van een'));
 
-  const oe_121002_7 = document.createElement('span');
-  const oe_121002_7_b1 = maakSpanBreedte('0.4cm', '•');
-  oe_121002_7.appendChild(oe_121002_7_b1);
-  oe_121002_7.appendChild(htmlSpan('Antwoord: De draaimolen neemt 78,54 m<sup>2</sup> in.'));
+  const oe_121012_5 = document.createElement('span');
+  const oe_121012_5_b1 = maakSpanBreedte('1.4cm', '');
+  oe_121012_5.appendChild(oe_121012_5_b1);
+  oe_121012_5.appendChild(htmlSpan('<b>vierkant</b> en een <b>rechthoek</b> berekenen.'));
 
-  const oe_121002_8 = document.createElement('span');
-  oe_121002_8.appendChild(htmlSpan('Hans zit op de draaimolen op 3 m van het middelpunt en draait 10 rondjes.<br>Bereken de afstand die Hans afgelegd heeft.'));
+  const oe_121012_6 = document.createElement('span');
+  const oe_121012_6_b1 = maakSpanBreedte('0.4cm', '•');
+  oe_121012_6.appendChild(oe_121012_6_b1);
+  const oe_121012_6_b2 = maakSpanBreedte('3cm', 'Berekening in m²:');
+  oe_121012_6.appendChild(oe_121012_6_b2);
+  oe_121012_6.appendChild(htmlSpan('- vierkant: 100<sup>2</sup> = 10 000'));
 
-  const oe_121002_10 = document.createElement('span');
-  const oe_121002_10_b1 = maakSpanBreedte('0.4cm', '•');
-  oe_121002_10.appendChild(oe_121002_10_b1);
-  oe_121002_10.appendChild(maakSpanBreedte('1cm','Plan:'));
-  oe_121002_10.appendChild(htmlSpan('De afstand is 10 rondjes, dus 10 keer'));
+  const oe_121012_7 = document.createElement('span');
+  const oe_121012_7_b1 = maakSpanBreedte('3.4cm', '');
+  oe_121012_7.appendChild(oe_121012_7_b1);
+  oe_121012_7.appendChild(htmlSpan('- rechthoek: 150 · 50 = 7 500'));
 
-  const oe_121002_12 = document.createElement('span');
-  const oe_121002_12_b1 = maakSpanBreedte('1.4cm', '');
-  oe_121002_12.appendChild(oe_121002_12_b1);
-  oe_121002_12.appendChild(htmlSpan('de <b>omtrek</b> van een <b>cirkel</b> met straal 3 m.'));
+  const oe_121012_8 = document.createElement('span');
+  const oe_121012_8_b1 = maakSpanBreedte('0.4cm', '•');
+  oe_121012_8.appendChild(oe_121012_8_b1);
+  oe_121012_8.appendChild(htmlSpan('Antwoord: Parkeerterrein 1 is het grootst.'));
 
-  const oe_121002_13 = document.createElement('span');
-  const oe_121002_13_b1 = maakSpanBreedte('0.4cm', '•');
-  oe_121002_13.appendChild(oe_121002_13_b1);
-  oe_121002_13.appendChild(maakSpanBreedte('3.5cm','Berekeningen in m:'));
-  oe_121002_13.appendChild(maakSpanBreedte('2.5cm','- 1 rondje:'));
-  oe_121002_13.appendChild(htmlSpan('2 · π · 3 = 6π'));
+  const oe_121012_9 = document.createElement('span');
+  oe_121012_9.appendChild(htmlSpan('Onderzoek bij welk parkeerterrein de totale omheining het langst is.'));
 
-  const oe_121002_15 = document.createElement('span');
-  const oe_121002_15_b1 = maakSpanBreedte('3.9cm', '');
-  oe_121002_15.appendChild(oe_121002_15_b1);
-  oe_121002_15.appendChild(maakSpanBreedte('2.5cm','- 10 rondjes:'));
-  oe_121002_15.appendChild(htmlSpan('10 · 6π ≈ 188,50'));
+  const oe_121012_11 = document.createElement('span');
+  const oe_121012_11_b1 = maakSpanBreedte('0.4cm', '•');
+  oe_121012_11.appendChild(oe_121012_11_b1);
+  const oe_121012_11_b2 = maakSpanBreedte('1cm', 'Plan:');
+  oe_121012_11.appendChild(oe_121012_11_b2);
+  oe_121012_11.appendChild(htmlSpan('De omheining is rond het terrein, je moet dus'));
 
-  const oe_121002_16 = document.createElement('span');
-  const oe_121002_16_b1 = maakSpanBreedte('0.4cm', '•');
-  oe_121002_16.appendChild(oe_121002_16_b1);
-  oe_121002_16.appendChild(htmlSpan('Antwoord: Hans legt 188,50 m af.'));
+  const oe_121012_12 = document.createElement('span');
+  const oe_121012_12_b1 = maakSpanBreedte('1.4cm', '');
+  oe_121012_12.appendChild(oe_121012_12_b1);
+  oe_121012_12.appendChild(htmlSpan('de <b>omtrek</b> van een <b>vierkant</b> en'));
+
+  const oe_121012_13 = document.createElement('span');
+  const oe_121012_13_b1 = maakSpanBreedte('1.4cm', '');
+  oe_121012_13.appendChild(oe_121012_13_b1);
+  oe_121012_13.appendChild(htmlSpan('een <b>rechthoek</b> berekenen.'));
+
+  const oe_121012_14 = document.createElement('span');
+  const oe_121012_14_b1 = maakSpanBreedte('0.4cm', '•');
+  oe_121012_14.appendChild(oe_121012_14_b1);
+  const oe_121012_14_b2 = maakSpanBreedte('3cm', 'Berekening in m:');
+  oe_121012_14.appendChild(oe_121012_14_b2);
+  oe_121012_14.appendChild(htmlSpan('- vierkant: 4 · 100 = 400'));
+
+  const oe_121012_15 = document.createElement('span');
+  const oe_121012_15_b1 = maakSpanBreedte('3.4cm', '');
+  oe_121012_15.appendChild(oe_121012_15_b1);
+  oe_121012_15.appendChild(htmlSpan('- rechthoek: 2 · (150 + 50) = 400'));
+
+  const oe_121012_16 = document.createElement('span');
+  const oe_121012_16_b1 = maakSpanBreedte('0.4cm', '•');
+  oe_121012_16.appendChild(oe_121012_16_b1);
+  oe_121012_16.appendChild(htmlSpan('Antwoord: voor beide terreinen is de omheining even lang.'));
 
   const inhoud = maakOefening({
-    id:'oe_121002', nummer:'?', soort:'voorbeeld',
+    id:'oe_121012', nummer:'?', soort:'inoefenen',
     niveaus:[], tools:[],
     toggleModus:'oefening'
   });
@@ -86,7 +109,7 @@
   {
     const _p = document.createElement('p');
     _p.classList.add('intro-tekst');
-    { const _v='Een draaimolen heeft een straal van 5 m.'; if(typeof _v==='string') _p.innerHTML=_v; else _p.appendChild(_v); }
+    { const _v='Parkeerterrein 1 is 100 m op 100 m. Parkeerterrein 2 is 50 m op 150 m.'; if(typeof _v==='string') _p.innerHTML=_v; else _p.appendChild(_v); }
     inhoud.appendChild(_p);
   }
 
@@ -95,7 +118,7 @@
   /* Opgave a */
   {
     const _trLbl = document.createElement('tr');
-    const _tdLbl = maakOpTdaz('a', oe_121002_1, false);
+    const _tdLbl = maakOpTdaz('a', oe_121012_2, false);
     _tdLbl.classList.add('kolom-links');
     _trLbl.appendChild(_tdLbl); tbody.appendChild(_trLbl);
   }
@@ -104,7 +127,7 @@
   {
     const _tr_a_0 = document.createElement('tr');
     _tr_a_0.dataset.figuur = 'afbeelding1';
-    const _td_a_0 = maakSlTd(oe_121002_2, false);
+    const _td_a_0 = maakSlTd(oe_121012_1, false);
     _td_a_0.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_a_0.querySelector('.sl').style.flex = 'none';
     _td_a_0.classList.add('kolom-links');
@@ -115,33 +138,66 @@
   {
     const _tr_a_1 = document.createElement('tr');
     _tr_a_1.dataset.figuur = 'afbeelding1';
-    const _td_a_1 = maakSlTd(oe_121002_3, false);
+    const _td_a_1 = maakSlTd(oe_121012_3, false);
     _td_a_1.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_a_1.querySelector('.sl').style.flex = 'none';
     _td_a_1.classList.add('kolom-links');
     _tr_a_1.appendChild(_td_a_1); tbody.appendChild(_tr_a_1);
   }
 
+  /* Schrijflijn 3 van a */
+  {
+    const _tr_a_2 = document.createElement('tr');
+    _tr_a_2.dataset.figuur = 'afbeelding1';
+    const _td_a_2 = maakSlTd(oe_121012_4, false);
+    _td_a_2.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
+    _td_a_2.querySelector('.sl').style.flex = 'none';
+    _td_a_2.classList.add('kolom-links');
+    _tr_a_2.appendChild(_td_a_2); tbody.appendChild(_tr_a_2);
+  }
+
   /* Schrijflijn 4 van a */
   {
     const _tr_a_3 = document.createElement('tr');
     _tr_a_3.dataset.figuur = 'afbeelding1';
-    const _td_a_3 = maakSlTd(oe_121002_5, false);
+    const _td_a_3 = maakSlTd(oe_121012_5, false);
     _td_a_3.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_a_3.querySelector('.sl').style.flex = 'none';
     _td_a_3.classList.add('kolom-links');
     _tr_a_3.appendChild(_td_a_3); tbody.appendChild(_tr_a_3);
   }
 
+  /* Schrijflijn 5 van a */
+  {
+    const _tr_a_4 = document.createElement('tr');
+    _tr_a_4.dataset.figuur = 'afbeelding1';
+    const _td_a_4 = maakSlTd(oe_121012_6, false);
+    _td_a_4.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
+    _td_a_4.querySelector('.sl').style.flex = 'none';
+    _td_a_4.classList.add('kolom-links');
+    _tr_a_4.appendChild(_td_a_4); tbody.appendChild(_tr_a_4);
+  }
+
   /* Schrijflijn 6 van a */
   {
     const _tr_a_5 = document.createElement('tr');
     _tr_a_5.dataset.figuur = 'afbeelding1';
-    const _td_a_5 = maakSlTd(oe_121002_7, false);
+    const _td_a_5 = maakSlTd(oe_121012_7, false);
     _td_a_5.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_a_5.querySelector('.sl').style.flex = 'none';
     _td_a_5.classList.add('kolom-links');
     _tr_a_5.appendChild(_td_a_5); tbody.appendChild(_tr_a_5);
+  }
+
+  /* Schrijflijn 7 van a */
+  {
+    const _tr_a_6 = document.createElement('tr');
+    _tr_a_6.dataset.figuur = 'afbeelding1';
+    const _td_a_6 = maakSlTd(oe_121012_8, false);
+    _td_a_6.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
+    _td_a_6.querySelector('.sl').style.flex = 'none';
+    _td_a_6.classList.add('kolom-links');
+    _tr_a_6.appendChild(_td_a_6); tbody.appendChild(_tr_a_6);
   }
 
   voegWitruimteToe(tbody,'0.3cm');
@@ -149,9 +205,7 @@
   /* Opgave b */
   {
     const _trLbl = document.createElement('tr');
-    const _tdLbl = maakOpTdaz('b', oe_121002_8, false);
-    _tdLbl.querySelector('.rij').style.alignItems = 'flex-start';
-    _tdLbl.querySelector('.lbl').style.paddingTop = '0cm';
+    const _tdLbl = maakOpTdaz('b', oe_121012_9, false);
     _tdLbl.classList.add('kolom-links');
     _trLbl.appendChild(_tdLbl); tbody.appendChild(_trLbl);
   }
@@ -160,18 +214,29 @@
   {
     const _tr_b_0 = document.createElement('tr');
     _tr_b_0.dataset.figuur = 'afbeelding2';
-    const _td_b_0 = maakSlTd(oe_121002_10, false);
+    const _td_b_0 = maakSlTd(oe_121012_11, false);
     _td_b_0.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_b_0.querySelector('.sl').style.flex = 'none';
     _td_b_0.classList.add('kolom-links');
     _tr_b_0.appendChild(_td_b_0); tbody.appendChild(_tr_b_0);
   }
 
+  /* Schrijflijn 2 van b */
+  {
+    const _tr_b_1 = document.createElement('tr');
+    _tr_b_1.dataset.figuur = 'afbeelding2';
+    const _td_b_1 = maakSlTd(oe_121012_12, false);
+    _td_b_1.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
+    _td_b_1.querySelector('.sl').style.flex = 'none';
+    _td_b_1.classList.add('kolom-links');
+    _tr_b_1.appendChild(_td_b_1); tbody.appendChild(_tr_b_1);
+  }
+
   /* Schrijflijn 3 van b */
   {
     const _tr_b_2 = document.createElement('tr');
     _tr_b_2.dataset.figuur = 'afbeelding2';
-    const _td_b_2 = maakSlTd(oe_121002_12, false);
+    const _td_b_2 = maakSlTd(oe_121012_13, false);
     _td_b_2.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_b_2.querySelector('.sl').style.flex = 'none';
     _td_b_2.classList.add('kolom-links');
@@ -182,18 +247,29 @@
   {
     const _tr_b_3 = document.createElement('tr');
     _tr_b_3.dataset.figuur = 'afbeelding2';
-    const _td_b_3 = maakSlTd(oe_121002_13, false);
+    const _td_b_3 = maakSlTd(oe_121012_14, false);
     _td_b_3.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_b_3.querySelector('.sl').style.flex = 'none';
     _td_b_3.classList.add('kolom-links');
     _tr_b_3.appendChild(_td_b_3); tbody.appendChild(_tr_b_3);
   }
 
+  /* Schrijflijn 5 van b */
+  {
+    const _tr_b_4 = document.createElement('tr');
+    _tr_b_4.dataset.figuur = 'afbeelding2';
+    const _td_b_4 = maakSlTd(oe_121012_15, false);
+    _td_b_4.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
+    _td_b_4.querySelector('.sl').style.flex = 'none';
+    _td_b_4.classList.add('kolom-links');
+    _tr_b_4.appendChild(_td_b_4); tbody.appendChild(_tr_b_4);
+  }
+
   /* Schrijflijn 6 van b */
   {
     const _tr_b_5 = document.createElement('tr');
     _tr_b_5.dataset.figuur = 'afbeelding2';
-    const _td_b_5 = maakSlTd(oe_121002_15, false);
+    const _td_b_5 = maakSlTd(oe_121012_16, false);
     _td_b_5.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_b_5.querySelector('.sl').style.flex = 'none';
     _td_b_5.classList.add('kolom-links');
@@ -204,7 +280,7 @@
   {
     const _tr_b_6 = document.createElement('tr');
     _tr_b_6.dataset.figuur = 'afbeelding2';
-    const _td_b_6 = maakSlTd(oe_121002_16, false);
+    const _td_b_6 = maakSlTd(null, false);
     _td_b_6.querySelector('.sl').style.maxWidth = 'calc(70% - var(--insprong-stap))';
     _td_b_6.querySelector('.sl').style.flex = 'none';
     _td_b_6.classList.add('kolom-links');
@@ -227,7 +303,7 @@
       const FIG_OFFSET_AFBEELDING1 = 0; /* ← offset in px: positief = naar beneden, negatief = naar boven */
       _fig.style.top    = (_top + FIG_OFFSET_AFBEELDING1) + 'px';
       _fig.style.height = (_bottom - _top) + 'px';
-      fetch('afbeeldingen/oe_121002b.svg') /* ← bestandsnaam */
+      fetch('afbeeldingen/oe_121012.svg') /* ← bestandsnaam */
         .then(r => r.text())
         .then(svgTekst => {
           const parser = new DOMParser();
@@ -235,7 +311,7 @@
           const svg = svgDoc.querySelector('svg');
           svg.style.width  = '70%'; /* ← breedte aanpassen indien nodig */
           svg.style.height = 'auto';
-          const oplLagen = ['layer2']; /* ← oplossingenlagen */
+          const oplLagen = ['layer2','layer3']; /* ← oplossingenlagen */
           oplLagen.forEach(id => {
             const laag = svg.getElementById(id);
             if (laag) { laag.style.display = TOON_OPLOSSINGEN ? 'block' : 'none'; laag.classList.add('svg-opl-laag'); }
@@ -270,7 +346,7 @@
       const FIG_OFFSET_AFBEELDING2 = 0; /* ← offset in px: positief = naar beneden, negatief = naar boven */
       _fig.style.top    = (_top + FIG_OFFSET_AFBEELDING2) + 'px';
       _fig.style.height = (_bottom - _top) + 'px';
-      fetch('afbeeldingen/oe_121002a.svg') /* ← bestandsnaam */
+      fetch('afbeeldingen/oe_121012b.svg') /* ← bestandsnaam */
         .then(r => r.text())
         .then(svgTekst => {
           const parser = new DOMParser();
@@ -278,7 +354,7 @@
           const svg = svgDoc.querySelector('svg');
           svg.style.width  = '70%'; /* ← breedte aanpassen indien nodig */
           svg.style.height = 'auto';
-          const oplLagen = ['layer2']; /* ← oplossingenlagen */
+          const oplLagen = ['layer2','layer3']; /* ← oplossingenlagen */
           oplLagen.forEach(id => {
             const laag = svg.getElementById(id);
             if (laag) { laag.style.display = TOON_OPLOSSINGEN ? 'block' : 'none'; laag.classList.add('svg-opl-laag'); }

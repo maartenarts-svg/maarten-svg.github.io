@@ -1,8 +1,27 @@
 // Matrix H12 — gegenereerd op 8/6/2026
 var H12_matrix = [
-  { nr: 1, bestandsnaam: 'oe_121001', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 537, container: '#content-121-zoeje', niveau: 'geen', doelen: [] },
-  { nr: 2, bestandsnaam: 'oe_121002', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 537, container: '#content-121-zoeje', niveau: 'geen', doelen: [] },
-  { nr: 3, bestandsnaam: 'oe_121501', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 538, container: '#content-121-zoeje-2', niveau: 'geen', doelen: [] },
-  { nr: 4, bestandsnaam: 'oe_121502', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 538, container: '#content-121-zoeje-2', niveau: 'geen', doelen: [] },
-  { nr: 5, bestandsnaam: 'oe_121003', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 539, container: '#content-121-oefenen', niveau: 'geen', doelen: [] }
+  { nr: 1, bestandsnaam: 'oe_121001', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 538, container: '#content-121-zoeje', niveau: 'geen', doelen: ['d_1780951574958_11'] },
+  { nr: 2, bestandsnaam: 'oe_121002', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 538, container: '#content-121-zoeje', niveau: 'geen', doelen: ['d_1780951575069_12'] },
+  { nr: 3, bestandsnaam: 'oe_121501', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 539, container: '#content-121-zoeje-2', niveau: 'geen', doelen: ['d_1780951575069_12'] },
+  { nr: 4, bestandsnaam: 'oe_121502', onderdeel: 'Zo doe je dat!', paragraaf: '12.1', bladzijde: 539, container: '#content-121-zoeje-2', niveau: 'geen', doelen: ['d_1780951575069_12'] },
+  { nr: 5, bestandsnaam: 'oe_121003', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 540, container: '#content-121-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951574958_11'] },
+  { nr: 6, bestandsnaam: 'oe_121004', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 7, bestandsnaam: 'oe_121005', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 8, bestandsnaam: 'oe_121006', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 9, bestandsnaam: 'oe_121007', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 10, bestandsnaam: 'oe_121008', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 11, bestandsnaam: 'oe_121010', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 12, bestandsnaam: 'oe_121011', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 13, bestandsnaam: 'oe_121012', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 14, bestandsnaam: 'oe_121K03', onderdeel: 'Oefenen!', paragraaf: '12.1', bladzijde: 541, container: '#content-121-oefenen-2', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575069_12'] },
+  { nr: 15, bestandsnaam: 'oe_122001', onderdeel: 'Zo doe je dat!', paragraaf: '12.2', bladzijde: 543, container: '#content-122-zoeje', niveau: 'geen', doelen: ['d_1780951575390_14', 'd_1780951575518_15'] },
+  { nr: 16, bestandsnaam: 'oe_122004', onderdeel: 'Oefenen!', paragraaf: '12.2', bladzijde: 544, container: '#content-122-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575390_14', 'd_1780951575518_15'] },
+  { nr: 17, bestandsnaam: 'oe_122005', onderdeel: 'Oefenen!', paragraaf: '12.2', bladzijde: 544, container: '#content-122-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575518_15', 'd_1780951575390_14'] },
+  { nr: 18, bestandsnaam: 'oe_122006', onderdeel: 'Oefenen!', paragraaf: '12.2', bladzijde: 544, container: '#content-122-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575518_15', 'd_1780951575390_14'] },
+  { nr: 19, bestandsnaam: 'oe_122007', onderdeel: 'Oefenen!', paragraaf: '12.2', bladzijde: 544, container: '#content-122-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575518_15', 'd_1780951575390_14'] },
+  { nr: 20, bestandsnaam: 'oe_122010', onderdeel: 'Oefenen!', paragraaf: '12.2', bladzijde: 544, container: '#content-122-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575518_15', 'd_1780951575390_14'] },
+  { nr: 21, bestandsnaam: 'oe_123002', onderdeel: 'Oefenen!', paragraaf: '12.3', bladzijde: 546, container: '#content-123-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575630_16'] },
+  { nr: 22, bestandsnaam: 'oe_123003', onderdeel: 'Oefenen!', paragraaf: '12.3', bladzijde: 546, container: '#content-123-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575630_16'] },
+  { nr: 23, bestandsnaam: 'oe_123008', onderdeel: 'Oefenen!', paragraaf: '12.3', bladzijde: 546, container: '#content-123-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575630_16'] },
+  { nr: 24, bestandsnaam: 'oe_123009', onderdeel: 'Oefenen!', paragraaf: '12.3', bladzijde: 546, container: '#content-123-oefenen', niveau: 'cirkel+vierkant+zeshoek', doelen: ['d_1780951575630_16'] }
 ];

@@ -317,9 +317,9 @@
    ============================================================ */
 const LAYOUT_SYSTEEM = 2;   // ← HIER AANPASSEN (1 of 2)
 // !! Zet op true voor oplossingensleutel, false voor normaal gebruik !!
-TOON_OPLOSSINGEN = true;
-const TOON_VULLINGSBALK = true; // ← hier aan/uit zetten
-TOGGLE_TOEGESTAAN = true;
+TOON_OPLOSSINGEN = false;
+const TOON_VULLINGSBALK = false; // ← hier aan/uit zetten
+TOGGLE_TOEGESTAAN = false;
 
 /* ============================================================
    CONFIGURATIE
@@ -586,19 +586,19 @@ laadOefeningen('#content-pagina', [
   'H11_W35WID/W35WID_sc.js',
 ]);
 
-witregel(onderTitel);
-voegContentToe('content-pagina-1');
-laadOefeningen('#content-pagina-1', [
-  'H11_W34WIJ/oe_1.js',
-  'H11_W34WIJ/oe_2.js',
-]);
-
 forceerPaginawissel();
 voegContentToe('content-pagina-2');
 laadOefeningen('#content-pagina-2', [
-  'H11_W34WIJ/oe_3.js',
+  'H11_W35WID/oe_1.js',
+  'H11_W35WID/oe_2.js',
 ]);
 
+forceerPaginawissel();
+voegContentToe('content-pagina-3');
+laadOefeningen('#content-pagina-3', [
+  'H11_W35WID/oe_3.js',
+  'H11_W35WID/oe_4.js',
+]);
 
 
 /* ============================================================
