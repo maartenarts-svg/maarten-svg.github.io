@@ -49,7 +49,7 @@
     },
     {
       nummer: '5|',
-      tekst:  'Ik maak berekeningen met ICT. (vraag 5, 6.23)',
+      tekst:  'Ik maak berekeningen met ICT. (vraag 3 en 4, 6.23)',
       scores: [
         { lbl: 'A:', tekst: 'Ik kan dit.' },
         { lbl: 'B:', tekst: 'Ik kan dit wel, maar maak soms nog eens een fout.' },
