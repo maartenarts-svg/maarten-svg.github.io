@@ -17,7 +17,7 @@
   const checkin_3 = document.createElement('span');
   const checkin_3_b1 = maakSpanBreedte('0.4cm', '');
   checkin_3.appendChild(checkin_3_b1);
-  checkin_3.appendChild(htmlSpan('De omtrek van het hartje is dus 60 · 0,25 cm = 15 cm.'));
+  checkin_3.appendChild(htmlSpan('De omtrek van het hartje is dus 60 · 0,5 cm = 30 cm.'));
 
   const checkin_4 = document.createElement('span');
   const checkin_4_b1 = maakSpanBreedte('0.4cm', '•');
@@ -27,7 +27,7 @@
   const checkin_5 = document.createElement('span');
   const checkin_5_b1 = maakSpanBreedte('0.4cm', '');
   checkin_5.appendChild(checkin_5_b1);
-  checkin_5.appendChild(htmlSpan('De omtrek van de smiley is dus 56 · 0,25 cm = 14 cm.'));
+  checkin_5.appendChild(htmlSpan('De omtrek van de smiley is dus 56 · 0,5 cm = 28 cm.'));
 
   const checkin_6 = document.createElement('span');
   checkin_6.appendChild(htmlSpan('Het hartje heeft de grootste omtrek.'));
