@@ -208,7 +208,7 @@
       _fig.style.top    = (_top + FIG_OFFSET_AFBEELDING1) + 'px';
       _fig.style.height = (_bottom - _top) + 'px';
       const _img = document.createElement('img');
-      _img.src = 'afbeeldingen/checkin.svg'; /* ← bestandsnaam */
+      _img.src = 'afbeeldingen/checkinH12.svg'; /* ← bestandsnaam */
       _img.style.width     = '120%';
       _img.style.height    = '120%';
       _img.style.objectFit = 'contain';

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="230" height="340" viewBox="25 10 230 335">
+
+  <!--
+    AANPASBARE WAARDEN:
+    - Lettergrootte tekst:   font-size="10"  (beide tekstelementen hieronder)
+    - Afstand tot ladder:    x="38" links / x="242" rechts  (zelfde elementen)
+      → groter x links  = verder van ladder
+      → kleiner x rechts = verder van ladder
+  -->
+
+  <!-- Linker tekst: rotated 90° CCW — → wordt na rotatie zichtbaar als ↑ -->
+  <text x="38" y="190" text-anchor="middle"
+        transform="rotate(-90, 38, 175)"
+        font-size="13" font-family="Arial" fill="#1a1a1a">
+    Bij elke stap omhoog wordt de eenheid 10 keer groter. →
+  </text>
+
+  <!-- Ladder (40px naar rechts verschoven t.o.v. eenhedenladderLengte.svg) -->
+  <rect x="60"  y="10" width="15" height="330" fill="#A8D8A8" stroke="#8BC68B" stroke-width="2" rx="5"/>
+  <rect x="205" y="10" width="15" height="330" fill="#A8D8A8" stroke="#8BC68B" stroke-width="2" rx="5"/>
+
+  <rect x="75"  y="25"  width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="140" y="37"  text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">km</text>
+  <rect x="75"  y="73"  width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="140" y="85"  text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">hm</text>
+  <rect x="75"  y="121" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="140" y="133" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">dam</text>
+  <rect x="75"  y="169" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="140" y="181" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">m</text>
+  <rect x="75"  y="217" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="140" y="229" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">dm</text>
+  <rect x="75"  y="265" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="140" y="277" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">cm</text>
+  <rect x="75"  y="313" width="130" height="12" fill="#FFE5A3" stroke="#FFD580" stroke-width="2" rx="4"/>
+  <text x="140" y="325" text-anchor="middle" font-size="16" font-family="Arial" font-weight="600" fill="#2C3E50">mm</text>
+
+  <!-- Rechter tekst: rotated 90° CCW — ← wordt na rotatie zichtbaar als ↓ -->
+  <text x="242" y="167" text-anchor="middle"
+        transform="rotate(-90, 242, 175)"
+        font-size="13" font-family="Arial" fill="#1a1a1a">
+    ← Bij elke stap omlaag wordt de eenheid 10 keer kleiner.
+  </text>
+
+</svg>
