@@ -1,72 +1,77 @@
 /* ============================================================
-   H12 / H12_W35WIMC2 / oe_1.js
-   soort: test
+   H12 / H12_W36WIF / oe_1.js
+   soort: inoefenen
    ============================================================ */
+
 (function () {
 
-  /* ---- Span-variabelen ---- */
-  const oe_1_1 = document.createElement('span');
-  oe_1_1.appendChild(htmlSpan('Een slaapkamer heeft een lengte van 4,5 m. Dat is ... cm.'));
-
-  const oe_1_2 = document.createElement('span');
-  oe_1_2.appendChild(htmlSpan('450'));
-
-  const oe_1_3 = document.createElement('span');
-  oe_1_3.appendChild(htmlSpan('Een touw is 78 cm lang. Dat is ... m.'));
-
-  const oe_1_4 = document.createElement('span');
-  oe_1_4.appendChild(htmlSpan('0,78'));
-
-  const oe_1_5 = document.createElement('span');
-  oe_1_5.appendChild(htmlSpan('De afstand tussen twee dorpen is 2,3 km. Dat is ... m.'));
-
-  const oe_1_6 = document.createElement('span');
-  oe_1_6.appendChild(htmlSpan('2 300'));
-
-  const oe_1_7 = document.createElement('span');
-  oe_1_7.appendChild(htmlSpan('Een plank is 6 500 mm lang. Dat is ... m.'));
-
-  const oe_1_8 = document.createElement('span');
-  oe_1_8.appendChild(htmlSpan('6,5'));
-
   const inhoud = maakOefening({
-    id:'oe_1', nummer:'?', soort:'test',
+    id:'oe_1', nummer:'?', soort:'inoefenen',
     niveaus:[], tools:[],
     toggleModus:'oefening'
   });
+  inhoud.style.position = 'relative';
 
-  voegTekstToe(inhoud, 'Zet de lengte-eenheden om.', ['intro-tekst']);
+  /* Introductietekst */
+  {
+    const _p = document.createElement('p');
+    _p.classList.add('intro-tekst');
+    { const _v='Het grondplan hoort bij een nieuw pretpark.'; if(typeof _v==='string') _p.innerHTML=_v; else _p.appendChild(_v); }
+    inhoud.appendChild(_p);
+  }
+  voegLijstToe(inhoud,'bullet','0cm','0.4cm',['Noteer bij iedere attractie het nummer van de locatie.','Maak berekeningen op een kladblad.']);
 
-  const {tbody} = maakOefTabel(inhoud, 1, false);
+  /* ============================================================
+     ATTRACTIES — afbeelding, naam met oppervlakte en schrijflijn
+     ============================================================ */
+  const attracties = [
+    { afbeelding:'W36WIF001.png', label:'schietattractie, 16 a: ____' },
+    { afbeelding:'W36WIF002.png', label:'rollercoaster, 24 a: ____' },
+    { afbeelding:'W36WIF003.png', label:'reuzenrad, 18 a: ____' },
+    { afbeelding:'W36WIF004.png', label:'avonturenrivier, 28,27 a: ____' },
+    { afbeelding:'W36WIF005.png', label:'zwiermolen, 20 a: ____' },
+    { afbeelding:'W36WIF006.png', label:'theekopjes, 14 a: ____' },
+  ];
 
-  const TW = '12cm';
+  const {tbody} = maakOefTabel(inhoud, 3, false);
 
-  /* Rij 1 */
-  const tr1 = document.createElement('tr');
-  const tdA = maakOpTdGeen('a', oe_1_1, TW, false, oe_1_2);
-  tdA.classList.add('kolom-links');
-  tr1.appendChild(tdA);
-  tbody.appendChild(tr1);
+  for (let r=0; r<2; r++) {
+    const tr = document.createElement('tr');
+    for (let c=0; c<3; c++) {
+      const {afbeelding, label} = attracties[r*3+c];
 
-  /* Rij 2 */
-  const tr2 = document.createElement('tr');
-  const tdB = maakOpTdGeen('b', oe_1_3, TW, false, oe_1_4);
-  tdB.classList.add('kolom-links');
-  tr2.appendChild(tdB);
-  tbody.appendChild(tr2);
+      const td = document.createElement('td');
+      td.classList.add('figuur-cel');
+      td.style.verticalAlign = 'top';
 
-  /* Rij 3 */
-  const tr3 = document.createElement('tr');
-  const tdC = maakOpTdGeen('c', oe_1_5, TW, false, oe_1_6);
-  tdC.classList.add('kolom-links');
-  tr3.appendChild(tdC);
-  tbody.appendChild(tr3);
+      const img = document.createElement('img');
+      img.src = 'afbeeldingen/' + afbeelding;
+      img.style.display = 'block';
+      img.style.margin = '0 auto';
+      img.style.height = '2.5cm';
+      img.style.width = 'auto';
+      td.appendChild(img);
 
-  /* Rij 4 */
-  const tr4 = document.createElement('tr');
-  const tdD = maakOpTdGeen('d', oe_1_7, TW, false, oe_1_8);
-  tdD.classList.add('kolom-links');
-  tr4.appendChild(tdD);
-  tbody.appendChild(tr4);
+      const p = document.createElement('p');
+      p.style.textAlign = 'center';
+      p.style.margin = '0.1cm 0 0 0';
+      p.innerHTML = label.replace('____', '<span style="color:var(--sl-kleur)">____</span>');
+      td.appendChild(p);
+
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+    if (r === 0) voegWitruimteToe(tbody, '0.3cm');
+  }
+
+  /* ============================================================
+     GRONDPLAN
+     ============================================================ */
+  const grondplan = document.createElement('img');
+  grondplan.src = 'afbeeldingen/W36WIF007.png';
+  grondplan.style.display = 'block';
+  grondplan.style.width = '100%';
+  grondplan.style.margin = '0.3cm auto 0';
+  inhoud.appendChild(grondplan);
 
 })();

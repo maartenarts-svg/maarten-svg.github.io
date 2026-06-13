@@ -72,7 +72,7 @@
   tdTitel.style.fontFamily = 'var(--font)';
   tdTitel.style.fontSize   = 'var(--fontsize)';
   tdTitel.style.fontWeight = 'bold';
-  tdTitel.appendChild(htmlSpan('Succescriteria'));
+  tdTitel.appendChild(htmlSpan('Instructies'));
   trTitel.appendChild(tdTitel);
   kader.appendChild(trTitel);
 

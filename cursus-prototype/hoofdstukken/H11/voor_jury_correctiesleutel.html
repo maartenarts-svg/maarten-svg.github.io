@@ -3,18 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P5W7 WI F — Omtrek en oppervlakte: grondplan pretpark</title>
+  <title>P5W6 WI J - Voorbereiding jury deel 1</title>
   <link rel="stylesheet" href="../../css/cursus.css">
 
   <style>
-    /* ============================================================
-       MARGES — override van de globale waarden uit cursus.css
-       ============================================================ */
-    :root {
-      --marge-top:    2cm;
-      --marge-bottom: 2cm;
-    }
-
     /* ============================================================
        LAYOUT-SYSTEEM
        Schakel hier tussen systeem 1 (doorlopend) en systeem 2 (pagina's)
@@ -327,7 +319,7 @@ const LAYOUT_SYSTEEM = 2;   // ← HIER AANPASSEN (1 of 2)
 // !! Zet op true voor oplossingensleutel, false voor normaal gebruik !!
 TOON_OPLOSSINGEN = false;
 const TOON_VULLINGSBALK = false; // ← hier aan/uit zetten
-TOGGLE_TOEGESTAAN = false;
+TOGGLE_TOEGESTAAN = true;
 
 /* ============================================================
    CONFIGURATIE
@@ -369,7 +361,7 @@ function nieuwePagina() {
 
   const hdr = document.createElement('div');
   hdr.classList.add('hoofdstuk-titel-header');
-  hdr.textContent = 'TIAB - 1a - week 7 - WI F';
+  hdr.textContent = 'TIAB - 1a - week 6 - WI J';
   // Even pagina: titel links; oneven pagina: titel rechts
   if (huidigePaginaNummer % 2 === 0) {
     hdr.classList.add('links');
@@ -377,7 +369,7 @@ function nieuwePagina() {
     hdr.classList.add('rechts');
   }
   pagina.appendChild(hdr);
-
+  
 
   //voettekst
   const voet = document.createElement('div');
@@ -494,7 +486,7 @@ function voegTheorieToe(items) {
   const kader = document.createElement('div');
   kader.classList.add('theorie-kader');
   kader.style.cursor = 'pointer';
-
+  
   items.forEach(({ nummer, tekst }) => {
     const rij = document.createElement('div');
     rij.classList.add('theorie-rij');
@@ -590,14 +582,26 @@ const inhoudstafelData = [];  // { tekst, blz } — wordt gevuld hieronder
 nieuwePagina();   // pagina 1
 voegContentToe('content-pagina');
 laadOefeningen('#content-pagina', [
-  'H12_W36WIF/W36WIF_hoofding.js',
+  'JURY/W35WIJ_hoofding.js',
+  'JURY/W35WIJ_sc.js',
 ]);
 
 witregel(onderTitel);
 voegContentToe('content-pagina-1');
 laadOefeningen('#content-pagina-1', [
-  'H12_W36WIF/oe_1.js',  
+  'JURY/oe_W35WIJ_1.js',
 ]);
+
+// ─────────────────────────────────────────────
+nieuwePagina();   // pagina 2
+
+voegContentToe('content-pagina-2');
+laadOefeningen('#content-pagina-2', [
+  'JURY/oe_W35WIJ_2.js',
+  'JURY/oe_W35WIJ_3.js',
+  'JURY/oe_W35WIJ_4.js',
+]);
+
 
 
 /* ============================================================

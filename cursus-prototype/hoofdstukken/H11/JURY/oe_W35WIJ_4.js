@@ -105,10 +105,10 @@
   /* theorie */
   {
     const tr = document.createElement('tr');
-    const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");
+    const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false," ");
     tdL.classList.add('kolom-links');
     tr.appendChild(tdL);
-    const tdR = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");;
+    const tdR = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false," ");;
     tdR.classList.add('kolom-rechts');
     tr.appendChild(tdR);
     tbody.appendChild(tr);    

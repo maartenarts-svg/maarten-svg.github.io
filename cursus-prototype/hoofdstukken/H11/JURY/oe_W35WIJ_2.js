@@ -143,7 +143,7 @@
     /* theorie */
     {
       const tr = document.createElement('tr');
-      const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");
+      const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false," ");
       tdL.classList.add('kolom-links');
       tr.appendChild(tdL);
       tbody.appendChild(tr);    
@@ -214,7 +214,7 @@
     /* theorie */
     {
       const tr = document.createElement('tr');
-      const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false,"nog");
+      const tdL = maakOpTdDubbelZStrZdub("",THT.cloneNode(true),ruimte1,false," ");
       tdL.classList.add('kolom-links');
       tr.appendChild(tdL);
       tbody.appendChild(tr);    
