@@ -7,12 +7,12 @@ window.__berekenScores = function(leerling, taakData) {
 
   // ── Score 1: verbeteringen (oe_1) ────────────────────────
   const verbetering  = leerling.verbetering || {};
-  const aantalVerbeterd = [1, 2, 3].filter(nr =>
+  const aantalVerbeterd = [1, 2, 3, 4].filter(nr =>
     (verbetering[nr]?.pogingen?.length || 0) > 0
   ).length;
 
   let scoreVerbeteringen;
-  if (aantalVerbeterd === 3)      scoreVerbeteringen = 'A';
+  if (aantalVerbeterd === 4)      scoreVerbeteringen = 'A';
   else if (aantalVerbeterd >= 1)  scoreVerbeteringen = 'C';
   else                            scoreVerbeteringen = 'NI';
 
