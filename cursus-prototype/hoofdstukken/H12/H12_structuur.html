@@ -784,68 +784,66 @@ voegParagraafToe('12.2', 'Omtrek en oppervlakte van samengestelde figuren');
 
 voegOnderdeelToe('🧠', 'Theorie');
 voegTheorieToe([
-  { nummer: '12.7', tekst: 'Vergelijkingen oplossen' },
+  { nummer: '12.6.2', tekst: 'Figuren opsplitsen' },
 ]);
 
-nieuwePagina();
-
+witregel(onderTitel);
 voegOnderdeelToe('🧭', 'Zo doe je dat!','');
 witregel(onderTitel);
-/*voegContentToe('content-122-zoeje');
+voegContentToe('content-122-zoeje');
 laadOefeningen('#content-122-zoeje', [
   'P12_2/oe_122001.js',
-]);*/
+]);
 
-nieuwePagina();
+forceerPaginawissel();
+voegContentToe('content-122-zoeje-2');
+laadOefeningen('#content-122-zoeje-2', [
+  'P12_2/oe_122005.js',
+]);
+
 voegOnderdeelToe('🔄', 'Oefenen!');
 witregel(onderTitel);
-/*voegContentToe('content-122-oefenen');
+voegContentToe('content-122-oefenen');
 laadOefeningen('#content-122-oefenen', [
   'P12_2/oe_122004.js',
-  'P12_2/oe_122005.js',
+]);
+
+forceerPaginawissel();
+
+voegContentToe('content-122-oefenen-2');
+laadOefeningen('#content-122-oefenen-2', [
   'P12_2/oe_122006.js',
   'P12_2/oe_122007.js',
+]);
+
+forceerPaginawissel();
+
+voegContentToe('content-122-oefenen-3');
+laadOefeningen('#content-122-oefenen-3', [
   'P12_2/oe_122010.js',
-]);*/
+]);
 
 // ── PARAGRAAF 12.3 ───────────────────────────────────────────
 nieuwePagina();   
 inhoudstafelData.push({ tekst: '12.3 Complexere problemen oplossen met omtrek en oppervlakte', blz: huidigePaginaNummer - 1 });
 voegParagraafToe('12.3', 'Complexere problemen oplossen met omtrek en oppervlakte');
 
-nieuwePagina();
 voegOnderdeelToe('🔄', 'Oefenen!');
 witregel(onderTitel);
-/*voegContentToe('content-123-oefenen');
+voegContentToe('content-123-oefenen');
 laadOefeningen('#content-123-oefenen', [
   'P12_3/oe_123002.js',
   'P12_3/oe_123003.js',
+]);
+
+forceerPaginawissel();
+
+voegContentToe('content-123-oefenen-2');
+laadOefeningen('#content-123-oefenen-2', [
   'P12_3/oe_123008.js',
   'P12_3/oe_123009.js',
-]);*/
+]);
 
-
-
-
-// ── Schema ───────────────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: 'Schema', blz: huidigePaginaNummer - 1 });
-voegBannerToe('🗂️', 'Schema');
-/*voegContentToe('content-schema');
-laadOefeningen('#content-schema', [
-  'P12_0/H12_schemadefa.js',
-]);*/
-
-
-
-// ── Uitchecken ───────────────────────────────────────────────
-nieuwePagina();
-inhoudstafelData.push({ tekst: 'Uitchecken', blz: huidigePaginaNummer - 1 });
-voegBannerToe('✔️', 'Uitchecken');
-/*voegContentToe('content-uitchecken');
-laadOefeningen('#content-uitchecken', [
-  'P12_0/checkout.js',
-]);+/
 
 /* ============================================================
    INHOUDSTAFEL INVULLEN
@@ -868,10 +866,6 @@ laadOefeningen('#content-uitchecken', [
     { tekst: '12.1 Problemen oplossen met omtrek en oppervlakte', blz: null },
     { tekst: '12.2 Omtrek en oppervlakte van samengestelde figuren',                  blz: null },
     { tekst: '12.3 Complexere problemen oplossen met omtrek en oppervlakte',         blz: null },
-    { type: 'witregel' },
-    { tekst: 'Schema',        blz: null },
-    { type: 'witregel' },
-    { tekst: 'Uitchecken',    blz: null },
   ];
 
   // Koppel paginanummers vanuit inhoudstafelData
