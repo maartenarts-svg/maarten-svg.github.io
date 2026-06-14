@@ -1,293 +1,315 @@
 // ============================================================
-//  oefeningen/oe_1.js  —  Zelfevaluatie jury
+//  oefeningen/oe_1.js  —  Zelfevaluatie succescriteria H6
 // ============================================================
+
 window.__taakOefening = (function () {
 
-  const OEF_ID = 'oe_2';
-
-  // Structuur: { stop: { checks: [...], anders: '' }, start: {...}, continue: {...}, doel: { checks: [...] }, actie: '' }
-  let _antwoord = {
-    antwoord: {
-      stop:     { checks: [], anders: '' },
-      start:    { checks: [], anders: '' },
-      doorgaan: { checks: [], anders: '' },
-      doel:     { checks: [] },
-      actie:    '',
+  // ── Succescriteria voor deze oefening ─────────────────────
+  const CRITERIA = [
+    {
+      id: 'W36WIJ2SC01',
+      tekst: 'Ik gebruik het verband tussen de optelling en de aftrekking.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik gebruik het verband tussen de optelling en de aftrekking en gebruik spontaan de correcte verwoording.' },
+        { waarde: 'A',  label: 'A: Ik gebruik het verband tussen de optelling en de aftrekking en ken de verwoording als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik gebruik het verband tussen de optelling en de aftrekking maar verwoord het nog niet correct.' },
+        { waarde: 'C',  label: 'C: Ik gebruik het verband tussen de optelling en de aftrekking nog niet correct.' },
+      ],
     },
-    score: 0,
-  };
-  let _verbeterd = false;
-  let _blokkeer  = false;
-
-  const STOP_ITEMS = [
-    'Alles pas de avond voordien leren',
-    'Alleen oefeningen overschrijven zonder na te denken',
-    'Meteen opgeven als iets moeilijk is',
-    'Niet controleren of ik de leerstof echt begrijp',
-    'Zonder planning leren',
-    'Mijn fouten niet bekijken',
-    'Afgeleid leren (gsm, muziek, filmpjes …)',
+    {
+      id: 'W36WIJ2SC02',
+      tekst: 'Ik kan breuken optellen en aftrekken en verwoord de rekenregel correct.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan breuken optellen en aftrekken en gebruik spontaan de correcte verwoordingen van de rekenregel.' },
+        { waarde: 'A',  label: 'A: Ik kan breuken optellen en aftrekken en ken de verwoording van de rekenregel als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan breuken optellen en aftrekken maar verwoord de rekenregel nog niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan breuken nog niet optellen en aftrekken.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC03',
+      tekst: 'Ik gebruik het verband tussen de vermenigvuldiging en de deling.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik gebruik het verband tussen de vermenigvuldiging en de deling en gebruik spontaan de correcte verwoording.' },
+        { waarde: 'A',  label: 'A: Ik gebruik het verband tussen de vermenigvuldiging en de deling en ken de verwoording als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik gebruik het verband tussen de vermenigvuldiging en de deling maar verwoord het nog niet correct.' },
+        { waarde: 'C',  label: 'C: Ik gebruik het verband tussen de vermenigvuldiging en de deling nog niet correct.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC04',
+      tekst: 'Ik kan positieve en negatieve breuken vermenigvuldigen en delen en verwoord de rekenregels correct.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan positieve en negatieve breuken vermenigvuldigen en delen en gebruik spontaan de correcte verwoordingen van de rekenregels.' },
+        { waarde: 'A',  label: 'A: Ik kan positieve en negatieve breuken vermenigvuldigen en delen en ken de verwoording van de rekenregels als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan positieve en negatieve breuken vermenigvuldigen en delen maar verwoord de rekenregels niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan positieve en negatieve breuken nog niet vermenigvuldigen en delen.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC05',
+      tekst: 'Ik gebruik de begrippen bij bewerkingen en breuken correct: optelling, termen, som, aftrekking, aftrektal, aftrekker, verschil, vermenigvuldiging, factoren, product, deling, deeltal, deler, quotiënt, teller, noemer, breukstreep, tegengestelde, omgekeerde.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik gebruik altijd spontaan de correcte begrippen.' },
+        { waarde: 'A',  label: 'A: Ik gebruik meestal de correcte begrippen en kan mezelf corrigeren als iemand mij daarop wijst.' },
+        { waarde: 'B',  label: 'B: Ik gebruik meestal de correcte begrippen, maar ken er een aantal niet.' },
+        { waarde: 'C',  label: 'C: Ik gebruik de correcte begrippen meestal nog niet.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC06',
+      tekst: 'Ik kan machten van rationale getallen berekenen.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan machten van rationale getallen berekenen en gebruik spontaan de correcte verwoordingen van de rekenregels.' },
+        { waarde: 'A',  label: 'A: Ik kan machten van rationale getallen berekenen en ken de verwoording van de rekenregels als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan machten van rationale getallen berekenen maar verwoord de rekenregels nog niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan machten van rationale getallen nog niet berekenen.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC07',
+      tekst: 'Ik kan het teken van een macht afleiden uit de opgave.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan het teken van een macht afleiden uit de opgave en gebruik spontaan de correcte verwoordingen van de rekenregels.' },
+        { waarde: 'A',  label: 'A: Ik kan het teken van een macht afleiden uit de opgave en ken de verwoording van de rekenregels als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan het teken van een macht afleiden uit de opgave maar verwoord de rekenregels nog niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan het teken van een macht nog niet afleiden uit de opgave.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC08',
+      tekst: 'Ik gebruik de begrippen bij machten correct: macht, grondtal, exponent, vermenigvuldiging, factor, tegengestelde.',
+      leerplandoelcode: '6.1',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik gebruik altijd spontaan de correcte begrippen.' },
+        { waarde: 'A',  label: 'A: Ik gebruik meestal de correcte begrippen en kan mezelf corrigeren als iemand mij daarop wijst.' },
+        { waarde: 'B',  label: 'B: Ik gebruik meestal de correcte begrippen, maar ken er een aantal niet.' },
+        { waarde: 'C',  label: 'C: Ik gebruik de correcte begrippen meestal nog niet.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC09',
+      tekst: 'Ik herleid lettervormen en verwoord de rekenregel correct.',
+      leerplandoelcode: '6.12',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan lettervormen herleiden en gebruik spontaan de correcte verwoordingen van de rekenregel.' },
+        { waarde: 'A',  label: 'A: Ik kan lettervormen herleiden en ken de verwoording van de rekenregel als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan lettervormen herleiden maar verwoord de rekenregels niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan lettervormen nog niet herleiden.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC10',
+      tekst: 'Ik vermenigvuldig lettervormen met een getal en verwoord de rekenregel correct.',
+      leerplandoelcode: '6.12',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan een lettervorm vermenigvuldigen met een getal en gebruik spontaan de correcte verwoordingen van de rekenregels.' },
+        { waarde: 'A',  label: 'A: Ik kan een lettervorm vermenigvuldigen met een getal en ken de verwoording van de rekenregel als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan een lettervorm vermenigvuldigen met een getal maar verwoord de rekenregels niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan een lettervorm nog niet vermenigvuldigen met een getal.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC11',
+      tekst: 'Ik gebruik de begrippen bij lettervormen correct: coëfficiënt, letterdeel.',
+      leerplandoelcode: '6.12',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik gebruik altijd spontaan de correcte begrippen.' },
+        { waarde: 'A',  label: 'A: Ik gebruik meestal de correcte begrippen en kan mezelf corrigeren als iemand mij daarop wijst.' },
+        { waarde: 'B',  label: 'B: Ik gebruik meestal de correcte begrippen, maar ken er een aantal niet.' },
+        { waarde: 'C',  label: 'C: Ik gebruik de correcte begrippen meestal nog niet.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC12',
+      tekst: 'Ik herken een vergelijking en gebruik het begrip onbekende.',
+      leerplandoelcode: '6.11',
+      opties: [
+        { waarde: 'A', label: 'A: Ik kan uitleggen hoe je een vergelijking herkent.' },
+        { waarde: 'B', label: 'B: Ik kan bijna foutloos uitleggen hoe je een vergelijking herkent.' },
+        { waarde: 'C', label: 'C: Ik kan nog niet zo goed uitleggen hoe je een vergelijking herkent.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC13',
+      tekst: 'Ik los vergelijkingen op en verwoord de stappen correct.',
+      leerplandoelcode: '6.17',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan een vergelijking oplossen en gebruik spontaan de correcte verwoordingen van de rekenregels.' },
+        { waarde: 'A',  label: 'A: Ik kan een vergelijking oplossen en ken de verwoording van de rekenregel als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan een vergelijking oplossen maar verwoord de rekenregels niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan een vergelijking nog niet oplossen.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC14',
+      tekst: 'Ik controleer de oplossing van een vergelijking en verwoord de werkwijze correct.',
+      leerplandoelcode: '6.13',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik kan de oplossing van een vergelijking controleren en gebruik spontaan de correcte verwoordingen van de rekenregels.' },
+        { waarde: 'A',  label: 'A: Ik kan de oplossing van een vergelijking controleren en ken de verwoording van de rekenregel als mij dat gevraagd wordt.' },
+        { waarde: 'B',  label: 'B: Ik kan de oplossing van een vergelijking controleren maar verwoord de rekenregels niet correct.' },
+        { waarde: 'C',  label: 'C: Ik kan de oplossing van een vergelijking nog niet controleren.' },
+      ],
+    },
+    {
+      id: 'W36WIJ2SC15',
+      tekst: 'Ik gebruik de begrippen bij vergelijkingen correct: linkerlid, rechterlid, onbekende.',
+      leerplandoelcode: '6.17',
+      opties: [
+        { waarde: 'A+', label: 'A+: Ik gebruik altijd spontaan de correcte begrippen.' },
+        { waarde: 'A',  label: 'A: Ik gebruik meestal de correcte begrippen en kan mezelf corrigeren als iemand mij daarop wijst.' },
+        { waarde: 'B',  label: 'B: Ik gebruik meestal de correcte begrippen, maar ken er een aantal niet.' },
+        { waarde: 'C',  label: 'C: Ik gebruik de correcte begrippen meestal nog niet.' },
+      ],
+    },
   ];
 
-  const START_ITEMS = [
-    'Op tijd beginnen leren',
-    'Mijn oefeningen opnieuw maken zonder oplossingen',
-    'Fouten verbeteren en begrijpen',
-    'Hulp vragen als ik iets niet snap',
-    'Een korte planning maken',
-    'Belangrijke regels/formules herhalen',
-    'Rustig mijn toets nalezen',
-    'Extra oefeningen maken',
-  ];
+  // ── Staat ─────────────────────────────────────────────────
+  let _antwoorden = CRITERIA.map(() => ({ antwoord: null, score: 0 }));
+  let _radioGroepen = [];
 
-  const CONTINUE_ITEMS = [
-    'Netjes en stap voor stap werken',
-    'Regelmatig herhalen',
-    'Vragen stellen in de les',
-    'Samenvattingen of schema\'s gebruiken',
-    'Oefeningen maken uit het boek of online',
-    'Mijn tijd goed verdelen tijdens de toets',
-    'Rustig blijven als iets moeilijk is',
-  ];
-
-  const DOEL_ITEMS = [
-    'beter plannen',
-    'minder slordigheidsfouten maken',
-    'meer oefenen',
-    'sneller werken',
-    'rustiger blijven',
-    'beter begrijpen wat ik leer',
-    'hulp vragen wanneer nodig',
-  ];
-
-  // ── render ──────────────────────────────────────────────
-  function render(container, opgeslagenAntwoorden, verbeterd, mail, slaOp, leerling) {
-    _verbeterd = verbeterd;
-    _blokkeer  = verbeterd || false;
-
-    if (opgeslagenAntwoorden && Array.isArray(opgeslagenAntwoorden) && opgeslagenAntwoorden[0]) {
-      const a = opgeslagenAntwoorden[0];
-      if (a && typeof a === 'object' && 'antwoord' in a && a.antwoord && typeof a.antwoord === 'object') {
-        _antwoord = a;
-        // Zorg dat alle sleutels aanwezig zijn
-        _antwoord.antwoord.stop     = _antwoord.antwoord.stop     || { checks: [], anders: '' };
-        _antwoord.antwoord.start    = _antwoord.antwoord.start    || { checks: [], anders: '' };
-        _antwoord.antwoord.doorgaan = _antwoord.antwoord.doorgaan || { checks: [], anders: '' };
-        _antwoord.antwoord.doel     = _antwoord.antwoord.doel     || { checks: [] };
-        _antwoord.antwoord.actie    = _antwoord.antwoord.actie    || '';
-      }
+  // ── render ────────────────────────────────────────────────
+  function render(container, opgeslagenAntwoorden, verbeterd) {
+    if (opgeslagenAntwoorden && Array.isArray(opgeslagenAntwoorden)) {
+      _antwoorden = opgeslagenAntwoorden.map(a =>
+        (a && typeof a === 'object' && 'antwoord' in a)
+          ? a
+          : { antwoord: a, score: 0 }
+      );
+      while (_antwoorden.length < CRITERIA.length)
+        _antwoorden.push({ antwoord: null, score: 0 });
     }
 
+    _radioGroepen = [];
     container.innerHTML = '';
-    _bouw(container);
-  }
 
-  // ── Oefening bouwen ──────────────────────────────────────
-  function _bouw(container) {
-    const inhoud = maakOefening({ id: OEF_ID, nummer: 2, container });
+    const inhoud = maakOefening({ id: 'oe_1', nummer: 1, container });
 
-    const stijl = document.createElement('style');
-    stijl.textContent = `
-      .ssc-sectie { margin-bottom: 0.5cm; }
-      .ssc-header {
-        display: flex; align-items: center; gap: 0.2cm;
-        margin-bottom: 0.15cm;
-      }
-      .ssc-badge {
-        font-family: var(--font); font-size: 11pt; font-weight: bold;
-        padding: 0.05cm 0.2cm;
-        border-radius: 4px;
-        flex-shrink: 0;
-      }
-      .ssc-badge.stop     { background: #ffcdd2; color: #b71c1c; }
-      .ssc-badge.start    { background: #c8e6c9; color: #1b5e20; }
-      .ssc-badge.doorgaan { background: #fff9c4; color: #f57f17; }
-      .ssc-badge.doel     { background: #e3f2fd; color: #0d47a1; }
-      .ssc-badge.actie    { background: #f3e5f5; color: #4a148c; }
-      .ssc-vraag {
-        font-family: var(--font); font-size: var(--fontsize);
-        color: var(--tekst-zacht); font-style: italic;
-        margin-bottom: 0.15cm;
-      }
-      .ssc-checks {
-        display: flex; flex-direction: column; gap: 0.1cm;
-      }
-      .ssc-check-item {
-        display: flex; align-items: center; gap: 0.1cm;
-        font-family: var(--font); font-size: var(--fontsize);
-        min-width: 45%;
-      }
-      .ssc-check-item input[type="checkbox"] {
-        width: 14px; height: 14px;
-        accent-color: var(--groen-donker);
-        flex-shrink: 0;
-        cursor: pointer;
-      }
-      .ssc-check-item input[type="checkbox"]:disabled { cursor: default; }
-      .ssc-anders {
-        display: flex; align-items: center; gap: 0.15cm;
-        margin-top: 0.1cm;
-        font-family: var(--font); font-size: var(--fontsize);
-      }
-      .ssc-invoer {
-        flex: 1;
-        border: none;
-        border-bottom: 1.5px solid var(--sl-kleur, #b0b0b0);
-        background: transparent; outline: none;
-        font-family: var(--font-oplossing); font-size: var(--fontsize);
-        color: var(--blauw-oplossing, #1a4fa0);
-        padding: 0 2px;
-      }
-      .ssc-actie-rij {
-        display: flex; align-items: center; gap: 0.15cm;
-        font-family: var(--font); font-size: var(--fontsize);
-        margin-top: 0.15cm;
-      }
-    `;
-    inhoud.appendChild(stijl);
+    // ── Opgave ─────────────────────────────────────────────
+    voegTekstToe(
+      inhoud,
+      'Duid de score aan die jij jezelf zou geven voor elk succescriterium.',
+      ['intro-tekst']
+    );
 
-    // ── STOP ──
-    inhoud.appendChild(_maakSectie(
-      'STOP', 'stop',
-      'Wat wil ik minder doen bij een volgende toetsvoorbereiding?',
-      STOP_ITEMS, true
-    ));
+    // ── Tabel met succescriteria ──────────────────────────
+    const { tbody } = maakOefTabel(inhoud, 1, false);
+    const tussenruimte = '0.5cm';
 
-    // ── START ──
-    inhoud.appendChild(_maakSectie(
-      'START', 'start',
-      'Wat wil ik voortaan wél proberen?',
-      START_ITEMS, true
-    ));
+    CRITERIA.forEach((criterium, idx) => {
+      const huidigAntwoord = _antwoorden[idx]?.antwoord || null;
 
-    // ── CONTINUE ──
-    inhoud.appendChild(_maakSectie(
-      'CONTINUE', 'doorgaan',
-      'Wat werkte goed en wil ik blijven doen?',
-      CONTINUE_ITEMS, true
-    ));
+      // Tussenruimte boven elk succescriterium
+      const trW = document.createElement('tr');
+      const tdW = document.createElement('td');
+      tdW.style.height = tussenruimte;
+      trW.appendChild(tdW);
+      tbody.appendChild(trW);
 
-    // ── DOEL ──
-    inhoud.appendChild(_maakSectie(
-      'Mijn doel voor de volgende toets', 'doel',
-      'Bij de volgende wiskundetoets wil ik vooral:',
-      DOEL_ITEMS, false
-    ));
+      // Label-rij: nummer + tekst (+ leerplandoelcode)
+      const trL = document.createElement('tr');
+      const tekstMetCode = `${criterium.tekst} (${criterium.leerplandoelcode})`;
+      const tdL = maakOpTdaz(String(idx + 1), tekstMetCode, false);
+      tdL.classList.add('kolom-links');
+      tdL.querySelector('.rij').style.cssText = `
+        display: flex;
+        align-items: flex-start;
+        height: auto;
+        min-height: var(--rij-hoogte);
+        padding-top: 0.1cm;
+      `;
+      const tdLR = document.createElement('td');
+      tdLR.classList.add('kolom-rechts');
+      trL.appendChild(tdL);
+      trL.appendChild(tdLR);
+      tbody.appendChild(trL);
 
-    // ── ACTIE ──
-    const actieSectie = document.createElement('div');
-    actieSectie.className = 'ssc-sectie';
+      // Antwoord-rij: radio buttons
+      const trA = document.createElement('tr');
+      const tdA = document.createElement('td');
+      tdA.classList.add('kolom-links');
+      tdA.colSpan = 2;
+      tdA.style.paddingTop = '0.2cm';
+      tdA.style.paddingBottom = '0.2cm';
+      tdA.style.paddingLeft = '0.65cm';
 
-    const actieHeader = document.createElement('div');
-    actieHeader.className = 'ssc-header';
-    const actieBadge = document.createElement('span');
-    actieBadge.className = 'ssc-badge actie';
-    actieBadge.textContent = 'ACTIE';
-    actieHeader.appendChild(actieBadge);
-    actieSectie.appendChild(actieHeader);
+      const groepNaam = `sc_${criterium.id}`;
+      const radios = [];
 
-    const actieRij = document.createElement('div');
-    actieRij.className = 'ssc-actie-rij';
-    const actieLabel = document.createElement('span');
-    actieLabel.textContent = 'Mijn persoonlijke actie:';
-    actieRij.appendChild(actieLabel);
+      criterium.opties.forEach(optie => {
+        const label = document.createElement('label');
+        label.style.cssText = `
+          display: flex;
+          align-items: flex-start;
+          gap: 6px;
+          margin-bottom: 0.2cm;
+          font-family: var(--font, Arial);
+          font-size: 10pt;
+          cursor: ${verbeterd ? 'default' : 'pointer'};
+          color: var(--tekst, #1a1a1a);
+        `;
 
-    const actieInvoer = document.createElement('input');
-    actieInvoer.type = 'text';
-    actieInvoer.className = 'ssc-invoer';
-    actieInvoer.disabled = _blokkeer;
-    actieInvoer.value = _antwoord.antwoord.actie || '';
-    actieInvoer.addEventListener('input', () => {
-      _antwoord.antwoord.actie = actieInvoer.value;
-    });
-    actieRij.appendChild(actieInvoer);
-    actieSectie.appendChild(actieRij);
-    inhoud.appendChild(actieSectie);
-  }
+        const radio = document.createElement('input');
+        radio.type    = 'radio';
+        radio.name    = groepNaam;
+        radio.value   = optie.waarde;
+        radio.checked = huidigAntwoord === optie.waarde;
+        radio.disabled = verbeterd;
+        radio.style.cssText = `
+          margin-top: 0;
+          cursor: ${verbeterd ? 'default' : 'pointer'};
+          accent-color: var(--lila-rand, #7b1fa2);
+          flex-shrink: 0;
+        `;
 
-  // ── Sectie bouwen ─────────────────────────────────────────
-  function _maakSectie(titel, sleutel, vraag, items, metAnders) {
-    const sectie = document.createElement('div');
-    sectie.className = 'ssc-sectie';
+        const [, prefix, tekst] = optie.label.match(/^([^:]+:)\s*(.*)$/);
 
-    // Header met badge
-    const header = document.createElement('div');
-    header.className = 'ssc-header';
-    const badge = document.createElement('span');
-    badge.className = `ssc-badge ${sleutel}`;
-    badge.textContent = titel;
-    header.appendChild(badge);
-    sectie.appendChild(header);
+        const prefixSpan = document.createElement('span');
+        prefixSpan.textContent = prefix;
+        prefixSpan.style.cssText = `
+          flex-shrink: 0;
+          width: 0.6cm;
+          display: inline-block;
+        `;
 
-    // Vraag
-    const vraagEl = document.createElement('div');
-    vraagEl.className = 'ssc-vraag';
-    vraagEl.textContent = vraag;
-    sectie.appendChild(vraagEl);
+        const tekstSpan = document.createElement('span');
+        tekstSpan.textContent = tekst;
+        tekstSpan.style.cssText = `
+          flex-shrink: 1;
+          min-width: 0;
+          white-space: normal;
+          overflow-wrap: break-word;
+        `;
 
-    // Checkboxes
-    const checksWrap = document.createElement('div');
-    checksWrap.className = 'ssc-checks';
-
-    const opgeslagenChecks = (sleutel === 'doel')
-      ? (_antwoord.antwoord.doel?.checks || [])
-      : (_antwoord.antwoord[sleutel]?.checks || []);
-
-    items.forEach((item, idx) => {
-      const label = document.createElement('label');
-      label.className = 'ssc-check-item';
-
-      const cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.disabled = _blokkeer;
-      cb.checked = opgeslagenChecks.includes(idx);
-      cb.addEventListener('change', () => {
-        const arr = sleutel === 'doel'
-          ? _antwoord.antwoord.doel.checks
-          : _antwoord.antwoord[sleutel].checks;
-        if (cb.checked) {
-          if (!arr.includes(idx)) arr.push(idx);
-        } else {
-          const pos = arr.indexOf(idx);
-          if (pos > -1) arr.splice(pos, 1);
-        }
+        label.appendChild(radio);
+        label.appendChild(prefixSpan);
+        label.appendChild(tekstSpan);
+        tdA.appendChild(label);
+        radios.push(radio);
       });
 
-      label.appendChild(cb);
-      const tekst = document.createElement('span');
-      tekst.textContent = item;
-      label.appendChild(tekst);
-      checksWrap.appendChild(label);
+      _radioGroepen.push({ idx, radios });
+
+      trA.appendChild(tdA);
+      tbody.appendChild(trA);
     });
-
-    sectie.appendChild(checksWrap);
-
-    // Anders-veld
-    if (metAnders) {
-      const andersRij = document.createElement('div');
-      andersRij.className = 'ssc-anders';
-      const andersLabel = document.createElement('span');
-      andersLabel.textContent = 'Anders:';
-      andersRij.appendChild(andersLabel);
-
-      const andersInvoer = document.createElement('input');
-      andersInvoer.type = 'text';
-      andersInvoer.className = 'ssc-invoer';
-      andersInvoer.disabled = _blokkeer;
-      andersInvoer.value = _antwoord.antwoord[sleutel]?.anders || '';
-      andersInvoer.addEventListener('input', () => {
-        _antwoord.antwoord[sleutel].anders = andersInvoer.value;
-      });
-      andersRij.appendChild(andersInvoer);
-      sectie.appendChild(andersRij);
-    }
-
-    return sectie;
   }
 
-  // ── getAntwoorden ────────────────────────────────────────
+  // ── getAntwoorden ─────────────────────────────────────────
   function getAntwoorden() {
-    return [{ ..._antwoord }];
+    _radioGroepen.forEach(({ idx, radios }) => {
+      const geselecteerd = radios.find(r => r.checked);
+      _antwoorden[idx].antwoord = geselecteerd ? geselecteerd.value : null;
+    });
+    return [..._antwoorden];
   }
 
   return { render, getAntwoorden };
