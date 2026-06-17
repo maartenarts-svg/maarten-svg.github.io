@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P5W7 WI D — Toets: omtrek en oppervlakte - formules en basisberekeningen</title>
+  <title>P5W7 WI MC2 — Toets: omtrek en oppervlakte - formules en basisberekeningen</title>
   <link rel="stylesheet" href="../../css/cursus.css">
 
   <style>
@@ -361,7 +361,7 @@ function nieuwePagina() {
 
   const hdr = document.createElement('div');
   hdr.classList.add('hoofdstuk-titel-header');
-  hdr.textContent = 'TIAB - 1a - week 7 - WI D';
+  hdr.textContent = 'TIAB - 1a - week 7 - WI MC2';
   // Even pagina: titel links; oneven pagina: titel rechts
   if (huidigePaginaNummer % 2 === 0) {
     hdr.classList.add('links');
@@ -582,30 +582,28 @@ const inhoudstafelData = [];  // { tekst, blz } — wordt gevuld hieronder
 nieuwePagina();   // pagina 1
 voegContentToe('content-pagina');
 laadOefeningen('#content-pagina', [
-  'H12_W36WID/W36WID_hoofding.js',
-  'H12_W36WID/W36WID_sc.js',
+  'H12_W36WIMC2/W36WIMC2_hoofding.js',
+  'H12_W36WIMC2/W36WIMC2_sc.js',
 ]);
 
 witregel(onderTitel);
 voegContentToe('content-pagina-1');
 laadOefeningen('#content-pagina-1', [
-  'H12_W36WID/oe_1.js',
+  'H12_W36WIMC2/oe_1.js',
 ]);
 
 forceerPaginawissel();
 voegContentToe('content-pagina-2');
 laadOefeningen('#content-pagina-2', [
-  'H12_W36WID/oe_2.js',
-  'H12_W36WID/oe_3.js',
+  'H12_W36WIMC2/oe_2.js',
+  'H12_W36WIMC2/oe_3.js',
 ]);
 
 forceerPaginawissel();
 voegContentToe('content-pagina-3');
 laadOefeningen('#content-pagina-3', [
-  'H12_W36WID/oe_4.js',
-  'H12_W36WID/oe_5.js',
+  'H12_W36WIMC2/oe_4.js',
 ]);
-
 
 /* ============================================================
    SYSTEEM TOEPASSEN

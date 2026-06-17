@@ -279,7 +279,7 @@
   <path d="M -160.37 -1423.2 L -750.69 -242.54 L 429.95 347.78 L 1020.3 -832.86 L -160.37 -1423.2 z"/>
 </clipPath>
 <g clip-path="url(#clip21)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">3</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">3</text>
 </g> <!-- clip21 -->
 </g> <!-- transform -->
 <g transform="matrix(0.13416, -0.067082, 0.067082, 0.13416, 128.16, 174.59)">
@@ -287,7 +287,7 @@
   <path d="M -243.67 -1423.2 L -833.99 -242.54 L 346.65 347.78 L 936.97 -832.86 L -243.67 -1423.2 z"/>
 </clipPath>
 <g clip-path="url(#clip22)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
 </g> <!-- clip22 -->
 </g> <!-- transform -->
 <g transform="matrix(0.13416, -0.067082, 0.067082, 0.13416, 138.81, 169.27)">
@@ -295,13 +295,13 @@
   <path d="M -323.07 -1423.2 L -913.39 -242.54 L 267.25 347.78 L 857.57 -832.86 L -323.07 -1423.2 z"/>
 </clipPath>
 <g clip-path="url(#clip23)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
 </g> <!-- clip23 -->
 </g> <!-- transform -->
 </g><!-- layer0 -->
 <defs>
-<font id="Jlm_cmss10" horiz-adv-x="0" >
-<font-face font-family="Jlm_cmss10" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="75.899925" descent="24.999977" />
+<font id="Arial" horiz-adv-x="0" >
+<font-face font-family="Arial" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="75.899925" descent="24.999977" />
 <missing-glyph horiz-adv-x="33.300"  d=""/>
 <glyph unicode="&#x0033;" horiz-adv-x="50.000" d="M 9.2031 51.406 L 5.5938 56.797 Q 8.7031 62.000 13.844 64.891 Q 19.000 67.797 24.797 67.797 Q 32.297 67.797 37.641 63.391 Q 43.000 59.000 43.000 52.594 Q 43.000 47.594 40.203 42.938 Q 37.406 38.297 31.906 35.406 Q 37.500 33.703 41.594 29.047 Q 45.703 24.406 45.703 18.000 Q 45.703 9.9063 39.641 3.8438 Q 33.594 -2.2031 24.703 -2.2031 Q 12.297 -2.2031 4.2031 8.2031 L 5.2969 14.203 Q 8.5000 9.2969 13.797 6.5938 Q 19.094 3.9063 24.500 3.9063 Q 30.094 3.9063 33.438 8.0000 Q 36.797 12.094 36.797 18.094 Q 36.797 20.297 36.250 22.500 Q 35.703 24.703 34.391 27.047 Q 33.094 29.406 30.344 30.906 Q 27.594 32.406 23.797 32.406 L 16.703 32.406 L 16.703 38.500 Q 24.203 39.094 24.594 39.203 Q 29.094 40.203 31.938 44.047 Q 34.797 47.906 34.797 52.594 Q 34.797 57.094 31.844 59.547 Q 28.906 62.000 24.703 62.000 Q 19.906 62.000 15.594 59.203 Q 11.297 56.406 9.2031 51.406 z"/>
 <glyph unicode="&#x006d;" horiz-adv-x="79.400" d="M 71.297 29.797 L 71.297 0.0000 L 63.500 0.0000 L 63.500 29.094 Q 63.500 31.000 63.250 32.391 Q 63.000 33.797 62.141 35.594 Q 61.297 37.406 59.141 38.406 Q 57.000 39.406 53.703 39.406 Q 48.594 39.406 46.094 34.906 Q 43.594 30.406 43.594 24.500 L 43.594 0.0000 L 35.797 0.0000 L 35.797 29.094 Q 35.797 31.000 35.547 32.391 Q 35.297 33.797 34.438 35.594 Q 33.594 37.406 31.438 38.406 Q 29.297 39.406 26.000 39.406 Q 20.906 39.406 18.406 34.906 Q 15.906 30.406 15.906 24.500 L 15.906 0.0000 L 8.0938 0.0000 L 8.0938 45.000 L 15.297 45.000 L 15.297 37.797 Q 21.094 45.500 29.906 45.500 Q 39.906 45.500 42.703 37.297 Q 48.297 45.500 57.594 45.500 Q 71.297 45.500 71.297 29.797 z"/>

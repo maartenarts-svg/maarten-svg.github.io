@@ -214,7 +214,7 @@
   <path d="M 463.22 -1623.3 L -681.53 -1241.7 L -190.32 231.88 L 954.43 -149.70 L 463.22 -1623.3 z"/>
 </clipPath>
 <g clip-path="url(#clip16)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">4</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">4</text>
 </g> <!-- clip16 -->
 </g> <!-- transform -->
 <g transform="matrix(0.14230, 0.047434, -0.047434, 0.14230, 49.936, 212.98)">
@@ -222,7 +222,7 @@
   <path d="M 379.92 -1623.3 L -764.83 -1241.7 L -273.62 231.88 L 871.13 -149.70 L 379.92 -1623.3 z"/>
 </clipPath>
 <g clip-path="url(#clip17)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">d</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">d</text>
 </g> <!-- clip17 -->
 </g> <!-- transform -->
 <g transform="matrix(0.14230, 0.047434, -0.047434, 0.14230, 57.293, 215.43)">
@@ -230,7 +230,7 @@
   <path d="M 328.22 -1623.3 L -816.53 -1241.7 L -325.32 231.88 L 819.43 -149.70 L 328.22 -1623.3 z"/>
 </clipPath>
 <g clip-path="url(#clip18)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
 </g> <!-- clip18 -->
 </g> <!-- transform -->
 <g transform="matrix(0.047434, -0.14230, 0.14230, 0.047434, 149.80, 165.12)">
@@ -238,7 +238,7 @@
   <path d="M 728.48 -1295.5 L -745.14 -804.30 L -363.56 340.45 L 1110.1 -150.76 L 728.48 -1295.5 z"/>
 </clipPath>
 <g clip-path="url(#clip19)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">6</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">6</text>
 </g> <!-- clip19 -->
 </g> <!-- transform -->
 <g transform="matrix(0.047434, -0.14230, 0.14230, 0.047434, 153.75, 153.26)">
@@ -246,7 +246,7 @@
   <path d="M 645.18 -1295.5 L -828.44 -804.30 L -446.86 340.45 L 1026.8 -150.76 L 645.18 -1295.5 z"/>
 </clipPath>
 <g clip-path="url(#clip20)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">d</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">d</text>
 </g> <!-- clip20 -->
 </g> <!-- transform -->
 <g transform="matrix(0.047434, -0.14230, 0.14230, 0.047434, 156.20, 145.91)">
@@ -254,13 +254,13 @@
   <path d="M 593.48 -1295.5 L -880.14 -804.30 L -498.56 340.45 L 975.06 -150.76 L 593.48 -1295.5 z"/>
 </clipPath>
 <g clip-path="url(#clip21)">
-<text font-weight="normal" font-size="100.00" font-family="Jlm_cmss10" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
+<text font-weight="normal" font-size="100.00" font-family="Arial" font-style="normal" fill="#000000" fill-opacity="1.0000" stroke="none" x="0" y="0">m</text>
 </g> <!-- clip21 -->
 </g> <!-- transform -->
 </g><!-- layer0 -->
 <defs>
-<font id="Jlm_cmss10" horiz-adv-x="0" >
-<font-face font-family="Jlm_cmss10" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="75.899925" descent="24.999977" />
+<font id="Arial" horiz-adv-x="0" >
+<font-face font-family="Arial" font-weight="normal" font-style="normal" font-size="100.00" units-per-em="100.00" ascent="75.899925" descent="24.999977" />
 <missing-glyph horiz-adv-x="33.300"  d=""/>
 <glyph unicode="&#x0034;" horiz-adv-x="50.000" d="M 37.203 17.094 L 37.203 0.0000 L 29.297 0.0000 L 29.297 17.094 L 2.7969 17.094 L 2.7969 23.203 L 28.094 65.594 L 37.203 65.594 L 37.203 23.203 L 47.094 23.203 L 47.094 17.094 L 37.203 17.094 z M 10.594 23.203 L 29.906 23.203 L 29.906 61.203 Q 29.906 55.094 10.594 23.203 z"/>
 <glyph unicode="&#x0064;" horiz-adv-x="51.600" d="M 43.406 69.406 L 43.406 0.0000 L 35.594 0.0000 L 35.594 5.2031 Q 29.094 -1.0938 20.797 -1.0938 Q 13.594 -1.0938 8.5938 5.6563 Q 3.5938 12.406 3.5938 22.203 Q 3.5938 31.906 8.7500 38.703 Q 13.906 45.500 21.297 45.500 Q 29.297 45.500 35.906 40.000 L 35.906 69.406 L 43.406 69.406 z M 35.594 13.906 L 35.594 33.906 Q 31.797 39.406 25.906 39.406 Q 20.406 39.406 15.906 35.203 Q 11.406 31.000 11.406 22.094 Q 11.406 13.500 15.453 9.2500 Q 19.500 5.0000 24.906 5.0000 Q 29.094 5.0000 32.297 7.7969 Q 35.594 10.797 35.594 13.906 z"/>
