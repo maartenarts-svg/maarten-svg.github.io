@@ -19,7 +19,7 @@
     { const _v='Los de misdaad op!'; if(typeof _v==='string') _p.innerHTML=_v; else _p.appendChild(_v); }
     inhoud.appendChild(_p);
   }
-  voegLijstToe(inhoud,'bullet','0cm','0.4cm',['Maak de vijg oefeningen.','Maak berekeningen op een kladblad.']);
+  voegLijstToe(inhoud,'bullet','0cm','0.4cm',['Maak de vijf oefeningen.','Maak berekeningen op een kladblad.']);
 
 
   const  bladvoorkant = document.createElement('img');
