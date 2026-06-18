@@ -80,12 +80,12 @@
   oe_36MC2004_13.appendChild(oe_36MC2004_13_b1);
   const oe_36MC2004_13_b2 = maakSpanBreedte('2cm', '- driehoek:');
   oe_36MC2004_13.appendChild(oe_36MC2004_13_b2);
-  oe_36MC2004_13.appendChild(htmlSpan('2 · 3 : 2 = 3'));
+  oe_36MC2004_13.appendChild(htmlSpan('2 · 2,4 : 2 = 2,4'));
 
   const oe_36MC2004_14 = document.createElement('span');
   const oe_36MC2004_14_b1 = maakSpanBreedte('3.8cm', '');
   oe_36MC2004_14.appendChild(oe_36MC2004_14_b1);
-  oe_36MC2004_14.appendChild(htmlSpan('0,5π + 3 ≈ 4,57'));
+  oe_36MC2004_14.appendChild(htmlSpan('0,5π + 2,4 ≈ 4,57'));
 
   const oe_36MC2004_15 = document.createElement('span');
   const oe_36MC2004_15_b1 = maakSpanBreedte('0.4cm', '•');
@@ -353,7 +353,7 @@
       const FIG_OFFSET_AFBEELDING2 = 0; /* ← offset in px: positief = naar beneden, negatief = naar boven */
       _fig.style.top    = (_top + FIG_OFFSET_AFBEELDING2) + 'px';
       _fig.style.height = (_bottom - _top) + 'px';
-      fetch('afbeeldingen/oe_36MC2004.svg') /* ← bestandsnaam */
+      fetch('afbeeldingen/oe_36MC2004b.svg') /* ← bestandsnaam */
         .then(r => r.text())
         .then(svgTekst => {
           const parser = new DOMParser();
